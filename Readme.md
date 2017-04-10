@@ -3,6 +3,7 @@
 ![Unikreativ](http://unikreativ.com/wp-content/uploads/2016/12/photo-logo.png)
 
 This project will use the following technology
+
   - .Net core
 
   - Webpack 2 or Grunt
