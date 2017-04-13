@@ -5,6 +5,7 @@
 <Workspace>
 	<Local Expanded="Yes">
 		<Model Expanded="Yes" ID="{100ACD2E-B297-460B-91C1-4AAA1A94A847}" Name="Unikreative" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="Unikreative.prj"/>
+		<Model Expanded="Yes" ID="{6AF793CB-7D78-401B-93C9-7C666FA8D1E4}" Name="Use Cases Accountant" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="Use Cases Accountant.oom"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
