@@ -1,4 +1,4 @@
-﻿namespace SPATemplate.Web.Models.ManageViewModels
+﻿namespace Unikreativ.Web.Models.ManageViewModels
 {
     public class FactorViewModel
     {

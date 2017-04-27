@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SPATemplate.Web.Models;
-using SPATemplate.Web.Models.AccountViewModels;
-using SPATemplate.Web.Services;
+using Unikreativ.Web.Models;
+using Unikreativ.Web.Models.AccountViewModels;
+using Unikreativ.Web.Services;
 
-namespace SPATemplate.Web.Controllers.Account
+namespace Unikreativ.Web.Controllers.Unikreativ.Account
 {
     [Authorize]
     public class AccountController : Controller

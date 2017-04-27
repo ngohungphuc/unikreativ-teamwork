@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace SPATemplate.Web.Controllers.SPA
+namespace Unikreativ.Web.Controllers.SPA
 {
     public class PartialController : Controller
     {

@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SPATemplate.Web.Models;
-using SPATemplate.Web.Models.ManageViewModels;
-using SPATemplate.Web.Services;
+using Unikreativ.Web.Models;
+using Unikreativ.Web.Models.ManageViewModels;
+using Unikreativ.Web.Services;
 
-namespace SPATemplate.Web.Controllers.Account
+namespace Unikreativ.Web.Controllers.Unikreativ.Account
 {
     [Authorize]
     public class ManageController : Controller

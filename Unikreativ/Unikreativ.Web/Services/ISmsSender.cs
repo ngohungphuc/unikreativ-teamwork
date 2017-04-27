@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SPATemplate.Web.Services
+namespace Unikreativ.Web.Services
 {
     public interface ISmsSender
     {

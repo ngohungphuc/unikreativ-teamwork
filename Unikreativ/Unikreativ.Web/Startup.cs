@@ -1,18 +1,29 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Text;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SPATemplate.Web.Data;
-using SPATemplate.Web.Models;
-using SPATemplate.Web.Services;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Unikreativ.Web.Data;
+using Unikreativ.Web.Middleware;
+using Unikreativ.Web.Middleware.DataModels;
+using Unikreativ.Web.Models;
+using Unikreativ.Web.Services;
 
-namespace SPATemplate.Web
+namespace Unikreativ.Web
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+        private static readonly string secretKey = "somethingverysecret";
+        private static readonly string issuer = "TestUser";
+        private static readonly string audience = "TestAudience";
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -30,8 +41,6 @@ namespace SPATemplate.Web
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -48,6 +57,13 @@ namespace SPATemplate.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Cookies.ApplicationCookie.AutomaticChallenge = true;
+                options.Cookies.ApplicationCookie.AutomaticChallenge = true;
+                options.Cookies.ApplicationCookie.AuthenticationScheme = "Cookie";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +71,41 @@ namespace SPATemplate.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
+
+            var jwtOptions = new TokenProviderOptions
+            {
+                Audience = audience,
+                Issuer = issuer,
+                SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
+            };
+
+            //setup middleware for jwt
+            app.UseMiddleware<TokenProviderMiddleware>(Options.Create(jwtOptions));
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
+
+                ValidateIssuer = true,
+                ValidIssuer = issuer,
+
+                ValidateAudience = true,
+                ValidAudience = audience,
+
+                ValidateLifetime = true,
+
+                ClockSkew = TimeSpan.Zero
+            };
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            {
+                AutomaticAuthenticate = false,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters,
+                AuthenticationScheme = "Bearer"
+            });
 
             if (env.IsDevelopment())
             {

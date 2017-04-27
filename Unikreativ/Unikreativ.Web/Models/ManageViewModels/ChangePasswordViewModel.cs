@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SPATemplate.Web.Models.ManageViewModels
+namespace Unikreativ.Web.Models.ManageViewModels
 {
     public class ChangePasswordViewModel
     {

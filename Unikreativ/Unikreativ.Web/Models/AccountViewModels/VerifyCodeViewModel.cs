@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SPATemplate.Web.Models.AccountViewModels
+namespace Unikreativ.Web.Models.AccountViewModels
 {
     public class VerifyCodeViewModel
     {

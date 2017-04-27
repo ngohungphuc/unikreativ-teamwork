@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SPATemplate.Web.Data.Migrations
+namespace Unikreativ.Web.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

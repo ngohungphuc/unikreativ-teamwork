@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace SPATemplate.Web.Models.AccountViewModels
+namespace Unikreativ.Web.Models.AccountViewModels
 {
     public class SendCodeViewModel
     {

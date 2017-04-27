@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SPATemplate.Web.Controllers
+namespace Unikreativ.Web.Controllers
 {
     public class HomeController : Controller
     {

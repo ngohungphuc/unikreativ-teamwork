@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SPATemplate.Web.Models;
+using Unikreativ.Web.Models;
 
-namespace SPATemplate.Web.Data
+namespace Unikreativ.Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public ApplicationDbContext()
+            : base()
         {
         }
 

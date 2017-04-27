@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace SPATemplate.Web.Models.ManageViewModels
+namespace Unikreativ.Web.Models.ManageViewModels
 {
     public class ConfigureTwoFactorViewModel
     {
