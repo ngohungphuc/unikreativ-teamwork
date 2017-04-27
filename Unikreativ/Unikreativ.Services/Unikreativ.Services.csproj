@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Unikreativ.Entities\Unikreativ.Entities.csproj" />
+    <ProjectReference Include="..\Unikreativ.Repositories\Unikreativ.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,8 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,kBAAmB,CACf,MAAM,CAAE,aAAa,CCDzB,WAAY,CACR,MAAM,CAAE,YAAY",
-"sources": ["wwwroot/sass/_index.scss","wwwroot/sass/_login.scss"],
-"sourcesContent": ["﻿.loading-component {\n    margin: 20% 45% 0 45%;\n}","﻿#login-form {\n    margin: 8% 35% 0 35%;\n}"],
-"names": [],
-"file": "site.css"
-}
