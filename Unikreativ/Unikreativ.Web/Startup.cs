@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Unikreativ.Entities.Data;
+using Unikreativ.Entities.Models;
 using Unikreativ.Web.Middleware;
 using Unikreativ.Web.Middleware.DataModels;
 using Unikreativ.Web.Models;

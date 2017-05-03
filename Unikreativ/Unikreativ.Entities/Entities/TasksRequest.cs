@@ -14,7 +14,7 @@ namespace Unikreativ.Entities.Entities
 
         public double WorkingTime { get; set; }
 
-        public double ComplteRate { get; set; }
+        public double CompleteRate { get; set; }
 
         public bool IsCompleted { get; set; }
 
@@ -25,7 +25,9 @@ namespace Unikreativ.Entities.Entities
 
         public string ProjectId { get; set; }
 
-        public string MemberId { get; set; }
+        public string AssignTo { get; set; }
+
+        public string AssignBy { get; set; }
 
         public ICollection<MediaFile> MediaFiles { get; set; }
     }
