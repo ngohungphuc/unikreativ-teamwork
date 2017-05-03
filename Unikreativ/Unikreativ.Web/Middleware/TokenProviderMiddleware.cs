@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Unikreativ.Web.Data;
+using Unikreativ.Entities.Data;
+using Unikreativ.Entities.Entities;
 using Unikreativ.Web.Middleware.DataModels;
-using Unikreativ.Web.Models;
 
 namespace Unikreativ.Web.Middleware
 {
@@ -18,13 +18,13 @@ namespace Unikreativ.Web.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly TokenProviderOptions _options;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<BaseUser> _userManager;
         private static readonly ApplicationDbContext DB = new ApplicationDbContext();
 
         public TokenProviderMiddleware(
             RequestDelegate next,
             IOptions<TokenProviderOptions> options,
-            UserManager<ApplicationUser> userManager)
+            UserManager<BaseUser> userManager)
         {
             _next = next;
             _options = options.Value;
@@ -52,7 +52,7 @@ namespace Unikreativ.Web.Middleware
             var username = context.Request.Form["username"];
             var password = context.Request.Form["password"];
 
-            ApplicationUser user = null;
+            BaseUser user = null;
             user = DB.Users.Single(x => x.Email == username);
 
             var result = _userManager.CheckPasswordAsync(user, password);

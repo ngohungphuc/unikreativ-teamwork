@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Unikreativ.Web.Models;
+using Unikreativ.Entities.Entities;
 
-namespace Unikreativ.Web.Data
+namespace Unikreativ.Entities.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<BaseUser>
     {
         public ApplicationDbContext()
             : base()
