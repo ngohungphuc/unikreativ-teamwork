@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Unikreativ.Entities.Entities
 {
-    public class Client : BaseUser
+    public class ApplicationUser : IdentityUser
     {
+        public string FullName { get; set; }
+
+        public string JobTitle { get; set; }
+
         public string CompanyName { get; set; }
 
         public string Address { get; set; }
@@ -14,6 +15,10 @@ namespace Unikreativ.Entities.Entities
         public string Country { get; set; }
 
         public string Website { get; set; }
+
+        public double ChargeRate { get; set; }
+
+        public string Status { get; set; }
 
         public enum Industry
         {

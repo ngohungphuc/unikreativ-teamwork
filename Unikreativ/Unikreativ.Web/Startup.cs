@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Unikreativ.Entities.Data;
-using Unikreativ.Entities.Models;
+using Unikreativ.Entities.Entities;
 using Unikreativ.Web.Middleware;
 using Unikreativ.Web.Middleware.DataModels;
 using Unikreativ.Web.Models;
@@ -58,7 +58,7 @@ namespace Unikreativ.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-
+            services.AddTransient<Seeder>();
             services.Configure<IdentityOptions>(options =>
             {
                 options.Cookies.ApplicationCookie.AutomaticChallenge = true;
@@ -68,11 +68,11 @@ namespace Unikreativ.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Seeder seeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            seeder.SeedUser();
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
             var jwtOptions = new TokenProviderOptions

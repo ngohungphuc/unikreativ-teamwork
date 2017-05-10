@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Unikreativ.Entities.Entities
 {
-    public class Event
+    public class Event : BaseEntity
     {
         public string TaskName { get; set; }
 

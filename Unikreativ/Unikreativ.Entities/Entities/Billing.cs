@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Unikreativ.Entities.Entities
 {
-    public class Billing
+    public class Billing : BaseEntity
     {
         public double WorkingTime { get; set; }
 

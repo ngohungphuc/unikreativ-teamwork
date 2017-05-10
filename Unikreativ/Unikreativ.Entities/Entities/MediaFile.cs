@@ -1,6 +1,9 @@
-﻿namespace Unikreativ.Entities.Entities
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Unikreativ.Entities.Entities
 {
-    public class MediaFile
+    public class MediaFile : BaseEntity
     {
         public string FileName { get; set; }
 

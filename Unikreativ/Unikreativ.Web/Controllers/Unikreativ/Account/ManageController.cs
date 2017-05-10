@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Unikreativ.Entities.Models;
+using Unikreativ.Entities.Entities;
 using Unikreativ.Web.Models;
 using Unikreativ.Web.Models.ManageViewModels;
 using Unikreativ.Web.Services;

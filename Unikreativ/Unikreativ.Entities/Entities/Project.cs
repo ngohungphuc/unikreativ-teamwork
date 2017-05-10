@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Unikreativ.Entities.Entities
 {
-    public class Project
+    public class Project : BaseEntity
     {
         public string ProjectName { get; set; }
 
@@ -12,9 +13,8 @@ namespace Unikreativ.Entities.Entities
 
         public DateTime AgreementDate { get; set; }
 
-        //nav properties
         public string ClientId { get; set; }
 
-        public ICollection<Member> Members { get; set; }
+        public ICollection<ApplicationUser> MemberId { get; set; }
     }
 }
