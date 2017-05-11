@@ -13,8 +13,10 @@ namespace Unikreativ.Entities.Entities
 
         public DateTime AgreementDate { get; set; }
 
-        public string ClientId { get; set; }
+        public ApplicationUser ClientId { get; set; }
 
-        public ICollection<ApplicationUser> MemberId { get; set; }
+        public ICollection<Billing> Billings { get; set; }
+
+        public ICollection<ApplicationUser> Members { get; set; }
     }
 }

@@ -21,14 +21,13 @@ namespace Unikreativ.Entities.Entities
 
         public double CostOfTask { get; set; }
 
-        //nav properties
-        public string BillingId { get; set; }
+        public Billing Billing { get; set; }
 
-        public string ProjectId { get; set; }
+        public Project Project { get; set; }
 
-        public string AssignTo { get; set; }
+        public ApplicationUser AssignTo { get; set; }
 
-        public string AssignBy { get; set; }
+        public ApplicationUser AssignBy { get; set; }
 
         public ICollection<MediaFile> MediaFiles { get; set; }
     }

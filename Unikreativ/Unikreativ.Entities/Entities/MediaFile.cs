@@ -9,9 +9,8 @@ namespace Unikreativ.Entities.Entities
 
         public string UploadDate { get; set; }
 
-        //nav properties
-        public string UserUpload { get; set; }
+        public ApplicationUser UserUpload { get; set; }
 
-        public string TaskId { get; set; }
+        public TasksRequest Task { get; set; }
     }
 }

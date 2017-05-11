@@ -11,10 +11,12 @@ namespace Unikreativ.Entities.Entities
 
         public string Description { get; set; }
 
-        public string AssignTo { get; set; }
-
         public DateTime DateAssigned { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public ApplicationUser AssignTo { get; set; }
+
+        public TasksRequest Task { get; set; }
     }
 }

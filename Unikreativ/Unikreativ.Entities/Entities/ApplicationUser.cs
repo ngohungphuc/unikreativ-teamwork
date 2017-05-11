@@ -20,6 +20,8 @@ namespace Unikreativ.Entities.Entities
 
         public string Status { get; set; }
 
+        public Industry Industries { get; set; }
+
         public enum Industry
         {
             Technology = 1,

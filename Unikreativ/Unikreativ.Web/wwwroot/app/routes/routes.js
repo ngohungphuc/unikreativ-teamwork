@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var _404_component_1 = require("../app/components/errors/404.component");
 var _500_component_1 = require("../app/components/errors/500.component");
 var login_component_1 = require("../app/components/login/login.component");
