@@ -14,8 +14,11 @@ namespace Unikreativ.Entities.Entities
 
         public double Total { get; set; }
 
-        public string TasksRequestId { get; set; }
+        [ForeignKey("TasksRequest")]
+        public Guid TasksRequestId { get; set; }
 
-        public string ProjectId { get; set; }
+        public Project Project { get; set; }
+
+        public TasksRequest TaskRequest { get; set; }
     }
 }
