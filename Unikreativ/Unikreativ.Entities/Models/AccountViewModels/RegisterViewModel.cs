@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Unikreativ.Web.Models.AccountViewModels
+namespace Unikreativ.Entities.Models.AccountViewModels
 {
     public class RegisterViewModel
     {

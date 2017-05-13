@@ -12,6 +12,12 @@ namespace Unikreativ.Web.Controllers.SPA
 
         #endregion Account
 
+        #region Dashboard
+
+        public IActionResult Dashboard() => PartialView("~/Views/Partial/Dashboard/Dashboard.cshtml");
+
+        #endregion Dashboard
+
         #region Errors
 
         public IActionResult Error404() => PartialView("~/Views/Partial/Errors/Err404.cshtml");

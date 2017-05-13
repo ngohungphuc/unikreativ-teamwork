@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
-namespace Unikreativ.Web.Models.ManageViewModels
+namespace Unikreativ.Entities.Models.ManageViewModels
 {
     public class IndexViewModel
     {

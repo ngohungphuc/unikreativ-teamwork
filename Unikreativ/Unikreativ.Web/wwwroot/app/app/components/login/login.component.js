@@ -10,9 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var login_service_1 = require("../../services/account/login.service");
 var LoginComponent = (function () {
-    function LoginComponent() {
+    function LoginComponent(loginService) {
+        this.loginService = loginService;
     }
+    LoginComponent.prototype.ngOnInit = function () {
+        this.username = new forms_1.FormControl('', forms_1.Validators.required);
+        this.password = new forms_1.FormControl('', forms_1.Validators.required);
+        this.loginForm = new forms_1.FormGroup({
+            username: this.username,
+            password: this.password
+        });
+    };
+    LoginComponent.prototype.login = function (formValues) {
+        this.loginService.loginUser(formValues.username, formValues.password).subscribe(function (resp) {
+            console.log(resp);
+        });
+    };
     return LoginComponent;
 }());
 LoginComponent = __decorate([
@@ -20,7 +36,7 @@ LoginComponent = __decorate([
         selector: 'login',
         templateUrl: 'partial/login'
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [login_service_1.LoginService])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

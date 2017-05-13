@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace Unikreativ.Web.Models.ManageViewModels
+namespace Unikreativ.Entities.Models.ManageViewModels
 {
     public class ManageLoginsViewModel
     {

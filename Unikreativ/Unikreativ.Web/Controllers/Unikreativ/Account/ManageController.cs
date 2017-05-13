@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Unikreativ.Entities.Entities;
-using Unikreativ.Web.Models;
-using Unikreativ.Web.Models.ManageViewModels;
+using Unikreativ.Entities.Models.ManageViewModels;
 using Unikreativ.Web.Services;
 
 namespace Unikreativ.Web.Controllers.Unikreativ.Account

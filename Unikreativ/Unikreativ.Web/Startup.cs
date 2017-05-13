@@ -13,7 +13,7 @@ using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Web.Middleware;
 using Unikreativ.Web.Middleware.DataModels;
-using Unikreativ.Web.Models;
+
 using Unikreativ.Web.Services;
 
 namespace Unikreativ.Web
@@ -63,6 +63,9 @@ namespace Unikreativ.Web
                 options.Cookies.ApplicationCookie.AutomaticChallenge = true;
                 options.Cookies.ApplicationCookie.AutomaticChallenge = true;
                 options.Cookies.ApplicationCookie.AuthenticationScheme = "Cookie";
+                options.Cookies.ApplicationCookie.LoginPath = "/login";
+                options.Cookies.ApplicationCookie.AutomaticAuthenticate = true;
+                options.Cookies.ApplicationCookie.AutomaticChallenge = true;
             });
         }
 
