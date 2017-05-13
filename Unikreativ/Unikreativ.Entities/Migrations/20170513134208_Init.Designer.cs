@@ -9,7 +9,7 @@ using Unikreativ.Entities.Entities;
 namespace Unikreativ.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170511172042_Init")]
+    [Migration("20170513134208_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,7 +125,188 @@ namespace Unikreativ.Entities.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Unikreativ.Entities.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Unikreativ.Entities.Entities.Billing", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateModified");
+
+                    b.Property<string>("ProjectId");
+
+                    b.Property<Guid?>("ProjectId1");
+
+                    b.Property<double>("RateOfTask");
+
+                    b.Property<Guid>("TasksRequestId");
+
+                    b.Property<double>("Total");
+
+                    b.Property<double>("WorkingTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId1");
+
+                    b.HasIndex("TasksRequestId")
+                        .IsUnique();
+
+                    b.ToTable("Billings");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.Event", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AssignBy");
+
+                    b.Property<string>("AssignTo");
+
+                    b.Property<DateTime>("DateAssigned");
+
+                    b.Property<DateTime>("DateModified");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsCompleted");
+
+                    b.Property<string>("ProjectId");
+
+                    b.Property<Guid?>("ProjectId1");
+
+                    b.Property<string>("TaskName");
+
+                    b.Property<string>("TaskRequestId");
+
+                    b.Property<Guid?>("TasksRequestId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId1");
+
+                    b.HasIndex("TasksRequestId");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.MediaFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateModified");
+
+                    b.Property<string>("FileName");
+
+                    b.Property<string>("TaskRequestId");
+
+                    b.Property<Guid?>("TasksRequestId");
+
+                    b.Property<string>("UploadDate");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TasksRequestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MediaFiles");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AgreementDate");
+
+                    b.Property<string>("BillingId");
+
+                    b.Property<string>("ClientId");
+
+                    b.Property<DateTime>("DateModified");
+
+                    b.Property<string>("EventId");
+
+                    b.Property<string>("ProjectDescription");
+
+                    b.Property<Guid>("ProjectId");
+
+                    b.Property<string>("ProjectName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.SubTask", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateModified");
+
+                    b.Property<string>("ProjectId");
+
+                    b.Property<Guid?>("ProjectId1");
+
+                    b.Property<string>("SubTaskName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId1");
+
+                    b.ToTable("SubTasks");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.TasksRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AssignBy");
+
+                    b.Property<string>("AssignTo");
+
+                    b.Property<string>("BillingId");
+
+                    b.Property<double>("CompleteRate");
+
+                    b.Property<double>("CostOfTask");
+
+                    b.Property<DateTime>("DateModified");
+
+                    b.Property<DateTime>("Due");
+
+                    b.Property<bool>("IsCompleted");
+
+                    b.Property<string>("ProjectId");
+
+                    b.Property<Guid?>("ProjectId1");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<string>("SubTaskId");
+
+                    b.Property<Guid?>("SubTaskId1");
+
+                    b.Property<string>("TaskName");
+
+                    b.Property<double>("WorkingTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId1");
+
+                    b.HasIndex("SubTaskId1");
+
+                    b.ToTable("TasksRequests");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -170,6 +351,8 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<Guid?>("ProjectId");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<string>("Status");
@@ -190,125 +373,9 @@ namespace Unikreativ.Entities.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
+                    b.HasIndex("ProjectId");
+
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Unikreativ.Entities.Entities.Billing", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ProjectId");
-
-                    b.Property<double>("RateOfTask");
-
-                    b.Property<string>("TasksRequestId");
-
-                    b.Property<double>("Total");
-
-                    b.Property<double>("WorkingTime");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Billings");
-                });
-
-            modelBuilder.Entity("Unikreativ.Entities.Entities.Event", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AssignBy");
-
-                    b.Property<string>("AssignTo");
-
-                    b.Property<DateTime>("DateAssigned");
-
-                    b.Property<string>("Description");
-
-                    b.Property<bool>("IsCompleted");
-
-                    b.Property<string>("ProjectId");
-
-                    b.Property<string>("TaskId");
-
-                    b.Property<string>("TaskName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("Unikreativ.Entities.Entities.MediaFile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("FileName");
-
-                    b.Property<string>("TaskId");
-
-                    b.Property<string>("UploadDate");
-
-                    b.Property<string>("UserUpload");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MediaFiles");
-                });
-
-            modelBuilder.Entity("Unikreativ.Entities.Entities.Project", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("AgreementDate");
-
-                    b.Property<string>("BillingId");
-
-                    b.Property<string>("ClientId");
-
-                    b.Property<string>("EventId");
-
-                    b.Property<string>("ProjectDescription");
-
-                    b.Property<string>("ProjectName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("Unikreativ.Entities.Entities.TasksRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AssignBy");
-
-                    b.Property<string>("AssignTo");
-
-                    b.Property<string>("BillingId");
-
-                    b.Property<double>("CompleteRate");
-
-                    b.Property<double>("CostOfTask");
-
-                    b.Property<DateTime>("Due");
-
-                    b.Property<bool>("IsCompleted");
-
-                    b.Property<string>("ProjectId");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<string>("TaskName");
-
-                    b.Property<double>("WorkingTime");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TasksRequest");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -321,7 +388,7 @@ namespace Unikreativ.Entities.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Unikreativ.Entities.Entities.ApplicationUser")
+                    b.HasOne("Unikreativ.Entities.Entities.User")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -329,7 +396,7 @@ namespace Unikreativ.Entities.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Unikreativ.Entities.Entities.ApplicationUser")
+                    b.HasOne("Unikreativ.Entities.Entities.User")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -342,10 +409,69 @@ namespace Unikreativ.Entities.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Unikreativ.Entities.Entities.ApplicationUser")
+                    b.HasOne("Unikreativ.Entities.Entities.User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.Billing", b =>
+                {
+                    b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
+                        .WithMany("Billings")
+                        .HasForeignKey("ProjectId1");
+
+                    b.HasOne("Unikreativ.Entities.Entities.TasksRequest", "TasksRequest")
+                        .WithOne("Billing")
+                        .HasForeignKey("Unikreativ.Entities.Entities.Billing", "TasksRequestId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.Event", b =>
+                {
+                    b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
+                        .WithMany("Events")
+                        .HasForeignKey("ProjectId1");
+
+                    b.HasOne("Unikreativ.Entities.Entities.TasksRequest", "TasksRequest")
+                        .WithMany()
+                        .HasForeignKey("TasksRequestId");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.MediaFile", b =>
+                {
+                    b.HasOne("Unikreativ.Entities.Entities.TasksRequest", "TasksRequest")
+                        .WithMany("MediaFiles")
+                        .HasForeignKey("TasksRequestId");
+
+                    b.HasOne("Unikreativ.Entities.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.SubTask", b =>
+                {
+                    b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
+                        .WithMany("SubTasks")
+                        .HasForeignKey("ProjectId1");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.TasksRequest", b =>
+                {
+                    b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId1");
+
+                    b.HasOne("Unikreativ.Entities.Entities.SubTask", "SubTask")
+                        .WithMany("TasksRequests")
+                        .HasForeignKey("SubTaskId1");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.User", b =>
+                {
+                    b.HasOne("Unikreativ.Entities.Entities.Project")
+                        .WithMany("Users")
+                        .HasForeignKey("ProjectId");
                 });
         }
     }

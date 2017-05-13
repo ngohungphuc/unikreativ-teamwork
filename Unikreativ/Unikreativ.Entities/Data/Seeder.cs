@@ -8,30 +8,23 @@ using Unikreativ.Entities.Entities;
 
 namespace Unikreativ.Entities.Data
 {
-    public class Seeder
+    public static class Seeder
     {
-        private readonly ApplicationDbContext _context;
-
-        public Seeder(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public async void SeedUser()
+        public static async void SeedUser(this ApplicationDbContext context)
         {
             string[] roles = new string[] { "Administrator", "Manager", "Developer", "Accountant", "Designer", "Client", "Watcher" };
 
             foreach (var role in roles)
             {
-                var roleStore = new RoleStore<IdentityRole>(_context);
+                var roleStore = new RoleStore<IdentityRole>(context);
                 //add default  role to db
-                if (!_context.Roles.Any(r => r.Name == role))
+                if (!context.Roles.Any(r => r.Name == role))
                 {
                     await roleStore.CreateAsync(new IdentityRole(role));
                 }
             }
 
-            var user = new ApplicationUser
+            var user = new User
             {
                 Email = "helentran2609@gmail.com",
                 UserName = "helentran",
@@ -40,7 +33,6 @@ namespace Unikreativ.Entities.Data
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 LockoutEnabled = false,
-                SecurityStamp = Guid.NewGuid().ToString("D"),
                 FullName = "Trần Mai Phương",
                 JobTitle = "Web Developer",
                 CompanyName = "Unikreativ",
@@ -48,13 +40,13 @@ namespace Unikreativ.Entities.Data
             };
 
             //create user account and assign role for account
-            if (!_context.Users.Any(u => u.UserName == user.UserName))
+            if (!context.Users.Any(u => u.UserName == user.UserName))
             {
-                var password = new PasswordHasher<ApplicationUser>();
+                var password = new PasswordHasher<User>();
                 var hashed = password.HashPassword(user, "tranmaiphuong2609");
                 user.PasswordHash = hashed;
 
-                var userStore = new UserStore<ApplicationUser>(_context);
+                var userStore = new UserStore<User>(context);
                 await userStore.CreateAsync(user);
                 await userStore.AddToRoleAsync(user, "Administrator");
             }

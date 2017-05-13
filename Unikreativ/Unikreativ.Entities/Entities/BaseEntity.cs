@@ -9,5 +9,7 @@ namespace Unikreativ.Entities.Entities
     {
         [Key]
         public Guid Id { get; set; }
+
+        public DateTime DateModified { get; set; }
     }
 }

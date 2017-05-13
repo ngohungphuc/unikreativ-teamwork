@@ -23,11 +23,17 @@ namespace Unikreativ.Entities.Entities
         public double CostOfTask { get; set; }
 
         public string BillingId { get; set; }
+        public Billing Billing { get; set; }
 
         public string ProjectId { get; set; }
+        public Project Project { get; set; }
 
         public string AssignTo { get; set; }
 
         public string AssignBy { get; set; }
+
+        public ICollection<MediaFile> MediaFiles { get; set; }
+        public string SubTaskId { get; set; }
+        public SubTask SubTask { get; set; }
     }
 }
