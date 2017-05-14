@@ -21,9 +21,6 @@ namespace Unikreativ.Web
     public class Startup
     {
         public IConfigurationRoot Configuration { get; }
-        private static readonly string secretKey = "somethingverysecret";
-        private static readonly string issuer = "TestUser";
-        private static readonly string audience = "TestAudience";
 
         public Startup(IHostingEnvironment env)
         {
@@ -79,40 +76,7 @@ namespace Unikreativ.Web
             //{
             //    serviceScope.ServiceProvider.GetService<ApplicationDbContext>().SeedUser();
             //}
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
-
-            var jwtOptions = new TokenProviderOptions
-            {
-                Audience = audience,
-                Issuer = issuer,
-                SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
-            };
-
-            //setup middleware for jwt
-            app.UseMiddleware<TokenProviderMiddleware>(Options.Create(jwtOptions));
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = signingKey,
-
-                ValidateIssuer = true,
-                ValidIssuer = issuer,
-
-                ValidateAudience = true,
-                ValidAudience = audience,
-
-                ValidateLifetime = true,
-
-                ClockSkew = TimeSpan.Zero
-            };
-
-            app.UseJwtBearerAuthentication(new JwtBearerOptions()
-            {
-                AutomaticAuthenticate = false,
-                AutomaticChallenge = true,
-                TokenValidationParameters = tokenValidationParameters,
-                AuthenticationScheme = "Bearer"
-            });
+            //var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
             if (env.IsDevelopment())
             {

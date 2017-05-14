@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var Observable_1 = require("rxjs/Observable");
 var http_1 = require("@angular/http");
 var LoginService = (function () {
     function LoginService(http) {
@@ -20,12 +19,7 @@ var LoginService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         var loginInfo = { Username: username, Password: password };
-        return this.http.post('/Account/Login', JSON.stringify(loginInfo), options)
-            .do(function (resp) {
-            console.log(resp);
-        }).catch(function (error) {
-            return Observable_1.Observable.of(false);
-        });
+        return this.http.get('http://localhost:53746/api/Account/GetSomething').map(function (res) { return res.json(); });
     };
     LoginService.prototype.logout = function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });

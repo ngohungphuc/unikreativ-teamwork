@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup
     username: FormControl
     password: FormControl
-    constructor(private loginService:LoginService) {
+    constructor(private loginService: LoginService) {
     }
 
     ngOnInit() {
@@ -24,10 +24,12 @@ export class LoginComponent implements OnInit {
     }
 
     login(formValues) {
-        this.loginService.loginUser(formValues.username,formValues.password).subscribe(
+        this.loginService.loginUser(formValues.username, formValues.password).subscribe(
             resp => {
-                console.log(resp)
-            }
-        )
+                console.log("Resp" + resp)
+            },
+            err => {
+                console.log("error"+err)
+            })
     }
 }

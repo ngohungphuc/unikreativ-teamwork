@@ -26,7 +26,9 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.login = function (formValues) {
         this.loginService.loginUser(formValues.username, formValues.password).subscribe(function (resp) {
-            console.log(resp);
+            console.log("Resp" + resp);
+        }, function (err) {
+            console.log("error" + err);
         });
     };
     return LoginComponent;
