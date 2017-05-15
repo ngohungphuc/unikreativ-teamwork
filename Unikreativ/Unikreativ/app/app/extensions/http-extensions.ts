@@ -1,0 +1,19 @@
+import { Injectable } from '@angular/core'
+import { Http } from '@angular/http'
+
+@Injectable()
+export class HttpClientService {
+    urlPrefix: string
+    constructor(private http: Http) {
+        this.urlPrefix = 'http://localhost:60876/api/'
+    }
+
+    get(url) {
+        return this.http.get(this.urlPrefix + url)
+    }
+
+    post(url, data, options) {
+        return this.http.post(this.urlPrefix + url, data, options)
+    }
+
+}

@@ -36,7 +36,8 @@ namespace Unikreativ.Entities.Data
                 FullName = "Trần Mai Phương",
                 JobTitle = "Web Developer",
                 CompanyName = "Unikreativ",
-                ChargeRate = 14
+                ChargeRate = 14,
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             //create user account and assign role for account
