@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../../services/account/login.service'
-
+import { Router } from '@angular/router'
 @Component({
     selector: 'login',
     templateUrl: 'partial/login',
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup
     username: FormControl
     password: FormControl
-    constructor(private loginService: LoginService) {
+    constructor(private loginService: LoginService, private router: Router) {
     }
 
     ngOnInit() {
@@ -28,10 +28,15 @@ export class LoginComponent implements OnInit {
     login(formValues) {
         this.loginService.loginUser(formValues.username, formValues.password).subscribe(
             resp => {
-                console.log('Resp' + resp)
+                if (resp === 200) {
+                    this.router.navigate(['dashboard'])
+                }
             },
             err => {
-                console.log('error'+err)
+                if (err === 400) {
+                    // toastr.error('Invalid credential', 'Error')
+                    alert('Invalid credentials')
+                }
             })
     }
 }

@@ -6,7 +6,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var shared_module_1 = require("./app/extensions/shared.module");
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var router_1 = require("@angular/router");
@@ -17,6 +16,8 @@ var login_component_1 = require("./app/components/login/login.component");
 var index_1 = require("./app/components/errors/index");
 var routes_1 = require("./routes/routes");
 var index_2 = require("./app/services/index");
+var admin_module_1 = require("./app/modules/admin/admin.module");
+var shared_module_1 = require("./app/extensions/shared.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,6 +31,7 @@ AppModule = __decorate([
             forms_1.ReactiveFormsModule,
             http_1.HttpModule,
             shared_module_1.ServicesModule,
+            admin_module_1.AdminModule,
             router_1.RouterModule.forRoot(routes_1.appRoutes)
         ],
         declarations: [

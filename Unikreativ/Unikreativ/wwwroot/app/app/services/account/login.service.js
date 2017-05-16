@@ -12,23 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var http_extensions_1 = require("../../extensions/http-extensions");
+var services_handler_1 = require("../../extensions/services-handler");
 require("rxjs/add/operator/map");
 var LoginService = (function () {
-    function LoginService(http, httpClientService) {
+    function LoginService(http, httpClientService, dataHandlerService) {
         this.http = http;
         this.httpClientService = httpClientService;
+        this.dataHandlerService = dataHandlerService;
     }
     LoginService.prototype.loginUser = function (username, password) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         var loginInfo = { Username: username, Password: password };
         return this.httpClientService.post('Account/Login', loginInfo, options)
-            .map(function (res) {
-            var user = res.json();
-            if (user) {
-                localStorage.setItem('currentUser', JSON.stringify(user));
-            }
-        });
+            .map(function (res) { return res.status; })
+            .catch(this.dataHandlerService.handleError);
     };
     LoginService.prototype.logout = function () {
         localStorage.removeItem('currentUser');
@@ -37,7 +35,9 @@ var LoginService = (function () {
 }());
 LoginService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, http_extensions_1.HttpClientService])
+    __metadata("design:paramtypes", [http_1.Http,
+        http_extensions_1.HttpClientService,
+        services_handler_1.DataHandlerService])
 ], LoginService);
 exports.LoginService = LoginService;
 //# sourceMappingURL=login.service.js.map

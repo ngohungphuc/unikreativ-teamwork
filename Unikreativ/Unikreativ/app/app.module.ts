@@ -1,6 +1,4 @@
-﻿import { ServicesModule } from './app/extensions/shared.module'
-import { HttpClientService } from './app/extensions/http-extensions'
-import { NgModule } from '@angular/core'
+﻿import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 import { HttpModule } from '@angular/http'
@@ -10,6 +8,9 @@ import { LoginComponent } from './app/components/login/login.component'
 import { Error404Component,Error500Component } from './app/components/errors/index'
 import { appRoutes } from './routes/routes'
 import { LoginService } from './app/services/index'
+import { AdminModule } from './app/modules/admin/admin.module'
+import { ServicesModule } from './app/extensions/shared.module'
+import { HttpClientService } from './app/extensions/http-extensions'
 @NgModule({
     imports: [
         BrowserModule,
@@ -17,6 +18,7 @@ import { LoginService } from './app/services/index'
         ReactiveFormsModule,
         HttpModule,
         ServicesModule,
+        AdminModule,
         RouterModule.forRoot(appRoutes)],
     declarations: [
         AppComponent,

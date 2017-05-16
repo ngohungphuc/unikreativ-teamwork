@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("./rxjs-extensions");
 var core_1 = require("@angular/core");
 var http_extensions_1 = require("./http-extensions");
+var services_handler_1 = require("./services-handler");
 var ServicesModule = (function () {
     function ServicesModule() {
     }
@@ -16,7 +17,7 @@ var ServicesModule = (function () {
 }());
 ServicesModule = __decorate([
     core_1.NgModule({
-        providers: [http_extensions_1.HttpClientService]
+        providers: [http_extensions_1.HttpClientService, services_handler_1.DataHandlerService]
     })
 ], ServicesModule);
 exports.ServicesModule = ServicesModule;

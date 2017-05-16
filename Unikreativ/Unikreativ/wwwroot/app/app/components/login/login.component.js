@@ -13,9 +13,11 @@ var http_extensions_1 = require("./../../extensions/http-extensions");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../services/account/login.service");
+var router_1 = require("@angular/router");
 var LoginComponent = (function () {
-    function LoginComponent(loginService) {
+    function LoginComponent(loginService, router) {
         this.loginService = loginService;
+        this.router = router;
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.username = new forms_1.FormControl('', forms_1.Validators.required);
@@ -26,10 +28,15 @@ var LoginComponent = (function () {
         });
     };
     LoginComponent.prototype.login = function (formValues) {
+        var _this = this;
         this.loginService.loginUser(formValues.username, formValues.password).subscribe(function (resp) {
-            console.log('Resp' + resp);
+            if (resp === 200) {
+                _this.router.navigate(['dashboard']);
+            }
         }, function (err) {
-            console.log('error' + err);
+            if (err === 400) {
+                alert('Invalid credentials');
+            }
         });
     };
     return LoginComponent;
@@ -40,7 +47,7 @@ LoginComponent = __decorate([
         templateUrl: 'partial/login',
         providers: [http_extensions_1.HttpClientService]
     }),
-    __metadata("design:paramtypes", [login_service_1.LoginService])
+    __metadata("design:paramtypes", [login_service_1.LoginService, router_1.Router])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

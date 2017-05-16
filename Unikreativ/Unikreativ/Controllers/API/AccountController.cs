@@ -33,10 +33,10 @@ namespace Unikreativ.Controllers.API
             if (result.Succeeded)
             {
                 _logger.LogInformation(1, "User logged in.");
-                return Json(new { success = true });
+                return Ok();
             }
 
-            return Json(new { isInvalid = true });
+            return BadRequest();
         }
     }
 }
