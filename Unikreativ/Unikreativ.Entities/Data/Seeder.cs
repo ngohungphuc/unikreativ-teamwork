@@ -40,7 +40,7 @@ namespace Unikreativ.Entities.Data
                 SecurityStamp = Guid.NewGuid().ToString(),
                 Industries = User.Industry.Technology
             };
-
+            var userStore = new UserStore<User>(context);
             //create user account and assign role for account
             if (!context.Users.Any(u => u.UserName == user.UserName))
             {
@@ -48,10 +48,10 @@ namespace Unikreativ.Entities.Data
                 var hashed = password.HashPassword(user, "tranmaiphuong2609");
                 user.PasswordHash = hashed;
 
-                var userStore = new UserStore<User>(context);
                 await userStore.CreateAsync(user);
                 await userStore.AddToRoleAsync(user, "Administrator");
             }
+            await userStore.AddToRoleAsync(user, "Administrator");
         }
     }
 }

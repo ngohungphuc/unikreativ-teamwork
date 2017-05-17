@@ -84,10 +84,10 @@ namespace Unikreativ
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {
-                    serviceScope.ServiceProvider.GetService<ApplicationDbContext>().SeedUser();
-                }
+                //using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                //{
+                //    serviceScope.ServiceProvider.GetService<ApplicationDbContext>().SeedUser();
+                //}
             }
             else
             {

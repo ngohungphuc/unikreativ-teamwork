@@ -2,10 +2,9 @@
 import { Observable } from 'rxjs/Observable'
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { HttpClientService, DataHandlerService } from '../../extensions/index'
-import { RequestResult } from '../../model/RequestResult';
+import { RequestResult } from '../../model/RequestResult'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise'
-
 
 @Injectable()
 export class LoginService {
@@ -65,7 +64,6 @@ export class LoginService {
             .then(response => response.json() as RequestResult)
             .catch(this.dataHandlerService.handleError)
     }
-
 
     private getLocalToken(): string {
         if (!this.token) {
