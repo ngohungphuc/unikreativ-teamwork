@@ -28,14 +28,12 @@ export class LoginComponent implements OnInit {
     }
 
     login(formValues) {
-        this.loginService.loginUser(formValues.username, formValues.password).subscribe(
+        this.loginService.loginUser(formValues.username, formValues.password).then(
             resp => {
-                if (resp === 200) {
+                if (resp.State === 1) {
                     this.router.navigate(['dashboard'])
                 }
-            },
-            err => {
-                if (err.status === 400) {
+                else {
                     this.toastr.error('Invalid credential', 'Error')
                 }
             })

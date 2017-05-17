@@ -11,22 +11,64 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var http_extensions_1 = require("../../extensions/http-extensions");
-var services_handler_1 = require("../../extensions/services-handler");
+var index_1 = require("../../extensions/index");
 require("rxjs/add/operator/map");
+require("rxjs/add/operator/toPromise");
 var LoginService = (function () {
     function LoginService(http, httpClientService, dataHandlerService) {
         this.http = http;
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
+        this.tokenKey = 'token';
     }
     LoginService.prototype.loginUser = function (username, password) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         var loginInfo = { Username: username, Password: password };
-        return this.httpClientService.post('Account/Login', loginInfo, options)
-            .map(function (res) { return res.status; })
+        return this.httpClientService.post('/TokenAuth', loginInfo, options)
+            .toPromise()
+            .then(function (response) {
+            var result = response.json();
+            if (result.State === 1) {
+                var json = result.Data;
+                sessionStorage.setItem('token', json.accessToken);
+            }
+            return result;
+        })
             .catch(this.dataHandlerService.handleError);
+    };
+    LoginService.prototype.checkLogin = function () {
+        var token = sessionStorage.getItem(this.tokenKey);
+        return token != null;
+    };
+    LoginService.prototype.getUserInfo = function () {
+        return this.authGet('/TokenAuth');
+    };
+    LoginService.prototype.authGet = function (url) {
+        var headers = this.initAuthHeaders();
+        return this.httpClientService.get(url, { headers: headers }).toPromise()
+            .then(function (res) { return res.json(); })
+            .catch(this.dataHandlerService.handleError);
+    };
+    LoginService.prototype.authPost = function (url, body) {
+        var headers = this.initAuthHeaders();
+        return this.http.post(url, body, { headers: headers }).toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.dataHandlerService.handleError);
+    };
+    LoginService.prototype.getLocalToken = function () {
+        if (!this.token) {
+            this.token = sessionStorage.getItem(this.tokenKey);
+        }
+        return this.token;
+    };
+    LoginService.prototype.initAuthHeaders = function () {
+        var token = this.getLocalToken();
+        if (token === null)
+            throw 'No token';
+        var headers = new http_1.Headers();
+        headers.append('Authorization', 'Bearer ' + token);
+        return headers;
     };
     LoginService.prototype.logout = function () {
         localStorage.removeItem('currentUser');
@@ -36,8 +78,8 @@ var LoginService = (function () {
 LoginService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http,
-        http_extensions_1.HttpClientService,
-        services_handler_1.DataHandlerService])
+        index_1.HttpClientService,
+        index_1.DataHandlerService])
 ], LoginService);
 exports.LoginService = LoginService;
 //# sourceMappingURL=login.service.js.map

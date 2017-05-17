@@ -16,8 +16,8 @@ var HttpClientService = (function () {
         this.http = http;
         this.urlPrefix = 'http://localhost:60876/api/';
     }
-    HttpClientService.prototype.get = function (url) {
-        return this.http.get(this.urlPrefix + url);
+    HttpClientService.prototype.get = function (url, options) {
+        return this.http.get(this.urlPrefix + url, options);
     };
     HttpClientService.prototype.post = function (url, data, options) {
         return this.http.post(this.urlPrefix + url, data, options);

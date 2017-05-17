@@ -33,12 +33,11 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.login = function (formValues) {
         var _this = this;
-        this.loginService.loginUser(formValues.username, formValues.password).subscribe(function (resp) {
-            if (resp === 200) {
+        this.loginService.loginUser(formValues.username, formValues.password).then(function (resp) {
+            if (resp.State === 1) {
                 _this.router.navigate(['dashboard']);
             }
-        }, function (err) {
-            if (err.status === 400) {
+            else {
                 _this.toastr.error('Invalid credential', 'Error');
             }
         });
