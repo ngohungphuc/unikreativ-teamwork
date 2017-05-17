@@ -39,7 +39,7 @@ var LoginComponent = (function () {
             }
         }, function (err) {
             if (err.status === 400) {
-                _this.toastr.error('Invalid credential');
+                _this.toastr.error('Invalid credential', 'Error');
             }
         });
     };

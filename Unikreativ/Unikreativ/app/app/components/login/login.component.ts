@@ -2,7 +2,7 @@
 import { Router } from '@angular/router'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../../services/account/login.service'
-import { HttpClientService, Toastr_Token } from './../../extensions/index'
+import { HttpClientService, Toastr_Token, Toastr } from './../../extensions/index'
 
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup
     username: FormControl
     password: FormControl
-    constructor(private loginService: LoginService, private router: Router, @Inject(Toastr_Token) private toastr: any) {
+    constructor(private loginService: LoginService, private router: Router, @Inject(Toastr_Token) private toastr: Toastr) {
     }
 
     ngOnInit() {
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
             },
             err => {
                 if (err.status === 400) {
-                    this.toastr.error('Invalid credential')
+                    this.toastr.error('Invalid credential', 'Error')
                 }
             })
     }
