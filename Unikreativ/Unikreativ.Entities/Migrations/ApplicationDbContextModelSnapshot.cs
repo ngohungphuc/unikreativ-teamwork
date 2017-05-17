@@ -14,7 +14,7 @@ namespace Unikreativ.Entities.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.1")
+                .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -131,9 +131,7 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<DateTime>("DateModified");
 
-                    b.Property<string>("ProjectId");
-
-                    b.Property<Guid?>("ProjectId1");
+                    b.Property<Guid?>("ProjectId");
 
                     b.Property<double>("RateOfTask");
 
@@ -145,7 +143,7 @@ namespace Unikreativ.Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId1");
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("TasksRequestId")
                         .IsUnique();
@@ -170,19 +168,15 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<bool>("IsCompleted");
 
-                    b.Property<string>("ProjectId");
-
-                    b.Property<Guid?>("ProjectId1");
+                    b.Property<Guid?>("ProjectId");
 
                     b.Property<string>("TaskName");
-
-                    b.Property<string>("TaskRequestId");
 
                     b.Property<Guid?>("TasksRequestId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId1");
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("TasksRequestId");
 
@@ -197,8 +191,6 @@ namespace Unikreativ.Entities.Migrations
                     b.Property<DateTime>("DateModified");
 
                     b.Property<string>("FileName");
-
-                    b.Property<string>("TaskRequestId");
 
                     b.Property<Guid?>("TasksRequestId");
 
@@ -232,8 +224,6 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<string>("ProjectDescription");
 
-                    b.Property<Guid>("ProjectId");
-
                     b.Property<string>("ProjectName");
 
                     b.HasKey("Id");
@@ -248,15 +238,13 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<DateTime>("DateModified");
 
-                    b.Property<string>("ProjectId");
-
-                    b.Property<Guid?>("ProjectId1");
+                    b.Property<Guid?>("ProjectId");
 
                     b.Property<string>("SubTaskName");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId1");
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("SubTasks");
                 });
@@ -270,8 +258,6 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<string>("AssignTo");
 
-                    b.Property<string>("BillingId");
-
                     b.Property<double>("CompleteRate");
 
                     b.Property<double>("CostOfTask");
@@ -282,15 +268,11 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<bool>("IsCompleted");
 
-                    b.Property<string>("ProjectId");
-
-                    b.Property<Guid?>("ProjectId1");
+                    b.Property<Guid?>("ProjectId");
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<string>("SubTaskId");
-
-                    b.Property<Guid?>("SubTaskId1");
+                    b.Property<Guid?>("SubTaskId");
 
                     b.Property<string>("TaskName");
 
@@ -298,9 +280,9 @@ namespace Unikreativ.Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId1");
+                    b.HasIndex("ProjectId");
 
-                    b.HasIndex("SubTaskId1");
+                    b.HasIndex("SubTaskId");
 
                     b.ToTable("TasksRequests");
                 });
@@ -350,8 +332,6 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<Guid?>("ProjectId");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<string>("Status");
@@ -371,8 +351,6 @@ namespace Unikreativ.Entities.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasName("UserNameIndex");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -418,7 +396,7 @@ namespace Unikreativ.Entities.Migrations
                 {
                     b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
                         .WithMany("Billings")
-                        .HasForeignKey("ProjectId1");
+                        .HasForeignKey("ProjectId");
 
                     b.HasOne("Unikreativ.Entities.Entities.TasksRequest", "TasksRequest")
                         .WithOne("Billing")
@@ -430,7 +408,7 @@ namespace Unikreativ.Entities.Migrations
                 {
                     b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
                         .WithMany("Events")
-                        .HasForeignKey("ProjectId1");
+                        .HasForeignKey("ProjectId");
 
                     b.HasOne("Unikreativ.Entities.Entities.TasksRequest", "TasksRequest")
                         .WithMany()
@@ -452,25 +430,18 @@ namespace Unikreativ.Entities.Migrations
                 {
                     b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
                         .WithMany("SubTasks")
-                        .HasForeignKey("ProjectId1");
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Unikreativ.Entities.Entities.TasksRequest", b =>
                 {
                     b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("ProjectId1");
+                        .HasForeignKey("ProjectId");
 
                     b.HasOne("Unikreativ.Entities.Entities.SubTask", "SubTask")
                         .WithMany("TasksRequests")
-                        .HasForeignKey("SubTaskId1");
-                });
-
-            modelBuilder.Entity("Unikreativ.Entities.Entities.User", b =>
-                {
-                    b.HasOne("Unikreativ.Entities.Entities.Project")
-                        .WithMany("Users")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("SubTaskId");
                 });
         }
     }

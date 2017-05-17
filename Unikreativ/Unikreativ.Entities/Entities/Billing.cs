@@ -18,7 +18,7 @@ namespace Unikreativ.Entities.Entities
         public Guid TasksRequestId { get; set; }
 
         public TasksRequest TasksRequest { get; set; }
-        public string ProjectId { get; set; }
+
         public Project Project { get; set; }
     }
 }
