@@ -1,8 +1,10 @@
-﻿import { HttpClientService } from './../../extensions/http-extensions'
-import { Component, OnInit } from '@angular/core'
+﻿import { Component, OnInit, Inject } from '@angular/core'
+import { Router } from '@angular/router'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../../services/account/login.service'
-import { Router } from '@angular/router'
+import { HttpClientService, Toastr_Token } from './../../extensions/index'
+
+
 @Component({
     selector: 'login',
     templateUrl: 'partial/login',
@@ -12,7 +14,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup
     username: FormControl
     password: FormControl
-    constructor(private loginService: LoginService, private router: Router) {
+    constructor(private loginService: LoginService, private router: Router, @Inject(Toastr_Token) private toastr: any) {
     }
 
     ngOnInit() {
@@ -33,9 +35,8 @@ export class LoginComponent implements OnInit {
                 }
             },
             err => {
-                if (err === 400) {
-                    // toastr.error('Invalid credential', 'Error')
-                    alert('Invalid credentials')
+                if (err.status === 400) {
+                    this.toastr.error('Invalid credential')
                 }
             })
     }

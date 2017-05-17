@@ -8,8 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./rxjs-extensions");
 var core_1 = require("@angular/core");
-var http_extensions_1 = require("./http-extensions");
-var services_handler_1 = require("./services-handler");
+var index_1 = require("./index");
 var ServicesModule = (function () {
     function ServicesModule() {
     }
@@ -17,7 +16,11 @@ var ServicesModule = (function () {
 }());
 ServicesModule = __decorate([
     core_1.NgModule({
-        providers: [http_extensions_1.HttpClientService, services_handler_1.DataHandlerService]
+        providers: [
+            index_1.HttpClientService,
+            index_1.DataHandlerService,
+            { provide: index_1.Toastr_Token, useValue: toastr }
+        ]
     })
 ], ServicesModule);
 exports.ServicesModule = ServicesModule;

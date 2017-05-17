@@ -8,16 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_extensions_1 = require("./../../extensions/http-extensions");
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../services/account/login.service");
-var router_1 = require("@angular/router");
+var index_1 = require("./../../extensions/index");
 var LoginComponent = (function () {
-    function LoginComponent(loginService, router) {
+    function LoginComponent(loginService, router, toastr) {
         this.loginService = loginService;
         this.router = router;
+        this.toastr = toastr;
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.username = new forms_1.FormControl('', forms_1.Validators.required);
@@ -34,8 +38,8 @@ var LoginComponent = (function () {
                 _this.router.navigate(['dashboard']);
             }
         }, function (err) {
-            if (err === 400) {
-                alert('Invalid credentials');
+            if (err.status === 400) {
+                _this.toastr.error('Invalid credential');
             }
         });
     };
@@ -45,9 +49,10 @@ LoginComponent = __decorate([
     core_1.Component({
         selector: 'login',
         templateUrl: 'partial/login',
-        providers: [http_extensions_1.HttpClientService]
+        providers: [index_1.HttpClientService]
     }),
-    __metadata("design:paramtypes", [login_service_1.LoginService, router_1.Router])
+    __param(2, core_1.Inject(index_1.Toastr_Token)),
+    __metadata("design:paramtypes", [login_service_1.LoginService, router_1.Router, Object])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

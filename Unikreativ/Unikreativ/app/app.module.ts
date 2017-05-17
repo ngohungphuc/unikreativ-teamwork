@@ -10,7 +10,7 @@ import { appRoutes } from './routes/routes'
 import { LoginService } from './app/services/index'
 import { AdminModule } from './app/modules/admin/admin.module'
 import { ServicesModule } from './app/extensions/shared.module'
-import { HttpClientService } from './app/extensions/http-extensions'
+
 @NgModule({
     imports: [
         BrowserModule,

@@ -39,7 +39,7 @@
                         "wwwroot/css/bootstrap.min.css",
                         "wwwroot/css/font-awesome.css",
                         "wwwroot/css/mdb.css",
-                        "wwwroot/css/toastr.css",
+                        "wwwroot/css/toastr.min.css",
                         "wwwroot/css/site.css"
                     ]
                 }

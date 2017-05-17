@@ -1,8 +1,12 @@
 ﻿import './rxjs-extensions'
 import { NgModule } from '@angular/core'
-import { HttpClientService } from './http-extensions'
-import { DataHandlerService } from './services-handler'
+import { HttpClientService, Toastr_Token, DataHandlerService } from './index'
+declare let toastr: any
 @NgModule({
-  providers: [HttpClientService,DataHandlerService]
+  providers: [
+    HttpClientService,
+    DataHandlerService, 
+    { provide : Toastr_Token , useValue : toastr }
+  ]
 })
 export class ServicesModule {}

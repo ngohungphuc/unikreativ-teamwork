@@ -9,4 +9,4 @@ export const appRoutes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     // { path: 'user', loadChildren: 'app/user/user.module#UserModule' }
     // { path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },
-];
+]
