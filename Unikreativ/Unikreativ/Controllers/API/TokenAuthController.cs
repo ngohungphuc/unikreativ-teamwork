@@ -14,6 +14,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
+using Unikreativ.Services.Interface;
 
 namespace Unikreativ.Controllers.API
 {
@@ -22,57 +23,59 @@ namespace Unikreativ.Controllers.API
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IUserServices _userServices;
 
         public TokenAuthController(
              UserManager<User> userManager,
-             SignInManager<User> signInManager)
+             SignInManager<User> signInManager,
+             IUserServices userServices)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _userServices = userServices;
         }
 
         [HttpPost]
+        [Route("GetAuthToken")]
         public string GetAuthToken([FromBody] LoginViewModel user)
         {
             var result = _signInManager.PasswordSignInAsync(user.Username, user.Password, false, true);
-            if (result.Result.Succeeded)
-            {
-                var requesAt = DateTime.Now;
-                var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
-                //need to pass user id for generate token
-                var token = GenerateToken(user, expiresIn);
-
-                return JsonConvert.SerializeObject(new RequestResult
-                {
-                    State = RequestState.Success,
-                    Data = new
-                    {
-                        requesAt = requesAt,
-                        expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
-                        tokenType = TokenAuthOption.TokenType,
-                        accessToken = token
-                    }
-                });
-            }
-            else
-            {
+            if (!result.Result.Succeeded)
                 return JsonConvert.SerializeObject(new RequestResult
                 {
                     State = RequestState.Failed,
                     Msg = "Username or password is invalid"
                 });
-            }
+
+            var requesAt = DateTime.Now;
+            var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
+
+            //need to pass user id for generate token
+            var userExist = _userServices.GetUserByName(user.Username);
+            var token = GenerateToken(userExist, expiresIn);
+
+            return JsonConvert.SerializeObject(new RequestResult
+            {
+                State = RequestState.Success,
+                Data = new
+                {
+                    requesAt = requesAt,
+                    expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
+                    tokenType = TokenAuthOption.TokenType,
+                    accessToken = token
+                }
+            });
         }
 
-        private string GenerateToken(LoginViewModel user, DateTime expiresIn)
+        private string GenerateToken(User user, DateTime expiresIn)
         {
             var handler = new JwtSecurityTokenHandler();
 
             ClaimsIdentity identity = new ClaimsIdentity(
-                new GenericIdentity(user.Username, "TokenAuth"),
+                new GenericIdentity(user.UserName, "TokenAuth"),
                 new[]
                 {
-                     new Claim("ID", user.Id.ToString())
+                     new Claim("ID", user.Id)
                 }
             );
 

@@ -1,14 +1,14 @@
 "use strict";
-require('angular2-universal-polyfills');
-require('angular2-universal-patch');
-require('zone.js');
-var aspnet_prerendering_1 = require('aspnet-prerendering');
-var core_1 = require('@angular/core');
-var angular2_universal_1 = require('angular2-universal');
-var app_module_1 = require('./app/app.module');
+Object.defineProperty(exports, "__esModule", { value: true });
+require("angular2-universal-polyfills");
+require("angular2-universal-patch");
+require("zone.js");
+var aspnet_prerendering_1 = require("aspnet-prerendering");
+var core_1 = require("@angular/core");
+var angular2_universal_1 = require("angular2-universal");
+var app_module_1 = require("./app/app.module");
 core_1.enableProdMode();
 var platform = angular2_universal_1.platformNodeDynamic();
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = aspnet_prerendering_1.createServerRenderer(function (params) {
     return new Promise(function (resolve, reject) {
         var requestZone = Zone.current.fork({

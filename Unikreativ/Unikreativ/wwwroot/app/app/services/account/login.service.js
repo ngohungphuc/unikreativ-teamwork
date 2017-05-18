@@ -25,7 +25,7 @@ var LoginService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         var loginInfo = { Username: username, Password: password };
-        return this.httpClientService.post('/TokenAuth', loginInfo, options)
+        return this.httpClientService.post('/TokenAuth/GetAuthToken', loginInfo, options)
             .toPromise()
             .then(function (response) {
             var result = response.json();

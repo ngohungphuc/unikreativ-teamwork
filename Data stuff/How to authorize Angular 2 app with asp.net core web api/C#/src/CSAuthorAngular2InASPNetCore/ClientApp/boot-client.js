@@ -1,9 +1,10 @@
 "use strict";
-require('angular2-universal-polyfills/browser');
-var core_1 = require('@angular/core');
-var angular2_universal_1 = require('angular2-universal');
-var app_module_1 = require('./app/app.module');
-require('bootstrap');
+Object.defineProperty(exports, "__esModule", { value: true });
+require("angular2-universal-polyfills/browser");
+var core_1 = require("@angular/core");
+var angular2_universal_1 = require("angular2-universal");
+var app_module_1 = require("./app/app.module");
+require("bootstrap");
 var rootElemTagName = 'app'; // Update this if you change your root component selector
 // Enable either Hot Module Reloading or production mode
 if (module['hot']) {

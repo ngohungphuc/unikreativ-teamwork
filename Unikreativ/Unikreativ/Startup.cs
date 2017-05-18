@@ -20,6 +20,10 @@ using Unikreativ.Entities.Models.Auth;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
 using Unikreativ.Helper.Auth;
+using Unikreativ.Repositories.Interface;
+using Unikreativ.Repositories.Repositories;
+using Unikreativ.Services.Interface;
+using Unikreativ.Services.Services;
 
 namespace Unikreativ
 {
@@ -59,7 +63,7 @@ namespace Unikreativ
             services.AddAuthorization(auth =>
             {
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
             });
 
@@ -71,6 +75,8 @@ namespace Unikreativ
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IUserServices, UserServices>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,10 +90,7 @@ namespace Unikreativ
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
-                //using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                //{
-                //    serviceScope.ServiceProvider.GetService<ApplicationDbContext>().SeedUser();
-                //}
+                Seeder.SeedUser(app);
             }
             else
             {
