@@ -12,7 +12,11 @@ export class LoginService {
     private token: string
     constructor(private http: Http,
         private httpClientService: HttpClientService,
-        private dataHandlerService: DataHandlerService) { }
+        private dataHandlerService: DataHandlerService) {
+        // set token if save in local storage
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'))
+        this.token = currentUser && currentUser.token
+    }
 
     /*loginUser(username: string, password: string) {
         let headers = new Headers({ 'Content-Type': 'application/json' })
@@ -34,7 +38,8 @@ export class LoginService {
                 let result = response.json() as RequestResult
                 if (result.State === 1) {
                     let json = result.Data as any
-                    sessionStorage.setItem('token', json.accessToken)
+                    this.token = json.accessToken
+                    localStorage.setItem('token', JSON.stringify({ username: username, token: json.accessToken }))
                 }
 
                 return result
@@ -43,7 +48,7 @@ export class LoginService {
     }
 
     checkLogin(): boolean {
-        let token = sessionStorage.getItem(this.tokenKey)
+        let token = localStorage.getItem(this.tokenKey)
         return token != null
     }
 
@@ -83,6 +88,7 @@ export class LoginService {
     }
 
     logout() {
+        this.token = null
         localStorage.removeItem('currentUser')
     }
 }

@@ -11,6 +11,7 @@ var common_1 = require("@angular/common");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var index_1 = require("./index");
+var auth_guard_1 = require("./../../extensions/guard/auth.guard");
 var AdminModule = (function () {
     function AdminModule() {
     }
@@ -22,12 +23,14 @@ AdminModule = __decorate([
             common_1.CommonModule,
             forms_1.FormsModule,
             forms_1.ReactiveFormsModule,
-            router_1.RouterModule.forChild(index_1.userRoutes)
+            router_1.RouterModule.forChild(index_1.adminRoutes)
         ],
         declarations: [
             index_1.DashboardComponent
         ],
-        providers: []
+        providers: [
+            auth_guard_1.AuthGuard
+        ]
     })
 ], AdminModule);
 exports.AdminModule = AdminModule;

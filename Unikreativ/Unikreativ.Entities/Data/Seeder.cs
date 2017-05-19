@@ -52,8 +52,11 @@ namespace Unikreativ.Entities.Data
                     var hashed = password.HashPassword(user, "tranmaiphuong2609");
                     user.PasswordHash = hashed;
 
-                    await userStore.CreateAsync(user);
-                    await userStore.AddToRoleAsync(user, "Administrator");
+                    var result = await userStore.CreateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        await userStore.AddToRoleAsync(user, roles[0]);
+                    }
                 }
             }
         }

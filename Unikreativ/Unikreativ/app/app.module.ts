@@ -5,12 +5,11 @@ import { HttpModule } from '@angular/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AppComponent } from './app.component'
 import { LoginComponent } from './app/components/login/login.component'
-import { Error404Component,Error500Component } from './app/components/errors/index'
-import { appRoutes } from './routes/routes'
+import { Error404Component, Error500Component } from './app/components/errors/index'
+import { routing } from './routes/routes'
 import { LoginService } from './app/services/index'
 import { AdminModule } from './app/modules/admin/admin.module'
 import { ServicesModule } from './app/extensions/shared.module'
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -18,14 +17,14 @@ import { ServicesModule } from './app/extensions/shared.module'
         ReactiveFormsModule,
         HttpModule,
         ServicesModule,
-        AdminModule,
-        RouterModule.forRoot(appRoutes)],
+        routing,
+        AdminModule],
     declarations: [
         AppComponent,
         LoginComponent,
         Error404Component,
         Error500Component],
-    providers:[
+    providers: [
         LoginService
     ],
     bootstrap: [AppComponent]

@@ -18,6 +18,7 @@ var routes_1 = require("./routes/routes");
 var index_2 = require("./app/services/index");
 var admin_module_1 = require("./app/modules/admin/admin.module");
 var shared_module_1 = require("./app/extensions/shared.module");
+var auth_guard_1 = require("./app/extensions/guard/auth.guard");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -31,8 +32,8 @@ AppModule = __decorate([
             forms_1.ReactiveFormsModule,
             http_1.HttpModule,
             shared_module_1.ServicesModule,
-            admin_module_1.AdminModule,
-            router_1.RouterModule.forRoot(routes_1.appRoutes)
+            router_1.RouterModule.forRoot(routes_1.appRoutes),
+            admin_module_1.AdminModule
         ],
         declarations: [
             app_component_1.AppComponent,
@@ -41,7 +42,8 @@ AppModule = __decorate([
             index_1.Error500Component
         ],
         providers: [
-            index_2.LoginService
+            index_2.LoginService,
+            auth_guard_1.AuthGuard
         ],
         bootstrap: [app_component_1.AppComponent]
     })

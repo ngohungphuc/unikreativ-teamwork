@@ -20,8 +20,11 @@ var LoginService = (function () {
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
         this.tokenKey = 'token';
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.token = currentUser && currentUser.token;
     }
     LoginService.prototype.loginUser = function (username, password) {
+        var _this = this;
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         var loginInfo = { Username: username, Password: password };
@@ -31,14 +34,15 @@ var LoginService = (function () {
             var result = response.json();
             if (result.State === 1) {
                 var json = result.Data;
-                sessionStorage.setItem('token', json.accessToken);
+                _this.token = json.accessToken;
+                localStorage.setItem('token', JSON.stringify({ username: username, token: json.accessToken }));
             }
             return result;
         })
             .catch(this.dataHandlerService.handleError);
     };
     LoginService.prototype.checkLogin = function () {
-        var token = sessionStorage.getItem(this.tokenKey);
+        var token = localStorage.getItem(this.tokenKey);
         return token != null;
     };
     LoginService.prototype.getUserInfo = function () {
@@ -71,6 +75,7 @@ var LoginService = (function () {
         return headers;
     };
     LoginService.prototype.logout = function () {
+        this.token = null;
         localStorage.removeItem('currentUser');
     };
     return LoginService;
