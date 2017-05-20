@@ -6,10 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AppComponent } from './app.component'
 import { LoginComponent } from './app/components/login/login.component'
 import { Error404Component, Error500Component } from './app/components/errors/index'
-import { routing } from './routes/routes'
 import { LoginService } from './app/services/index'
 import { AdminModule } from './app/modules/admin/admin.module'
 import { ServicesModule } from './app/extensions/shared.module'
+import { Routing } from './routes/routes'
 @NgModule({
     imports: [
         BrowserModule,
@@ -17,7 +17,7 @@ import { ServicesModule } from './app/extensions/shared.module'
         ReactiveFormsModule,
         HttpModule,
         ServicesModule,
-        routing,
+        Routing,
         AdminModule],
     declarations: [
         AppComponent,

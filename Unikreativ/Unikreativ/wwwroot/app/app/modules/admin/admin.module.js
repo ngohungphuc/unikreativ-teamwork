@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
-var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var index_1 = require("./index");
 var auth_guard_1 = require("./../../extensions/guard/auth.guard");
+var admin_routes_1 = require("./admin.routes");
 var AdminModule = (function () {
     function AdminModule() {
     }
@@ -23,7 +23,7 @@ AdminModule = __decorate([
             common_1.CommonModule,
             forms_1.FormsModule,
             forms_1.ReactiveFormsModule,
-            router_1.RouterModule.forChild(index_1.adminRoutes)
+            admin_routes_1.AdminRouting
         ],
         declarations: [
             index_1.DashboardComponent

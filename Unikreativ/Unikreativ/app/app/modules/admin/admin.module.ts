@@ -4,13 +4,14 @@ import { RouterModule } from '@angular/router'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { DashboardComponent, adminRoutes } from './index'
 import { AuthGuard } from './../../extensions/guard/auth.guard'
-
+import { AdminRouting } from './admin.routes'
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(adminRoutes)],
+    AdminRouting
+  ],
   declarations: [
     DashboardComponent
   ],

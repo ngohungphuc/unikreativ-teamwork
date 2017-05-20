@@ -6,9 +6,10 @@ export const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '404', component: Error404Component },
     { path: '500', component: Error500Component },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', component: LoginComponent },
+    { path: '**', redirectTo: '/404', pathMatch: 'full' }
     // { path: 'user', loadChildren: 'app/user/user.module#UserModule' }
     // { path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },
 ]
 
-export const routing = RouterModule.forRoot(appRoutes)
+export const Routing = RouterModule.forRoot(appRoutes)
