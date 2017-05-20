@@ -5,4 +5,4 @@ export const adminRoutes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  }
 ]
 
-export const AdminRouting = RouterModule.forRoot(adminRoutes)
+export const AdminRouting = RouterModule.forChild(adminRoutes)

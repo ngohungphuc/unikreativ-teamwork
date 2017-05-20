@@ -35,7 +35,7 @@ var LoginService = (function () {
             if (result.State === 1) {
                 var json = result.Data;
                 _this.token = json.accessToken;
-                localStorage.setItem('token', JSON.stringify({ username: username, token: json.accessToken }));
+                localStorage.setItem('currentUser', JSON.stringify({ username: username, token: json.accessToken }));
             }
             return result;
         })

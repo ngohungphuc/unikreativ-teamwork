@@ -10,6 +10,8 @@ var core_1 = require("@angular/core");
 var DashboardComponent = (function () {
     function DashboardComponent() {
     }
+    DashboardComponent.prototype.ngOnInit = function () {
+    };
     return DashboardComponent;
 }());
 DashboardComponent = __decorate([

@@ -17,6 +17,7 @@ var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../services/account/login.service");
 var index_1 = require("./../../extensions/index");
+var app_status_1 = require("../../extensions/app-status");
 var LoginComponent = (function () {
     function LoginComponent(loginService, router, toastr) {
         this.loginService = loginService;
@@ -34,7 +35,7 @@ var LoginComponent = (function () {
     LoginComponent.prototype.login = function (formValues) {
         var _this = this;
         this.loginService.loginUser(formValues.username, formValues.password).then(function (resp) {
-            if (resp.State === 1) {
+            if (resp.State === app_status_1.AppStatusCode.LoginSuccess) {
                 _this.router.navigate(['dashboard']);
             }
             else {

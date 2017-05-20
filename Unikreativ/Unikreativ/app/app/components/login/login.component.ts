@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { LoginService } from '../../services/account/login.service'
 import { HttpClientService, Toastr_Token, Toastr } from './../../extensions/index'
+import { AppStatusCode } from '../../extensions/app-status'
 
 
 @Component({
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
     login(formValues) {
         this.loginService.loginUser(formValues.username, formValues.password).then(
             resp => {
-                if (resp.State === 1) {
+                if (resp.State === AppStatusCode.LoginSuccess) {
                     this.router.navigate(['dashboard'])
                 }
                 else {
