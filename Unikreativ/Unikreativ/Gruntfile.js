@@ -101,7 +101,7 @@
             css: [
                 "wwwroot/css/site.min.css", "wwwroot/css/site.css"
             ],
-            js: ["wwwroot/js/app.min.js"]
+            js: ["wwwroot/app", "wwwroot/js/app.min.js"]
         }
     });
     grunt.registerTask("default",

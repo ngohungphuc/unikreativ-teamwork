@@ -8,18 +8,11 @@ export class AuthGuard implements CanActivate {
     }
 
     canActivate(): Observable<boolean> | boolean {
-        console.log('called')
-        console.log(localStorage.getItem('currentUser'))
-
-        if (localStorage.getItem('currentUser') !== null) {
-            alert('true')
+        if (localStorage.getItem('currentUser') !== null)
             return true
-        }
 
-        if (localStorage.getItem('currentUser') === null) {
-            alert('false')
-            this.router.navigate(['login'])
-            return false
-        }
+        this.router.navigate(['login'])
+        return false
+
     }
 }
