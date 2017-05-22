@@ -6,24 +6,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var router_1 = require("@angular/router");
 var core_1 = require("@angular/core");
-var login_component_1 = require("./app/components/login/login.component");
-exports.appRoutes = [
-    { path: 'login', component: login_component_1.LoginComponent },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: '**', redirectTo: '/404', pathMatch: 'full' }
-];
-var AppRoutingModule = (function () {
-    function AppRoutingModule() {
+var common_1 = require("@angular/common");
+var errors_routing_1 = require("./errors.routing");
+var index_1 = require("../index");
+var ErrorsModule = (function () {
+    function ErrorsModule() {
     }
-    return AppRoutingModule;
+    return ErrorsModule;
 }());
-AppRoutingModule = __decorate([
+ErrorsModule = __decorate([
     core_1.NgModule({
-        imports: [router_1.RouterModule.forRoot(exports.appRoutes)],
-        exports: [router_1.RouterModule]
+        imports: [
+            common_1.CommonModule,
+            errors_routing_1.ErrorsRoutingModule
+        ],
+        declarations: [
+            index_1.Error404Component,
+            index_1.Error500Component
+        ]
     })
-], AppRoutingModule);
-exports.AppRoutingModule = AppRoutingModule;
-//# sourceMappingURL=app.routing.js.map
+], ErrorsModule);
+exports.ErrorsModule = ErrorsModule;
+//# sourceMappingURL=errors.module.js.map

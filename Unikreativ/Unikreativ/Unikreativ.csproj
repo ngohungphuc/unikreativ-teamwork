@@ -44,6 +44,7 @@
     <ProjectReference Include="..\Unikreativ.Services\Unikreativ.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\app\modules\errors\" />
     <Folder Include="Controllers\" />
     <Folder Include="Views\" />
   </ItemGroup>

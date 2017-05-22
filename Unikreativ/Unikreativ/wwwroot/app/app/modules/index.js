@@ -5,5 +5,4 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./errors/404.component"));
 __export(require("./errors/500.component"));
-__export(require("./login/login.component"));
 //# sourceMappingURL=index.js.map
