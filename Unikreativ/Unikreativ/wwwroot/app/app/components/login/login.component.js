@@ -23,6 +23,8 @@ var LoginComponent = (function () {
         this.loginService = loginService;
         this.router = router;
         this.toastr = toastr;
+        if (localStorage.getItem('currentUser') !== null)
+            this.router.navigate(['admin']);
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.username = new forms_1.FormControl('', forms_1.Validators.required);
