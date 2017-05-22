@@ -6,15 +6,15 @@ This project will use the following technology
 
   - .Net core
 
-  - Webpack 2 or Grunt
+  - Grunt
 
   - Sass
 
-  - Bootstrap materialize design
+  - [Bootstrap materialize design](https://mdbootstrap.com)
 
   - AngularJS2
 
-  - MongoDB
+  - SQL Server
 
   - Maybe apply docker when deploy to live server
 
@@ -22,3 +22,11 @@ This project will use the following technology
 
   - Design use case and write SRS
   
+  - Implement basic function
+
+  Continue to update.....
+
+
+# Doc & Ref
+
+  - [Admin Template](https://mdbootstrap.com/live/_MDB/templates/Admin/home%20v2.html)   

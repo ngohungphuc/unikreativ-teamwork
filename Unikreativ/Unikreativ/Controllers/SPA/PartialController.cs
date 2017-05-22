@@ -12,11 +12,13 @@ namespace Unikreativ.Controllers.SPA
 
         #endregion Account
 
-        #region Dashboard
+        #region Admin
 
         public IActionResult Admin() => PartialView("~/Views/Partial/Admin/Index.cshtml");
+        public IActionResult Header() => PartialView("~/Views/Partial/Template/Header.cshtml");
+        public IActionResult Sidebar() => PartialView("~/Views/Partial/Template/Sidebar.cshtml");
 
-        #endregion Dashboard
+        #endregion Admin
 
         #region Errors
 

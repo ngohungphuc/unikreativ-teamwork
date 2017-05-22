@@ -12,10 +12,11 @@ var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
 var login_component_1 = require("./app/components/login/login.component");
-var index_1 = require("./app/services/index");
+var index_1 = require("./app/modules/index");
+var index_2 = require("./app/services/index");
 var shared_module_1 = require("./app/extensions/shared.module");
 var app_routing_1 = require("./app.routing");
-var index_2 = require("./app/modules/index");
+var index_3 = require("./app/modules/index");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,16 +30,18 @@ AppModule = __decorate([
             forms_1.ReactiveFormsModule,
             http_1.HttpModule,
             shared_module_1.ServicesModule,
-            index_2.AdminModule,
-            index_2.ErrorsModule,
+            index_3.AdminModule,
+            index_3.ErrorsModule,
             app_routing_1.AppRoutingModule
         ],
         declarations: [
             app_component_1.AppComponent,
-            login_component_1.LoginComponent
+            login_component_1.LoginComponent,
+            index_1.SidebarComponent,
+            index_1.HeaderComponent
         ],
         providers: [
-            index_1.LoginService
+            index_2.LoginService
         ],
         bootstrap: [app_component_1.AppComponent]
     })
