@@ -36,7 +36,7 @@ var LoginComponent = (function () {
         var _this = this;
         this.loginService.loginUser(formValues.username, formValues.password).then(function (resp) {
             if (resp.State === app_status_1.AppStatusCode.LoginSuccess) {
-                _this.router.navigate(['dashboard']);
+                _this.router.navigate(['admin']);
             }
             else {
                 _this.toastr.error('Invalid credential', 'Error');

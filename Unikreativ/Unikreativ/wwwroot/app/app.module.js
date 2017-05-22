@@ -14,9 +14,8 @@ var app_component_1 = require("./app.component");
 var login_component_1 = require("./app/components/login/login.component");
 var index_1 = require("./app/services/index");
 var shared_module_1 = require("./app/extensions/shared.module");
-var errors_module_1 = require("./app/modules/errors/errors.module");
-var auth_guard_1 = require("./app/extensions/guard/auth.guard");
 var app_routing_1 = require("./app.routing");
+var index_2 = require("./app/modules/index");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,7 +29,8 @@ AppModule = __decorate([
             forms_1.ReactiveFormsModule,
             http_1.HttpModule,
             shared_module_1.ServicesModule,
-            errors_module_1.ErrorsModule,
+            index_2.AdminModule,
+            index_2.ErrorsModule,
             app_routing_1.AppRoutingModule
         ],
         declarations: [
@@ -38,8 +38,7 @@ AppModule = __decorate([
             login_component_1.LoginComponent
         ],
         providers: [
-            index_1.LoginService,
-            auth_guard_1.AuthGuard
+            index_1.LoginService
         ],
         bootstrap: [app_component_1.AppComponent]
     })

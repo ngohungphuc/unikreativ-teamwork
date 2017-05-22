@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         this.loginService.loginUser(formValues.username, formValues.password).then(
             resp => {
                 if (resp.State === AppStatusCode.LoginSuccess) {
-                    this.router.navigate(['dashboard'])
+                    this.router.navigate(['admin'])
                 }
                 else {
                     this.toastr.error('Invalid credential', 'Error')
