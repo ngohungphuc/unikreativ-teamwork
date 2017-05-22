@@ -14,7 +14,7 @@ namespace Unikreativ.Controllers.SPA
 
         #region Dashboard
 
-        public IActionResult Dashboard() => PartialView("~/Views/Partial/Dashboard/Index.cshtml");
+        public IActionResult Admin() => PartialView("~/Views/Partial/Admin/Index.cshtml");
 
         #endregion Dashboard
 

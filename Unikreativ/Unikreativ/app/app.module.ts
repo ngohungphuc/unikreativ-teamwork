@@ -1,15 +1,16 @@
-﻿import { NgModule } from '@angular/core'
+﻿import { AuthGuard } from './app/extensions/guard/auth.guard'
+
+import { AppRoutingModule } from './app.routing'
+import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 import { HttpModule } from '@angular/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AppComponent } from './app.component'
-import { LoginComponent } from './app/components/login/login.component'
-import { Error404Component, Error500Component } from './app/components/errors/index'
+import { LoginComponent, Error404Component, Error500Component } from './app/components/index'
 import { LoginService } from './app/services/index'
-import { AdminModule } from './app/modules/admin/admin.module'
 import { ServicesModule } from './app/extensions/shared.module'
-import { Routing } from './routes/routes'
+import { AdminComponent } from './app/components/admin.component'
 @NgModule({
     imports: [
         BrowserModule,
@@ -17,15 +18,17 @@ import { Routing } from './routes/routes'
         ReactiveFormsModule,
         HttpModule,
         ServicesModule,
-        Routing,
-        AdminModule],
+        // AdminModule,
+        AppRoutingModule],
     declarations: [
         AppComponent,
         LoginComponent,
+        AdminComponent,
         Error404Component,
         Error500Component],
     providers: [
-        LoginService
+        LoginService,
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })

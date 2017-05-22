@@ -5,21 +5,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var Error404Component = (function () {
-    function Error404Component() {
+var AdminComponent = (function () {
+    function AdminComponent() {
     }
-    return Error404Component;
+    return AdminComponent;
 }());
-Error404Component = __decorate([
+AdminComponent = __decorate([
     core_1.Component({
-        selector: '404',
-        templateUrl: 'partial/error404'
-    }),
-    __metadata("design:paramtypes", [])
-], Error404Component);
-exports.Error404Component = Error404Component;
-//# sourceMappingURL=404 - Copy.component.js.map
+        selector: 'dashboard',
+        templateUrl: 'partial/admin'
+    })
+], AdminComponent);
+exports.AdminComponent = AdminComponent;
+//# sourceMappingURL=admin.component.js.map

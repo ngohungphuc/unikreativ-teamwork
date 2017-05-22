@@ -6,17 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var auth_guard_1 = require("./app/extensions/guard/auth.guard");
+var app_routing_1 = require("./app.routing");
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
-var login_component_1 = require("./app/components/login/login.component");
-var index_1 = require("./app/components/errors/index");
+var index_1 = require("./app/components/index");
 var index_2 = require("./app/services/index");
-var admin_module_1 = require("./app/modules/admin/admin.module");
 var shared_module_1 = require("./app/extensions/shared.module");
-var routes_1 = require("./routes/routes");
+var admin_component_1 = require("./app/components/admin.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,17 +30,18 @@ AppModule = __decorate([
             forms_1.ReactiveFormsModule,
             http_1.HttpModule,
             shared_module_1.ServicesModule,
-            routes_1.Routing,
-            admin_module_1.AdminModule
+            app_routing_1.AppRoutingModule
         ],
         declarations: [
             app_component_1.AppComponent,
-            login_component_1.LoginComponent,
+            index_1.LoginComponent,
+            admin_component_1.AdminComponent,
             index_1.Error404Component,
             index_1.Error500Component
         ],
         providers: [
-            index_2.LoginService
+            index_2.LoginService,
+            auth_guard_1.AuthGuard
         ],
         bootstrap: [app_component_1.AppComponent]
     })
