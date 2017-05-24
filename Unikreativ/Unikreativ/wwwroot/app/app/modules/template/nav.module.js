@@ -8,26 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
-var index_1 = require("../index");
-var TemplateModule = (function () {
-    function TemplateModule() {
+var header_component_1 = require("./header.component");
+var sidebar_component_1 = require("./sidebar.component");
+var NavModule = (function () {
+    function NavModule() {
     }
-    return TemplateModule;
+    return NavModule;
 }());
-TemplateModule = __decorate([
+NavModule = __decorate([
     core_1.NgModule({
         imports: [
             common_1.CommonModule
         ],
         exports: [
-            index_1.SidebarComponent,
-            index_1.HeaderComponent
+            header_component_1.HeaderComponent,
+            sidebar_component_1.SidebarComponent
         ],
         declarations: [
-            index_1.SidebarComponent,
-            index_1.HeaderComponent
+            header_component_1.HeaderComponent,
+            sidebar_component_1.SidebarComponent
         ]
     })
-], TemplateModule);
-exports.TemplateModule = TemplateModule;
-//# sourceMappingURL=template.module.js.map
+], NavModule);
+exports.NavModule = NavModule;
+//# sourceMappingURL=nav.module.js.map

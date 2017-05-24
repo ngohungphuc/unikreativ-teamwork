@@ -1,11 +1,10 @@
-
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { AdminComponent } from '../index'
+import { UserComponent } from './user.component'
 import { AuthGuard } from './../../extensions/guard/auth.guard'
 
 export const adminRoutes: Routes = [
-    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
+    { path: 'user', component: UserComponent }
 ]
 
 @NgModule({

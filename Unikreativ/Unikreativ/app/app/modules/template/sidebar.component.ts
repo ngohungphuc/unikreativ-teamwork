@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 @Component({
-    selector: 'uni-sidebar-nav',
+    selector: 'uni-sidebar',
     templateUrl: 'partial/sidebar'
 })
 export class SidebarComponent {

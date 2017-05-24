@@ -11,6 +11,8 @@ var common_1 = require("@angular/common");
 var admin_routing_1 = require("./admin.routing");
 var auth_guard_1 = require("./../../extensions/guard/auth.guard");
 var admin_component_1 = require("./admin.component");
+var nav_module_1 = require("./../template/nav.module");
+var user_component_1 = require("./user.component");
 var AdminModule = (function () {
     function AdminModule() {
     }
@@ -20,10 +22,12 @@ AdminModule = __decorate([
     core_1.NgModule({
         imports: [
             common_1.CommonModule,
-            admin_routing_1.AdminRoutingModule
+            admin_routing_1.AdminRoutingModule,
+            nav_module_1.NavModule
         ],
         declarations: [
-            admin_component_1.AdminComponent
+            admin_component_1.AdminComponent,
+            user_component_1.UserComponent
         ],
         providers: [
             auth_guard_1.AuthGuard

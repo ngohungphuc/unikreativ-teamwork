@@ -17,7 +17,7 @@ var HeaderComponent = (function () {
 }());
 HeaderComponent = __decorate([
     core_1.Component({
-        selector: 'uni-header-nav',
+        selector: 'uni-header',
         templateUrl: 'partial/header'
     }),
     __metadata("design:paramtypes", [])

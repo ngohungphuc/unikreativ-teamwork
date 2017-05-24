@@ -17,7 +17,7 @@ var SidebarComponent = (function () {
 }());
 SidebarComponent = __decorate([
     core_1.Component({
-        selector: 'uni-sidebar-nav',
+        selector: 'uni-sidebar',
         templateUrl: 'partial/sidebar'
     }),
     __metadata("design:paramtypes", [])
