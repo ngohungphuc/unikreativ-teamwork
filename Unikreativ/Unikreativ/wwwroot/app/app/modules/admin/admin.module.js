@@ -22,8 +22,8 @@ AdminModule = __decorate([
     core_1.NgModule({
         imports: [
             common_1.CommonModule,
-            admin_routing_1.AdminRoutingModule,
-            nav_module_1.NavModule
+            nav_module_1.NavModule,
+            admin_routing_1.AdminRoutingModule
         ],
         declarations: [
             admin_component_1.AdminComponent,

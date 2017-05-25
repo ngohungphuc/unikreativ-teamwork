@@ -9,8 +9,8 @@ import { UserComponent } from './user/user.component'
 @NgModule({
     imports: [
         CommonModule,
-        AdminRoutingModule,
-        NavModule
+        NavModule,
+        AdminRoutingModule
     ],
     declarations: [
         AdminComponent,
