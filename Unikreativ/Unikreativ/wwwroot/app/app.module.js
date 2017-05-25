@@ -6,7 +6,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var auth_guard_1 = require("./app/extensions/guard/auth.guard");
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/http");
@@ -41,8 +40,7 @@ AppModule = __decorate([
             login_component_1.LoginComponent
         ],
         providers: [
-            index_1.LoginService,
-            auth_guard_1.AuthGuard
+            index_1.LoginService
         ],
         bootstrap: [app_component_1.AppComponent]
     })

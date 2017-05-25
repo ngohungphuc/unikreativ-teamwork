@@ -9,11 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var router_1 = require("@angular/router");
 var core_1 = require("@angular/core");
 var login_component_1 = require("./app/components/login/login.component");
-var auth_guard_1 = require("./app/extensions/guard/auth.guard");
-var admin_component_1 = require("./app/modules/admin/admin.component");
 exports.appRoutes = [
     { path: 'login', component: login_component_1.LoginComponent },
-    { path: 'admin', component: admin_component_1.AdminComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ];
