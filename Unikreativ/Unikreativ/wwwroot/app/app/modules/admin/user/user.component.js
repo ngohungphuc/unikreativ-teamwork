@@ -15,7 +15,7 @@ var UserComponent = (function () {
 UserComponent = __decorate([
     core_1.Component({
         selector: 'user',
-        template: '<h1>User component</h1>'
+        template: 'partial/usermanage'
     })
 ], UserComponent);
 exports.UserComponent = UserComponent;

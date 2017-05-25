@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot/js\tether.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\js\toastr.min.js" />
   </ItemGroup>
   <ItemGroup>

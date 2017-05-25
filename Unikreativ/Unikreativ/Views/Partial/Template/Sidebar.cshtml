@@ -3,7 +3,7 @@
     <li>
         <div class="user-box">
             <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="img-fluid rounded-circle">
-            <p class="user text-center black-text">Jane Doe</p>
+            <p class="user text-center black-text">Welcome {{user}}</p>
         </div>
     </li>
     <!--/. Logo -->
@@ -69,10 +69,9 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="clients.html" class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i> Clients</a>
-            <li><a href="invoice.html" class="collapsible-header waves-effect arrow-r"><i class="fa fa-money"></i> Invoice</a>
-            <li><a href="support.html" class="collapsible-header waves-effect arrow-r"><i class="fa fa-support"></i> Support</a>
-            <li><a href="faq.html" class="collapsible-header waves-effect arrow-r"><i class="fa fa-question-circle" aria-hidden="true"></i> FAQ</a>
+            <li><a routerLink="admin/people" class="collapsible-header waves-effect arrow-r"><i class="fa fa-users"></i> People</a></li>
+            <li><a href="invoice.html" class="collapsible-header waves-effect arrow-r"><i class="fa fa-money"></i> Invoice</a></li>
+            <li><a href="support.html" class="collapsible-header waves-effect arrow-r"><i class="fa fa-support"></i> Support</a></li>
         </ul>
     </li>
     <!--/. Side navigation links -->

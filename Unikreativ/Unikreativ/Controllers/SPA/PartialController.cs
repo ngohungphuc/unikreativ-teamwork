@@ -15,8 +15,8 @@ namespace Unikreativ.Controllers.SPA
         #region Admin
 
         public IActionResult Admin() => PartialView("~/Views/Partial/Admin/Index.cshtml");
-        public IActionResult Header() => PartialView("~/Views/Partial/Template/Header.cshtml");
-        public IActionResult Sidebar() => PartialView("~/Views/Partial/Template/Sidebar.cshtml");
+
+        public IActionResult UserManage() => PartialView("~/Views/Partial/Admin/User/UserManage.cshtml");
 
         #endregion Admin
 
@@ -27,5 +27,13 @@ namespace Unikreativ.Controllers.SPA
         public IActionResult Error500() => PartialView("~/Views/Partial/Errors/Err500.cshtml");
 
         #endregion Errors
+
+        #region Template
+
+        public IActionResult Header() => PartialView("~/Views/Partial/Template/Header.cshtml");
+
+        public IActionResult Sidebar() => PartialView("~/Views/Partial/Template/Sidebar.cshtml");
+
+        #endregion Template
     }
 }

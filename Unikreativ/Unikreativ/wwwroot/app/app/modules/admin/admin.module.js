@@ -6,13 +6,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var admin_routing_1 = require("./admin.routing");
 var auth_guard_1 = require("./../../extensions/guard/auth.guard");
 var admin_component_1 = require("./admin.component");
 var nav_module_1 = require("./../template/nav.module");
-var user_component_1 = require("./user.component");
+var user_component_1 = require("./user/user.component");
 var AdminModule = (function () {
     function AdminModule() {
     }
@@ -22,6 +23,7 @@ AdminModule = __decorate([
     core_1.NgModule({
         imports: [
             common_1.CommonModule,
+            platform_browser_1.BrowserModule,
             admin_routing_1.AdminRoutingModule,
             nav_module_1.NavModule
         ],

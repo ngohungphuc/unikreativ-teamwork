@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var user_component_1 = require("./user.component");
+var user_component_1 = require("./user/user.component");
 exports.adminRoutes = [
-    { path: 'user', component: user_component_1.UserComponent }
+    { path: 'people', component: user_component_1.UserComponent }
 ];
 var AdminRoutingModule = (function () {
     function AdminRoutingModule() {
