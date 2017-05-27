@@ -7,7 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var common_1 = require("@angular/common");
 var errors_routing_1 = require("./errors.routing");
 var index_1 = require("../index");
 var ErrorsModule = (function () {
@@ -18,7 +17,6 @@ var ErrorsModule = (function () {
 ErrorsModule = __decorate([
     core_1.NgModule({
         imports: [
-            common_1.CommonModule,
             errors_routing_1.ErrorsRoutingModule
         ],
         declarations: [

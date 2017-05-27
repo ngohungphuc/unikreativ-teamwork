@@ -10,5 +10,7 @@ namespace Unikreativ.Repositories.Interface
         //User GetUserById(string id);
 
         User GetUserByName(string name);
+
+        Object GetTeamMembers();
     }
 }

@@ -4,4 +4,5 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./account/login.service"));
+__export(require("./users/user.service"));
 //# sourceMappingURL=index.js.map

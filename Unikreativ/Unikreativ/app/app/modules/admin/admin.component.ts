@@ -5,5 +5,11 @@ import { Component, OnInit } from '@angular/core'
     templateUrl: 'partial/admin'
 })
 
-export class AdminComponent {
+export class AdminComponent implements OnInit {
+    constructor() {
+
+    }
+    ngOnInit() {
+
+    }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
@@ -67,6 +69,13 @@ namespace Unikreativ.Repositories.Repositories
         public User GetUserByName(string name)
         {
             return _dbSet.FirstOrDefault(x => x.UserName == name);
+        }
+
+        public object GetTeamMembers()
+        {
+            var role = _context.Roles.SingleOrDefault(r => r.Name == "Client");
+            var usersNotInRole = _context.Users.Where(m => m.Roles.All(r => r.RoleId != role.Id));
+            return usersNotInRole;
         }
     }
 }

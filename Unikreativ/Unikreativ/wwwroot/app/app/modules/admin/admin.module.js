@@ -11,6 +11,7 @@ var nav_module_1 = require("./../template/nav.module");
 var admin_routing_1 = require("./admin.routing");
 var auth_guard_1 = require("./../../extensions/guard/auth.guard");
 var index_1 = require("../index");
+var index_2 = require("../../services/index");
 var AdminModule = (function () {
     function AdminModule() {
     }
@@ -27,7 +28,8 @@ AdminModule = __decorate([
             index_1.UserComponent
         ],
         providers: [
-            auth_guard_1.AuthGuard
+            auth_guard_1.AuthGuard,
+            index_2.UserService
         ],
     })
 ], AdminModule);
