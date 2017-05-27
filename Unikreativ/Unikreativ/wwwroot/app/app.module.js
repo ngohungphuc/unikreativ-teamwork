@@ -30,8 +30,8 @@ AppModule = __decorate([
             forms_1.ReactiveFormsModule,
             http_1.HttpModule,
             shared_module_1.ServicesModule,
-            index_2.AdminModule,
             nav_module_1.NavModule,
+            index_2.AdminModule,
             index_2.ErrorsModule,
             app_routing_1.AppRoutingModule
         ],

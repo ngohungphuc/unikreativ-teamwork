@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
-var nav_module_1 = require("./../template/nav.module");
 var admin_routing_1 = require("./admin.routing");
 var auth_guard_1 = require("./../../extensions/guard/auth.guard");
 var index_1 = require("../index");
+var nav_module_1 = require("./../template/nav.module");
 var AdminModule = (function () {
     function AdminModule() {
     }

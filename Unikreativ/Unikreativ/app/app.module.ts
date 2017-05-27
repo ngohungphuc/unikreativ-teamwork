@@ -18,8 +18,8 @@ import { NavModule } from './app/modules/template/nav.module'
         ReactiveFormsModule,
         HttpModule,
         ServicesModule,
-        AdminModule,
         NavModule,
+        AdminModule,
         ErrorsModule,
         AppRoutingModule
     ],
