@@ -8,11 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
+var nav_module_1 = require("./../template/nav.module");
 var admin_routing_1 = require("./admin.routing");
 var auth_guard_1 = require("./../../extensions/guard/auth.guard");
-var admin_component_1 = require("./admin.component");
-var nav_module_1 = require("./../template/nav.module");
-var user_component_1 = require("./user/user.component");
+var index_1 = require("../index");
 var AdminModule = (function () {
     function AdminModule() {
     }
@@ -26,8 +25,8 @@ AdminModule = __decorate([
             admin_routing_1.AdminRoutingModule
         ],
         declarations: [
-            admin_component_1.AdminComponent,
-            user_component_1.UserComponent
+            index_1.AdminComponent,
+            index_1.UserComponent
         ],
         providers: [
             auth_guard_1.AuthGuard

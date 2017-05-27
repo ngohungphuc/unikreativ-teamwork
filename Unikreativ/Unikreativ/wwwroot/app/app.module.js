@@ -37,7 +37,7 @@ AppModule = __decorate([
         ],
         declarations: [
             app_component_1.AppComponent,
-            login_component_1.LoginComponent
+            login_component_1.LoginComponent,
         ],
         providers: [
             index_1.LoginService

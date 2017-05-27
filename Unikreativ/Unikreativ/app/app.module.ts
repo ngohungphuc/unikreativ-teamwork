@@ -10,8 +10,6 @@ import { ServicesModule } from './app/extensions/shared.module'
 import { AppRoutingModule } from './app.routing'
 import { AdminModule, ErrorsModule } from './app/modules/index'
 import { NavModule } from './app/modules/template/nav.module'
-import { SidebarComponent } from './app/modules/template/sidebar.component'
-import { HeaderComponent } from './app/modules/template/header.component'
 
 @NgModule({
     imports: [
@@ -27,7 +25,7 @@ import { HeaderComponent } from './app/modules/template/header.component'
     ],
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
     ],
     providers: [
         LoginService
