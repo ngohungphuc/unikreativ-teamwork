@@ -8,7 +8,7 @@ namespace Unikreativ.Entities.Entities
     public class BaseEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public DateTime DateModified { get; set; }
     }

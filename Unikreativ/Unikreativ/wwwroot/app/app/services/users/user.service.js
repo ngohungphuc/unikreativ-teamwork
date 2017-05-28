@@ -24,8 +24,15 @@ var UserService = (function () {
     UserService.prototype.getTeamMembers = function () {
         var url = '/Admin/GetTeamMembers';
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.httpClientService.get(url, { headers: headers }).toPromise()
-            .then(function (res) { return res.json(); })
+        return this.httpClientService.get(url, { headers: headers })
+            .map(function (res) { return res.json(); })
+            .catch(this.dataHandlerService.handleError);
+    };
+    UserService.prototype.getClients = function () {
+        var url = '/Admin/GetClients';
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.httpClientService.get(url, { headers: headers })
+            .map(function (res) { return res.json(); })
             .catch(this.dataHandlerService.handleError);
     };
     return UserService;

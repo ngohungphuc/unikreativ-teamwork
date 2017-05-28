@@ -14,12 +14,22 @@ export class UserService {
         // set token if save in local storage
         let currentUser = JSON.parse(localStorage.getItem('currentUser'))
     }
+
     getTeamMembers() {
         let url = '/Admin/GetTeamMembers'
         let headers = new Headers({ 'Content-Type': 'application/json' })
 
-        return this.httpClientService.get(url, { headers: headers }).toPromise()
-            .then(res => res.json())
+        return this.httpClientService.get(url, { headers: headers })
+            .map(res => res.json())
+            .catch(this.dataHandlerService.handleError)
+    }
+
+    getClients() {
+        let url = '/Admin/GetClients'
+        let headers = new Headers({ 'Content-Type': 'application/json' })
+
+        return this.httpClientService.get(url, { headers: headers })
+            .map(res => res.json())
             .catch(this.dataHandlerService.handleError)
     }
 }

@@ -11,12 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var index_1 = require("../../../services/index");
+var Observable_1 = require("rxjs/Observable");
+require("rxjs/add/observable/forkJoin");
 var UserComponent = (function () {
     function UserComponent(userService) {
         this.userService = userService;
     }
     UserComponent.prototype.ngOnInit = function () {
-        var teamMember = this.userService.getTeamMembers();
+        var teamMembersAPI = this.userService.getTeamMembers();
+        var clientsAPI = this.userService.getClients();
+        Observable_1.Observable.forkJoin([teamMembersAPI, clientsAPI]).subscribe(function (result) {
+            console.log(result[0]);
+            console.log(result[1]);
+        });
     };
     return UserComponent;
 }());

@@ -23,9 +23,14 @@ namespace Unikreativ.Services.Services
             return _userRepository.GetUserByName(name);
         }
 
-        public object GetTeamMember()
+        public IQueryable<User> GetTeamMember()
         {
             return _userRepository.GetTeamMembers();
+        }
+
+        public IQueryable<User> GetClients()
+        {
+            return _userRepository.GetClients();
         }
     }
 }

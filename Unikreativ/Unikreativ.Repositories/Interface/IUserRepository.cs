@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Unikreativ.Entities.Entities;
 
@@ -11,6 +12,8 @@ namespace Unikreativ.Repositories.Interface
 
         User GetUserByName(string name);
 
-        Object GetTeamMembers();
+        IQueryable<User> GetTeamMembers();
+
+        IQueryable<User> GetClients();
     }
 }

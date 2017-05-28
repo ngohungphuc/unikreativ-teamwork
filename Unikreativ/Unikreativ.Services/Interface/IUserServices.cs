@@ -11,6 +11,8 @@ namespace Unikreativ.Services.Interface
     {
         User GetUserByName(string name);
 
-        Object GetTeamMember();
+        IQueryable<User> GetTeamMember();
+
+        IQueryable<User> GetClients();
     }
 }
