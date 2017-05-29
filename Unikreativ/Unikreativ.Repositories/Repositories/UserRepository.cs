@@ -74,14 +74,14 @@ namespace Unikreativ.Repositories.Repositories
         public IQueryable<User> GetTeamMembers()
         {
             var role = _context.Roles.SingleOrDefault(r => r.Name == "Client");
-            var usersNotInRole = _context.Users.Where(m => m.Roles.All(r => r.RoleId != role.Id));
+            var usersNotInRole = _context.Users.Where(m => m.Roles.All(r => r.RoleId != role.Id)).Include(ur => ur.Roles);
             return usersNotInRole;
         }
 
         public IQueryable<User> GetClients()
         {
             var role = _context.Roles.SingleOrDefault(r => r.Name == "Client");
-            var usersNotInRole = _context.Users.Where(m => m.Roles.All(r => r.RoleId == role.Id));
+            var usersNotInRole = _context.Users.Where(m => m.Roles.All(r => r.RoleId == role.Id)).Include(ur => ur.Roles);
             return usersNotInRole;
         }
     }

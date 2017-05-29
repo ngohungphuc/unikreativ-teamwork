@@ -757,6 +757,13 @@ grunt-legacy-util@~1.0.0:
     underscore.string "~3.2.3"
     which "~1.2.1"
 
+grunt-shell@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/grunt-shell/-/grunt-shell-2.1.0.tgz#439f79159ed11e64a651a69cc8a3d02bebf5ecc2"
+  dependencies:
+    chalk "^1.0.0"
+    npm-run-path "^2.0.0"
+
 grunt-tslint@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/grunt-tslint/-/grunt-tslint-5.0.1.tgz#7432bd1bd56e8a3a25000088d5c61fdcc342f0c2"
@@ -1243,6 +1250,12 @@ normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
     semver "2 || 3 || 4 || 5"
     validate-npm-package-license "^3.0.1"
 
+npm-run-path@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
+  dependencies:
+    path-key "^2.0.0"
+
 number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
@@ -1365,6 +1378,10 @@ path-exists@^2.0.0:
 path-is-absolute@^1.0.0, path-is-absolute@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
+
+path-key@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
 path-parse@^1.0.5:
   version "1.0.5"

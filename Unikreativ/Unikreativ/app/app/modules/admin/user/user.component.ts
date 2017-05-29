@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { UserService } from '../../../services/index'
 import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/observable/forkJoin'
 
 @Component({
     selector: 'user',
@@ -13,13 +12,14 @@ export class UserComponent implements OnInit {
     teamMembers: any[]
     clients: any[]
     constructor(private userService: UserService) {
-
     }
     ngOnInit() {
         let teamMembersAPI = this.userService.getTeamMembers()
         let clientsAPI = this.userService.getClients()
 
         Observable.forkJoin([teamMembersAPI, clientsAPI]).subscribe(result => {
+            this.teamMembers = result[0]
+            this.clients = result[1]
             console.log(result[0])
             console.log(result[1])
         })

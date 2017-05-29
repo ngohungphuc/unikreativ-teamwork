@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { HttpClientService, DataHandlerService } from '../../extensions/index'
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/toPromise'
 
 @Injectable()
 export class UserService {

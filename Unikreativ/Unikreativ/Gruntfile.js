@@ -7,7 +7,13 @@
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-concurrent");
     grunt.loadNpmTasks("grunt-tslint");
+    grunt.loadNpmTasks('grunt-shell');
     grunt.initConfig({
+        shell: {
+            ngapp: {
+                command: 'tsc -p app/ -w'
+            }
+        },
         tslint: {
             options: {
                 configuration: "./tslint.json",
@@ -90,7 +96,7 @@
         concurrent: {
             dev: {
                 tasks: [
-                    "watch"
+                    "watch", 'shell'
                 ],
                 options: {
                     logConcurrentOutput: true

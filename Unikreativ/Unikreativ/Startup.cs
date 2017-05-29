@@ -85,12 +85,13 @@ namespace Unikreativ
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            seeder.SeedUser();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
+                seeder.SeedUser();
             }
             else
             {

@@ -30,6 +30,7 @@ This project will use the following technology
 # Doc & Ref
 
   - [Admin Template](https://mdbootstrap.com/live/_MDB/templates/Admin/home%20v2.html)
+
   https://github.com/aspnet/Identity/issues/716
 
   https://stackoverflow.com/questions/34343599/how-to-seed-users-and-roles-with-code-first-migration-using-identity-asp-net-mvc

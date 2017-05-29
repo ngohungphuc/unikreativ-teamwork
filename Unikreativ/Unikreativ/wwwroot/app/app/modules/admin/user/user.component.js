@@ -12,15 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var index_1 = require("../../../services/index");
 var Observable_1 = require("rxjs/Observable");
-require("rxjs/add/observable/forkJoin");
 var UserComponent = (function () {
     function UserComponent(userService) {
         this.userService = userService;
     }
     UserComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var teamMembersAPI = this.userService.getTeamMembers();
         var clientsAPI = this.userService.getClients();
         Observable_1.Observable.forkJoin([teamMembersAPI, clientsAPI]).subscribe(function (result) {
+            _this.teamMembers = result[0];
+            _this.clients = result[1];
             console.log(result[0]);
             console.log(result[1]);
         });

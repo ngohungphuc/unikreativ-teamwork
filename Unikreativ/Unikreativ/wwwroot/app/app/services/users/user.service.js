@@ -12,8 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var index_1 = require("../../extensions/index");
-require("rxjs/add/operator/map");
-require("rxjs/add/operator/toPromise");
 var UserService = (function () {
     function UserService(http, httpClientService, dataHandlerService) {
         this.http = http;
