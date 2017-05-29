@@ -10,55 +10,76 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Unikreativ.Entities.Data
 {
-    public static class Seeder
+    public class Seeder
     {
-        public static async void SeedUser(IApplicationBuilder app)
+        private ApplicationDbContext _context;
+
+        public Seeder(ApplicationDbContext context)
         {
-            using (var context = app.ApplicationServices.GetRequiredService<ApplicationDbContext>())
+            _context = context;
+        }
+
+        public async void SeedUser()
+        {
+            var user = new User
             {
-                string[] roles = new string[] { "Administrator", "Manager", "Developer", "Accountant", "Designer", "Client", "Watcher" };
+                Email = "helentran2609@gmail.com",
+                UserName = "helentran",
+                NormalizedUserName = "HelenTran",
+                PhoneNumber = "0937005331",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                LockoutEnabled = false,
+                FullName = "Trần Mai Phương",
+                JobTitle = "Web Developer",
+                CompanyName = "Unikreativ",
+                ChargeRate = 14,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                Industries = User.Industry.Technology
+            };
+
+            var client = new User
+            {
+                Email = "kmstechnology@com.vn",
+                UserName = "kms",
+                CompanyName = "KMS",
+                Website = "http://www.kms-technology.com/",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                LockoutEnabled = false,
+                PhoneNumber = "(+84) 8 3811 9977",
+                SecurityStamp = Guid.NewGuid().ToString(),
+                Industries = User.Industry.Technology
+            };
+
+            var roleStore = new RoleStore<IdentityRole>(_context);
+
+            if (!_context.Roles.Any(r => r.Name == "Administrator"))
+            {
+                string[] roles = new string[]
+                    {"Administrator", "Manager", "Developer", "Accountant", "Designer", "Client", "Watcher"};
 
                 foreach (var role in roles)
                 {
-                    var roleStore = new RoleStore<IdentityRole>(context);
-                    //add default  role to db
-                    if (!context.Roles.Any(r => r.Name == role))
-                    {
-                        await roleStore.CreateAsync(new IdentityRole(role));
-                    }
-                }
-
-                var user = new User
-                {
-                    Email = "helentran2609@gmail.com",
-                    UserName = "helentran",
-                    NormalizedUserName = "HelenTran",
-                    PhoneNumber = "0937005331",
-                    EmailConfirmed = true,
-                    PhoneNumberConfirmed = true,
-                    LockoutEnabled = false,
-                    FullName = "Trần Mai Phương",
-                    JobTitle = "Web Developer",
-                    CompanyName = "Unikreativ",
-                    ChargeRate = 14,
-                    SecurityStamp = Guid.NewGuid().ToString(),
-                    Industries = User.Industry.Technology
-                };
-                var userStore = new UserStore<User>(context);
-                //create user account and assign role for account
-                if (!context.Users.Any(u => u.UserName == user.UserName))
-                {
-                    var password = new PasswordHasher<User>();
-                    var hashed = password.HashPassword(user, "tranmaiphuong2609");
-                    user.PasswordHash = hashed;
-
-                    var result = await userStore.CreateAsync(user);
-                    if (result.Succeeded)
-                    {
-                        await userStore.AddToRoleAsync(user, roles[0]);
-                    }
+                    await roleStore.CreateAsync(new IdentityRole { Name = role, NormalizedName = role });
                 }
             }
+
+            if (!_context.Users.Any(u => u.UserName == user.UserName))
+            {
+                var password = new PasswordHasher<User>();
+                user.PasswordHash = password.HashPassword(user, "tranmaiphuong2609");
+                client.PasswordHash = password.HashPassword(user, "kms123");
+
+                var userStore = new UserStore<User>(_context);
+                await userStore.CreateAsync(user);
+                await userStore.AddToRoleAsync(user, "Administrator");
+
+                await userStore.CreateAsync(client);
+                await userStore.AddToRoleAsync(client, "Client");
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
 }
