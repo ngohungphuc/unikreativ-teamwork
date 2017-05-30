@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks.Dataflow;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
+using Unikreativ.Entities.ViewModel;
 using Unikreativ.Repositories.Interface;
 
 namespace Unikreativ.Repositories.Repositories
@@ -71,11 +73,23 @@ namespace Unikreativ.Repositories.Repositories
             return _dbSet.FirstOrDefault(x => x.UserName == name);
         }
 
-        public IQueryable<User> GetTeamMembers()
+        public IQueryable<Member> GetTeamMembers()
         {
-            var role = _context.Roles.SingleOrDefault(r => r.Name == "Client");
-            var usersNotInRole = _context.Users.Where(m => m.Roles.All(r => r.RoleId != role.Id)).Include(ur => ur.Roles);
-            return usersNotInRole;
+            var teamMembers = from user in _context.Users
+                              join userRole in _context.UserRoles on user.Id equals userRole.UserId
+                              join role in _context.Roles on userRole.RoleId equals role.Id
+                              where role.Name != "Client"
+                              select new Member()
+                              {
+                                  Id = user.Id,
+                                  CompanyName = user.CompanyName,
+                                  Email = user.Email,
+                                  Phone = user.PhoneNumber,
+                                  Role = role.Name,
+                                  JobTitle = user.JobTitle,
+                                  NormalizedUserName = user.NormalizedUserName
+                              };
+            return teamMembers;
         }
 
         public IQueryable<User> GetClients()

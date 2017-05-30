@@ -1,3 +1,4 @@
+import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { NavModule } from './../template/nav.module'
 import { AdminRoutingModule } from './admin.routing'
@@ -8,6 +9,7 @@ import { UserService } from '../../services/index'
 
 @NgModule({
     imports: [
+        BrowserModule,
         NavModule,
         AdminRoutingModule
     ],

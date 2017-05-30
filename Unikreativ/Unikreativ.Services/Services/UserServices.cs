@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Unikreativ.Entities.Entities;
+using Unikreativ.Entities.ViewModel;
 using Unikreativ.Repositories.Interface;
 using Unikreativ.Services.Interface;
 
@@ -23,7 +24,7 @@ namespace Unikreativ.Services.Services
             return _userRepository.GetUserByName(name);
         }
 
-        public IQueryable<User> GetTeamMember()
+        public IQueryable<Member> GetTeamMember()
         {
             return _userRepository.GetTeamMembers();
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Unikreativ.Entities.Entities;
+using Unikreativ.Entities.ViewModel;
 using Unikreativ.Repositories.Interface;
 
 namespace Unikreativ.Services.Interface
@@ -11,7 +12,7 @@ namespace Unikreativ.Services.Interface
     {
         User GetUserByName(string name);
 
-        IQueryable<User> GetTeamMember();
+        IQueryable<Member> GetTeamMember();
 
         IQueryable<User> GetClients();
     }

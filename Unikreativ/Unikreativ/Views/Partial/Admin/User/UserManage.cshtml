@@ -1,60 +1,79 @@
-<div class="row mb-0">
-   <!--First column-->
-   <div class="col-md-12">
-      <!--Panel content-->
-      <div class="card-block pt-0">
-         <div class="table-responsive">
-            <!--Table-->
-            <table class="table table-hover">
-               <!--Table head-->
-               <thead>
-                  <tr class="primary-color">
-                     <th>Campaign name</th>
-                     <th>Source</th>
-                     <th>Conversion rate</th>
-                     <th>Invested</th>
-                  </tr>
-               </thead>
-               <!--/Table head-->
-               <!--Table body-->
-               <tbody>
-                  <tr class="none-top-border">
-                     <td>Newsletter</td>
-                     <td>Newsletter</td>
-                     <td>5%</td>
-                     <td>100$</td>
-                  </tr>
-                  <tr>
-                     <td>Facebook</td>
-                     <td>Facebook</td>
-                     <td>5%</td>
-                     <td>100$</td>
-                  </tr>
-                  <tr>
-                     <td>Adwords</td>
-                     <td>Adwords</td>
-                     <td>5%</td>
-                     <td>100$</td>
-                  </tr>
-                  <tr>
-                     <td>Sponsored post</td>
-                     <td>Sponsored post</td>
-                     <td>5%</td>
-                     <td>100$</td>
-                  </tr>
-                  <tr>
-                     <td>Newsletter 2</td>
-                     <td>Newsletter 2</td>
-                     <td>5%</td>
-                     <td>100$</td>
-                  </tr>
-               </tbody>
-               <!--/Table body-->
-            </table>
-            <!--/Table-->
-         </div>
-      </div>
-      <!--/.Panel content-->
-   </div>
-   <!--/First column-->
+<div class="tabs-wrapper">
+    <ul class="nav classic-tabs tabs-primary" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link waves-light active" data-toggle="tab" href="#panelMembers" role="tab"><i class="fa fa-user fa-2x" aria-hidden="true"></i><br> Members</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-light" data-toggle="tab" href="#panelClients" role="tab"><i class="fa fa-user-md fa-2x" aria-hidden="true"></i><br> Clients</a>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content card">
+    <div class="tab-pane fade in show active" id="panelMembers" role="tabpanel">
+        <div class="row mb-0">
+            <div class="col-md-12">
+                <div class="card-block pt-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="primary-color">
+                                    <th>Name</th>
+                                    <th>CompanyName</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>JobTitle</th>
+                                    <th>Primary Role</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let teamMember of teamMembers">
+                                    <td>{{teamMember.normalizedUserName}}</td>
+                                    <td>{{teamMember.companyName}}</td>
+                                    <td>{{teamMember.email}}</td>
+                                    <td>{{teamMember.phone}}</td>
+                                    <td>{{teamMember.jobTitle}}</td>
+                                    <td>{{teamMember.role}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="panelClients" role="tabpanel">
+        <div class="row mb-0">
+            <div class="col-md-12">
+                <div class="card-block pt-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="primary-color">
+                                    <th>CompanyName</th>
+                                    <th>Address</th>
+                                    <th>Country</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Industry</th>
+                                    <th>Website</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let client of clients">
+                                    <td>{{client.companyName}}</td>
+                                    <td>{{client.address}}</td>
+                                    <td>{{client.country}}</td>
+                                    <td>{{client.email}}</td>
+                                    <td>{{client.phoneNumber}}</td>
+                                    <td>{{client.industries}}</td>
+                                    <td>{{client.website}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
