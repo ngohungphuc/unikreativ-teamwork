@@ -91,7 +91,7 @@ namespace Unikreativ
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
-                seeder.SeedUser();
+                //seeder.SeedUser();
             }
             else
             {
