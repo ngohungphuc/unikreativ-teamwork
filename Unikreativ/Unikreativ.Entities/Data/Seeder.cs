@@ -21,7 +21,7 @@ namespace Unikreativ.Entities.Data
 
         public async void SeedUser()
         {
-            var user = new User
+            var helen = new User
             {
                 Email = "helentran2609@gmail.com",
                 UserName = "helentran",
@@ -38,10 +38,29 @@ namespace Unikreativ.Entities.Data
                 Industries = User.Industry.Technology
             };
 
+            var tony = new User
+            {
+                Email = "ngohungphuc95@gmail.com",
+                UserName = "tony",
+                NormalizedUserName = "TonyHudson",
+                PhoneNumber = "01269976689",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                LockoutEnabled = false,
+                FullName = "Ngô Hùng Phúc",
+                JobTitle = "Web Developer",
+                CompanyName = "None",
+                ChargeRate = 14,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                Industries = User.Industry.Technology
+            };
+
             var client = new User
             {
                 Email = "kmstechnology@com.vn",
                 UserName = "kms",
+                Address = "123 Cộng Hòa Quận Tân Bình",
+                Country = "Việt Nam",
                 CompanyName = "KMS",
                 Website = "http://www.kms-technology.com/",
                 EmailConfirmed = true,
@@ -65,15 +84,20 @@ namespace Unikreativ.Entities.Data
                 }
             }
 
-            if (!_context.Users.Any(u => u.UserName == user.UserName))
+            if (!_context.Users.Any(u => u.UserName == helen.UserName))
             {
                 var password = new PasswordHasher<User>();
-                user.PasswordHash = password.HashPassword(user, "tranmaiphuong2609");
-                client.PasswordHash = password.HashPassword(user, "kms123");
+                helen.PasswordHash = password.HashPassword(helen, "tranmaiphuong2609");
+                tony.PasswordHash = password.HashPassword(tony, "tony95");
+                client.PasswordHash = password.HashPassword(client, "kms123");
 
                 var userStore = new UserStore<User>(_context);
-                await userStore.CreateAsync(user);
-                await userStore.AddToRoleAsync(user, "Administrator");
+
+                await userStore.CreateAsync(helen);
+                await userStore.AddToRoleAsync(helen, "Administrator");
+
+                await userStore.CreateAsync(tony);
+                await userStore.AddToRoleAsync(tony, "Developer");
 
                 await userStore.CreateAsync(client);
                 await userStore.AddToRoleAsync(client, "Client");

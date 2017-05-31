@@ -4,6 +4,7 @@ export * from './errors/errors.module'
 
 export * from './admin/admin.component'
 export * from './admin/user/user.component'
+export * from './admin/user/client-edit.component'
 export * from './admin/admin.module'
 
 

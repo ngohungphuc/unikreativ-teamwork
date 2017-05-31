@@ -14,5 +14,7 @@ namespace Unikreativ.Entities.ViewModel
         public string Phone { get; set; }
         public string Role { get; set; }
         public string JobTitle { get; set; }
+
+        public List<string> UserRoles { get; set; }
     }
 }

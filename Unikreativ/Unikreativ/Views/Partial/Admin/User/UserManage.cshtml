@@ -24,9 +24,10 @@
                                     <th>Phone</th>
                                     <th>JobTitle</th>
                                     <th>Primary Role</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="table-border">
                                 <tr *ngFor="let teamMember of teamMembers">
                                     <td>{{teamMember.normalizedUserName}}</td>
                                     <td>{{teamMember.companyName}}</td>
@@ -34,6 +35,10 @@
                                     <td>{{teamMember.phone}}</td>
                                     <td>{{teamMember.jobTitle}}</td>
                                     <td>{{teamMember.role}}</td>
+                                    <td class="action-btn">
+                                        <a class="btn-floating btn-md blue"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a class="btn-floating btn-md red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -57,9 +62,10 @@
                                     <th>Phone</th>
                                     <th>Industry</th>
                                     <th>Website</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="table-border">
                                 <tr *ngFor="let client of clients">
                                     <td>{{client.companyName}}</td>
                                     <td>{{client.address}}</td>
@@ -68,6 +74,10 @@
                                     <td>{{client.phoneNumber}}</td>
                                     <td>{{client.industries}}</td>
                                     <td>{{client.website}}</td>
+                                    <td class="action-btn">
+                                        <a class="btn-floating btn-md blue" data-toggle="modal" data-target="#centralModalInfo"><i class="fa fa-pencil" aria-hidden="true" (click)="selectClient(client)"></i></a>
+                                        <a class="btn-floating btn-md red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -77,3 +87,5 @@
         </div>
     </div>
 </div>
+
+<client-edit [client]="client"></client-edit>

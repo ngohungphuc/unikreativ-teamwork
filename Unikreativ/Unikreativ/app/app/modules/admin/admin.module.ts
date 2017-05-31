@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core'
 import { NavModule } from './../template/nav.module'
 import { AdminRoutingModule } from './admin.routing'
 import { AuthGuard } from './../../extensions/guard/auth.guard'
-import { AdminComponent, UserComponent } from '../index'
+import { AdminComponent, UserComponent, ClientEditComponent } from '../index'
 import { UserService } from '../../services/index'
 
 
@@ -15,7 +15,8 @@ import { UserService } from '../../services/index'
     ],
     declarations: [
         AdminComponent,
-        UserComponent
+        UserComponent,
+        ClientEditComponent
     ],
     providers: [
         AuthGuard,

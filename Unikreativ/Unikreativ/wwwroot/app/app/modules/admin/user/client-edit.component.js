@@ -11,32 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var index_1 = require("../../../services/index");
-var Observable_1 = require("rxjs/Observable");
-var UserComponent = (function () {
-    function UserComponent(userService) {
+var ClientEditComponent = (function () {
+    function ClientEditComponent(userService) {
         this.userService = userService;
     }
-    UserComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        var teamMembersAPI = this.userService.getTeamMembers();
-        var clientsAPI = this.userService.getClients();
-        Observable_1.Observable.forkJoin([teamMembersAPI, clientsAPI]).subscribe(function (result) {
-            _this.teamMembers = result[0];
-            _this.clients = result[1];
-        });
+    ClientEditComponent.prototype.ngOnInit = function () {
+        console.log(this.client);
     };
-    UserComponent.prototype.selectClient = function (client) {
-        this.client = client;
-    };
-    return UserComponent;
+    return ClientEditComponent;
 }());
-UserComponent = __decorate([
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], ClientEditComponent.prototype, "client", void 0);
+ClientEditComponent = __decorate([
     core_1.Component({
-        selector: 'user',
-        templateUrl: 'partial/usermanage',
+        selector: 'client-edit',
+        templateUrl: 'partial/clientedit',
         providers: [index_1.UserService]
     }),
     __metadata("design:paramtypes", [index_1.UserService])
-], UserComponent);
-exports.UserComponent = UserComponent;
-//# sourceMappingURL=user.component.js.map
+], ClientEditComponent);
+exports.ClientEditComponent = ClientEditComponent;
+//# sourceMappingURL=client-edit.component.js.map

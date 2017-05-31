@@ -11,8 +11,12 @@ import { Observable } from 'rxjs/Observable'
 export class UserComponent implements OnInit {
     teamMembers: any[]
     clients: any[]
+
+    // dual binding data
+    client: any[]
     constructor(private userService: UserService) {
     }
+
     ngOnInit() {
         let teamMembersAPI = this.userService.getTeamMembers()
         let clientsAPI = this.userService.getClients()
@@ -20,8 +24,10 @@ export class UserComponent implements OnInit {
         Observable.forkJoin([teamMembersAPI, clientsAPI]).subscribe(result => {
             this.teamMembers = result[0]
             this.clients = result[1]
-            console.log(result[0])
-            console.log(result[1])
         })
+    }
+
+    selectClient(client: any[]) {
+        this.client = client
     }
 }

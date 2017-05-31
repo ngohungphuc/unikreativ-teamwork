@@ -8,5 +8,6 @@ __export(require("./errors/500.component"));
 __export(require("./errors/errors.module"));
 __export(require("./admin/admin.component"));
 __export(require("./admin/user/user.component"));
+__export(require("./admin/user/client-edit.component"));
 __export(require("./admin/admin.module"));
 //# sourceMappingURL=index.js.map

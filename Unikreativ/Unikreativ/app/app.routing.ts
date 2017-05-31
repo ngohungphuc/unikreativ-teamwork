@@ -1,4 +1,4 @@
-﻿import { RouterModule, Routes } from '@angular/router'
+﻿import { RouterModule, Routes, PreloadAllModules } from '@angular/router'
 import { NgModule } from '@angular/core'
 import { Error404Component, Error500Component } from './app/modules/index'
 import { LoginComponent } from './app/components/login/login.component'
@@ -9,7 +9,7 @@ export const appRoutes: Routes = [
     { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ]
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
+    imports: [RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules })],
     exports: [RouterModule]
 })
 

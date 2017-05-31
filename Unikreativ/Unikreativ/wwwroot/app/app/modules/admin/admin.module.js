@@ -27,7 +27,8 @@ AdminModule = __decorate([
         ],
         declarations: [
             index_1.AdminComponent,
-            index_1.UserComponent
+            index_1.UserComponent,
+            index_1.ClientEditComponent
         ],
         providers: [
             auth_guard_1.AuthGuard,
