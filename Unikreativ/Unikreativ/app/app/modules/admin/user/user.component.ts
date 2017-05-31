@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Component, OnInit } from '@angular/core'
 import { UserService } from '../../../services/index'
 import { Observable } from 'rxjs/Observable'
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs/Observable'
 export class UserComponent implements OnInit {
     teamMembers: any[]
     clients: any[]
+    
 
     // dual binding data
     client: any[]
@@ -18,12 +20,14 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
+       
         let teamMembersAPI = this.userService.getTeamMembers()
         let clientsAPI = this.userService.getClients()
 
         Observable.forkJoin([teamMembersAPI, clientsAPI]).subscribe(result => {
             this.teamMembers = result[0]
             this.clients = result[1]
+            console.log(this.clients)
         })
     }
 

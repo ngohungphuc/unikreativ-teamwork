@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { NavModule } from './../template/nav.module'
@@ -10,6 +11,8 @@ import { UserService } from '../../services/index'
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
         NavModule,
         AdminRoutingModule
     ],

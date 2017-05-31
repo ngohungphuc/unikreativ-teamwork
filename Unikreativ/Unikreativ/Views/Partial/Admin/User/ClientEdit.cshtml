@@ -1,34 +1,75 @@
 <!-- Central Modal Medium Info -->
-<form name="editClientInfo" *ngIf="client">
+<form id="editClientInfoForm" [formGroup]="editClientInfoForm" (ngSubmit)="editClientInfo(editClientInfoForm.value)" autocomplete="off" name="editClientInfo" *ngIf="client">
+   <!--Modal: Register Form-->
     <div class="modal fade" id="centralModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-notify modal-info" role="document">
+        <div class="modal-dialog cascading-modal" role="document">
             <!--Content-->
             <div class="modal-content">
                 <!--Header-->
-                <div class="modal-header">
-                    <p class="heading lead">Modal Info</p>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text">&times;</span>
+                <div class="modal-header light-blue darken-3 white-text">
+                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
+                    <h4 class="title"><i class="fa fa-user-plus"></i> Update Client Info </h4>
                 </div>
-
                 <!--Body-->
                 <div class="modal-body">
-                    <div class="text-center">
-                        <i class="fa fa-check fa-4x mb-1 animated rotateIn"></i>
-                        <p>{{client.companyName}}</p>
+                    <div class="row">
+                        <div class="col-md-12" [ngClass]="{'error':companyName.invalid && companyName.dirty}">
+                            <div class="md-form">
+                                <input formControlName="companyName" value="{{client.companyName}}" type="text" id="companyName" class="form-control">
+                                <label class="active" for="companyName">CompanyName</label>
+                                <label *ngIf="companyName.invalid && companyName.dirty">CompanyName is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':country.invalid && country.dirty}">
+                            <div class="md-form">
+                                <input formControlName="country" value="{{client.country}}" type="text" id="country" class="form-control">
+                                <label class="active" for="country">Country</label>
+                                <label *ngIf="companyName.invalid && companyName.dirty">Country is required</label>
+                            </div>
+                        </div>  
+                        <div class="col-md-12" [ngClass]="{'error':address.invalid && address.dirty}">
+                            <div class="md-form">
+                                <input  formControlName="address"  value="{{client.address}}" type="text" id="address" class="form-control">
+                                <label class="active" for="address">Address</label>
+                                <label *ngIf="address.invalid && address.dirty">Address is required</label>
+                            </div>
+                        </div>  
+                        <div class="col-md-12" [ngClass]="{'error':email.invalid && email.dirty}">
+                            <div class="md-form">
+                                <input  formControlName="email" value="{{client.email}}" type="text" id="email" class="form-control">
+                                <label class="active" for="email">Email</label>
+                                <label *ngIf="email.invalid && email.dirty">Email is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':phoneNumber.invalid && phoneNumber.dirty}">
+                            <div class="md-form">
+                                <input formControlName="phoneNumber"  value="{{client.phoneNumber}}" type="text" id="phoneNumber" class="form-control">
+                                <label class="active" for="phoneNumber">Phone</label>
+                                <label *ngIf="phoneNumber.invalid && phoneNumber.dirty">Phone is required</label>
+                            </div>
+                        </div>    
+                        <div class="col-md-12" [ngClass]="{'error':website.invalid && website.dirty}">
+                            <div class="md-form">
+                                <input formControlName="website" value="{{client.website}}" type="text" id="website" class="form-control">
+                                <label class="active" for="website">Website</label>
+                                <label *ngIf="website.invalid && website.dirty">Phone is required</label>
+                            </div>
+                        </div>            
                     </div>
-                </div>
+                   
 
-                <!--Footer-->
-                <div class="modal-footer justify-content-center">
-                    <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a>
-                    <a type="button" class="btn btn-outline-secondary-modal waves-effect" data-dismiss="modal">No, thanks</a>
+                    <div class="text-center mt-2">
+                        <button [disabled]="editClientInfoForm.invalid" class="btn btn-info">Update<i class="fa fa-save" aria-hidden="true"></i></button>
+                    </div>
+
                 </div>
             </div>
             <!--/.Content-->
         </div>
     </div>
+    <!--Modal: Register Form-->
 </form>
 <!-- Central Modal Medium Info-->
+

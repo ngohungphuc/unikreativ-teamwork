@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var forms_1 = require("@angular/forms");
 var core_1 = require("@angular/core");
 var index_1 = require("../../../services/index");
 var ClientEditComponent = (function () {
@@ -16,6 +17,20 @@ var ClientEditComponent = (function () {
         this.userService = userService;
     }
     ClientEditComponent.prototype.ngOnInit = function () {
+        this.companyName = new forms_1.FormControl('', forms_1.Validators.required);
+        this.country = new forms_1.FormControl('', forms_1.Validators.required);
+        this.address = new forms_1.FormControl('', forms_1.Validators.required);
+        this.email = new forms_1.FormControl('', forms_1.Validators.required);
+        this.phoneNumber = new forms_1.FormControl('', forms_1.Validators.required);
+        this.website = new forms_1.FormControl('', forms_1.Validators.required);
+        this.editClientInfoForm = new forms_1.FormGroup({
+            companyName: this.companyName,
+            country: this.country,
+            address: this.address,
+            email: this.email,
+            phoneNumber: this.phoneNumber,
+            website: this.website
+        });
         console.log(this.client);
     };
     return ClientEditComponent;
