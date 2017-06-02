@@ -31,7 +31,9 @@ var ClientEditComponent = (function () {
             phoneNumber: this.phoneNumber,
             website: this.website
         });
-        console.log(this.client);
+    };
+    ClientEditComponent.prototype.editClientInfo = function (value) {
+        console.log(value);
     };
     return ClientEditComponent;
 }());

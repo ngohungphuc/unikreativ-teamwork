@@ -42,9 +42,10 @@ export class ClientEditComponent implements OnInit {
             website: this.website
         })
 
-
-        console.log(this.client)
     }
 
+    editClientInfo(value: any) {
+        console.log(value)
+    }
 
 }
