@@ -8,12 +8,15 @@ export class HttpClientService {
         this.urlPrefix = 'http://localhost:60876/api/'
     }
 
-    get(url,options?) {
-        return this.http.get(this.urlPrefix + url,options)
+    get(url, options?) {
+        return this.http.get(this.urlPrefix + url, options)
     }
 
     post(url, data, options?) {
         return this.http.post(this.urlPrefix + url, data, options)
     }
 
+    put(url, data, options?) {
+        return this.http.put(this.urlPrefix + url, data, options)
+    }
 }

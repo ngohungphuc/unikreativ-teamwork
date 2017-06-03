@@ -7,7 +7,7 @@ using Unikreativ.Entities.ViewModel;
 
 namespace Unikreativ.Repositories.Interface
 {
-    public interface IUserRepository : IGenericRepository<User>
+    public interface IUserRepository
     {
         //User GetUserById(string id);
 

@@ -1,12 +1,15 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Component, OnInit, Input } from '@angular/core'
-import { UserService } from '../../../services/index'
+import { UserService, LoginService } from '../../../services/index'
 import { Observable } from 'rxjs/Observable'
 
 @Component({
     selector: 'client-edit',
     templateUrl: 'partial/clientedit',
-    providers: [UserService]
+    providers: [
+        UserService,
+        LoginService
+    ]
 })
 
 export class ClientEditComponent implements OnInit {
@@ -21,7 +24,9 @@ export class ClientEditComponent implements OnInit {
     phoneNumber: FormControl
     website: FormControl
 
-    constructor(private userService: UserService) {
+    constructor(
+        private userService: UserService,
+        private loginService: LoginService) {
     }
 
     ngOnInit() {
@@ -46,6 +51,10 @@ export class ClientEditComponent implements OnInit {
 
     editClientInfo(value: any) {
         console.log(value)
+        this.userService.updateClient(value).then(
+            resp => {
+                console.log(resp)
+            })
     }
 
 }

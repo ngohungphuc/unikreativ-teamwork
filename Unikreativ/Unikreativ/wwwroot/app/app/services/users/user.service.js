@@ -12,26 +12,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var index_1 = require("../../extensions/index");
+var index_2 = require("../index");
 var UserService = (function () {
-    function UserService(http, httpClientService, dataHandlerService) {
+    function UserService(http, httpClientService, dataHandlerService, loginService) {
         this.http = http;
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
+        this.loginService = loginService;
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     UserService.prototype.getTeamMembers = function () {
-        var url = '/Admin/GetTeamMembers';
+        var url = '/Data/GetTeamMembers';
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.httpClientService.get(url, { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.dataHandlerService.handleError);
     };
     UserService.prototype.getClients = function () {
-        var url = '/Admin/GetClients';
+        var url = '/Data/GetClients';
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.httpClientService.get(url, { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.dataHandlerService.handleError);
+    };
+    UserService.prototype.updateClient = function (client) {
+        var url = '/Data/GetClients';
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.loginService.authPut(url, { headers: headers });
     };
     return UserService;
 }());
@@ -39,7 +46,8 @@ UserService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http,
         index_1.HttpClientService,
-        index_1.DataHandlerService])
+        index_1.DataHandlerService,
+        index_2.LoginService])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map
