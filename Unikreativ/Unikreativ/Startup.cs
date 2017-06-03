@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using Unikreativ.Entities.Models.Auth;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
+using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Auth;
 using Unikreativ.Repositories.Interface;
 using Unikreativ.Repositories.Repositories;
@@ -72,7 +73,13 @@ namespace Unikreativ
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-            services.AddTransient<Seeder>();
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Client, User>();
+            });
+
+            var mapper = config.CreateMapper();
+
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
@@ -81,7 +88,7 @@ namespace Unikreativ
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Seeder seeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory/* Seeder seeder*/)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();

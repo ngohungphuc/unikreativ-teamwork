@@ -18,15 +18,6 @@ export class LoginService {
         this.token = currentUser && currentUser.token
     }
 
-    /*loginUser(username: string, password: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json' })
-        let options = new RequestOptions({ headers: headers })
-        let loginInfo = { Username: username, Password: password }
-
-        return this.httpClientService.post('Account/Login', loginInfo, options)
-            .map(res => res.status)
-            .catch(this.dataHandlerService.handleError)
-    }*/
     loginUser(username: string, password: string): Promise<RequestResult> {
         let headers = new Headers({ 'Content-Type': 'application/json' })
         let options = new RequestOptions({ headers: headers })
@@ -65,10 +56,18 @@ export class LoginService {
 
     authPost(url: string, body: any): Promise<RequestResult> {
         let headers = this.initAuthHeaders()
-        return this.http.post(url, body, { headers: headers }).toPromise()
+        return this.httpClientService.post(url, body, { headers: headers }).toPromise()
             .then(response => response.json() as RequestResult)
             .catch(this.dataHandlerService.handleError)
     }
+
+    authPut(url: string, body: any): Promise<RequestResult> {
+        let headers = this.initAuthHeaders()
+        return this.httpClientService.put(url, body, { headers: headers }).toPromise()
+            .then(response => response.json() as RequestResult)
+            .catch(this.dataHandlerService.handleError)
+    }
+
 
     private getLocalToken(): string {
         if (!this.token) {

@@ -23,7 +23,6 @@ var UserComponent = (function () {
         Observable_1.Observable.forkJoin([teamMembersAPI, clientsAPI]).subscribe(function (result) {
             _this.teamMembers = result[0];
             _this.clients = result[1];
-            console.log(_this.clients);
         });
     };
     UserComponent.prototype.selectClient = function (client) {

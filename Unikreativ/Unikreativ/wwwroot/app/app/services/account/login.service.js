@@ -56,7 +56,13 @@ var LoginService = (function () {
     };
     LoginService.prototype.authPost = function (url, body) {
         var headers = this.initAuthHeaders();
-        return this.http.post(url, body, { headers: headers }).toPromise()
+        return this.httpClientService.post(url, body, { headers: headers }).toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.dataHandlerService.handleError);
+    };
+    LoginService.prototype.authPut = function (url, body) {
+        var headers = this.initAuthHeaders();
+        return this.httpClientService.put(url, body, { headers: headers }).toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.dataHandlerService.handleError);
     };

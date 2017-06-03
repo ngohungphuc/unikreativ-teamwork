@@ -22,6 +22,9 @@ var HttpClientService = (function () {
     HttpClientService.prototype.post = function (url, data, options) {
         return this.http.post(this.urlPrefix + url, data, options);
     };
+    HttpClientService.prototype.put = function (url, data, options) {
+        return this.http.put(this.urlPrefix + url, data, options);
+    };
     return HttpClientService;
 }());
 HttpClientService = __decorate([

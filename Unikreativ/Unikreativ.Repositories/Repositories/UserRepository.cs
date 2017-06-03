@@ -28,47 +28,6 @@ namespace Unikreativ.Repositories.Repositories
             _dbSet = context.Set<User>();
         }
 
-        public IQueryable<User> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public User GetById(object id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> Filter(Expression<Func<User, bool>> filter = null, Func<IQueryable<User>, IOrderedQueryable<User>> orderBy = null, string includeProperties = "", int? page = null,
-            int? pageSize = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<User> FindBy(Expression<Func<User, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Add(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Edit(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteById(object id)
-        {
-            throw new NotImplementedException();
-        }
-
         public User GetUserByName(string name)
         {
             return _dbSet.FirstOrDefault(x => x.UserName == name);
