@@ -14,31 +14,34 @@ var http_1 = require("@angular/http");
 var index_1 = require("../../extensions/index");
 var index_2 = require("../index");
 var UserService = (function () {
-    function UserService(http, httpClientService, dataHandlerService, loginService) {
+    function UserService(http, httpClientService, dataHandlerService, authHttpService) {
         this.http = http;
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
-        this.loginService = loginService;
+        this.authHttpService = authHttpService;
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     UserService.prototype.getTeamMembers = function () {
-        var url = '/Data/GetTeamMembers';
+        var url = 'Data/GetTeamMembers';
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.httpClientService.get(url, { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.dataHandlerService.handleError);
     };
     UserService.prototype.getClients = function () {
-        var url = '/Data/GetClients';
+        var url = 'Data/GetClients';
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.httpClientService.get(url, { headers: headers })
             .map(function (res) { return res.json(); })
             .catch(this.dataHandlerService.handleError);
     };
+    UserService.prototype.newClient = function (client) {
+        var url = 'Admin/NewClient';
+        return this.authHttpService.authPost(url, client);
+    };
     UserService.prototype.updateClient = function (client) {
-        var url = '/Data/GetClients';
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.loginService.authPut(url, { headers: headers });
+        var url = 'Admin/UpdateClientInfo';
+        return this.authHttpService.authPut(url, client);
     };
     return UserService;
 }());
@@ -47,7 +50,7 @@ UserService = __decorate([
     __metadata("design:paramtypes", [http_1.Http,
         index_1.HttpClientService,
         index_1.DataHandlerService,
-        index_2.LoginService])
+        index_2.AuthHttpServices])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

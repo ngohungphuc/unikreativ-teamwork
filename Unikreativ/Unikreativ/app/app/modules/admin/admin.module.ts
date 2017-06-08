@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core'
 import { NavModule } from './../template/nav.module'
 import { AdminRoutingModule } from './admin.routing'
 import { AuthGuard } from './../../extensions/guard/auth.guard'
-import { AdminComponent, UserComponent, ClientEditComponent } from '../index'
-import { UserService } from '../../services/index'
+import { AdminComponent, UserComponent, NewClientComponent, ClientEditComponent } from '../index'
+import { UserService, AuthHttpServices } from '../../services/index'
 
 
 @NgModule({
@@ -19,11 +19,13 @@ import { UserService } from '../../services/index'
     declarations: [
         AdminComponent,
         UserComponent,
+        NewClientComponent,
         ClientEditComponent
     ],
     providers: [
         AuthGuard,
-        UserService
+        UserService,
+        AuthHttpServices
     ],
 })
 export class AdminModule { }

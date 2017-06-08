@@ -14,34 +14,58 @@ using Unikreativ.Services.Interface;
 
 namespace Unikreativ.Controllers.API
 {
-    [Route("api/[controller]/[action]")]
     [Authorize("Bearer")]
+    [Route("api/[controller]/[action]")]
     public class AdminController : Controller
     {
-        private readonly UserManager<User> _userManager;
-        private readonly IUserServices _userServices;
-        private readonly IMapper _mapper;
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
+        private readonly UserManager<User> _userManager;
 
-        public AdminController(
-            IUserServices userServices,
-            UserManager<User> userManager,
-            IMapper mapper)
+        public AdminController(UserManager<User> userManager)
         {
             _userManager = userManager;
-            _userServices = userServices;
-            _mapper = mapper;
         }
 
         #region Manage Account
 
+        [HttpPost]
         [ValidModel]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NewClient([FromBody] Client clientDto)
+        {
+            var client = Mapper.Map<User>(clientDto);
+            try
+            {
+                var result = await _userManager.CreateAsync(client, client.PasswordHash);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(client, "Client");
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPut]
+        [ValidModel]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdateClientInfo(Client clientDto)
         {
-            var client = _mapper.Map<User>(clientDto);
-            _unitOfWork.UserRepository.Edit(client);
-            _unitOfWork.Commit();
-            return Ok();
+            var client = Mapper.Map<User>(clientDto);
+            try
+            {
+                _unitOfWork.UserRepository.Edit(client);
+                _unitOfWork.Commit();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         #endregion Manage Account

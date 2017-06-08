@@ -69,7 +69,7 @@ namespace Unikreativ.Entities.Migrations
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     FullName = table.Column<string>(nullable: true),
-                    Industries = table.Column<int>(nullable: false),
+                    Industry = table.Column<string>(nullable: true),
                     JobTitle = table.Column<string>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),

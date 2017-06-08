@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Unikreativ.Entities.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -35,7 +36,7 @@ namespace Unikreativ.Entities.Data
                 CompanyName = "Unikreativ",
                 ChargeRate = 14,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                Industries = User.Industry.Technology
+                Industry = "Technology"
             };
 
             var tony = new User
@@ -52,7 +53,7 @@ namespace Unikreativ.Entities.Data
                 CompanyName = "None",
                 ChargeRate = 14,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                Industries = User.Industry.Technology
+                Industry = "Technology"
             };
 
             var client = new User
@@ -68,7 +69,7 @@ namespace Unikreativ.Entities.Data
                 LockoutEnabled = false,
                 PhoneNumber = "(+84) 8 3811 9977",
                 SecurityStamp = Guid.NewGuid().ToString(),
-                Industries = User.Industry.Technology
+                Industry = "Technology"
             };
 
             var roleStore = new RoleStore<IdentityRole>(_context);

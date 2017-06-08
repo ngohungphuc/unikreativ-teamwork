@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { HttpClientService, DataHandlerService } from '../../extensions/index'
-import { LoginService } from '../index'
+import { AuthHttpServices } from '../index'
 
 @Injectable()
 export class UserService {
@@ -9,13 +9,13 @@ export class UserService {
     constructor(private http: Http,
         private httpClientService: HttpClientService,
         private dataHandlerService: DataHandlerService,
-        private loginService: LoginService) {
+        private authHttpService: AuthHttpServices) {
         // set token if save in local storage
         let currentUser = JSON.parse(localStorage.getItem('currentUser'))
     }
 
     getTeamMembers() {
-        let url = '/Data/GetTeamMembers'
+        let url = 'Data/GetTeamMembers'
         let headers = new Headers({ 'Content-Type': 'application/json' })
 
         return this.httpClientService.get(url, { headers: headers })
@@ -24,7 +24,7 @@ export class UserService {
     }
 
     getClients() {
-        let url = '/Data/GetClients'
+        let url = 'Data/GetClients'
         let headers = new Headers({ 'Content-Type': 'application/json' })
 
         return this.httpClientService.get(url, { headers: headers })
@@ -32,10 +32,13 @@ export class UserService {
             .catch(this.dataHandlerService.handleError)
     }
 
-    updateClient(client: any) {
-        let url = '/Data/GetClients'
-        let headers = new Headers({ 'Content-Type': 'application/json' })
+    newClient(client: any) {
+        let url = 'Admin/NewClient'
+        return this.authHttpService.authPost(url, client)
+    }
 
-        return this.loginService.authPut(url, { headers: headers })
+    updateClient(client: any) {
+        let url = 'Admin/UpdateClientInfo'
+        return this.authHttpService.authPut(url, client)
     }
 }

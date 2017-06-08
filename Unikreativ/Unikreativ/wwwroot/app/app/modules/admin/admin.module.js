@@ -31,11 +31,13 @@ AdminModule = __decorate([
         declarations: [
             index_1.AdminComponent,
             index_1.UserComponent,
+            index_1.NewClientComponent,
             index_1.ClientEditComponent
         ],
         providers: [
             auth_guard_1.AuthGuard,
-            index_2.UserService
+            index_2.UserService,
+            index_2.AuthHttpServices
         ],
     })
 ], AdminModule);

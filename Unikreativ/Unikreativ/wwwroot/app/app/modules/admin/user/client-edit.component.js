@@ -13,9 +13,8 @@ var forms_1 = require("@angular/forms");
 var core_1 = require("@angular/core");
 var index_1 = require("../../../services/index");
 var ClientEditComponent = (function () {
-    function ClientEditComponent(userService, loginService) {
+    function ClientEditComponent(userService) {
         this.userService = userService;
-        this.loginService = loginService;
     }
     ClientEditComponent.prototype.ngOnInit = function () {
         this.companyName = new forms_1.FormControl('', forms_1.Validators.required);
@@ -34,10 +33,9 @@ var ClientEditComponent = (function () {
         });
     };
     ClientEditComponent.prototype.editClientInfo = function (value) {
-        console.log(value);
-        this.userService.updateClient(value).then(function (resp) {
-            console.log(resp);
-        });
+        this.userService.updateClient(value)
+            .then(function (result) { return console.log(result); })
+            .catch(function (error) { return console.log(error); });
     };
     return ClientEditComponent;
 }());
@@ -50,12 +48,10 @@ ClientEditComponent = __decorate([
         selector: 'client-edit',
         templateUrl: 'partial/clientedit',
         providers: [
-            index_1.UserService,
-            index_1.LoginService
+            index_1.UserService
         ]
     }),
-    __metadata("design:paramtypes", [index_1.UserService,
-        index_1.LoginService])
+    __metadata("design:paramtypes", [index_1.UserService])
 ], ClientEditComponent);
 exports.ClientEditComponent = ClientEditComponent;
 //# sourceMappingURL=client-edit.component.js.map

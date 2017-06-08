@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Unikreativ.Entities.Data;
-using Unikreativ.Entities.Entities;
 
 namespace Unikreativ.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170517132534_Init")]
+    [Migration("20170608135211_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -313,7 +312,7 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<string>("FullName");
 
-                    b.Property<int>("Industries");
+                    b.Property<string>("Industry");
 
                     b.Property<string>("JobTitle");
 

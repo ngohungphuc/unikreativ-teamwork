@@ -15,7 +15,7 @@ var DataHandlerService = (function () {
         return body.data || {};
     };
     DataHandlerService.prototype.handleError = function (error) {
-        console.error('An error occurred', error);
+        console.error(error.message || error);
         return Promise.reject(error.message || error);
     };
     return DataHandlerService;

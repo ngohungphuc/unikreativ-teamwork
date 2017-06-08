@@ -8,9 +8,9 @@ export class DataHandlerService {
         return body.data || {}
     }
 
-    handleError(error: any): Promise<any> {
-        console.error('An error occurred', error)
+    handleError(error: Response | any) {
+        console.error(error.message || error)
         return Promise.reject(error.message || error)
     }
-    
+
 }

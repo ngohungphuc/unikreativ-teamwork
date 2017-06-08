@@ -28,7 +28,7 @@ var LoginService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         var loginInfo = { Username: username, Password: password };
-        return this.httpClientService.post('/TokenAuth/GetAuthToken', loginInfo, options)
+        return this.httpClientService.post('TokenAuth/GetAuthToken', loginInfo, options)
             .toPromise()
             .then(function (response) {
             var result = response.json();
@@ -44,41 +44,6 @@ var LoginService = (function () {
     LoginService.prototype.checkLogin = function () {
         var token = localStorage.getItem(this.tokenKey);
         return token != null;
-    };
-    LoginService.prototype.getUserInfo = function () {
-        return this.authGet('/TokenAuth');
-    };
-    LoginService.prototype.authGet = function (url) {
-        var headers = this.initAuthHeaders();
-        return this.httpClientService.get(url, { headers: headers }).toPromise()
-            .then(function (res) { return res.json(); })
-            .catch(this.dataHandlerService.handleError);
-    };
-    LoginService.prototype.authPost = function (url, body) {
-        var headers = this.initAuthHeaders();
-        return this.httpClientService.post(url, body, { headers: headers }).toPromise()
-            .then(function (response) { return response.json(); })
-            .catch(this.dataHandlerService.handleError);
-    };
-    LoginService.prototype.authPut = function (url, body) {
-        var headers = this.initAuthHeaders();
-        return this.httpClientService.put(url, body, { headers: headers }).toPromise()
-            .then(function (response) { return response.json(); })
-            .catch(this.dataHandlerService.handleError);
-    };
-    LoginService.prototype.getLocalToken = function () {
-        if (!this.token) {
-            this.token = sessionStorage.getItem(this.tokenKey);
-        }
-        return this.token;
-    };
-    LoginService.prototype.initAuthHeaders = function () {
-        var token = this.getLocalToken();
-        if (token === null)
-            throw 'No token';
-        var headers = new http_1.Headers();
-        headers.append('Authorization', 'Bearer ' + token);
-        return headers;
     };
     LoginService.prototype.logout = function () {
         this.token = null;

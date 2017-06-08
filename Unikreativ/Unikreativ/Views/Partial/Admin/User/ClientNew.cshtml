@@ -1,0 +1,98 @@
+<!-- Central Modal Medium Info -->
+<form [formGroup]="newClientForm" (ngSubmit)="newClient(newClientForm.value)" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <!--Modal: Register Form-->
+    <div class="modal fade" id="newClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog cascading-modal" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header light-blue darken-3 white-text">
+                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="title"><i class="fa fa-user-plus"></i> New Client </h4>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12" [ngClass]="{'error':UserName.invalid && UserName.dirty}">
+                            <div class="md-form">
+                                <input formControlName="UserName" type="text" id="UserName" class="form-control">
+                                <label class="active" for="UserName">UserName</label>
+                                <label *ngIf="UserName.invalid && UserName.dirty">UserName is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':PasswordHash.invalid && PasswordHash.dirty}">
+                            <div class="md-form">
+                                <input formControlName="PasswordHash" type="password" id="PasswordHash" class="form-control">
+                                <label class="active" for="PasswordHash">PasswordHash</label>
+                                <label *ngIf="PasswordHash.invalid && PasswordHash.dirty">PasswordHash is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':CompanyName.invalid && CompanyName.dirty}">
+                            <div class="md-form">
+                                <input formControlName="CompanyName" type="text" id="CompanyName" class="form-control">
+                                <label class="active" for="CompanyName">CompanyName</label>
+                                <label *ngIf="CompanyName.invalid && CompanyName.dirty">CompanyName is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':Country.invalid && Country.dirty}">
+                            <div class="md-form">
+                                <input formControlName="Country" type="text" id="Country" class="form-control">
+                                <label class="active" for="Country">Country</label>
+                                <label *ngIf="Country.invalid && Country.dirty">Country is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':Address.invalid && Address.dirty}">
+                            <div class="md-form">
+                                <input formControlName="Address" type="text" id="Address" class="form-control">
+                                <label class="active" for="Address">Address</label>
+                                <label *ngIf="Address.invalid && Address.dirty">Address is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':Email.invalid && Email.dirty}">
+                            <div class="md-form">
+                                <input formControlName="Email" type="text" id="Email" class="form-control">
+                                <label class="active" for="Email">Email</label>
+                                <label *ngIf="Email.invalid && Email.dirty">Email is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':Phone.invalid && Phone.dirty}">
+                            <div class="md-form">
+                                <input formControlName="Phone" type="text" id="Phone" class="form-control">
+                                <label class="active" for="Phone">Phone</label>
+                                <label *ngIf="Phone.invalid && Phone.dirty">Phone is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':Website.invalid && Website.dirty}">
+                            <div class="md-form">
+                                <input formControlName="Website" type="text" id="Website" class="form-control">
+                                <label class="active" for="Website">Website</label>
+                                <label *ngIf="Website.invalid && Website.dirty">Website is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label>Industry</label>
+                            <select formControlName="Industry" class="form-control">
+                                <option [value]="Technology" selected>Technology</option>
+                                <option [value]="Finance">Finance</option>
+                                <option [value]="Ecommerce">Ecommerce</option>
+                                <option [value]="Healthcare">Healthcare</option>
+                                <option [value]="Construction">Construction</option>
+                                <option [value]="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <button type="submit" [disabled]="newClientForm.invalid" class="btn btn-info">Save<i class="fa fa-save" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: Register Form-->
+</form>
+<!-- Central Modal Medium Info-->
