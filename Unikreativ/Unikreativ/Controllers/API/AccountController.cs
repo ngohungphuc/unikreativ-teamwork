@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Antiforgery.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.Models.AccountViewModels;
+using Unikreativ.Helper.Filter;
 using ILoggerFactory = Microsoft.Extensions.Logging.ILoggerFactory;
 
 namespace Unikreativ.Controllers.API
@@ -27,6 +29,8 @@ namespace Unikreativ.Controllers.API
         }
 
         [HttpPost]
+        [ValidModel]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
             var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, true);

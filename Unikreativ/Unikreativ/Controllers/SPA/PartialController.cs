@@ -18,6 +18,8 @@ namespace Unikreativ.Controllers.SPA
 
         public IActionResult UserManage() => PartialView("~/Views/Partial/Admin/User/UserManage.cshtml");
 
+        public IActionResult ClientNew() => PartialView("~/Views/Partial/Admin/User/ClientNew.cshtml");
+        
         public IActionResult ClientEdit() => PartialView("~/Views/Partial/Admin/User/ClientEdit.cshtml");
 
         #endregion Admin

@@ -20,16 +20,16 @@ namespace Unikreativ.Entities.Entities
 
         public string Status { get; set; }
 
-        public Industry Industries { get; set; }
+        public string Industry { get; set; }
 
-        public enum Industry
-        {
-            Technology = 1,
-            Finance = 2,
-            Ecommerce = 3,
-            Healthcare = 4,
-            Construction = 5,
-            Other = 0
-        }
+        //public enum Industry
+        //{
+        //    Technology = 1,
+        //    Finance = 2,
+        //    Ecommerce = 3,
+        //    Healthcare = 4,
+        //    Construction = 5,
+        //    Other = 0
+        //}
     }
 }

@@ -23,7 +23,7 @@ export class LoginService {
         let options = new RequestOptions({ headers: headers })
         let loginInfo = { Username: username, Password: password }
 
-        return this.httpClientService.post('/TokenAuth/GetAuthToken', loginInfo, options)
+        return this.httpClientService.post('TokenAuth/GetAuthToken', loginInfo, options)
             .toPromise()
             .then(response => {
                 let result = response.json() as RequestResult
@@ -41,49 +41,6 @@ export class LoginService {
     checkLogin(): boolean {
         let token = localStorage.getItem(this.tokenKey)
         return token != null
-    }
-
-    getUserInfo(): Promise<RequestResult> {
-        return this.authGet('/TokenAuth')
-    }
-
-    authGet(url): Promise<RequestResult> {
-        let headers = this.initAuthHeaders()
-        return this.httpClientService.get(url, { headers: headers }).toPromise()
-            .then(res => res.json() as RequestResult)
-            .catch(this.dataHandlerService.handleError)
-    }
-
-    authPost(url: string, body: any): Promise<RequestResult> {
-        let headers = this.initAuthHeaders()
-        return this.httpClientService.post(url, body, { headers: headers }).toPromise()
-            .then(response => response.json() as RequestResult)
-            .catch(this.dataHandlerService.handleError)
-    }
-
-    authPut(url: string, body: any): Promise<RequestResult> {
-        let headers = this.initAuthHeaders()
-        return this.httpClientService.put(url, body, { headers: headers }).toPromise()
-            .then(response => response.json() as RequestResult)
-            .catch(this.dataHandlerService.handleError)
-    }
-
-
-    private getLocalToken(): string {
-        if (!this.token) {
-            this.token = sessionStorage.getItem(this.tokenKey)
-        }
-        return this.token
-    }
-
-    private initAuthHeaders(): Headers {
-        let token = this.getLocalToken()
-        if (token === null) throw 'No token'
-
-        let headers = new Headers()
-        headers.append('Authorization', 'Bearer ' + token)
-
-        return headers
     }
 
     logout() {

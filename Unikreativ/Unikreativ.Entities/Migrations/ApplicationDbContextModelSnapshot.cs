@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Unikreativ.Entities.Data;
-using Unikreativ.Entities.Entities;
 
 namespace Unikreativ.Entities.Migrations
 {
@@ -312,7 +311,7 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<string>("FullName");
 
-                    b.Property<int>("Industries");
+                    b.Property<string>("Industry");
 
                     b.Property<string>("JobTitle");
 

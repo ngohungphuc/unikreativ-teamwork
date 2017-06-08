@@ -73,14 +73,8 @@ namespace Unikreativ
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-            var config = new AutoMapper.MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Client, User>();
-            });
-
-            var mapper = config.CreateMapper();
-
             // Add application services.
+            services.AddTransient<Seeder>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IUserServices, UserServices>();
@@ -88,7 +82,7 @@ namespace Unikreativ
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory/* Seeder seeder*/)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Seeder seeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -98,7 +92,7 @@ namespace Unikreativ
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
-                //seeder.SeedUser();
+                seeder.SeedUser();
             }
             else
             {
@@ -115,7 +109,7 @@ namespace Unikreativ
                 {
                     var error = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
                     //when authorization has failed, should retrun a json message to client
-                    if (error != null && error.Error is SecurityTokenExpiredException)
+                    if (error?.Error is SecurityTokenExpiredException)
                     {
                         context.Response.StatusCode = 401;
                         context.Response.ContentType = "application/json";
@@ -170,6 +164,15 @@ namespace Unikreativ
             #endregion UseJwtBearerAuthentication
 
             app.UseIdentity();
+
+            #region Mapper
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Client, User>();
+            });
+
+            #endregion Mapper
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
