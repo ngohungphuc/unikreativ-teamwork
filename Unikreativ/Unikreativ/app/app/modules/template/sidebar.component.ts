@@ -7,7 +7,7 @@ export class SidebarComponent implements OnInit {
     user: string
 
     ngOnInit() {
-        let data = JSON.parse(localStorage.getItem('currentUser'))
+        let data = JSON.parse(sessionStorage.getItem('currentUser'))
         this.user = data['username']
     }
 }

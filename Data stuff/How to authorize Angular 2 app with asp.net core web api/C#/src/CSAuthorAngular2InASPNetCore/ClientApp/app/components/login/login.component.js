@@ -8,9 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
+var router_1 = require('@angular/router');
 var auth_service_1 = require("../../_services/auth.service");
 var LoginComponent = (function () {
     function LoginComponent(authService, router) {
@@ -29,16 +28,15 @@ var LoginComponent = (function () {
             }
         });
     };
+    LoginComponent = __decorate([
+        core_1.Component({
+            selector: "my-login",
+            templateUrl: "view.html",
+            styleUrls: ["style.css"]
+        }), 
+        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
+    ], LoginComponent);
     return LoginComponent;
 }());
-LoginComponent = __decorate([
-    core_1.Component({
-        selector: "my-login",
-        templateUrl: "view.html",
-        styleUrls: ["style.css"]
-    }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService,
-        router_1.Router])
-], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

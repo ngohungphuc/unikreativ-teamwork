@@ -1,6 +1,5 @@
 <!-- Central Modal Medium Info -->
 <form [formGroup]="newClientForm" (ngSubmit)="newClient(newClientForm.value)" autocomplete="off">
-    @Html.AntiForgeryToken()
     <!--Modal: Register Form-->
     <div class="modal fade" id="newClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog cascading-modal" role="document">
@@ -58,11 +57,11 @@
                                 <label *ngIf="Email.invalid && Email.dirty">Email is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':Phone.invalid && Phone.dirty}">
+                        <div class="col-md-12" [ngClass]="{'error':PhoneNumber.invalid && PhoneNumber.dirty}">
                             <div class="md-form">
-                                <input formControlName="Phone" type="text" id="Phone" class="form-control">
-                                <label class="active" for="Phone">Phone</label>
-                                <label *ngIf="Phone.invalid && Phone.dirty">Phone is required</label>
+                                <input formControlName="PhoneNumber" type="text" id="PhoneNumber" class="form-control">
+                                <label class="active" for="PhoneNumber">Phone</label>
+                                <label *ngIf="PhoneNumber.invalid && PhoneNumber.dirty">Phone is required</label>
                             </div>
                         </div>
                         <div class="col-md-12" [ngClass]="{'error':Website.invalid && Website.dirty}">
@@ -72,16 +71,18 @@
                                 <label *ngIf="Website.invalid && Website.dirty">Website is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" [ngClass]="{'error':Industry.invalid && Industry.dirty}">
                             <label>Industry</label>
                             <select formControlName="Industry" class="form-control">
-                                <option [value]="Technology" selected>Technology</option>
-                                <option [value]="Finance">Finance</option>
-                                <option [value]="Ecommerce">Ecommerce</option>
-                                <option [value]="Healthcare">Healthcare</option>
-                                <option [value]="Construction">Construction</option>
-                                <option [value]="Other">Other</option>
+                                <option value="">Select Industry</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Ecommerce">Ecommerce</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Construction">Construction</option>
+                                <option value="Other">Other</option>
                             </select>
+                            <label *ngIf="Industry.invalid && Industry.dirty">Industry is required</label>
                         </div>
                     </div>
 

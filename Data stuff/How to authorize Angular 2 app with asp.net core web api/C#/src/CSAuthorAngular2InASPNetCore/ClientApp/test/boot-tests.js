@@ -1,15 +1,14 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // Load required polyfills and testing libraries
-require("angular2-universal-polyfills");
-require("zone.js/dist/long-stack-trace-zone");
-require("zone.js/dist/proxy.js");
-require("zone.js/dist/sync-test");
-require("zone.js/dist/jasmine-patch");
-require("zone.js/dist/async-test");
-require("zone.js/dist/fake-async-test");
-var testing = require("@angular/core/testing");
-var testingBrowser = require("@angular/platform-browser-dynamic/testing");
+require('angular2-universal-polyfills');
+require('zone.js/dist/long-stack-trace-zone');
+require('zone.js/dist/proxy.js');
+require('zone.js/dist/sync-test');
+require('zone.js/dist/jasmine-patch');
+require('zone.js/dist/async-test');
+require('zone.js/dist/fake-async-test');
+var testing = require('@angular/core/testing');
+var testingBrowser = require('@angular/platform-browser-dynamic/testing');
 // Prevent Karma from running prematurely
 __karma__.loaded = function () { };
 // First, initialize the Angular testing environment

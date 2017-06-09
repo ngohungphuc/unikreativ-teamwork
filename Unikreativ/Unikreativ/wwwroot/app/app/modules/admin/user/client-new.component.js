@@ -8,20 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var forms_1 = require("@angular/forms");
 var core_1 = require("@angular/core");
 var index_1 = require("../../../services/index");
+var index_2 = require("../../../extensions/index");
 var NewClientComponent = (function () {
-    function NewClientComponent(userService) {
+    function NewClientComponent(userService, toastr) {
         this.userService = userService;
+        this.toastr = toastr;
     }
     NewClientComponent.prototype.ngOnInit = function () {
         this.CompanyName = new forms_1.FormControl('', forms_1.Validators.required);
         this.Country = new forms_1.FormControl('', forms_1.Validators.required);
         this.Address = new forms_1.FormControl('', forms_1.Validators.required);
         this.Email = new forms_1.FormControl('', forms_1.Validators.required);
-        this.Phone = new forms_1.FormControl('', forms_1.Validators.required);
+        this.PhoneNumber = new forms_1.FormControl('', forms_1.Validators.required);
         this.Website = new forms_1.FormControl('', forms_1.Validators.required);
         this.Industry = new forms_1.FormControl('', forms_1.Validators.required);
         this.UserName = new forms_1.FormControl('', forms_1.Validators.required);
@@ -31,7 +36,7 @@ var NewClientComponent = (function () {
             Country: this.Country,
             Address: this.Address,
             Email: this.Email,
-            Phone: this.Phone,
+            PhoneNumber: this.PhoneNumber,
             Website: this.Website,
             Industry: this.Industry,
             UserName: this.UserName,
@@ -39,10 +44,13 @@ var NewClientComponent = (function () {
         });
     };
     NewClientComponent.prototype.newClient = function (value) {
+        var _this = this;
         console.log(value);
-        this.userService.newClient(value).then(function (data) {
-            console.log(data);
+        this.userService.newClient(value).then(function (result) {
+            _this.toastr.success('Success', result.msg);
+            console.log(result);
         }, function (error) {
+            _this.toastr.error('Error', error.msg);
             console.log(error);
         });
     };
@@ -56,7 +64,8 @@ NewClientComponent = __decorate([
             index_1.UserService
         ]
     }),
-    __metadata("design:paramtypes", [index_1.UserService])
+    __param(1, core_1.Inject(index_2.Toastr_Token)),
+    __metadata("design:paramtypes", [index_1.UserService, Object])
 ], NewClientComponent);
 exports.NewClientComponent = NewClientComponent;
 //# sourceMappingURL=client-new.component.js.map

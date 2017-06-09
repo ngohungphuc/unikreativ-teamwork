@@ -30,19 +30,15 @@ namespace Unikreativ.Controllers.API
 
         [HttpPost]
         [ValidModel]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> NewClient([FromBody] Client clientDto)
         {
             var client = Mapper.Map<User>(clientDto);
             try
             {
                 var result = await _userManager.CreateAsync(client, client.PasswordHash);
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(client, "Client");
-                }
-
-                return Ok();
+                if (!result.Succeeded) return Json(new { result = false, msg = "Something happend please try again" });
+                await _userManager.AddToRoleAsync(client, "Client");
+                return Json(new { msg = true, msg = "Create new Client success" });
             }
             catch (Exception ex)
             {

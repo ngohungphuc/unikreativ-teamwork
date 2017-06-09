@@ -11,7 +11,7 @@ var SidebarComponent = (function () {
     function SidebarComponent() {
     }
     SidebarComponent.prototype.ngOnInit = function () {
-        var data = JSON.parse(localStorage.getItem('currentUser'));
+        var data = JSON.parse(sessionStorage.getItem('currentUser'));
         this.user = data['username'];
     };
     return SidebarComponent;

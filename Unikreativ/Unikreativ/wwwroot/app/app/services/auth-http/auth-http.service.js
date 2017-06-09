@@ -18,7 +18,7 @@ var AuthHttpServices = (function () {
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
         this.tokenKey = 'token';
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        var currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
     }
     AuthHttpServices.prototype.authGet = function (url) {

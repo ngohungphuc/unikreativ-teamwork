@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var index_1 = require("../../extensions/index");
-require("rxjs/add/operator/map");
+var app_status_1 = require("../../extensions/app-status");
 require("rxjs/add/operator/toPromise");
 var LoginService = (function () {
     function LoginService(http, httpClientService, dataHandlerService) {
@@ -20,8 +20,6 @@ var LoginService = (function () {
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
         this.tokenKey = 'token';
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.token = currentUser && currentUser.token;
     }
     LoginService.prototype.loginUser = function (username, password) {
         var _this = this;
@@ -32,22 +30,22 @@ var LoginService = (function () {
             .toPromise()
             .then(function (response) {
             var result = response.json();
-            if (result.State === 1) {
+            if (result.State === app_status_1.AppStatusCode.LoginSuccess) {
                 var json = result.Data;
                 _this.token = json.accessToken;
-                localStorage.setItem('currentUser', JSON.stringify({ username: username, token: json.accessToken }));
+                sessionStorage.setItem('currentUser', JSON.stringify({ username: username, token: json.accessToken }));
             }
             return result;
         })
             .catch(this.dataHandlerService.handleError);
     };
     LoginService.prototype.checkLogin = function () {
-        var token = localStorage.getItem(this.tokenKey);
+        var token = sessionStorage.getItem(this.tokenKey);
         return token != null;
     };
     LoginService.prototype.logout = function () {
         this.token = null;
-        localStorage.removeItem('currentUser');
+        sessionStorage.removeItem('currentUser');
     };
     return LoginService;
 }());

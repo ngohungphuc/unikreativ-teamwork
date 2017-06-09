@@ -12,7 +12,7 @@ export class AuthHttpServices {
         private httpClientService: HttpClientService,
         private dataHandlerService: DataHandlerService) {
         // set token if save in local storage
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'))
+        let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
         this.token = currentUser && currentUser.token
     }
 
@@ -25,13 +25,13 @@ export class AuthHttpServices {
             .catch(this.dataHandlerService.handleError)
     }
 
-    authPost(url: string, body: any): Promise<RequestResult> {
+    authPost(url: string, body: any): Promise<any> {
         let headers = this.initAuthHeaders()
         let options = new RequestOptions({ headers: headers })
 
         return this.httpClientService.post(url, body, options)
             .toPromise()
-            .then(response => response.json() as RequestResult)
+            .then(response => response.json() as any)
             .catch(this.dataHandlerService.handleError)
     }
 
