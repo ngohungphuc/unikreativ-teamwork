@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Unikreativ.Entities.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Unikreativ.Entities.ViewModel
 {
@@ -21,7 +17,7 @@ namespace Unikreativ.Entities.ViewModel
         public string Email { get; set; }
 
         [Required]
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         public string Industry { get; set; }
@@ -29,12 +25,7 @@ namespace Unikreativ.Entities.ViewModel
         [Required]
         public string Website { get; set; }
 
-        public int AccessFailedCount = 0;
         public double ChargeRate = 0;
-        public bool EmailConfirmed = false;
-        public bool LockoutEnabled = false;
-        public bool PhoneNumberConfirmed = false;
-        public bool TwoFactorEnabled = false;
 
         [Required]
         public string UserName { get; set; }

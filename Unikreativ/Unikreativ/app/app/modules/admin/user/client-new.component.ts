@@ -1,8 +1,7 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Inject } from '@angular/core'
 import { UserService } from '../../../services/index'
-import { Observable } from 'rxjs/Observable'
-
+import { Toastr_Token, Toastr } from '../../../extensions/index'
 @Component({
     selector: 'client-new',
     templateUrl: 'partial/clientnew',
@@ -17,13 +16,15 @@ export class NewClientComponent implements OnInit {
     Country: FormControl
     Address: FormControl
     Email: FormControl
-    Phone: FormControl
+    PhoneNumber: FormControl
     Website: FormControl
     Industry: FormControl
     UserName: FormControl
     PasswordHash: FormControl
+
     constructor(
-        private userService: UserService) {
+        private userService: UserService,
+        @Inject(Toastr_Token) private toastr: Toastr) {
     }
 
     ngOnInit() {
@@ -31,7 +32,7 @@ export class NewClientComponent implements OnInit {
         this.Country = new FormControl('', Validators.required)
         this.Address = new FormControl('', Validators.required)
         this.Email = new FormControl('', Validators.required)
-        this.Phone = new FormControl('', Validators.required)
+        this.PhoneNumber = new FormControl('', Validators.required)
         this.Website = new FormControl('', Validators.required)
         this.Industry = new FormControl('', Validators.required)
         this.UserName = new FormControl('', Validators.required)
@@ -43,7 +44,7 @@ export class NewClientComponent implements OnInit {
             Country: this.Country,
             Address: this.Address,
             Email: this.Email,
-            Phone: this.Phone,
+            PhoneNumber: this.PhoneNumber,
             Website: this.Website,
             Industry: this.Industry,
             UserName: this.UserName,
@@ -55,10 +56,12 @@ export class NewClientComponent implements OnInit {
     newClient(value: any) {
         console.log(value)
         this.userService.newClient(value).then(
-            data => {
-                console.log(data)
+            result => {
+                this.toastr.success('Success', result.msg)
+                console.log(result)
             },
             error => {
+                this.toastr.error('Error', error.msg)
                 console.log(error)
             })
     }
