@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     username: FormControl
     password: FormControl
     constructor(private loginService: LoginService, private router: Router, @Inject(Toastr_Token) private toastr: Toastr) {
-        if (localStorage.getItem('currentUser') !== null)
+        if (sessionStorage.getItem('currentUser') !== null)
             this.router.navigate(['admin'])
 
     }
