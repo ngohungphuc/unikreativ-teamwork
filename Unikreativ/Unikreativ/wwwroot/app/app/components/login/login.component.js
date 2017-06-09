@@ -23,7 +23,7 @@ var LoginComponent = (function () {
         this.loginService = loginService;
         this.router = router;
         this.toastr = toastr;
-        if (localStorage.getItem('currentUser') !== null)
+        if (sessionStorage.getItem('currentUser') !== null)
             this.router.navigate(['admin']);
     }
     LoginComponent.prototype.ngOnInit = function () {
