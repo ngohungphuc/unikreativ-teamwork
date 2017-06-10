@@ -1,7 +1,12 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Component, OnInit, Input, Inject } from '@angular/core'
+import {
+    Component,
+    Inject,
+    Input,
+    OnInit
+} from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Toastr, Toastr_Token } from '../../../extensions/index'
 import { UserService } from '../../../services/index'
-import { Toastr_Token, Toastr } from '../../../extensions/index'
 @Component({
     selector: 'client-new',
     templateUrl: 'partial/clientnew',
@@ -11,6 +16,9 @@ import { Toastr_Token, Toastr } from '../../../extensions/index'
 })
 
 export class NewClientComponent implements OnInit {
+    @Input()
+    client: any[]
+
     newClientForm: FormGroup
     CompanyName: FormControl
     Country: FormControl
@@ -53,16 +61,14 @@ export class NewClientComponent implements OnInit {
 
     }
 
-    newClient(value: any) {
+    async newClient(value: any) {
         console.log(value)
-        this.userService.newClient(value).then(
-            result => {
-                this.toastr.success('Success', result.msg)
-                console.log(result)
-            },
-            error => {
-                this.toastr.error('Error', error.msg)
-                console.log(error)
+        await this.userService.newClient(value).then(
+            res => {
+                if (res.result) {
+                    this.toastr.success(res.msg, 'Success')
+                }
+                else this.toastr.error(res.msg, 'Error')
             })
     }
 

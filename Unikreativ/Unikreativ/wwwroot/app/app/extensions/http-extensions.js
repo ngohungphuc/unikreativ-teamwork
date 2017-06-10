@@ -9,24 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var HttpClientService = (function () {
-    function HttpClientService(http) {
+const core_1 = require("@angular/core");
+const http_1 = require("@angular/http");
+let HttpClientService = class HttpClientService {
+    constructor(http) {
         this.http = http;
         this.urlPrefix = 'http://localhost:60876/api/';
     }
-    HttpClientService.prototype.get = function (url, options) {
+    get(url, options) {
         return this.http.get(this.urlPrefix + url, options);
-    };
-    HttpClientService.prototype.post = function (url, data, options) {
+    }
+    post(url, data, options) {
         return this.http.post(this.urlPrefix + url, data, options);
-    };
-    HttpClientService.prototype.put = function (url, data, options) {
+    }
+    put(url, data, options) {
         return this.http.put(this.urlPrefix + url, data, options);
-    };
-    return HttpClientService;
-}());
+    }
+    delete(url, options) {
+        return this.http.delete(this.urlPrefix + url, options);
+    }
+};
 HttpClientService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])

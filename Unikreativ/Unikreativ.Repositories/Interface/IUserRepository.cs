@@ -9,8 +9,6 @@ namespace Unikreativ.Repositories.Interface
 {
     public interface IUserRepository
     {
-        //User GetUserById(string id);
-
         User GetUserByName(string name);
 
         IQueryable<Member> GetTeamMembers();
