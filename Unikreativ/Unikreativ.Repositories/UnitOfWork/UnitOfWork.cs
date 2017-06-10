@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Unikreativ.Entities.Data;
@@ -12,7 +13,14 @@ namespace Unikreativ.Repositories.UnitOfWork
         private ApplicationDbContext _dbContext;
         private GenericRepository<User> _userRepository;
 
-        #region Init repo
+        public UnitOfWork() : this(new ApplicationDbContext())
+        {
+        }
+
+        public UnitOfWork(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public GenericRepository<User> UserRepository
         {
@@ -25,8 +33,6 @@ namespace Unikreativ.Repositories.UnitOfWork
                 return _userRepository;
             }
         }
-
-        #endregion Init repo
 
         /// <summary>
         /// Saves all pending changes

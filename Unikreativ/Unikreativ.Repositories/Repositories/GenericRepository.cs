@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Unikreativ.Entities.Data;
 using Unikreativ.Repositories.Interface;
@@ -16,27 +17,117 @@ namespace Unikreativ.Repositories.Repositories
 
         public GenericRepository(ApplicationDbContext context)
         {
-            if (context == null)
-                throw new ArgumentNullException("context");
             _context = context;
-            _dbSet = context.Set<T>();
         }
 
-        public IQueryable<T> GetAll()
+        public ICollection<T> GetAll()
         {
-            IQueryable<T> query = _dbSet;
-            return query;
+            return _context.Set<T>().ToList();
         }
 
-        public T GetById(object id)
+        public async Task<ICollection<T>> GetAllAsync()
         {
-            return _dbSet.Find(id);
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        public T GetById(string id)
+        {
+            return _context.Set<T>().Find(id);
+        }
+
+        public async Task<T> GetByIdAsync(string id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
+
+        public T Find(Expression<Func<T, bool>> match)
+        {
+            return _context.Set<T>().SingleOrDefault(match);
+        }
+
+        public async Task<T> FindAsync(Expression<Func<T, bool>> match)
+        {
+            return await _context.Set<T>().SingleOrDefaultAsync(match);
+        }
+
+        public ICollection<T> FindAll(Expression<Func<T, bool>> match)
+        {
+            return _context.Set<T>().Where(match).ToList();
+        }
+
+        public async Task<ICollection<T>> FindAllAsync(Expression<Func<T, bool>> match)
+        {
+            return await _context.Set<T>().Where(match).ToListAsync();
+        }
+
+        public T Add(T entity)
+        {
+            _context.Set<T>().Add(entity);
+            _context.SaveChanges();
+            return entity;
+        }
+
+        public async Task<T> AddAsync(T entity)
+        {
+            _context.Set<T>().Add(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+
+        public T Update(T updated, int key)
+        {
+            if (updated == null)
+                return null;
+
+            T existing = _context.Set<T>().Find(key);
+            if (existing != null)
+            {
+                _context.Entry(existing).CurrentValues.SetValues(updated);
+                _context.SaveChanges();
+            }
+            return existing;
+        }
+
+        public async Task<T> UpdateAsync(T updated, int key)
+        {
+            if (updated == null)
+                return null;
+
+            T existing = await _context.Set<T>().FindAsync(key);
+            if (existing != null)
+            {
+                _context.Entry(existing).CurrentValues.SetValues(updated);
+                await _context.SaveChangesAsync();
+            }
+            return existing;
+        }
+
+        public void Delete(T t)
+        {
+            _context.Set<T>().Remove(t);
+            _context.SaveChanges();
+        }
+
+        public async Task<int> DeleteAsync(T t)
+        {
+            _context.Set<T>().Remove(t);
+            return await _context.SaveChangesAsync();
+        }
+
+        public int Count()
+        {
+            return _context.Set<T>().Count();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _context.Set<T>().CountAsync();
         }
 
         public IEnumerable<T> Filter(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "", int? page = null,
             int? pageSize = null)
         {
-            IQueryable<T> query = _dbSet;
+            IQueryable<T> query = _context.Set<T>();
             if (filter != null)
                 query = query.Where(filter);
 
@@ -57,30 +148,6 @@ namespace Unikreativ.Repositories.Repositories
         public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
             return _dbSet.Where(predicate);
-        }
-
-        public void Add(T entity)
-        {
-            _dbSet.Add(entity);
-        }
-
-        public void Edit(T entity)
-        {
-            _dbSet.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
-        }
-
-        public void Delete(T entity)
-        {
-            if (_context.Entry(entity).State == EntityState.Detached)
-                _dbSet.Attach(entity);
-            _dbSet.Remove(entity);
-        }
-
-        public void DeleteById(object id)
-        {
-            var entityToDelete = _dbSet.Find(id);
-            Delete(entityToDelete);
         }
     }
 }

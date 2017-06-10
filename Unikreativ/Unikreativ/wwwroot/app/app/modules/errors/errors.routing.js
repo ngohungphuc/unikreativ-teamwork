@@ -6,18 +6,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var index_1 = require("../index");
+const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
+const index_1 = require("../index");
 exports.errorsRoutes = [
     { path: '404', component: index_1.Error404Component },
     { path: '500', component: index_1.Error500Component }
 ];
-var ErrorsRoutingModule = (function () {
-    function ErrorsRoutingModule() {
-    }
-    return ErrorsRoutingModule;
-}());
+let ErrorsRoutingModule = class ErrorsRoutingModule {
+};
 ErrorsRoutingModule = __decorate([
     core_1.NgModule({
         imports: [router_1.RouterModule.forChild(exports.errorsRoutes)],
