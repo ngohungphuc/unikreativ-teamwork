@@ -20,10 +20,14 @@ namespace Unikreativ.Controllers.API
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         private readonly UserManager<User> _userManager;
+        private readonly IUserServices _userServices;
 
-        public AdminController(UserManager<User> userManager)
+        public AdminController(
+            UserManager<User> userManager,
+             IUserServices userServices)
         {
             _userManager = userManager;
+            _userServices = userServices;
         }
 
         #region Manage Account
@@ -32,13 +36,37 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<IActionResult> NewClient([FromBody] Client clientDto)
         {
+            if (clientDto == null)
+            {
+                throw new ArgumentNullException(nameof(clientDto));
+            }
+
             var client = Mapper.Map<User>(clientDto);
             try
             {
                 var result = await _userManager.CreateAsync(client, client.PasswordHash);
-                if (!result.Succeeded) return Json(new { result = false, msg = "Something happend please try again" });
+                if (!result.Succeeded) return Json(new
+                {
+                    result = false,
+                    msg = "Something happend please try again later"
+                });
                 await _userManager.AddToRoleAsync(client, "Client");
-                return Json(new { msg = true, msg = "Create new Client success" });
+                return Json(new { result = true, msg = "Create new Client success" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = true, msg = ex });
+            }
+        }
+
+        [HttpPut]
+        [ValidModel]
+        public IActionResult UpdateClientInfo(Client clientDto)
+        {
+            var client = Mapper.Map<User>(clientDto);
+            try
+            {
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -46,21 +74,25 @@ namespace Unikreativ.Controllers.API
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [ValidModel]
-        [ValidateAntiForgeryToken]
-        public IActionResult UpdateClientInfo(Client clientDto)
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteClient(string id)
         {
-            var client = Mapper.Map<User>(clientDto);
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
             try
             {
-                _unitOfWork.UserRepository.Edit(client);
-                _unitOfWork.Commit();
-                return Ok();
+                var clientToDelete = await _unitOfWork.UserRepository.GetByIdAsync(id);
+                await _unitOfWork.UserRepository.DeleteAsync(clientToDelete);
+                return Json(new { result = true, msg = "Delete client success" });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return Json(new { result = false, msg = ex });
             }
         }
 

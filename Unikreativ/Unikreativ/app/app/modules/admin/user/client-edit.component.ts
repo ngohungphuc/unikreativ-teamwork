@@ -48,8 +48,8 @@ export class ClientEditComponent implements OnInit {
 
     }
 
-    editClientInfo(value: any) {
-        this.userService.updateClient(value)
+    async editClientInfo(value: any) {
+        await this.userService.updateClient(value)
             .then(result => console.log(result))
             .catch(error => console.log(error))
     }

@@ -1,7 +1,12 @@
-import { Injectable } from '@angular/core'
-import { Http, Response, Headers, RequestOptions } from '@angular/http'
-import { HttpClientService, DataHandlerService } from '../../extensions/index'
 import { AuthHttpServices } from '../index'
+import { DataHandlerService, HttpClientService } from '../../extensions/index'
+import {
+    Headers,
+    Http,
+    RequestOptions,
+    Response
+    } from '@angular/http'
+import { Injectable } from '@angular/core'
 
 @Injectable()
 export class UserService {
@@ -40,5 +45,10 @@ export class UserService {
     updateClient(client: any) {
         let url = 'Admin/UpdateClientInfo'
         return this.authHttpService.authPut(url, client)
+    }
+
+    deleteClient(id: any) {
+        let url = `Admin/DeleteClient/${id}`
+        return this.authHttpService.authDelete(url)
     }
 }

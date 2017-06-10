@@ -19,4 +19,8 @@ export class HttpClientService {
     put(url, data, options?) {
         return this.http.put(this.urlPrefix + url, data, options)
     }
+
+    delete(url, options?) {
+        return this.http.delete(this.urlPrefix + url, options)
+    }
 }

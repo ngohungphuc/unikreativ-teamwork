@@ -11,17 +11,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var forms_1 = require("@angular/forms");
-var core_1 = require("@angular/core");
-var index_1 = require("../../../services/index");
-var index_2 = require("../../../extensions/index");
-var NewClientComponent = (function () {
-    function NewClientComponent(userService, toastr) {
+const core_1 = require("@angular/core");
+const forms_1 = require("@angular/forms");
+const index_1 = require("../../../extensions/index");
+const index_2 = require("../../../services/index");
+let NewClientComponent = class NewClientComponent {
+    constructor(userService, toastr) {
         this.userService = userService;
         this.toastr = toastr;
     }
-    NewClientComponent.prototype.ngOnInit = function () {
+    ngOnInit() {
         this.CompanyName = new forms_1.FormControl('', forms_1.Validators.required);
         this.Country = new forms_1.FormControl('', forms_1.Validators.required);
         this.Address = new forms_1.FormControl('', forms_1.Validators.required);
@@ -42,30 +50,34 @@ var NewClientComponent = (function () {
             UserName: this.UserName,
             PasswordHash: this.PasswordHash
         });
-    };
-    NewClientComponent.prototype.newClient = function (value) {
-        var _this = this;
-        console.log(value);
-        this.userService.newClient(value).then(function (result) {
-            _this.toastr.success('Success', result.msg);
-            console.log(result);
-        }, function (error) {
-            _this.toastr.error('Error', error.msg);
-            console.log(error);
+    }
+    newClient(value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(value);
+            yield this.userService.newClient(value).then(res => {
+                if (res.result) {
+                    this.toastr.success(res.msg, 'Success');
+                }
+                else
+                    this.toastr.error(res.msg, 'Error');
+            });
         });
-    };
-    return NewClientComponent;
-}());
+    }
+};
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], NewClientComponent.prototype, "client", void 0);
 NewClientComponent = __decorate([
     core_1.Component({
         selector: 'client-new',
         templateUrl: 'partial/clientnew',
         providers: [
-            index_1.UserService
+            index_2.UserService
         ]
     }),
-    __param(1, core_1.Inject(index_2.Toastr_Token)),
-    __metadata("design:paramtypes", [index_1.UserService, Object])
+    __param(1, core_1.Inject(index_1.Toastr_Token)),
+    __metadata("design:paramtypes", [index_2.UserService, Object])
 ], NewClientComponent);
 exports.NewClientComponent = NewClientComponent;
 //# sourceMappingURL=client-new.component.js.map
