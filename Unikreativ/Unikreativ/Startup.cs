@@ -71,7 +71,10 @@ namespace Unikreativ
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
             });
+
+            //services.AddMvcCore().AddJsonFormatters();
 
             services.AddIdentity<User, IdentityRole>(options =>
             {

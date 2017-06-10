@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
         })
     }
 
-    login(formValues) {
-        this.loginService.loginUser(formValues.username, formValues.password).then(
+    async login(formValues) {
+        await this.loginService.loginUser(formValues.username, formValues.password).then(
             resp => {
                 if (resp.State === AppStatusCode.LoginSuccess) {
                     this.router.navigate(['admin'])

@@ -8,15 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var forms_1 = require("@angular/forms");
-var core_1 = require("@angular/core");
-var index_1 = require("../../../services/index");
-var ClientEditComponent = (function () {
-    function ClientEditComponent(userService) {
+const forms_1 = require("@angular/forms");
+const core_1 = require("@angular/core");
+const index_1 = require("../../../services/index");
+let ClientEditComponent = class ClientEditComponent {
+    constructor(userService) {
         this.userService = userService;
     }
-    ClientEditComponent.prototype.ngOnInit = function () {
+    ngOnInit() {
         this.companyName = new forms_1.FormControl('', forms_1.Validators.required);
         this.country = new forms_1.FormControl('', forms_1.Validators.required);
         this.address = new forms_1.FormControl('', forms_1.Validators.required);
@@ -31,14 +39,15 @@ var ClientEditComponent = (function () {
             phoneNumber: this.phoneNumber,
             website: this.website
         });
-    };
-    ClientEditComponent.prototype.editClientInfo = function (value) {
-        this.userService.updateClient(value)
-            .then(function (result) { return console.log(result); })
-            .catch(function (error) { return console.log(error); });
-    };
-    return ClientEditComponent;
-}());
+    }
+    editClientInfo(value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.userService.updateClient(value)
+                .then(result => console.log(result))
+                .catch(error => console.log(error));
+        });
+    }
+};
 __decorate([
     core_1.Input(),
     __metadata("design:type", Array)

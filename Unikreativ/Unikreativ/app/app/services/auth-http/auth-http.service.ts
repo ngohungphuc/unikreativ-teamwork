@@ -1,7 +1,11 @@
+import { DataHandlerService, HttpClientService } from '../../extensions/index'
+import {
+    Headers,
+    Http,
+    RequestOptions,
+    Response
+} from '@angular/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
-import { Http, Response, Headers, RequestOptions } from '@angular/http'
-import { HttpClientService, DataHandlerService } from '../../extensions/index'
 import { RequestResult } from '../../model/RequestResult'
 
 @Injectable()
@@ -11,6 +15,7 @@ export class AuthHttpServices {
     constructor(private http: Http,
         private httpClientService: HttpClientService,
         private dataHandlerService: DataHandlerService) {
+            
         // set token if save in local storage
         let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
         this.token = currentUser && currentUser.token
@@ -27,9 +32,8 @@ export class AuthHttpServices {
 
     authPost(url: string, body: any): Promise<any> {
         let headers = this.initAuthHeaders()
-        let options = new RequestOptions({ headers: headers })
 
-        return this.httpClientService.post(url, body, options)
+        return this.httpClientService.post(url, body, { headers: headers })
             .toPromise()
             .then(response => response.json() as any)
             .catch(this.dataHandlerService.handleError)
@@ -41,6 +45,15 @@ export class AuthHttpServices {
         return this.httpClientService.put(url, body, { headers: headers })
             .toPromise()
             .then(response => response.json() as RequestResult)
+            .catch(this.dataHandlerService.handleError)
+    }
+
+    authDelete(url: string): Promise<any> {
+        let headers = this.initAuthHeaders()
+
+        return this.httpClientService.delete(url, { headers: headers })
+            .toPromise()
+            .then(response => response.json() as any)
             .catch(this.dataHandlerService.handleError)
     }
 
