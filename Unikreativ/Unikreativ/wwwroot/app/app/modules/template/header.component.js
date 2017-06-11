@@ -9,11 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-let HeaderComponent = class HeaderComponent {
-    constructor() {
+var core_1 = require("@angular/core");
+var HeaderComponent = (function () {
+    function HeaderComponent() {
     }
-};
+    return HeaderComponent;
+}());
 HeaderComponent = __decorate([
     core_1.Component({
         selector: 'uni-header',

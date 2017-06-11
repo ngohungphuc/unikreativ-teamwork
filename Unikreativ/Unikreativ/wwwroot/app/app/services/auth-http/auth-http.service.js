@@ -9,61 +9,62 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("../../extensions/index");
-const http_1 = require("@angular/http");
-const core_1 = require("@angular/core");
-let AuthHttpServices = class AuthHttpServices {
-    constructor(http, httpClientService, dataHandlerService) {
+var index_1 = require("../../extensions/index");
+var http_1 = require("@angular/http");
+var core_1 = require("@angular/core");
+var AuthHttpServices = (function () {
+    function AuthHttpServices(http, httpClientService, dataHandlerService) {
         this.http = http;
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
         this.tokenKey = 'token';
-        let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        var currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
     }
-    authGet(url) {
-        let headers = this.initAuthHeaders();
+    AuthHttpServices.prototype.authGet = function (url) {
+        var headers = this.initAuthHeaders();
         return this.httpClientService.get(url, { headers: headers })
             .toPromise()
-            .then(res => res.json())
+            .then(function (res) { return res.json(); })
             .catch(this.dataHandlerService.handleError);
-    }
-    authPost(url, body) {
-        let headers = this.initAuthHeaders();
+    };
+    AuthHttpServices.prototype.authPost = function (url, body) {
+        var headers = this.initAuthHeaders();
         return this.httpClientService.post(url, body, { headers: headers })
             .toPromise()
-            .then(response => response.json())
+            .then(function (response) { return response.json(); })
             .catch(this.dataHandlerService.handleError);
-    }
-    authPut(url, body) {
-        let headers = this.initAuthHeaders();
+    };
+    AuthHttpServices.prototype.authPut = function (url, body) {
+        var headers = this.initAuthHeaders();
         return this.httpClientService.put(url, body, { headers: headers })
             .toPromise()
-            .then(response => response.json())
+            .then(function (response) { return response.json(); })
             .catch(this.dataHandlerService.handleError);
-    }
-    authDelete(url) {
-        let headers = this.initAuthHeaders();
+    };
+    AuthHttpServices.prototype.authDelete = function (url) {
+        var headers = this.initAuthHeaders();
         return this.httpClientService.delete(url, { headers: headers })
             .toPromise()
-            .then(response => response.json())
+            .then(function (response) { return response.json(); })
             .catch(this.dataHandlerService.handleError);
-    }
-    getLocalToken() {
+    };
+    AuthHttpServices.prototype.getLocalToken = function () {
         if (!this.token) {
             this.token = sessionStorage.getItem(this.tokenKey);
         }
         return this.token;
-    }
-    initAuthHeaders() {
-        let token = this.getLocalToken();
+    };
+    AuthHttpServices.prototype.initAuthHeaders = function () {
+        var token = this.getLocalToken();
         if (token === null)
             throw 'No token';
-        let headers = new http_1.Headers();
+        var headers = new http_1.Headers();
         headers.append('Authorization', 'Bearer ' + token);
         return headers;
-    }
-};
+    };
+    return AuthHttpServices;
+}());
 AuthHttpServices = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http,
