@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace Unikreativ.Entities.Entities
+﻿namespace Unikreativ.Entities.Entities
 {
     public class MediaFile : BaseEntity
     {

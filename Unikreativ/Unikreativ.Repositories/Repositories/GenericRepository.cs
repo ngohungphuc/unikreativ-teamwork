@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Unikreativ.Entities.Data;
@@ -12,7 +11,6 @@ namespace Unikreativ.Repositories.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public DbSet<T> _dbSet;
         private readonly ApplicationDbContext _context;
 
         public GenericRepository(ApplicationDbContext context)
@@ -147,7 +145,7 @@ namespace Unikreativ.Repositories.Repositories
 
         public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            return _dbSet.Where(predicate);
+            return _context.Set<T>().Where(predicate);
         }
     }
 }

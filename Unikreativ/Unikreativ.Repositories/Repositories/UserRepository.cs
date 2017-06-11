@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks.Dataflow;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.ViewModel;
@@ -17,7 +10,7 @@ namespace Unikreativ.Repositories.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public DbSet<User> _dbSet;
+        public readonly DbSet<User> _dbSet;
         private readonly ApplicationDbContext _context;
 
         public UserRepository(ApplicationDbContext context)

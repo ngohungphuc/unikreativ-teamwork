@@ -9,11 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-let Error500Component = class Error500Component {
-    constructor() {
+var core_1 = require("@angular/core");
+var Error500Component = (function () {
+    function Error500Component() {
     }
-};
+    return Error500Component;
+}());
 Error500Component = __decorate([
     core_1.Component({
         selector: 'error500',
