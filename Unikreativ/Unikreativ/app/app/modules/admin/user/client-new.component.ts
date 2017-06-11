@@ -2,7 +2,9 @@ import {
     Component,
     Inject,
     Input,
-    OnInit
+    Output,
+    OnInit,
+    EventEmitter
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Toastr, Toastr_Token } from '../../../extensions/index'
@@ -16,9 +18,9 @@ import { UserService } from '../../../services/index'
 })
 
 export class NewClientComponent implements OnInit {
-    @Input()
-    client: any[]
-
+    // emit event to user component when create new client
+    @Output() newClientCreated = new EventEmitter()
+    
     newClientForm: FormGroup
     CompanyName: FormControl
     Country: FormControl
@@ -62,11 +64,23 @@ export class NewClientComponent implements OnInit {
     }
 
     async newClient(value: any) {
-        console.log(value)
-        await this.userService.newClient(value).then(
+        let newClient = {
+            CompanyName: value.CompanyName,
+            Country: value.Country,
+            Address: value.Address,
+            Email: value.Email,
+            PhoneNumber: value.PhoneNumber,
+            Website: value.Website,
+            Industry: value.Industry,
+            UserName: value.UserName,
+            PasswordHash: value.PasswordHash
+        }
+
+        await this.userService.newClient(newClient).then(
             res => {
                 if (res.result) {
                     this.toastr.success(res.msg, 'Success')
+                    this.newClientCreated.emit(newClient)
                 }
                 else this.toastr.error(res.msg, 'Error')
             })

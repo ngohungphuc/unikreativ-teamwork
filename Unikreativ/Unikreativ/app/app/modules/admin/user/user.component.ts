@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs/Observable'
 import { Toastr, Toastr_Token } from '../../../extensions/index'
 import { UserService } from '../../../services/index'
+import { NewClientComponent } from './client-new.component'
 @Component({
     selector: 'user',
     templateUrl: 'partial/usermanage',
@@ -13,9 +14,9 @@ export class UserComponent implements OnInit {
     teamMembers: any[]
     clients: any[]
 
-
     // dual binding data
     client: any[]
+
     constructor(private userService: UserService,
         @Inject(Toastr_Token) private toastr: Toastr) {
     }
@@ -47,5 +48,10 @@ export class UserComponent implements OnInit {
             )
         }
 
+    }
+
+    // when create new client,it will push new client to table
+    newClientCreated(newClient) {
+        this.clients.push(newClient)
     }
 }

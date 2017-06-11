@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Repositories.Repositories;

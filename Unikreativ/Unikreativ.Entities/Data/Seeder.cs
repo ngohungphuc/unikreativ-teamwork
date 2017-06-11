@@ -1,13 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Unikreativ.Entities.Entities;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Unikreativ.Entities.Data
 {
