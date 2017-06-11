@@ -25,7 +25,7 @@ namespace Unikreativ.Entities.ViewModel
         [Required]
         public string Website { get; set; }
 
-        public double ChargeRate = 0;
+        private double ChargeRate = 0;
 
         [Required]
         public string UserName { get; set; }

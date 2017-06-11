@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.ViewModel;
 

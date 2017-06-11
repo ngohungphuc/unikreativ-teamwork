@@ -89,6 +89,6 @@
         </div>
     </div>
 </div>
-
-<client-new></client-new>
+<!--Raise event when new client is create -->
+<client-new (newClientCreated)="newClientCreated($event)"></client-new>
 <client-edit [client]="client"></client-edit>

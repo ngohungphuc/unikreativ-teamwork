@@ -6,11 +6,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-const errors_routing_1 = require("./errors.routing");
-const index_1 = require("../index");
-let ErrorsModule = class ErrorsModule {
-};
+var core_1 = require("@angular/core");
+var errors_routing_1 = require("./errors.routing");
+var index_1 = require("../index");
+var ErrorsModule = (function () {
+    function ErrorsModule() {
+    }
+    return ErrorsModule;
+}());
 ErrorsModule = __decorate([
     core_1.NgModule({
         imports: [

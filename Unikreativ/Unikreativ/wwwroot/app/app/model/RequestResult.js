@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class RequestResult {
-}
+var RequestResult = (function () {
+    function RequestResult() {
+    }
+    return RequestResult;
+}());
 exports.RequestResult = RequestResult;
 //# sourceMappingURL=RequestResult.js.map
