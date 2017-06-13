@@ -72,12 +72,13 @@ namespace Unikreativ.Repositories.Repositories
             return entity;
         }
 
-        public T Update(T updated, int key)
+        public T Update(T updated, string key)
         {
             if (updated == null)
                 return null;
 
             T existing = _context.Set<T>().Find(key);
+
             if (existing != null)
             {
                 _context.Entry(existing).CurrentValues.SetValues(updated);
@@ -86,7 +87,7 @@ namespace Unikreativ.Repositories.Repositories
             return existing;
         }
 
-        public async Task<T> UpdateAsync(T updated, int key)
+        public async Task<T> UpdateAsync(T updated, string key)
         {
             if (updated == null)
                 return null;
@@ -97,6 +98,7 @@ namespace Unikreativ.Repositories.Repositories
                 _context.Entry(existing).CurrentValues.SetValues(updated);
                 await _context.SaveChangesAsync();
             }
+
             return existing;
         }
 

@@ -6,16 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var platform_browser_1 = require("@angular/platform-browser");
-var core_1 = require("@angular/core");
-var header_component_1 = require("./header.component");
-var sidebar_component_1 = require("./sidebar.component");
-var router_1 = require("@angular/router");
-var NavModule = (function () {
-    function NavModule() {
-    }
-    return NavModule;
-}());
+const platform_browser_1 = require("@angular/platform-browser");
+const core_1 = require("@angular/core");
+const header_component_1 = require("./header.component");
+const sidebar_component_1 = require("./sidebar.component");
+const router_1 = require("@angular/router");
+let NavModule = class NavModule {
+};
 NavModule = __decorate([
     core_1.NgModule({
         imports: [

@@ -9,46 +9,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var index_1 = require("../../extensions/index");
-var app_status_1 = require("../../extensions/app-status");
+const core_1 = require("@angular/core");
+const http_1 = require("@angular/http");
+const index_1 = require("../../extensions/index");
+const app_status_1 = require("../../extensions/app-status");
 require("rxjs/add/operator/toPromise");
-var LoginService = (function () {
-    function LoginService(http, httpClientService, dataHandlerService) {
+let LoginService = class LoginService {
+    constructor(http, httpClientService, dataHandlerService) {
         this.http = http;
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
         this.tokenKey = 'token';
     }
-    LoginService.prototype.loginUser = function (username, password) {
-        var _this = this;
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        var loginInfo = { Username: username, Password: password };
+    loginUser(username, password) {
+        let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        let options = new http_1.RequestOptions({ headers: headers });
+        let loginInfo = { Username: username, Password: password };
         return this.httpClientService.post('TokenAuth/GetAuthToken', loginInfo, options)
             .toPromise()
-            .then(function (response) {
-            var result = response.json();
+            .then(response => {
+            let result = response.json();
             if (result.State === app_status_1.AppStatusCode.LoginSuccess) {
-                var json = result.Data;
-                _this.token = json.accessToken;
+                let json = result.Data;
+                this.token = json.accessToken;
                 sessionStorage.setItem('currentUser', JSON.stringify({ username: username, token: json.accessToken }));
             }
             return result;
         })
             .catch(this.dataHandlerService.handleError);
-    };
-    LoginService.prototype.checkLogin = function () {
-        var token = sessionStorage.getItem(this.tokenKey);
+    }
+    checkLogin() {
+        let token = sessionStorage.getItem(this.tokenKey);
         return token != null;
-    };
-    LoginService.prototype.logout = function () {
+    }
+    logout() {
         this.token = null;
         sessionStorage.removeItem('currentUser');
-    };
-    return LoginService;
-}());
+    }
+};
 LoginService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http,

@@ -16,47 +16,61 @@
                 <!--Body-->
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-12" [ngClass]="{'error':companyName.invalid && companyName.dirty}">
+                        <input type="hidden" #clientId name="Id"  [value]="client.Id">
+                        <div class="col-md-12" [ngClass]="{'error':CompanyName.invalid && CompanyName.dirty}">
                             <div class="md-form">
-                                <input [(ngModel)]="client.companyName" formControlName="companyName" value="{{client.companyName}}" type="text" id="companyName" class="form-control">
-                                <label class="active" for="companyName">CompanyName</label>
-                                <label *ngIf="companyName.invalid && companyName.dirty">CompanyName is required</label>
+                                <input [(ngModel)]="client.CompanyName" formControlName="CompanyName" value="{{client.CompanyName}}" type="text" id="CompanyName" class="form-control">
+                                <label class="active" for="CompanyName">CompanyName</label>
+                                <label *ngIf="CompanyName.invalid && CompanyName.dirty">CompanyName is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':country.invalid && country.dirty}">
+                        <div class="col-md-12" [ngClass]="{'error':Country.invalid && Country.dirty}">
                             <div class="md-form">
-                                <input [(ngModel)]="client.country" formControlName="country" value="{{client.country}}" type="text" id="country" class="form-control">
-                                <label class="active" for="country">Country</label>
-                                <label *ngIf="country.invalid && country.dirty">Country is required</label>
+                                <input [(ngModel)]="client.Country" formControlName="Country" value="{{client.Country}}" type="text" id="Country" class="form-control">
+                                <label class="active" for="Country">Country</label>
+                                <label *ngIf="Country.invalid && Country.dirty">Country is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':address.invalid && address.dirty}">
+                        <div class="col-md-12" [ngClass]="{'error':Address.invalid && Address.dirty}">
                             <div class="md-form">
-                                <input [(ngModel)]="client.address" formControlName="address" value="{{client.address}}" type="text" id="address" class="form-control">
-                                <label class="active" for="address">Address</label>
-                                <label *ngIf="address.invalid && address.dirty">Address is required</label>
+                                <input [(ngModel)]="client.Address" formControlName="Address" value="{{client.Address}}" type="text" id="Address" class="form-control">
+                                <label class="active" for="Address">Address</label>
+                                <label *ngIf="Address.invalid && Address.dirty">Address is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':email.invalid && email.dirty}">
+                        <div class="col-md-12" [ngClass]="{'error':Email.invalid && Email.dirty}">
                             <div class="md-form">
-                                <input [(ngModel)]="client.email" formControlName="email" value="{{client.email}}" type="text" id="email" class="form-control">
-                                <label class="active" for="email">Email</label>
-                                <label *ngIf="email.invalid && email.dirty">Email is required</label>
+                                <input [(ngModel)]="client.Email" formControlName="Email" value="{{client.Email}}" type="text" id="Email" class="form-control">
+                                <label class="active" for="Email">Email</label>
+                                <label *ngIf="Email.invalid && Email.dirty">Email is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':phoneNumber.invalid && phoneNumber.dirty}">
+                        <div class="col-md-12" [ngClass]="{'error':PhoneNumber.invalid && PhoneNumber.dirty}">
                             <div class="md-form">
-                                <input [(ngModel)]="client.phoneNumber" formControlName="phoneNumber" value="{{client.phoneNumber}}" type="text" id="phoneNumber" class="form-control">
-                                <label class="active" for="phoneNumber">Phone</label>
-                                <label *ngIf="phoneNumber.invalid && phoneNumber.dirty">Phone is required</label>
+                                <input [(ngModel)]="client.PhoneNumber" formControlName="PhoneNumber" value="{{client.PhoneNumber}}" type="text" id="PhoneNumber" class="form-control">
+                                <label class="active" for="PhoneNumber">Phone</label>
+                                <label *ngIf="PhoneNumber.invalid && PhoneNumber.dirty">Phone is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':website.invalid && website.dirty}">
+                        <div class="col-md-12" [ngClass]="{'error':Website.invalid && Website.dirty}">
                             <div class="md-form">
-                                <input [(ngModel)]="client.website" formControlName="website" value="{{client.website}}" type="text" id="website" class="form-control">
-                                <label class="active" for="website">Website</label>
-                                <label *ngIf="website.invalid && website.dirty">Website is required</label>
+                                <input [(ngModel)]="client.Website" formControlName="Website" value="{{client.Website}}" type="text" id="Website" class="form-control">
+                                <label class="active" for="Website">Website</label>
+                                <label *ngIf="Website.invalid && Website.dirty">Website is required</label>
                             </div>
+                        </div>
+                         <div class="col-md-12" [ngClass]="{'error':Industry.invalid && Industry.dirty}">
+                            <label>Industry</label>
+                            <select formControlName="Industry" [(ngModel)]="client.Industry" class="form-control">
+                                <option value="">Select Industry</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Ecommerce">Ecommerce</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Construction">Construction</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <label *ngIf="Industry.invalid && Industry.dirty">Industry is required</label>
                         </div>
                     </div>
 

@@ -15,7 +15,7 @@ export class AuthHttpServices {
     constructor(private http: Http,
         private httpClientService: HttpClientService,
         private dataHandlerService: DataHandlerService) {
-            
+
         // set token if save in local storage
         let currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
         this.token = currentUser && currentUser.token
@@ -39,12 +39,12 @@ export class AuthHttpServices {
             .catch(this.dataHandlerService.handleError)
     }
 
-    authPut(url: string, body: any): Promise<RequestResult> {
+    authPut(url: string, body: any): Promise<any> {
         let headers = this.initAuthHeaders()
 
         return this.httpClientService.put(url, body, { headers: headers })
             .toPromise()
-            .then(response => response.json() as RequestResult)
+            .then(response => response.json() as any)
             .catch(this.dataHandlerService.handleError)
     }
 
