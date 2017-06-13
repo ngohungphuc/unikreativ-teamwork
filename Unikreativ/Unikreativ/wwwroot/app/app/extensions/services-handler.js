@@ -6,20 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var DataHandlerService = (function () {
-    function DataHandlerService() {
-    }
-    DataHandlerService.prototype.extractData = function (res) {
-        var body = res.json();
+const core_1 = require("@angular/core");
+let DataHandlerService = class DataHandlerService {
+    extractData(res) {
+        let body = res.json();
         return body.data || {};
-    };
-    DataHandlerService.prototype.handleError = function (error) {
+    }
+    handleError(error) {
         console.error(error.message || error);
         return Promise.reject(error.message || error);
-    };
-    return DataHandlerService;
-}());
+    }
+};
 DataHandlerService = __decorate([
     core_1.Injectable()
 ], DataHandlerService);

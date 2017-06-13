@@ -59,16 +59,17 @@ namespace Unikreativ.Controllers.API
 
         [HttpPut]
         [ValidModel]
-        public IActionResult UpdateClientInfo(Client clientDto)
+        public async Task<IActionResult> UpdateClientInfo([FromBody] Client clientDto)
         {
-            var client = Mapper.Map<User>(clientDto);
             try
             {
-                return Ok();
+                var clientToUpdate = await _unitOfWork.UserRepository.GetByIdAsync(clientDto.Id);
+                await _unitOfWork.UserRepository.UpdateAsync(clientToUpdate, clientToUpdate.Id);
+                return Json(new { result = true, msg = "Update Client success" });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return Json(new { result = true, msg = ex });
             }
         }
 
