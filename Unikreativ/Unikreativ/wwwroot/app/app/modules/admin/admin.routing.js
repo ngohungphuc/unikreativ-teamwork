@@ -6,11 +6,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var auth_guard_1 = require("./../../extensions/guard/auth.guard");
-var admin_component_1 = require("./admin.component");
-var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var user_component_1 = require("./user/user.component");
+const auth_guard_1 = require("./../../extensions/guard/auth.guard");
+const admin_component_1 = require("./admin.component");
+const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
+const user_component_1 = require("./user/user.component");
 exports.adminRoutes = [
     {
         path: 'admin',
@@ -24,11 +24,8 @@ exports.adminRoutes = [
         ]
     },
 ];
-var AdminRoutingModule = (function () {
-    function AdminRoutingModule() {
-    }
-    return AdminRoutingModule;
-}());
+let AdminRoutingModule = class AdminRoutingModule {
+};
 AdminRoutingModule = __decorate([
     core_1.NgModule({
         imports: [router_1.RouterModule.forChild(exports.adminRoutes)],

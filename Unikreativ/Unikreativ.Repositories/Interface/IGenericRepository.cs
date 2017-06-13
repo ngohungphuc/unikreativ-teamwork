@@ -28,9 +28,9 @@ namespace Unikreativ.Repositories.Interface
 
         Task<T> AddAsync(T entity);
 
-        T Update(T updated, int key);
+        T Update(T updated, string key);
 
-        Task<T> UpdateAsync(T updated, int key);
+        Task<T> UpdateAsync(T updated, string key);
 
         void Delete(T t);
 
