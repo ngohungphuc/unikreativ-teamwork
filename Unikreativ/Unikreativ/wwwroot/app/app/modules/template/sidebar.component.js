@@ -6,16 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var SidebarComponent = (function () {
-    function SidebarComponent() {
-    }
-    SidebarComponent.prototype.ngOnInit = function () {
-        var data = JSON.parse(sessionStorage.getItem('currentUser'));
+const core_1 = require("@angular/core");
+let SidebarComponent = class SidebarComponent {
+    ngOnInit() {
+        let data = JSON.parse(sessionStorage.getItem('currentUser'));
         this.user = data['username'];
-    };
-    return SidebarComponent;
-}());
+    }
+};
 SidebarComponent = __decorate([
     core_1.Component({
         selector: 'uni-sidebar',

@@ -10,7 +10,7 @@ namespace Unikreativ.Repositories.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public readonly DbSet<User> _dbSet;
+        private readonly DbSet<User> _dbSet;
         private readonly ApplicationDbContext _context;
 
         public UserRepository(ApplicationDbContext context)
@@ -48,7 +48,7 @@ namespace Unikreativ.Repositories.Repositories
         public IQueryable<User> GetClients()
         {
             var role = _context.Roles.SingleOrDefault(r => r.Name == "Client");
-            var usersNotInRole = _context.Users.Where(m => m.Roles.All(r => r.RoleId == role.Id)).Include(ur => ur.Roles);
+            var usersNotInRole = _dbSet.Where(m => m.Roles.All(r => r.RoleId == role.Id)).Include(ur => ur.Roles);
             return usersNotInRole;
         }
     }

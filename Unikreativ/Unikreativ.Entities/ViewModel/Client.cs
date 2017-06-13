@@ -4,6 +4,8 @@ namespace Unikreativ.Entities.ViewModel
 {
     public class Client
     {
+        public string Id { get; set; }
+
         [Required]
         public string CompanyName { get; set; }
 
@@ -25,12 +27,10 @@ namespace Unikreativ.Entities.ViewModel
         [Required]
         public string Website { get; set; }
 
-        private double ChargeRate = 0;
+        private readonly double ChargeRate = 0;
 
-        [Required]
         public string UserName { get; set; }
 
-        [Required]
         public string PasswordHash { get; set; }
     }
 }

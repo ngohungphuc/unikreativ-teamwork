@@ -38,14 +38,22 @@ export class UserComponent implements OnInit {
 
     async deleteClient(clientId: any) {
         if (confirm('Are you sure to delete')) {
-            await this.userService.deleteClient(clientId).then(
-                res => {
-                    if (res.result) {
-                        this.toastr.success(res.msg, 'Success')
-                    }
-                    else this.toastr.error(res.msg, 'Error')
+            for (let i = 0; i < this.clients.length; i++) {
+                let clientToRemove = this.clients[i]
+                if (clientToRemove.Id === clientId) {
+                    this.clients.splice(i, 1)
+                    await this.userService.deleteClient(clientId).then(
+                        res => {
+                            if (res.result) {
+                                this.toastr.success(res.msg, 'Success')
+                            }
+                            else this.toastr.error(res.msg, 'Error')
+                        }
+                    )
+                    break
                 }
-            )
+            }
+
         }
 
     }

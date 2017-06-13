@@ -9,46 +9,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var index_1 = require("../index");
-var index_2 = require("../../extensions/index");
-var http_1 = require("@angular/http");
-var core_1 = require("@angular/core");
-var UserService = (function () {
-    function UserService(http, httpClientService, dataHandlerService, authHttpService) {
+const index_1 = require("../index");
+const index_2 = require("../../extensions/index");
+const http_1 = require("@angular/http");
+const core_1 = require("@angular/core");
+let UserService = class UserService {
+    constructor(http, httpClientService, dataHandlerService, authHttpService) {
         this.http = http;
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
         this.authHttpService = authHttpService;
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
-    UserService.prototype.getTeamMembers = function () {
-        var url = 'Data/GetTeamMembers';
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+    getTeamMembers() {
+        let url = 'Data/GetTeamMembers';
+        let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.httpClientService.get(url, { headers: headers })
-            .map(function (res) { return res.json(); })
+            .map(res => res.json())
             .catch(this.dataHandlerService.handleError);
-    };
-    UserService.prototype.getClients = function () {
-        var url = 'Data/GetClients';
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+    }
+    getClients() {
+        let url = 'Data/GetClients';
+        let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.httpClientService.get(url, { headers: headers })
-            .map(function (res) { return res.json(); })
+            .map(res => res.json())
             .catch(this.dataHandlerService.handleError);
-    };
-    UserService.prototype.newClient = function (client) {
-        var url = 'Admin/NewClient';
+    }
+    newClient(client) {
+        let url = 'Admin/NewClient';
         return this.authHttpService.authPost(url, client);
-    };
-    UserService.prototype.updateClient = function (client) {
-        var url = 'Admin/UpdateClientInfo';
+    }
+    updateClient(client) {
+        let url = 'Admin/UpdateClientInfo';
         return this.authHttpService.authPut(url, client);
-    };
-    UserService.prototype.deleteClient = function (id) {
-        var url = "Admin/DeleteClient/" + id;
+    }
+    deleteClient(id) {
+        let url = `Admin/DeleteClient/${id}`;
         return this.authHttpService.authDelete(url);
-    };
-    return UserService;
-}());
+    }
+};
 UserService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http,
