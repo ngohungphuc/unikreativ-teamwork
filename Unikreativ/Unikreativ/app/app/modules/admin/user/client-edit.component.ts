@@ -1,6 +1,7 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core'
+import { Component, OnInit, Input, ElementRef, ViewChild, Inject } from '@angular/core'
 import { UserService } from '../../../services/index'
+import { Toastr, Toastr_Token } from '../../../extensions/toastr'
 
 
 @Component({
@@ -26,7 +27,8 @@ export class ClientEditComponent implements OnInit {
     Website: FormControl
     Industry: FormControl
     constructor(
-        private userService: UserService
+        private userService: UserService,
+        @Inject(Toastr_Token) private toastr: Toastr
     ) {
     }
 
@@ -63,10 +65,9 @@ export class ClientEditComponent implements OnInit {
             Industry: value.Industry,
         }
 
-        console.log(newClient)
         await this.userService.updateClient(newClient)
-            .then(result => console.log(result))
-            .catch(error => console.log(error))
+            .then(result => this.toastr.success(result.msg,'Success'))
+            .catch(error => this.toastr.error(error.msg,'Error'))
     }
 
 }
