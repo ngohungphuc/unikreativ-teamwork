@@ -9,6 +9,7 @@ using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Filter;
 using Unikreativ.Repositories.UnitOfWork;
 using Unikreativ.Services.Interface;
+using Unikreativ.Helper.Auth;
 
 namespace Unikreativ.Controllers.API
 {
@@ -17,15 +18,18 @@ namespace Unikreativ.Controllers.API
     public class AdminController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
-        private readonly UserManager<User> _userManager;
+        private UserManager<User> _userManager;
         private readonly IUserServices _userServices;
+        private readonly ValidateAccount _validateAccount;
 
         public AdminController(
             UserManager<User> userManager,
-             IUserServices userServices)
+            IUserServices userServices,
+            ValidateAccount validateAccount)
         {
             _userManager = userManager;
             _userServices = userServices;
+            _validateAccount = validateAccount;
         }
 
         #region Manage Account
@@ -42,6 +46,9 @@ namespace Unikreativ.Controllers.API
             var client = Mapper.Map<User>(clientDto);
             try
             {
+                if (await _validateAccount.CheckAccountExist(clientDto.UserName)) return Json(new { result = false, msg = "Account already exist" });
+                if (await _validateAccount.CheckEmailExist(clientDto.Email)) return Json(new { result = false, msg = "Email already exist" });
+
                 var result = await _userManager.CreateAsync(client, client.PasswordHash);
                 if (!result.Succeeded) return Json(new
                 {
@@ -63,7 +70,9 @@ namespace Unikreativ.Controllers.API
         {
             try
             {
-                var clientToUpdate = await _unitOfWork.UserRepository.GetByIdAsync(clientDto.Id);
+                var client = await _unitOfWork.UserRepository.GetByIdAsync(clientDto.Id);
+                if (client == null) return Json(new { result = false, msg = "Account not exist" });
+                var clientToUpdate = Mapper.Map<User>(clientDto);
                 await _unitOfWork.UserRepository.UpdateAsync(clientToUpdate, clientToUpdate.Id);
                 return Json(new { result = true, msg = "Update Client success" });
             }
