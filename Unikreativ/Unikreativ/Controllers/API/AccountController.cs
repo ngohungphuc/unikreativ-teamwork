@@ -31,11 +31,23 @@ namespace Unikreativ.Controllers.API
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user != null)
+            {
+                if (await _userManager.IsEmailConfirmedAsync(user))
+                    return Json(new { result = false, msg = "You must have a confirmed email to log in." });
+            }
+
             var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, true);
             if (result.Succeeded)
             {
                 _logger.LogInformation(1, "User logged in.");
                 return Ok();
+            }
+
+            if (result.IsLockedOut)
+            {
+                return Json(new { result = false, msg = "User account locked out." });
             }
 
             return BadRequest();
