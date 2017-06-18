@@ -10,6 +10,8 @@ using Unikreativ.Helper.Filter;
 using Unikreativ.Repositories.UnitOfWork;
 using Unikreativ.Services.Interface;
 using Unikreativ.Helper.Auth;
+using Unikreativ.Helper.Confirm;
+using Unikreativ.Helper.Security;
 
 namespace Unikreativ.Controllers.API
 {
@@ -18,18 +20,24 @@ namespace Unikreativ.Controllers.API
     public class AdminController : Controller
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
-        private UserManager<User> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IUserServices _userServices;
+        private readonly IAccountServices _accountServices;
         private readonly ValidateAccount _validateAccount;
+        private readonly IEmailSender _emailSender;
 
         public AdminController(
             UserManager<User> userManager,
             IUserServices userServices,
-            ValidateAccount validateAccount)
+            IAccountServices accountServices,
+            ValidateAccount validateAccount,
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _userServices = userServices;
             _validateAccount = validateAccount;
+            _emailSender = emailSender;
+            _accountServices = accountServices;
         }
 
         #region Manage Account
@@ -56,6 +64,9 @@ namespace Unikreativ.Controllers.API
                     msg = "Something happend please try again later"
                 });
                 await _userManager.AddToRoleAsync(client, "Client");
+                var tokenConfirm = GenerateToken.RandomString();
+                await _accountServices.AddNewRequestAccount(client.Email, tokenConfirm);
+                await _emailSender.SendEmail("NewAccount", client.Email, tokenConfirm);
                 return Json(new { result = true, msg = "Create new Client success" });
             }
             catch (Exception ex)

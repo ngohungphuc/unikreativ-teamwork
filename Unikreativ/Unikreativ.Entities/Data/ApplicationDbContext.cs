@@ -12,6 +12,7 @@ namespace Unikreativ.Entities.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<TasksRequest> TasksRequests { get; set; }
         public DbSet<SubTask> SubTasks { get; set; }
+        public DbSet<AccountRequest> AccountRequests { get; set; }
 
         public ApplicationDbContext()
             : base()

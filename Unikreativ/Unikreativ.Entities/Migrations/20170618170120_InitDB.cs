@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Unikreativ.Entities.Migrations
 {
-    public partial class Init : Migration
+    public partial class InitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,6 +35,21 @@ namespace Unikreativ.Entities.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AccountRequests",
+                columns: table => new
+                {
+                    RequestId = table.Column<Guid>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    ExpireTime = table.Column<int>(nullable: false),
+                    RequestTime = table.Column<DateTime>(nullable: false),
+                    Token = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccountRequests", x => x.RequestId);
                 });
 
             migrationBuilder.CreateTable(
@@ -418,6 +434,9 @@ namespace Unikreativ.Entities.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "AccountRequests");
 
             migrationBuilder.DropTable(
                 name: "Billings");

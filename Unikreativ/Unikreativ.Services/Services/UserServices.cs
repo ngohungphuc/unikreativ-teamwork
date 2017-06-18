@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Repositories.Interface;
@@ -20,14 +22,14 @@ namespace Unikreativ.Services.Services
             return _userRepository.GetUserByName(name);
         }
 
-        public IQueryable<Member> GetTeamMember()
+        public async Task<List<Member>> GetTeamMember()
         {
-            return _userRepository.GetTeamMembers();
+            return await _userRepository.GetTeamMembers();
         }
 
-        public IQueryable<User> GetClients()
+        public async Task<List<User>> GetClients()
         {
-            return _userRepository.GetClients();
+            return await _userRepository.GetClients();
         }
     }
 }

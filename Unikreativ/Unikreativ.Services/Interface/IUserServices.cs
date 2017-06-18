@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.ViewModel;
 
@@ -8,8 +10,8 @@ namespace Unikreativ.Services.Interface
     {
         User GetUserByName(string name);
 
-        IQueryable<Member> GetTeamMember();
+        Task<List<Member>> GetTeamMember();
 
-        IQueryable<User> GetClients();
+        Task<List<User>> GetClients();
     }
 }
