@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Unikreativ.Entities.Data;
 
 namespace Unikreativ.Entities.Migrations
@@ -120,6 +121,24 @@ namespace Unikreativ.Entities.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.AccountRequest", b =>
+                {
+                    b.Property<Guid>("RequestId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<int>("ExpireTime");
+
+                    b.Property<DateTime>("RequestTime");
+
+                    b.Property<string>("Token");
+
+                    b.HasKey("RequestId");
+
+                    b.ToTable("AccountRequests");
                 });
 
             modelBuilder.Entity("Unikreativ.Entities.Entities.Billing", b =>

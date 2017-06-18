@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Unikreativ.Services.Interface;
@@ -19,15 +20,15 @@ namespace Unikreativ.Controllers.API
 
         #region Get Info
 
-        public IActionResult GetTeamMembers()
+        public async Task<IActionResult> GetTeamMembers()
         {
-            var members = _userServices.GetTeamMember();
+            var members = await _userServices.GetTeamMember();
             return Ok(members);
         }
 
-        public IActionResult GetClients()
+        public async Task<IActionResult> GetClients()
         {
-            var clients = _userServices.GetClients();
+            var clients = await _userServices.GetClients();
             return Ok(clients);
         }
 
