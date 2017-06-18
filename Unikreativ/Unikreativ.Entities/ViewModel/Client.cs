@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Unikreativ.Entities.ViewModel
 {
@@ -27,10 +28,11 @@ namespace Unikreativ.Entities.ViewModel
         [Required]
         public string Website { get; set; }
 
-        private readonly double ChargeRate = 0;
-
         public string UserName { get; set; }
 
         public string PasswordHash { get; set; }
+
+        private readonly double ChargeRate = 0;
+        private readonly bool EmailConfirmed = false;
     }
 }

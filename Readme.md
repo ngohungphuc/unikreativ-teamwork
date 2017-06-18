@@ -36,3 +36,9 @@ This project will use the following technology
   https://stackoverflow.com/questions/34343599/how-to-seed-users-and-roles-with-code-first-migration-using-identity-asp-net-mvc
 
   https://stackoverflow.com/questions/20841262/adding-a-role-for-user-after-registration-in-mvc-5
+
+  https://shellmonger.com/2015/04/07/asp-net-vnext-identity-part-5-forgotten-passwords/
+
+  http://www.dominikgorecki.com/2014/01/implementing-password-reset-in-mvc-4-ef-code-first-using-simple-membership-part-2/
+
+  http://www.dominikgorecki.com/2013/10/mvc4-password-rese/		

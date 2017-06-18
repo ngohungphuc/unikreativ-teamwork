@@ -18,6 +18,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Auth;
+using Unikreativ.Helper.Confirm;
+using Unikreativ.Helper.Email;
 using Unikreativ.Repositories.Interface;
 using Unikreativ.Repositories.Repositories;
 using Unikreativ.Services.Interface;
@@ -91,10 +93,12 @@ namespace Unikreativ
             // Add application services.
             services.AddTransient<Seeder>();
             services.AddScoped<ValidateAccount>();
-            services.AddTransient<IEmailSender, AuthMessageSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IEmailSender, MessageServices>();
+            services.AddTransient<ISmsSender, MessageServices>();
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAccountServices, AccountServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

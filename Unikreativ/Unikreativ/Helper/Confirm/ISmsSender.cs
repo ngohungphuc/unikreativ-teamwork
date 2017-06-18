@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Unikreativ.Services
+namespace Unikreativ.Helper.Confirm
 {
     public interface ISmsSender
     {
