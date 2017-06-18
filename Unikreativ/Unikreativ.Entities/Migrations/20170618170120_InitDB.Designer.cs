@@ -8,8 +8,8 @@ using Unikreativ.Entities.Data;
 namespace Unikreativ.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170608135211_Init")]
-    partial class Init
+    [Migration("20170618170120_InitDB")]
+    partial class InitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,6 +122,24 @@ namespace Unikreativ.Entities.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.AccountRequest", b =>
+                {
+                    b.Property<Guid>("RequestId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<int>("ExpireTime");
+
+                    b.Property<DateTime>("RequestTime");
+
+                    b.Property<string>("Token");
+
+                    b.HasKey("RequestId");
+
+                    b.ToTable("AccountRequests");
                 });
 
             modelBuilder.Entity("Unikreativ.Entities.Entities.Billing", b =>
