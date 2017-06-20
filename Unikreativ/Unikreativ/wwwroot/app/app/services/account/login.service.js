@@ -25,7 +25,7 @@ let LoginService = class LoginService {
         let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         let options = new http_1.RequestOptions({ headers: headers });
         let loginInfo = { Username: username, Password: password };
-        return this.httpClientService.post('TokenAuth/GetAuthToken', loginInfo, options)
+        return this.httpClientService.post('Auth/GetAuthToken', loginInfo, options)
             .toPromise()
             .then(response => {
             let result = response.json();

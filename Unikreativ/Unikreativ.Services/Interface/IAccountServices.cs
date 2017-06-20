@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unikreativ.Entities.Entities;
+using Unikreativ.Entities.Params;
 
 namespace Unikreativ.Services.Interface
 {
@@ -12,5 +13,7 @@ namespace Unikreativ.Services.Interface
         Task<IQueryable<AccountRequest>> GetAccountRequestId(string email);
 
         Task<AccountRequest> AddNewRequestAccount(string email, string token);
+
+        Task<bool> ActivateAccount(RegisterQueryParams queryParams);
     }
 }

@@ -37,30 +37,30 @@ let LoginComponent = class LoginComponent {
     ngOnInit() {
         this.username = new forms_1.FormControl('', forms_1.Validators.required);
         this.password = new forms_1.FormControl('', forms_1.Validators.required);
-        this.loginForm = new forms_1.FormGroup({
-            username: this.username,
-            password: this.password
-        });
+        this.loginForm = new forms_1.FormGroup({ username: this.username, password: this.password });
     }
     login(formValues) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.loginService.loginUser(formValues.username, formValues.password).then(resp => {
+            yield this
+                .loginService
+                .loginUser(formValues.username, formValues.password)
+                .then(resp => {
                 if (resp.State === app_status_1.AppStatusCode.LoginSuccess) {
-                    this.router.navigate(['admin']);
+                    this
+                        .router
+                        .navigate(['admin']);
                 }
                 else {
-                    this.toastr.error('Invalid credential', 'Error');
+                    this
+                        .toastr
+                        .error(resp.Msg, 'Error');
                 }
             });
         });
     }
 };
 LoginComponent = __decorate([
-    core_1.Component({
-        selector: 'login',
-        templateUrl: 'partial/login',
-        providers: [index_1.HttpClientService]
-    }),
+    core_1.Component({ selector: 'login', templateUrl: 'partial/login', providers: [index_1.HttpClientService] }),
     __param(2, core_1.Inject(index_1.Toastr_Token)),
     __metadata("design:paramtypes", [login_service_1.LoginService, router_1.Router, Object])
 ], LoginComponent);

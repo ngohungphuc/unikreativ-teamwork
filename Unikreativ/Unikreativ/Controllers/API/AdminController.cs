@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Unikreativ.Entities.Entities;
+using Unikreativ.Entities.Params;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Filter;
 using Unikreativ.Repositories.UnitOfWork;
@@ -63,10 +64,13 @@ namespace Unikreativ.Controllers.API
                     result = false,
                     msg = "Something happend please try again later"
                 });
+
                 await _userManager.AddToRoleAsync(client, "Client");
                 var tokenConfirm = GenerateToken.RandomString();
+
                 await _accountServices.AddNewRequestAccount(client.Email, tokenConfirm);
                 await _emailSender.SendEmail("NewAccount", client.Email, tokenConfirm);
+
                 return Json(new { result = true, msg = "Create new Client success" });
             }
             catch (Exception ex)
