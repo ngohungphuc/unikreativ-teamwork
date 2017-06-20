@@ -19,7 +19,6 @@ using Microsoft.AspNetCore.Http;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Auth;
 using Unikreativ.Helper.Confirm;
-using Unikreativ.Helper.Email;
 using Unikreativ.Repositories.Interface;
 using Unikreativ.Repositories.Repositories;
 using Unikreativ.Services.Interface;

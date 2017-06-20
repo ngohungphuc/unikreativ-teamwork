@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\app\modules\errors\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>

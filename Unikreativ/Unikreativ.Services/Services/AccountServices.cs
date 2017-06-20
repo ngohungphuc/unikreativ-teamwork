@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unikreativ.Entities.Entities;
+using Unikreativ.Entities.Params;
 using Unikreativ.Repositories.Interface;
 using Unikreativ.Services.Interface;
 
@@ -26,6 +27,11 @@ namespace Unikreativ.Services.Services
         public async Task<AccountRequest> AddNewRequestAccount(string email, string token)
         {
             return await _accountRepository.AddNewRequestAccount(email, token);
+        }
+
+        public async Task<bool> ActivateAccount(RegisterQueryParams queryParams)
+        {
+            return await _accountRepository.ActivateAccount(queryParams);
         }
     }
 }
