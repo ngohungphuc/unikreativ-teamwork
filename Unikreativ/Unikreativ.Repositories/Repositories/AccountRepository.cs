@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
+using Unikreativ.Entities.Params;
 using Unikreativ.Repositories.Interface;
 
 namespace Unikreativ.Repositories.Repositories
@@ -23,10 +24,12 @@ namespace Unikreativ.Repositories.Repositories
             {
                 Email = email,
                 ExpireTime = 86400,
-                Token = token
+                Token = token,
+                RequestTime = DateTime.Today
             };
             _context.AccountRequests.Add(newAccountRequest);
             await _context.SaveChangesAsync();
+            var id = newAccountRequest.RequestId;
             return newAccountRequest;
         }
 
@@ -34,6 +37,22 @@ namespace Unikreativ.Repositories.Repositories
         {
             var accountRequestId = await _context.AccountRequests.Where(data => data.Email.Equals(email)).ToListAsync();
             return accountRequestId.AsQueryable();
+        }
+
+        public async Task<bool> ActivateAccount(RegisterQueryParams queryParams)
+        {
+            var currentTime = DateTime.Today.Millisecond;
+            var requestExist = _context.AccountRequests
+                .Where(
+                    request => request.Email == queryParams.EmailTo
+                               && request.Token == queryParams.Token
+                               && request.ExpireTime - currentTime > 0);
+
+            if (requestExist == null) return false;
+            var users = await _context.Users.FirstOrDefaultAsync(x => x.Email == queryParams.EmailTo);
+            users.EmailConfirmed = true;
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
