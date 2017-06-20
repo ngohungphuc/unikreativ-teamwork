@@ -1,48 +1,52 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
-using MimeKit;
-using Unikreativ.Helper.Confirm;
 using Microsoft.Extensions.Configuration;
+using MimeKit;
 
-namespace Unikreativ.Helper.Email
+namespace Unikreativ.Helper.Confirm
 {
     // This class is used by the application to send Email and SMS
     // when you turn on two-factor authentication in ASP.NET Identity.
     // For more details see this link https://go.microsoft.com/fwlink/?LinkID=532713
     public class MessageServices : IEmailSender, ISmsSender
     {
-        public MessageServices(IConfigurationRoot configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfigurationRoot Configuration { get; }
+
+        public MessageServices()
+        {
+            var builder = new ConfigurationBuilder()
+              .SetBasePath(Directory.GetCurrentDirectory())
+             .AddJsonFile("appsettings.json");
+
+            Configuration = builder.Build();
+        }
 
         public Task SendEmail(string emailType, string to, object options)
         {
-            var smtpServer = Configuration.GetSection("Email:Server").ToString();
-            var smtpPortNumber = int.Parse(Configuration.GetSection("Email:Port").ToString());
+            var smtpServer = Configuration["Email:Server"];
+            var smtpPortNumber = int.Parse(Configuration["Email:Port"]);
             try
             {
                 string fromEmail, fromEmailTitle, toEmail, toEmailTitle, subject, bodyContent;
                 if (emailType == "NewAccount")
                 {
-                    fromEmail = Configuration.GetSection("Email:From").ToString();
+                    fromEmail = Configuration["Email:From"];
                     fromEmailTitle = "Account Register Confirmation";
                     toEmail = to;
                     toEmailTitle = "Account Register Confirmation";
                     subject = $"{to} - Account Register Confirmation";
-                    bodyContent = $"Welcome to Unikreative teamwork please follow this link <a href='http://localhost:60876/Account/Confirm/{to}/{options}'>link</a> to activate your account";
+                    bodyContent = $"Welcome to Unikreative teamwork please follow this link http://localhost:60876/Account/Confirm?emailTo={to}&token={options}/ to activate your account";
                 }
                 else
                 {
-                    fromEmail = Configuration.GetSection("Email:From").ToString();
+                    fromEmail = Configuration["Email:From"];
                     fromEmailTitle = "Password Reset";
                     toEmail = to;
                     toEmailTitle = "Password Reset";
                     subject = $"{to} - Password Reset";
-                    bodyContent = $"We receive your request to reset password. Follow this link <a href='http://localhost:60876/Account/Reset/{to}/{options}'>link</a> to update new password";
+                    bodyContent = $"We receive your request to reset password. Follow this link http://localhost:60876/Account/Reset?emailTo={to}&token={options}/ to update new password";
                 }
 
                 var mimeMessage = new MimeMessage();
@@ -58,8 +62,8 @@ namespace Unikreativ.Helper.Email
                 {
                     client.Connect(smtpServer, smtpPortNumber, false);
                     client.Authenticate(
-                        Configuration.GetSection("Email:Usermail").ToString(),
-                        Configuration.GetSection("Email:Password").ToString());
+                        Configuration["Email:Usermail"],
+                        Configuration["Email:Password"]);
                     client.Send(mimeMessage);
                     client.Disconnect(true);
                 }

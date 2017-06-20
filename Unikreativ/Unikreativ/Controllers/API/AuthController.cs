@@ -9,20 +9,22 @@ using Unikreativ.Entities.Models.Auth;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
+using Unikreativ.Helper.Filter;
 using Unikreativ.Services.Interface;
 
 namespace Unikreativ.Controllers.API
 {
-    [Route("api/[controller]")]
-    public class TokenAuthController : Controller
+    [Route("api/[controller]/[action]")]
+    public class AuthController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IUserServices _userServices;
 
-        public TokenAuthController(
+        public AuthController(
              UserManager<User> userManager,
              SignInManager<User> signInManager,
              IUserServices userServices)
@@ -33,22 +35,34 @@ namespace Unikreativ.Controllers.API
         }
 
         [HttpPost]
-        [Route("GetAuthToken")]
-        public string GetAuthToken([FromBody] LoginViewModel user)
+        [ValidModel]
+        public async Task<string> GetAuthToken([FromBody] LoginViewModel userDto)
         {
-            var result = _signInManager.PasswordSignInAsync(user.Username, user.Password, false, true);
-            if (!result.Result.Succeeded)
+            var user = await _userManager.FindByNameAsync(userDto.Username);
+            if (user != null)
+            {
+                if (!await _userManager.IsEmailConfirmedAsync(user))
+                    return JsonConvert.SerializeObject(new RequestResult
+                    {
+                        State = RequestState.Failed,
+                        Msg = "You must have a confirmed email to log in."
+                    });
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(userDto.Username, userDto.Password, false, true);
+
+            if (result.IsLockedOut)
                 return JsonConvert.SerializeObject(new RequestResult
                 {
                     State = RequestState.Failed,
-                    Msg = "Username or password is invalid"
+                    Msg = "User account locked out."
                 });
 
             var requesAt = DateTime.Now;
             var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
 
             //need to pass user id for generate token
-            var userExist = _userServices.GetUserByName(user.Username);
+            var userExist = _userServices.GetUserByName(userDto.Username);
             var token = GenerateToken(userExist, expiresIn);
 
             return JsonConvert.SerializeObject(new RequestResult

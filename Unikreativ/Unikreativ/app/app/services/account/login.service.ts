@@ -21,7 +21,7 @@ export class LoginService {
         let options = new RequestOptions({ headers: headers })
         let loginInfo = { Username: username, Password: password }
 
-        return this.httpClientService.post('TokenAuth/GetAuthToken', loginInfo, options)
+        return this.httpClientService.post('Auth/GetAuthToken', loginInfo, options)
             .toPromise()
             .then(response => {
                 let result = response.json() as RequestResult
