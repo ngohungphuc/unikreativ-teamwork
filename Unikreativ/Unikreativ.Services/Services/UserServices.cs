@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.ViewModel;
@@ -22,7 +24,7 @@ namespace Unikreativ.Services.Services
             return _userRepository.GetUserByName(name);
         }
 
-        public async Task<List<Member>> GetTeamMember()
+        public async Task<List<Member>> GetTeamMembers()
         {
             return await _userRepository.GetTeamMembers();
         }

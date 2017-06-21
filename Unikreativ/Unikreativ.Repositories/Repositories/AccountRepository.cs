@@ -27,9 +27,10 @@ namespace Unikreativ.Repositories.Repositories
                 Token = token,
                 RequestTime = DateTime.Today
             };
+
             _context.AccountRequests.Add(newAccountRequest);
             await _context.SaveChangesAsync();
-            var id = newAccountRequest.RequestId;
+
             return newAccountRequest;
         }
 
@@ -50,8 +51,10 @@ namespace Unikreativ.Repositories.Repositories
 
             if (requestExist == null) return false;
             var users = await _context.Users.FirstOrDefaultAsync(x => x.Email == queryParams.EmailTo);
+
             users.EmailConfirmed = true;
             await _context.SaveChangesAsync();
+
             return true;
         }
     }
