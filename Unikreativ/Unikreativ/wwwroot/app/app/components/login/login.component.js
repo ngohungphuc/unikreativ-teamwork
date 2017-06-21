@@ -20,12 +20,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-const router_1 = require("@angular/router");
-const forms_1 = require("@angular/forms");
-const login_service_1 = require("../../services/account/login.service");
-const index_1 = require("./../../extensions/index");
 const app_status_1 = require("../../extensions/app-status");
+const core_1 = require("@angular/core");
+const forms_1 = require("@angular/forms");
+const index_1 = require("./../../extensions/index");
+const login_service_1 = require("../../services/account/login.service");
+const router_1 = require("@angular/router");
 let LoginComponent = class LoginComponent {
     constructor(loginService, router, toastr) {
         this.loginService = loginService;
@@ -62,7 +62,8 @@ let LoginComponent = class LoginComponent {
 LoginComponent = __decorate([
     core_1.Component({ selector: 'login', templateUrl: 'partial/login', providers: [index_1.HttpClientService] }),
     __param(2, core_1.Inject(index_1.Toastr_Token)),
-    __metadata("design:paramtypes", [login_service_1.LoginService, router_1.Router, Object])
+    __metadata("design:paramtypes", [login_service_1.LoginService,
+        router_1.Router, Object])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

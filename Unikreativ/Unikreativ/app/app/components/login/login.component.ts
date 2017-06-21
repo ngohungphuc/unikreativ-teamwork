@@ -1,16 +1,18 @@
-﻿import {Component, OnInit, Inject} from '@angular/core'
-import {Router} from '@angular/router'
+﻿import {AppStatusCode} from '../../extensions/app-status'
+import {Component, Inject, OnInit} from '@angular/core'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
+import {HttpClientService, Toastr, Toastr_Token} from './../../extensions/index'
 import {LoginService} from '../../services/account/login.service'
-import {HttpClientService, Toastr_Token, Toastr} from './../../extensions/index'
-import {AppStatusCode} from '../../extensions/app-status'
+import {Router} from '@angular/router'
 
 @Component({selector: 'login', templateUrl: 'partial/login', providers: [HttpClientService]})
 export class LoginComponent implements OnInit {
-    loginForm : FormGroup
-    username : FormControl
-    password : FormControl
-    constructor(private loginService : LoginService, private router : Router, @Inject(Toastr_Token)private toastr : Toastr) {
+    loginForm: FormGroup
+    username: FormControl
+    password: FormControl
+    constructor(private loginService: LoginService, 
+    private router: Router, 
+    @Inject(Toastr_Token)private toastr: Toastr) {
         if (sessionStorage.getItem('currentUser') !== null) 
             this.router.navigate(['admin'])
 

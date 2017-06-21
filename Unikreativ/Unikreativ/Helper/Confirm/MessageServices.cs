@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
+using Unikreativ.Entities.Models;
 
 namespace Unikreativ.Helper.Confirm
 {
@@ -23,50 +24,37 @@ namespace Unikreativ.Helper.Confirm
             Configuration = builder.Build();
         }
 
-        public Task SendEmail(string emailType, string to, object options)
+        public Task SendEmail(EmailType emailType, string to, object options)
         {
-            var smtpServer = Configuration["Email:Server"];
-            var smtpPortNumber = int.Parse(Configuration["Email:Port"]);
+            var email = new Email
+            {
+                SmtpServer = Configuration["Email:Server"],
+                SmtpPortNumber = int.Parse(Configuration["Email:Port"]),
+                FromEmail = Configuration["Email:From"],
+                ToEmail = to
+            };
             try
             {
-                string fromEmail, fromEmailTitle, toEmail, toEmailTitle, subject, bodyContent;
-                if (emailType == "NewAccount")
+                switch (emailType)
                 {
-                    fromEmail = Configuration["Email:From"];
-                    fromEmailTitle = "Account Register Confirmation";
-                    toEmail = to;
-                    toEmailTitle = "Account Register Confirmation";
-                    subject = $"{to} - Account Register Confirmation";
-                    bodyContent = $"Welcome to Unikreative teamwork please follow this link http://localhost:60876/Account/Confirm?emailTo={to}&token={options}/ to activate your account";
-                }
-                else
-                {
-                    fromEmail = Configuration["Email:From"];
-                    fromEmailTitle = "Password Reset";
-                    toEmail = to;
-                    toEmailTitle = "Password Reset";
-                    subject = $"{to} - Password Reset";
-                    bodyContent = $"We receive your request to reset password. Follow this link http://localhost:60876/Account/Reset?emailTo={to}&token={options}/ to update new password";
+                    case EmailType.ClientAccount:
+                        email.FromEmailTitle = "Account Register Confirmation";
+                        email.ToEmailTitle = "Account Register Confirmation";
+                        email.Subject = $"{to} - Account Register Confirmation";
+                        email.BodyContent =
+                            $"Welcome to Unikreative teamwork please follow this link http://localhost:60876/Account/Confirm?emailTo={to}&token={options}/ to activate your account";
+                        break;
+
+                    case EmailType.ResetPassword:
+                        email.FromEmailTitle = "Password Reset";
+                        email.ToEmailTitle = "Password Reset";
+                        email.Subject = $"{to} - Password Reset";
+                        email.BodyContent =
+                             $"We receive your request to reset password. Follow this link http://localhost:60876/Account/Reset?emailTo={to}&token={options}/ to update new password";
+                        break;
                 }
 
-                var mimeMessage = new MimeMessage();
-                mimeMessage.From.Add(new MailboxAddress(fromEmailTitle, fromEmail));
-                mimeMessage.To.Add(new MailboxAddress(toEmailTitle, toEmail));
-                mimeMessage.Subject = subject;
-                mimeMessage.Body = new TextPart("plain")
-                {
-                    Text = bodyContent
-                };
-
-                using (var client = new SmtpClient())
-                {
-                    client.Connect(smtpServer, smtpPortNumber, false);
-                    client.Authenticate(
-                        Configuration["Email:Usermail"],
-                        Configuration["Email:Password"]);
-                    client.Send(mimeMessage);
-                    client.Disconnect(true);
-                }
+                SendMailService(email);
             }
             catch (Exception ex)
             {
@@ -79,6 +67,29 @@ namespace Unikreativ.Helper.Confirm
         {
             // Plug in your SMS service here to send a text message.
             return Task.FromResult(0);
+        }
+
+        private void SendMailService(Email email)
+        {
+            var mimeMessage = new MimeMessage();
+
+            mimeMessage.From.Add(new MailboxAddress(email.FromEmailTitle, email.FromEmail));
+            mimeMessage.To.Add(new MailboxAddress(email.ToEmailTitle, email.ToEmail));
+            mimeMessage.Subject = email.Subject;
+            mimeMessage.Body = new TextPart("plain")
+            {
+                Text = email.BodyContent
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect(email.SmtpServer, email.SmtpPortNumber, false);
+                client.Authenticate(
+                    Configuration["Email:Usermail"],
+                    Configuration["Email:Password"]);
+                client.Send(mimeMessage);
+                client.Disconnect(true);
+            }
         }
     }
 }
