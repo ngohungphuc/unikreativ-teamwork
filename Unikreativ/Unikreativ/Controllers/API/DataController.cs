@@ -22,7 +22,7 @@ namespace Unikreativ.Controllers.API
 
         public async Task<IActionResult> GetTeamMembers()
         {
-            var members = await _userServices.GetTeamMember();
+            var members = await _userServices.GetTeamMembers();
             return Ok(members);
         }
 

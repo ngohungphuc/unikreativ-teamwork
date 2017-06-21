@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using Unikreativ.Helper.Filter;
+using Unikreativ.Helper.Message;
 using Unikreativ.Services.Interface;
 
 namespace Unikreativ.Controllers.API
@@ -39,67 +40,31 @@ namespace Unikreativ.Controllers.API
         public async Task<string> GetAuthToken([FromBody] LoginViewModel userDto)
         {
             var user = await _userManager.FindByNameAsync(userDto.Username);
-            if (user != null)
-            {
-                if (!await _userManager.IsEmailConfirmedAsync(user))
-                    return JsonConvert.SerializeObject(new RequestResult
-                    {
-                        State = RequestState.Failed,
-                        Msg = "You must have a confirmed email to log in."
-                    });
-            }
+
+            if (user == null) AccountValidate.ValidationMessage("User account not exists");
+            if (!await _userManager.IsEmailConfirmedAsync(user)) AccountValidate.ValidationMessage("You must have a confirmed email to log in.");
 
             var result = await _signInManager.PasswordSignInAsync(userDto.Username, userDto.Password, false, true);
-
-            if (result.IsLockedOut)
-                return JsonConvert.SerializeObject(new RequestResult
-                {
-                    State = RequestState.Failed,
-                    Msg = "User account locked out."
-                });
+            if (result.IsLockedOut) AccountValidate.ValidationMessage("User account locked out.");
 
             var requesAt = DateTime.Now;
             var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
 
             //need to pass user id for generate token
             var userExist = _userServices.GetUserByName(userDto.Username);
-            var token = GenerateToken(userExist, expiresIn);
+            var token = TokenHelper.GenerateToken(userExist, expiresIn);
 
             return JsonConvert.SerializeObject(new RequestResult
             {
                 State = RequestState.Success,
                 Data = new
                 {
-                    requesAt = requesAt,
+                    requesAt,
                     expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
                     tokenType = TokenAuthOption.TokenType,
                     accessToken = token
                 }
             });
-        }
-
-        private string GenerateToken(User user, DateTime expiresIn)
-        {
-            var handler = new JwtSecurityTokenHandler();
-
-            ClaimsIdentity identity = new ClaimsIdentity(
-                new GenericIdentity(user.UserName, "TokenAuth"),
-                new[]
-                {
-                     new Claim("ID", user.Id)
-                }
-            );
-
-            var securityToken = handler.CreateToken(new SecurityTokenDescriptor
-            {
-                Issuer = TokenAuthOption.Issuer,
-                Audience = TokenAuthOption.Audience,
-                SigningCredentials = TokenAuthOption.SigningCredentials,
-                Subject = identity,
-                Expires = expiresIn
-            });
-
-            return handler.WriteToken(securityToken);
         }
 
         [HttpGet]
