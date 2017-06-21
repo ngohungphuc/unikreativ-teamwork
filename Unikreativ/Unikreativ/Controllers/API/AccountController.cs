@@ -42,6 +42,8 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<IActionResult> Confirm(RegisterQueryParams queryParams)
         {
+            if (queryParams == null) throw new ArgumentNullException("queryParams");
+
             var result = await _accountServices.ActivateAccount(queryParams);
             return Json(result ? new { result = true, msg = "You can now login to website" } : new { result = false, msg = "Something went wrong" });
         }
