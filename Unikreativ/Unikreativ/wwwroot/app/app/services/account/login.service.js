@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-const http_1 = require("@angular/http");
-const index_1 = require("../../extensions/index");
 const app_status_1 = require("../../extensions/app-status");
+const index_1 = require("../../extensions/index");
+const http_1 = require("@angular/http");
+const core_1 = require("@angular/core");
 require("rxjs/add/operator/toPromise");
 let LoginService = class LoginService {
     constructor(http, httpClientService, dataHandlerService) {

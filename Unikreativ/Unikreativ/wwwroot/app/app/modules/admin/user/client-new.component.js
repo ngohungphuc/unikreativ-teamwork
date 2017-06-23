@@ -82,7 +82,7 @@ __decorate([
 ], NewClientComponent.prototype, "newClientCreated", void 0);
 NewClientComponent = __decorate([
     core_1.Component({
-        selector: 'client-new',
+        selector: 'new-client',
         templateUrl: 'partial/clientnew',
         providers: [
             index_2.UserService

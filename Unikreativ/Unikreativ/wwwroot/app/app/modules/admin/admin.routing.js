@@ -6,8 +6,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const auth_guard_1 = require("./../../extensions/guard/auth.guard");
 const admin_component_1 = require("./admin.component");
+const auth_guard_1 = require("./../../extensions/guard/auth.guard");
 const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
 const user_component_1 = require("./user/user.component");

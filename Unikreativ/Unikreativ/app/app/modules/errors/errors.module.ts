@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core'
-import { ErrorsRoutingModule } from './errors.routing'
 import { Error404Component, Error500Component } from '../index'
+import { ErrorsRoutingModule } from './errors.routing'
+import { NgModule } from '@angular/core'
 
 
 @NgModule({

@@ -1,15 +1,15 @@
-﻿import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { RouterModule } from '@angular/router'
-import { HttpModule } from '@angular/http'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+﻿import { AdminModule, ErrorsModule } from './app/modules/index'
 import { AppComponent } from './app.component'
+import { AppRoutingModule } from './app.routing'
+import { BrowserModule } from '@angular/platform-browser'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpModule } from '@angular/http'
 import { LoginComponent } from './app/components/login/login.component'
 import { LoginService } from './app/services/index'
-import { ServicesModule } from './app/extensions/shared.module'
-import { AppRoutingModule } from './app.routing'
-import { AdminModule, ErrorsModule } from './app/modules/index'
 import { NavModule } from './app/modules/template/nav.module'
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { ServicesModule } from './app/extensions/shared.module'
 
 @NgModule({
     imports: [
