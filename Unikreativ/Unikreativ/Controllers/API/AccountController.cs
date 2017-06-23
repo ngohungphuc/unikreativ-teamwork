@@ -40,7 +40,7 @@ namespace Unikreativ.Controllers.API
 
         [HttpGet]
         [ValidModel]
-        public async Task<IActionResult> Confirm(RegisterQueryParams queryParams)
+        public async Task<IActionResult> Confirm(ActivateAccountQueryParams queryParams)
         {
             if (queryParams == null) throw new ArgumentNullException("queryParams");
 

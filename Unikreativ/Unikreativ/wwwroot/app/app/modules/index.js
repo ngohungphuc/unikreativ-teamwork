@@ -10,5 +10,7 @@ __export(require("./admin/admin.component"));
 __export(require("./admin/user/user.component"));
 __export(require("./admin/user/client-new.component"));
 __export(require("./admin/user/client-edit.component"));
+__export(require("./admin/user/member-new.component"));
+__export(require("./admin/user/member-edit.component"));
 __export(require("./admin/admin.module"));
 //# sourceMappingURL=index.js.map

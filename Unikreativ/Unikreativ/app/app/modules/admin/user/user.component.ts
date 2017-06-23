@@ -14,7 +14,7 @@ export class UserComponent implements OnInit {
 
     // dual binding data
     client: any[]
-
+    member: any[]
     constructor(private userService: UserService,
         @Inject(Toastr_Token) private toastr: Toastr) {
     }
@@ -34,13 +34,17 @@ export class UserComponent implements OnInit {
         this.client = client
     }
 
+    selectMember(member: any[]) {
+        this.member = member
+    }
+
     async deleteClient(clientId: any) {
         if (confirm('Are you sure to delete')) {
             for (let i = 0; i < this.clients.length; i++) {
                 let clientToRemove = this.clients[i]
                 if (clientToRemove.Id === clientId) {
                     this.clients.splice(i, 1)
-                    await this.userService.deleteClient(clientId).then(
+                    await this.userService.deleteAccount(clientId).then(
                         res => {
                             if (res.result) {
                                 this.toastr.success(res.msg, 'Success')

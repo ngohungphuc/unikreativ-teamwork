@@ -21,60 +21,61 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
-const Observable_1 = require("rxjs/Observable");
+const forms_1 = require("@angular/forms");
 const index_1 = require("../../../extensions/index");
 const index_2 = require("../../../services/index");
-let UserComponent = class UserComponent {
+const core_2 = require("@angular/core");
+let EditMemberComponent = class EditMemberComponent {
     constructor(userService, toastr) {
         this.userService = userService;
         this.toastr = toastr;
     }
     ngOnInit() {
-        let teamMembersAPI = this.userService.getTeamMembers();
-        let clientsAPI = this.userService.getClients();
-        Observable_1.Observable.forkJoin([teamMembersAPI, clientsAPI]).subscribe(result => {
-            this.teamMembers = result[0];
-            this.clients = result[1];
+        this.CompanyName = new forms_1.FormControl('', forms_1.Validators.required);
+        this.Phone = new forms_1.FormControl('', forms_1.Validators.required);
+        this.Email = new forms_1.FormControl('', forms_1.Validators.required);
+        this.JobTitle = new forms_1.FormControl('', forms_1.Validators.required);
+        this.Role = new forms_1.FormControl('', forms_1.Validators.required);
+        this.editMemberInfoForm = new forms_1.FormGroup({
+            CompanyName: this.CompanyName,
+            Phone: this.Phone,
+            Email: this.Email,
+            JobTitle: this.JobTitle,
+            Role: this.Role
         });
     }
-    selectClient(client) {
-        this.client = client;
-    }
-    selectMember(member) {
-        this.member = member;
-    }
-    deleteClient(clientId) {
+    editMemberInfo(value) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (confirm('Are you sure to delete')) {
-                for (let i = 0; i < this.clients.length; i++) {
-                    let clientToRemove = this.clients[i];
-                    if (clientToRemove.Id === clientId) {
-                        this.clients.splice(i, 1);
-                        yield this.userService.deleteAccount(clientId).then(res => {
-                            if (res.result) {
-                                this.toastr.success(res.msg, 'Success');
-                            }
-                            else
-                                this.toastr.error(res.msg, 'Error');
-                        });
-                        break;
-                    }
-                }
-            }
+            let member = {
+                Id: this.memberId.nativeElement.value,
+                CompanyName: value.CompanyName,
+                Email: value.Email,
+                Phone: value.Phone,
+                JobTitle: value.JobTitle,
+                Role: value.Role
+            };
+            yield this.userService.updateMember(member)
+                .then(result => this.toastr.success(result.msg, 'Success'))
+                .catch(error => this.toastr.error(error.msg, 'Error'));
         });
-    }
-    newClientCreated(newClient) {
-        this.clients.push(newClient);
     }
 };
-UserComponent = __decorate([
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], EditMemberComponent.prototype, "member", void 0);
+__decorate([
+    core_2.ViewChild('memberId'),
+    __metadata("design:type", core_2.ElementRef)
+], EditMemberComponent.prototype, "memberId", void 0);
+EditMemberComponent = __decorate([
     core_1.Component({
-        selector: 'user',
-        templateUrl: 'partial/usermanage',
+        selector: 'edit-member',
+        templateUrl: 'partial/editmember',
         providers: [index_2.UserService]
     }),
     __param(1, core_1.Inject(index_1.Toastr_Token)),
     __metadata("design:paramtypes", [index_2.UserService, Object])
-], UserComponent);
-exports.UserComponent = UserComponent;
-//# sourceMappingURL=user.component.js.map
+], EditMemberComponent);
+exports.EditMemberComponent = EditMemberComponent;
+//# sourceMappingURL=member-edit.component.js.map

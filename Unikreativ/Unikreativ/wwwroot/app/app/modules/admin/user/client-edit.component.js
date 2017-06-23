@@ -20,10 +20,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const forms_1 = require("@angular/forms");
 const core_1 = require("@angular/core");
-const index_1 = require("../../../services/index");
+const forms_1 = require("@angular/forms");
 const toastr_1 = require("../../../extensions/toastr");
+const index_1 = require("../../../services/index");
 let ClientEditComponent = class ClientEditComponent {
     constructor(userService, toastr) {
         this.userService = userService;
@@ -49,7 +49,7 @@ let ClientEditComponent = class ClientEditComponent {
     }
     editClientInfo(value) {
         return __awaiter(this, void 0, void 0, function* () {
-            let newClient = {
+            let client = {
                 Id: this.clientId.nativeElement.value,
                 CompanyName: value.CompanyName,
                 Country: value.Country,
@@ -57,9 +57,11 @@ let ClientEditComponent = class ClientEditComponent {
                 Email: value.Email,
                 PhoneNumber: value.PhoneNumber,
                 Website: value.Website,
-                Industry: value.Industry,
+                Industry: value.Industry
             };
-            yield this.userService.updateClient(newClient)
+            yield this
+                .userService
+                .updateClient(client)
                 .then(result => this.toastr.success(result.msg, 'Success'))
                 .catch(error => this.toastr.error(error.msg, 'Error'));
         });
@@ -74,13 +76,7 @@ __decorate([
     __metadata("design:type", core_1.ElementRef)
 ], ClientEditComponent.prototype, "clientId", void 0);
 ClientEditComponent = __decorate([
-    core_1.Component({
-        selector: 'client-edit',
-        templateUrl: 'partial/clientedit',
-        providers: [
-            index_1.UserService
-        ]
-    }),
+    core_1.Component({ selector: 'edit-client', templateUrl: 'partial/clientedit', providers: [index_1.UserService] }),
     __param(1, core_1.Inject(toastr_1.Toastr_Token)),
     __metadata("design:paramtypes", [index_1.UserService, Object])
 ], ClientEditComponent);

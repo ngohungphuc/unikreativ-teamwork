@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core'
+import { Environment } from './../config/env'
 import { Http } from '@angular/http'
+import { Injectable } from '@angular/core'
 
 @Injectable()
 export class HttpClientService {
     urlPrefix: string
     constructor(private http: Http) {
-        this.urlPrefix = 'http://localhost:60876/api/'
+        this.urlPrefix = Environment.API_URL
     }
 
     get(url, options?) {
