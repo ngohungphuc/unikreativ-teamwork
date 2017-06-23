@@ -48,52 +48,87 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<IActionResult> NewClient([FromBody] Client clientDto)
         {
-            if (clientDto == null)
-                throw new ArgumentNullException(nameof(clientDto));
+            var account = await CreateNewAccount(clientDto);
 
-            var client = Mapper.Map<User>(clientDto);
+            await _userManager.AddToRoleAsync(account, "Client");
+            await _accountServices.AddNewRequestAccount(clientDto.Email, account.code);
+            await _emailSender.SendEmail(EmailType.ClientAccount, clientDto.Email, account.callbackUrl);
 
-            if (await _validateAccount.CheckAccountExist(clientDto.UserName)) return Json(new { result = false, msg = "Account already exist" });
-            if (await _validateAccount.CheckEmailExist(clientDto.Email)) return Json(new { result = false, msg = "Email already exist" });
+            return Json(new { result = true, msg = "Create new client success" });
+        }
 
-            var result = await _userManager.CreateAsync(client, client.PasswordHash);
-            if (!result.Succeeded) return Json(new
-            {
-                result = false,
-                msg = "Something happend please try again later"
-            });
+        [HttpPost]
+        [ValidModel]
+        public async Task<IActionResult> NewMember([FromBody] Member memberDto)
+        {
+            var account = await CreateNewAccount(memberDto);
 
-            await _userManager.AddToRoleAsync(client, "Client");
-            await _accountServices.AddNewRequestAccount(client.Email, GenerateToken.RandomString());
-            await _emailSender.SendEmail(EmailType.ClientAccount, client.Email, GenerateToken.RandomString());
+            await _userManager.AddToRoleAsync(account, memberDto.Role);
+            await _accountServices.AddNewRequestAccount(memberDto.Email, account.code);
+            await _emailSender.SendEmail(EmailType.MemberAccount, memberDto.Email, account.callbackUrl);
 
-            return Json(new { result = true, msg = "Create new Client success" });
+            return Json(new { result = true, msg = "Create new member success", accountId = account.Id });
         }
 
         [HttpPut]
         [ValidModel]
         public async Task<IActionResult> UpdateClientInfo([FromBody] Client clientDto)
         {
-            var client = await _unitOfWork.UserRepository.GetByIdAsync(clientDto.Id);
-            if (client == null) return Json(new { result = false, msg = "Account not exist" });
-
-            var clientToUpdate = Mapper.Map<User>(clientDto);
-            await _unitOfWork.UserRepository.UpdateAsync(clientToUpdate, clientToUpdate.Id);
-
+            await UpdateUserInfoAsync(clientDto);
             return Json(new { result = true, msg = "Update Client success" });
         }
 
-        [HttpDelete]
+        [HttpPut]
         [ValidModel]
+        public async Task<IActionResult> UpdateMemberInfo([FromBody] Member memberDto)
+        {
+            await UpdateUserInfoAsync(memberDto);
+            return Json(new { result = true, msg = "Update Member success" });
+        }
+
+        [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> DeleteClient(string id)
+        public async Task<IActionResult> DeleteAccount(string id)
         {
             if (id == null) throw new ArgumentNullException(nameof(id));
 
             var clientToDelete = await _unitOfWork.UserRepository.GetByIdAsync(id);
             await _unitOfWork.UserRepository.DeleteAsync(clientToDelete);
 
-            return Json(new { result = true, msg = "Delete client success" });
+            return Json(new { result = true, msg = "Delete account success" });
+        }
+
+        public async Task UpdateUserInfoAsync(dynamic accountDto)
+        {
+            var account = await _unitOfWork.UserRepository.GetByIdAsync(accountDto.Id);
+            if (account == null) throw new Exception("Account not exist");
+
+            var accountToUpdate = Mapper.Map<User>(accountDto);
+            await _unitOfWork.UserRepository.UpdateAsync(accountToUpdate, accountToUpdate.Id);
+        }
+
+        private async Task<dynamic> CreateNewAccount(dynamic accountDto)
+        {
+            if (accountDto == null)
+                throw new ArgumentNullException(nameof(accountDto));
+
+            var account = Mapper.Map<User>(accountDto);
+
+            if (await _validateAccount.CheckAccountExist(accountDto.UserName)) throw new Exception("Account already exist");
+            if (await _validateAccount.CheckEmailExist(accountDto.Email)) throw new Exception("Email already exist");
+
+            var result = _userManager.CreateAsync(account, account.PasswordHash);
+            if (!result.Succeeded) throw new Exception("Something went wrong please try again later");
+
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(account);
+            var callbackUrl = Url.Action("Confirm", "Account", new { userId = account.Id, code = code });
+
+            return new
+            {
+                account,
+                code,
+                callbackUrl
+            };
         }
 
         #endregion Manage Account

@@ -1,36 +1,31 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Component, OnInit, Input, ElementRef, ViewChild, Inject } from '@angular/core'
-import { UserService } from '../../../services/index'
-import { Toastr, Toastr_Token } from '../../../extensions/toastr'
+import {
+    Component,
+    ElementRef,
+    Inject,
+    Input,
+    OnInit,
+    ViewChild
+} from '@angular/core'
+import {FormControl, FormGroup, Validators} from '@angular/forms'
+import {Toastr, Toastr_Token} from '../../../extensions/toastr'
+import {UserService} from '../../../services/index'
 
-
-@Component({
-    selector: 'client-edit',
-    templateUrl: 'partial/clientedit',
-    providers: [
-        UserService
-    ]
-})
+@Component({selector: 'edit-client', templateUrl: 'partial/clientedit', providers: [UserService]})
 
 export class ClientEditComponent implements OnInit {
-    @Input()
-    client: any[]
+    @Input()client : any[]
 
-    @ViewChild('clientId') clientId: ElementRef
+    @ViewChild('clientId')clientId : ElementRef
 
-    editClientInfoForm: FormGroup
-    CompanyName: FormControl
-    Country: FormControl
-    Address: FormControl
-    Email: FormControl
-    PhoneNumber: FormControl
-    Website: FormControl
-    Industry: FormControl
-    constructor(
-        private userService: UserService,
-        @Inject(Toastr_Token) private toastr: Toastr
-    ) {
-    }
+    editClientInfoForm : FormGroup
+    CompanyName : FormControl
+    Country : FormControl
+    Address : FormControl
+    Email : FormControl
+    PhoneNumber : FormControl
+    Website : FormControl
+    Industry : FormControl
+    constructor(private userService : UserService, @Inject(Toastr_Token)private toastr : Toastr) {}
 
     ngOnInit() {
         this.CompanyName = new FormControl('', Validators.required)
@@ -53,8 +48,8 @@ export class ClientEditComponent implements OnInit {
 
     }
 
-    async editClientInfo(value: any) {
-        let newClient = {
+    async editClientInfo(value : any) {
+        let client = {
             Id: this.clientId.nativeElement.value,
             CompanyName: value.CompanyName,
             Country: value.Country,
@@ -62,12 +57,13 @@ export class ClientEditComponent implements OnInit {
             Email: value.Email,
             PhoneNumber: value.PhoneNumber,
             Website: value.Website,
-            Industry: value.Industry,
+            Industry: value.Industry
         }
 
-        await this.userService.updateClient(newClient)
-            .then(result => this.toastr.success(result.msg,'Success'))
-            .catch(error => this.toastr.error(error.msg,'Error'))
+        await this
+            .userService
+            .updateClient(client)
+            .then(result => this.toastr.success(result.msg, 'Success'))
+            .catch(error => this.toastr.error(error.msg, 'Error'))
     }
-
 }

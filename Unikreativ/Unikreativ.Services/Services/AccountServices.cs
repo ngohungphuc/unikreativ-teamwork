@@ -19,17 +19,12 @@ namespace Unikreativ.Services.Services
             _accountRepository = accountRepository;
         }
 
-        public async Task<IQueryable<AccountRequest>> GetAccountRequestId(string email)
-        {
-            return await _accountRepository.GetAccountRequestId(email);
-        }
-
         public async Task<AccountRequest> AddNewRequestAccount(string email, string token)
         {
             return await _accountRepository.AddNewRequestAccount(email, token);
         }
 
-        public async Task<bool> ActivateAccount(RegisterQueryParams queryParams)
+        public async Task<bool> ActivateAccount(ActivateAccountQueryParams queryParams)
         {
             return await _accountRepository.ActivateAccount(queryParams);
         }

@@ -10,10 +10,8 @@ namespace Unikreativ.Repositories.Interface
 {
     public interface IAccountRepository
     {
-        Task<IQueryable<AccountRequest>> GetAccountRequestId(string email);
-
         Task<AccountRequest> AddNewRequestAccount(string email, string token);
 
-        Task<bool> ActivateAccount(RegisterQueryParams queryParams);
+        Task<bool> ActivateAccount(ActivateAccountQueryParams queryParams);
     }
 }

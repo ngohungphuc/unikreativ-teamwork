@@ -51,8 +51,7 @@ namespace Unikreativ.Controllers.API
             var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
 
             //need to pass user id for generate token
-            var userExist = _userServices.GetUserByName(userDto.Username);
-            var token = TokenHelper.GenerateToken(userExist, expiresIn);
+            var token = TokenHelper.GenerateToken(user, expiresIn);
 
             return JsonConvert.SerializeObject(new RequestResult
             {

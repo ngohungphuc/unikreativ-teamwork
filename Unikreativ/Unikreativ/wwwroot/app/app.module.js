@@ -6,17 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-const platform_browser_1 = require("@angular/platform-browser");
-const http_1 = require("@angular/http");
-const forms_1 = require("@angular/forms");
+const index_1 = require("./app/modules/index");
 const app_component_1 = require("./app.component");
-const login_component_1 = require("./app/components/login/login.component");
-const index_1 = require("./app/services/index");
-const shared_module_1 = require("./app/extensions/shared.module");
 const app_routing_1 = require("./app.routing");
-const index_2 = require("./app/modules/index");
+const platform_browser_1 = require("@angular/platform-browser");
+const forms_1 = require("@angular/forms");
+const http_1 = require("@angular/http");
+const login_component_1 = require("./app/components/login/login.component");
+const index_2 = require("./app/services/index");
 const nav_module_1 = require("./app/modules/template/nav.module");
+const core_1 = require("@angular/core");
+const shared_module_1 = require("./app/extensions/shared.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -28,8 +28,8 @@ AppModule = __decorate([
             http_1.HttpModule,
             shared_module_1.ServicesModule,
             nav_module_1.NavModule,
-            index_2.AdminModule,
-            index_2.ErrorsModule,
+            index_1.AdminModule,
+            index_1.ErrorsModule,
             app_routing_1.AppRoutingModule
         ],
         declarations: [
@@ -37,7 +37,7 @@ AppModule = __decorate([
             login_component_1.LoginComponent,
         ],
         providers: [
-            index_1.LoginService
+            index_2.LoginService
         ],
         bootstrap: [app_component_1.AppComponent]
     })

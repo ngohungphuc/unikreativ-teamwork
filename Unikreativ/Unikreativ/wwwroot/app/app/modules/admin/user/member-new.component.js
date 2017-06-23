@@ -6,21 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("../index");
-const errors_routing_1 = require("./errors.routing");
 const core_1 = require("@angular/core");
-let ErrorsModule = class ErrorsModule {
+const index_1 = require("../../../services/index");
+let NewMemberComponent = class NewMemberComponent {
+    ngOnInit() { }
 };
-ErrorsModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            errors_routing_1.ErrorsRoutingModule
-        ],
-        declarations: [
-            index_1.Error404Component,
-            index_1.Error500Component
-        ]
-    })
-], ErrorsModule);
-exports.ErrorsModule = ErrorsModule;
-//# sourceMappingURL=errors.module.js.map
+NewMemberComponent = __decorate([
+    core_1.Component({ selector: 'new-member', templateUrl: 'partial/newmember', providers: [index_1.UserService] })
+], NewMemberComponent);
+exports.NewMemberComponent = NewMemberComponent;
+//# sourceMappingURL=member-new.component.js.map

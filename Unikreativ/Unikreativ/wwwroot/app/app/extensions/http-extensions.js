@@ -9,12 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
+const env_1 = require("./../config/env");
 const http_1 = require("@angular/http");
+const core_1 = require("@angular/core");
 let HttpClientService = class HttpClientService {
     constructor(http) {
         this.http = http;
-        this.urlPrefix = 'http://localhost:60876/api/';
+        this.urlPrefix = env_1.Environment.API_URL;
     }
     get(url, options) {
         return this.http.get(this.urlPrefix + url, options);

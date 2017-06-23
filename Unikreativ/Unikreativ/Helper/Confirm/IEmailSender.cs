@@ -5,6 +5,6 @@ namespace Unikreativ.Helper.Confirm
 {
     public interface IEmailSender
     {
-        Task SendEmail(EmailType emailType, string to, object options);
+        Task SendEmail(EmailType emailType, string to, string callbackUrl);
     }
 }

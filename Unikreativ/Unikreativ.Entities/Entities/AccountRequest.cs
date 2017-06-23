@@ -11,6 +11,5 @@ namespace Unikreativ.Entities.Entities
         public string Email { get; set; }
         public string Token { get; set; }
         public DateTime RequestTime { get; set; }
-        public int ExpireTime { get; set; }
     }
 }

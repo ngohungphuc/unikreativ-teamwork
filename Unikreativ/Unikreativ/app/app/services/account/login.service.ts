@@ -1,9 +1,14 @@
-﻿import { Injectable } from '@angular/core'
+﻿import { AppStatusCode } from '../../extensions/app-status'
+import { DataHandlerService, HttpClientService } from '../../extensions/index'
+import {
+    Headers,
+    Http,
+    RequestOptions,
+    Response
+} from '@angular/http'
+import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
-import { Http, Response, Headers, RequestOptions } from '@angular/http'
-import { HttpClientService, DataHandlerService } from '../../extensions/index'
 import { RequestResult } from '../../model/RequestResult'
-import { AppStatusCode } from '../../extensions/app-status'
 import 'rxjs/add/operator/toPromise'
 
 
@@ -28,7 +33,9 @@ export class LoginService {
                 if (result.State === AppStatusCode.LoginSuccess) {
                     let json = result.Data as any
                     this.token = json.accessToken
-                    sessionStorage.setItem('currentUser', JSON.stringify({ username: username, token: json.accessToken }))
+                    sessionStorage.setItem(
+                        'currentUser',
+                        JSON.stringify({ username: username, token: json.accessToken }))
                 }
 
                 return result
