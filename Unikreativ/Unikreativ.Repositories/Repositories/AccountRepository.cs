@@ -23,7 +23,6 @@ namespace Unikreativ.Repositories.Repositories
             var newAccountRequest = new AccountRequest
             {
                 Email = email,
-                ExpireTime = 86400,
                 Token = token,
                 RequestTime = DateTime.Today
             };
@@ -34,24 +33,17 @@ namespace Unikreativ.Repositories.Repositories
             return newAccountRequest;
         }
 
-        public async Task<IQueryable<AccountRequest>> GetAccountRequestId(string email)
+        public async Task<bool> ActivateAccount(ActivateAccountQueryParams queryParams)
         {
-            var accountRequestId = await _context.AccountRequests.Where(data => data.Email.Equals(email)).ToListAsync();
-            return accountRequestId.AsQueryable();
-        }
-
-        public async Task<bool> ActivateAccount(RegisterQueryParams queryParams)
-        {
-            var currentTime = DateTime.Today.Millisecond;
+            var currentTime = DateTime.Today.Day;
             var requestExist = _context.AccountRequests
                 .Where(
-                    request => request.Email == queryParams.EmailTo
-                               && request.Token == queryParams.Token
-                               && request.ExpireTime - currentTime > 0);
+                    request => request.Token == queryParams.Token
+                               && request.RequestTime.Day - currentTime > 0);
 
             if (requestExist == null) return false;
-            var users = await _context.Users.FirstOrDefaultAsync(x => x.Email == queryParams.EmailTo);
 
+            var users = await _context.Users.FirstOrDefaultAsync(x => x.Email == queryParams.EmailTo);
             users.EmailConfirmed = true;
             await _context.SaveChangesAsync();
 

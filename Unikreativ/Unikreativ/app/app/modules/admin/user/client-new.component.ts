@@ -10,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Toastr, Toastr_Token } from '../../../extensions/index'
 import { UserService } from '../../../services/index'
 @Component({
-    selector: 'client-new',
+    selector: 'new-client',
     templateUrl: 'partial/clientnew',
     providers: [
         UserService

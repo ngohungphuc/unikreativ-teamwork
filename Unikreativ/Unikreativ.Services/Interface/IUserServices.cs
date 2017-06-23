@@ -10,10 +10,8 @@ namespace Unikreativ.Services.Interface
 {
     public interface IUserServices
     {
-        User GetUserByName(string name);
-
         Task<List<Member>> GetTeamMembers();
 
-        Task<List<User>> GetClients();
+        Task<List<Client>> GetClients();
     }
 }

@@ -19,17 +19,13 @@ namespace Unikreativ.Services.Services
             _userRepository = userRepository;
         }
 
-        public User GetUserByName(string name)
-        {
-            return _userRepository.GetUserByName(name);
-        }
 
         public async Task<List<Member>> GetTeamMembers()
         {
             return await _userRepository.GetTeamMembers();
         }
 
-        public async Task<List<User>> GetClients()
+        public async Task<List<Client>> GetClients()
         {
             return await _userRepository.GetClients();
         }

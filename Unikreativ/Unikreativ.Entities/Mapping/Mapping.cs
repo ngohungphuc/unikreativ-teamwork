@@ -19,7 +19,27 @@ namespace Unikreativ.Entities.Mapping
                     JobTitle = member.JobTitle,
                     NormalizedUserName = member.NormalizedUserName,
                     Phone = member.PhoneNumber,
+                    ChargeRate = member.ChargeRate,
                     Role = member.Roles.ToString()
+                };
+            }
+        }
+
+        public static Expression<Func<User, Client>> ClientMapping
+        {
+            get
+            {
+                return client => new Client
+                {
+                    Id = client.Id,
+                    Email = client.Email,
+                    CompanyName = client.CompanyName,
+                    Address = client.Address,
+                    Country = client.Country,
+                    Industry = client.Industry,
+                    PhoneNumber = client.PhoneNumber,
+                    UserName = client.UserName,
+                    Website = client.Website
                 };
             }
         }

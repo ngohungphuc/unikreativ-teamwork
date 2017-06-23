@@ -1,6 +1,6 @@
 ﻿namespace Unikreativ.Entities.Params
 {
-    public class RegisterQueryParams
+    public class ActivateAccountQueryParams
     {
         public string EmailTo { get; set; }
         public string Token { get; set; }

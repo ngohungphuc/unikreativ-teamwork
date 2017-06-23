@@ -43,8 +43,12 @@ let UserService = class UserService {
         let url = 'Admin/UpdateClientInfo';
         return this.authHttpService.authPut(url, client);
     }
-    deleteClient(id) {
-        let url = `Admin/DeleteClient/${id}`;
+    updateMember(member) {
+        let url = 'Admin/UpdateMemberInfo';
+        return this.authHttpService.authPut(url, member);
+    }
+    deleteAccount(id) {
+        let url = `Admin/DeleteAccount/${id}`;
         return this.authHttpService.authDelete(url);
     }
 };

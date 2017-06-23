@@ -9,21 +9,19 @@ using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.Mapping;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Repositories.Interface;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Unikreativ.Repositories.Repositories
 {
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public UserRepository(ApplicationDbContext context)
         {
             _context = context;
-        }
-
-        public User GetUserByName(string name)
-        {
-            return _context.Users.FirstOrDefault(x => x.UserName == name);
         }
 
         public async Task<List<Member>> GetTeamMembers()
@@ -41,14 +39,19 @@ namespace Unikreativ.Repositories.Repositories
                               Role = role.Name,
                               JobTitle = user.JobTitle,
                               NormalizedUserName = user.NormalizedUserName
-                          }).ToListAsync();
+                          }).AsNoTracking().ToListAsync();
         }
 
-        public async Task<List<User>> GetClients()
+        public async Task<List<Client>> GetClients()
         {
             var role = _context.Roles.SingleOrDefault(r => r.Name == "Client");
-            var usersNotInRole = await _context.Users.Where(m => m.Roles.All(r => r.RoleId == role.Id)).Include(ur => ur.Roles).ToListAsync();
-            return usersNotInRole;
+
+            var client = await _context.Users
+                .Where(m => m.Roles.All(r => r.RoleId == role.Id))
+                .Select(Mapping.ClientMapping)
+                .AsNoTracking()
+                .ToListAsync();
+            return client;
         }
     }
 }

@@ -6,9 +6,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const router_1 = require("@angular/router");
-const core_1 = require("@angular/core");
 const login_component_1 = require("./app/components/login/login.component");
+const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
 exports.appRoutes = [
     { path: 'login', component: login_component_1.LoginComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },

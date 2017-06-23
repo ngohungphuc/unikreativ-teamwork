@@ -6,9 +6,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("./rxjs-extensions");
-const core_1 = require("@angular/core");
 const index_1 = require("./index");
+const core_1 = require("@angular/core");
+require("./rxjs-extensions");
 let ServicesModule = class ServicesModule {
 };
 ServicesModule = __decorate([
