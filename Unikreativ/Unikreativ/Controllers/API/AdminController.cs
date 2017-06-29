@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.Models;
+using Unikreativ.Entities.Models.AccountViewModels;
 using Unikreativ.Entities.Params;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Filter;
@@ -50,9 +51,9 @@ namespace Unikreativ.Controllers.API
         {
             var account = await CreateNewAccount(clientDto);
 
-            await _userManager.AddToRoleAsync(account, "Client");
-            await _accountServices.AddNewRequestAccount(clientDto.Email, account.code);
-            await _emailSender.SendEmail(EmailType.ClientAccount, clientDto.Email, account.callbackUrl);
+            await _userManager.AddToRoleAsync(account.User, "Client");
+            await _accountServices.AddNewRequestAccount(clientDto.Email, account.Code);
+            await _emailSender.SendEmail(EmailType.ClientAccount, clientDto.Email, account.CallbackUrl);
 
             return Json(new { result = true, msg = "Create new client success" });
         }
@@ -63,11 +64,11 @@ namespace Unikreativ.Controllers.API
         {
             var account = await CreateNewAccount(memberDto);
 
-            await _userManager.AddToRoleAsync(account, memberDto.Role);
-            await _accountServices.AddNewRequestAccount(memberDto.Email, account.code);
-            await _emailSender.SendEmail(EmailType.MemberAccount, memberDto.Email, account.callbackUrl);
+            await _userManager.AddToRoleAsync(account.User, memberDto.Role);
+            await _accountServices.AddNewRequestAccount(memberDto.Email, account.Code);
+            await _emailSender.SendEmail(EmailType.MemberAccount, memberDto.Email, account.CallbackUrl);
 
-            return Json(new { result = true, msg = "Create new member success", accountId = account.Id });
+            return Json(new { result = true, msg = "Create new member success", accountId = account.User.Id });
         }
 
         [HttpPut]
@@ -107,7 +108,7 @@ namespace Unikreativ.Controllers.API
             await _unitOfWork.UserRepository.UpdateAsync(accountToUpdate, accountToUpdate.Id);
         }
 
-        private async Task<dynamic> CreateNewAccount(dynamic accountDto)
+        private async Task<RegisterViewModel> CreateNewAccount(dynamic accountDto)
         {
             if (accountDto == null)
                 throw new ArgumentNullException(nameof(accountDto));
@@ -117,17 +118,17 @@ namespace Unikreativ.Controllers.API
             if (await _validateAccount.CheckAccountExist(accountDto.UserName)) throw new Exception("Account already exist");
             if (await _validateAccount.CheckEmailExist(accountDto.Email)) throw new Exception("Email already exist");
 
-            var result = _userManager.CreateAsync(account, account.PasswordHash);
+            var result = await _userManager.CreateAsync(account, account.PasswordHash);
             if (!result.Succeeded) throw new Exception("Something went wrong please try again later");
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(account);
-            var callbackUrl = Url.Action("Confirm", "Account", new { userId = account.Id, code = code });
+            var callbackUrl = $"http://localhost:60876/Account/Confirm?Token={code}&EmailTo={accountDto.Email}";
 
-            return new
+            return new RegisterViewModel()
             {
-                account,
-                code,
-                callbackUrl
+                User = account,
+                Code = code,
+                CallbackUrl = callbackUrl
             };
         }
 

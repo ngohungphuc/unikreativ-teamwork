@@ -34,5 +34,6 @@ namespace Unikreativ.Entities.ViewModel
 
         private readonly double ChargeRate = 0;
         private readonly bool EmailConfirmed = false;
+        private readonly bool LockoutEnabled = false;
     }
 }

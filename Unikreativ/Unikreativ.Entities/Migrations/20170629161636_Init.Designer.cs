@@ -8,8 +8,8 @@ using Unikreativ.Entities.Data;
 namespace Unikreativ.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170618170120_InitDB")]
-    partial class InitDB
+    [Migration("20170629161636_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -130,8 +130,6 @@ namespace Unikreativ.Entities.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email");
-
-                    b.Property<int>("ExpireTime");
 
                     b.Property<DateTime>("RequestTime");
 
