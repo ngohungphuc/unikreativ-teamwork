@@ -43,6 +43,7 @@ namespace Unikreativ.Helper.Confirm
                         email.Subject = $"{to} - Account Register Confirmation";
                         email.BodyContent =
                             $"Welcome to Unikreative teamwork please follow this link <a href=\'{{callbackUrl}}\' target=\'_blank\' />{{callbackUrl}} </a> to activate your account";
+
                         break;
 
                     case EmailType.ResetPassword:
@@ -51,6 +52,7 @@ namespace Unikreativ.Helper.Confirm
                         email.Subject = $"{to} - Password Reset";
                         email.BodyContent =
                              $"We receive your request to reset password. Follow this link <a href=\'{{callbackUrl}}\' target=\'_blank\' />{{callbackUrl}} </a> to update new password";
+
                         break;
                 }
 
