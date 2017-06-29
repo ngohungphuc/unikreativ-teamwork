@@ -24,40 +24,49 @@ let UserService = class UserService {
     getTeamMembers() {
         let url = 'Data/GetTeamMembers';
         let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.httpClientService.get(url, { headers: headers })
+        return this
+            .httpClientService
+            .get(url, { headers: headers })
             .map(res => res.json())
             .catch(this.dataHandlerService.handleError);
     }
     getClients() {
         let url = 'Data/GetClients';
         let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.httpClientService.get(url, { headers: headers })
+        return this
+            .httpClientService
+            .get(url, { headers: headers })
             .map(res => res.json())
             .catch(this.dataHandlerService.handleError);
     }
     newClient(client) {
         let url = 'Admin/NewClient';
-        return this.authHttpService.authPost(url, client);
+        return this
+            .authHttpService
+            .authPost(url, client);
     }
     updateClient(client) {
         let url = 'Admin/UpdateClientInfo';
-        return this.authHttpService.authPut(url, client);
+        return this
+            .authHttpService
+            .authPut(url, client);
     }
     updateMember(member) {
         let url = 'Admin/UpdateMemberInfo';
-        return this.authHttpService.authPut(url, member);
+        return this
+            .authHttpService
+            .authPut(url, member);
     }
     deleteAccount(id) {
         let url = `Admin/DeleteAccount/${id}`;
-        return this.authHttpService.authDelete(url);
+        return this
+            .authHttpService
+            .authDelete(url);
     }
 };
 UserService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http,
-        index_2.HttpClientService,
-        index_2.DataHandlerService,
-        index_1.AuthHttpServices])
+    __metadata("design:paramtypes", [http_1.Http, index_2.HttpClientService, index_2.DataHandlerService, index_1.AuthHttpServices])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

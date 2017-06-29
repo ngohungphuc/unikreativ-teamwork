@@ -27,7 +27,7 @@ namespace Unikreativ.Repositories.Repositories
                 RequestTime = DateTime.Today
             };
 
-            _context.AccountRequests.Add(newAccountRequest);
+            await _context.AccountRequests.AddAsync(newAccountRequest);
             await _context.SaveChangesAsync();
 
             return newAccountRequest;

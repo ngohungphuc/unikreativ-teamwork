@@ -130,8 +130,6 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<int>("ExpireTime");
-
                     b.Property<DateTime>("RequestTime");
 
                     b.Property<string>("Token");

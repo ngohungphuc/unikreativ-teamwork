@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Unikreativ.Entities.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +43,6 @@ namespace Unikreativ.Entities.Migrations
                 {
                     RequestId = table.Column<Guid>(nullable: false),
                     Email = table.Column<string>(nullable: true),
-                    ExpireTime = table.Column<int>(nullable: false),
                     RequestTime = table.Column<DateTime>(nullable: false),
                     Token = table.Column<string>(nullable: true)
                 },
