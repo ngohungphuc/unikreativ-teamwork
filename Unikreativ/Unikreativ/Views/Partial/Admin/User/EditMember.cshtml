@@ -1,6 +1,6 @@
 <!-- Central Modal Medium Info -->
 <form [formGroup]="editMemberInfoForm" (ngSubmit)="editMemberInfo(editMemberInfoForm.value)" autocomplete="off" *ngIf="member">
-     @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
     <!--Modal: Register Form-->
     <div class="modal fade" id="editMemberInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog cascading-modal" role="document">
@@ -16,7 +16,15 @@
                 <!--Body-->
                 <div class="modal-body">
                     <div class="row">
-                        <input type="hidden" #memberId name="Id"  [value]="member.Id">
+                        <input type="hidden" #memberId name="Id" [value]="member.Id">
+
+                        <div class="col-md-12" [ngClass]="{'error':NormalizedUserName.invalid && NormalizedUserName.dirty}">
+                            <div class="md-form">
+                                <input [(ngModel)]="member.NormalizedUserName" formControlName="NormalizedUserName" value="{{member.NormalizedUserName}}" type="text" id="NormalizedUserName" class="form-control">
+                                <label class="active" for="NormalizedUserName">NormalizedUserName</label>
+                                <label *ngIf="NormalizedUserName.invalid && NormalizedUserName.dirty">NormalizedUserName is required</label>
+                            </div>
+                        </div>
                         <div class="col-md-12" [ngClass]="{'error':CompanyName.invalid && CompanyName.dirty}">
                             <div class="md-form">
                                 <input [(ngModel)]="member.CompanyName" formControlName="CompanyName" value="{{member.CompanyName}}" type="text" id="CompanyName" class="form-control">
@@ -38,14 +46,21 @@
                                 <label *ngIf="Email.invalid && Email.dirty">Email is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':Phone.invalid && Phone.dirty}">
+                        <div class="col-md-12" [ngClass]="{'error':PhoneNumber.invalid && PhoneNumber.dirty}">
                             <div class="md-form">
-                                <input [(ngModel)]="member.Phone" formControlName="Phone" value="{{member.Phone}}" type="text" id="Phone" class="form-control">
-                                <label class="active" for="Phone">Phone</label>
-                                <label *ngIf="Phone.invalid && Phone.dirty">Phone is required</label>
+                                <input [(ngModel)]="member.PhoneNumber" formControlName="PhoneNumber" value="{{member.PhoneNumber}}" type="text" id="PhoneNumber" class="form-control">
+                                <label class="active" for="PhoneNumber">PhoneNumber</label>
+                                <label *ngIf="PhoneNumber.invalid && PhoneNumber.dirty">PhoneNumber is required</label>
                             </div>
                         </div>
-                         <div class="col-md-12" [ngClass]="{'error':Role.invalid && Role.dirty}">
+                        <div class="col-md-12" [ngClass]="{'error':ChargeRate.invalid && ChargeRate.dirty}">
+                            <div class="md-form">
+                                <input [(ngModel)]="member.ChargeRate" formControlName="ChargeRate" value="{{member.ChargeRate}}" type="text" id="ChargeRate" class="form-control">
+                                <label class="active" for="ChargeRate">ChargeRate (Per hours)</label>
+                                <label *ngIf="ChargeRate.invalid && ChargeRate.dirty">ChargeRate is required</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" [ngClass]="{'error':Role.invalid && Role.dirty}">
                             <label>Role</label>
                             <select formControlName="Role" [(ngModel)]="member.Role" class="form-control">
                                 <option value="">Select Role</option>

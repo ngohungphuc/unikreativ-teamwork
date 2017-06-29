@@ -35,6 +35,7 @@ let UserComponent = class UserComponent {
         Observable_1.Observable.forkJoin([teamMembersAPI, clientsAPI]).subscribe(result => {
             this.teamMembers = result[0];
             this.clients = result[1];
+            console.log(result[0]);
         });
     }
     selectClient(client) {

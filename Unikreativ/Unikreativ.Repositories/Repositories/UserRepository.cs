@@ -35,10 +35,11 @@ namespace Unikreativ.Repositories.Repositories
                               Id = user.Id,
                               CompanyName = user.CompanyName,
                               Email = user.Email,
-                              Phone = user.PhoneNumber,
+                              PhoneNumber = user.PhoneNumber,
                               Role = role.Name,
                               JobTitle = user.JobTitle,
-                              NormalizedUserName = user.NormalizedUserName
+                              NormalizedUserName = user.NormalizedUserName,
+                              ChargeRate = user.ChargeRate
                           }).AsNoTracking().ToListAsync();
         }
 
