@@ -32,16 +32,20 @@ let EditMemberComponent = class EditMemberComponent {
     }
     ngOnInit() {
         this.CompanyName = new forms_1.FormControl('', forms_1.Validators.required);
-        this.Phone = new forms_1.FormControl('', forms_1.Validators.required);
+        this.PhoneNumber = new forms_1.FormControl('', forms_1.Validators.required);
         this.Email = new forms_1.FormControl('', forms_1.Validators.required);
         this.JobTitle = new forms_1.FormControl('', forms_1.Validators.required);
         this.Role = new forms_1.FormControl('', forms_1.Validators.required);
+        this.ChargeRate = new forms_1.FormControl('', forms_1.Validators.required);
+        this.NormalizedUserName = new forms_1.FormControl('', forms_1.Validators.required);
         this.editMemberInfoForm = new forms_1.FormGroup({
             CompanyName: this.CompanyName,
-            Phone: this.Phone,
+            PhoneNumber: this.PhoneNumber,
             Email: this.Email,
             JobTitle: this.JobTitle,
-            Role: this.Role
+            Role: this.Role,
+            ChargeRate: this.ChargeRate,
+            NormalizedUserName: this.NormalizedUserName
         });
     }
     editMemberInfo(value) {
@@ -50,11 +54,16 @@ let EditMemberComponent = class EditMemberComponent {
                 Id: this.memberId.nativeElement.value,
                 CompanyName: value.CompanyName,
                 Email: value.Email,
-                Phone: value.Phone,
+                PhoneNumber: value.PhoneNumber,
                 JobTitle: value.JobTitle,
-                Role: value.Role
+                Role: value.Role,
+                ChargeRate: value.ChargeRate,
+                EmailConfirmed: true,
+                NormalizedUserName: value.NormalizedUserName
             };
-            yield this.userService.updateMember(member)
+            yield this
+                .userService
+                .updateMember(member)
                 .then(result => this.toastr.success(result.msg, 'Success'))
                 .catch(error => this.toastr.error(error.msg, 'Error'));
         });
@@ -69,11 +78,7 @@ __decorate([
     __metadata("design:type", core_2.ElementRef)
 ], EditMemberComponent.prototype, "memberId", void 0);
 EditMemberComponent = __decorate([
-    core_1.Component({
-        selector: 'edit-member',
-        templateUrl: 'partial/editmember',
-        providers: [index_2.UserService]
-    }),
+    core_1.Component({ selector: 'edit-member', templateUrl: 'partial/editmember', providers: [index_2.UserService] }),
     __param(1, core_1.Inject(index_1.Toastr_Token)),
     __metadata("design:paramtypes", [index_2.UserService, Object])
 ], EditMemberComponent);

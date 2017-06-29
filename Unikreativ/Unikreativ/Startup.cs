@@ -189,6 +189,7 @@ namespace Unikreativ
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Client, User>();
+                cfg.CreateMap<Member, User>();
             });
 
             #endregion Mapper

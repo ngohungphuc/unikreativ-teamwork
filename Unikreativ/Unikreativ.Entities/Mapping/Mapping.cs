@@ -18,7 +18,7 @@ namespace Unikreativ.Entities.Mapping
                     CompanyName = member.CompanyName,
                     JobTitle = member.JobTitle,
                     NormalizedUserName = member.NormalizedUserName,
-                    Phone = member.PhoneNumber,
+                    PhoneNumber = member.PhoneNumber,
                     ChargeRate = member.ChargeRate,
                     Role = member.Roles.ToString()
                 };
