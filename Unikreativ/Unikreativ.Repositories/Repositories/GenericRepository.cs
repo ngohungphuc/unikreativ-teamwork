@@ -81,7 +81,7 @@ namespace Unikreativ.Repositories.Repositories
 
             if (existing != null)
             {
-                _context.Entry(existing).CurrentValues.SetValues(updated);
+                _context.Entry(updated).State = EntityState.Modified;
                 _context.SaveChanges();
             }
             return existing;
@@ -95,7 +95,7 @@ namespace Unikreativ.Repositories.Repositories
             T existing = await _context.Set<T>().FindAsync(key);
             if (existing != null)
             {
-                _context.Entry(existing).CurrentValues.SetValues(updated);
+                _context.Entry(updated).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
 
