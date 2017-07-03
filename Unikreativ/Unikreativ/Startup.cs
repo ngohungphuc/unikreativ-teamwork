@@ -92,12 +92,14 @@ namespace Unikreativ
             // Add application services.
             services.AddTransient<Seeder>();
             services.AddScoped<ValidateAccount>();
+            services.AddTransient<IEmailTemplateService, EmailTemplateService>();
             services.AddTransient<IEmailSender, MessageServices>();
             services.AddTransient<ISmsSender, MessageServices>();
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IAccountServices, AccountServices>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

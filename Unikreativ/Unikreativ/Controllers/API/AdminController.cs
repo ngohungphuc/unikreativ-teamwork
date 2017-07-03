@@ -55,8 +55,14 @@ namespace Unikreativ.Controllers.API
             var account = await CreateNewAccount(clientDto);
 
             await _userManager.AddToRoleAsync(account.User, "Client");
-            await _accountServices.AddNewRequestAccount(clientDto.Email, account.Code);
-            await _emailSender.SendEmail(EmailType.ClientAccount, clientDto.Email, account.CallbackUrl);
+            var signUpInfo = new SignUpInfo
+            {
+                UserName = account.User.UserName,
+                SignupUrl = account.CallbackUrl,
+                RandomPassword = account.RandomPassword
+            };
+            var bodyContent = await _emailTemplateService.RenderTemplateAsync("Account/AccountConfirm.cshtml", signUpInfo);
+            await _emailSender.SendEmail(EmailType.ClientAccount, clientDto.Email, bodyContent);
 
             return Json(new { result = true, msg = "Create new client success" });
         }
@@ -68,8 +74,14 @@ namespace Unikreativ.Controllers.API
             var account = await CreateNewAccount(memberDto);
 
             await _userManager.AddToRoleAsync(account.User, memberDto.Role);
-            await _accountServices.AddNewRequestAccount(memberDto.Email, account.Code);
-            await _emailSender.SendEmail(EmailType.MemberAccount, memberDto.Email, account.CallbackUrl);
+            var signUpInfo = new SignUpInfo
+            {
+                UserName = account.User.UserName,
+                SignupUrl = account.CallbackUrl,
+                RandomPassword = account.RandomPassword
+            };
+            var bodyContent = await _emailTemplateService.RenderTemplateAsync("Account/AccountConfirm.cshtml", signUpInfo);
+            await _emailSender.SendEmail(EmailType.MemberAccount, memberDto.Email, bodyContent);
 
             return Json(new { result = true, msg = "Create new member success", accountId = account.User.Id });
         }
@@ -121,45 +133,23 @@ namespace Unikreativ.Controllers.API
             if (await _validateAccount.CheckAccountExist(accountDto.UserName)) throw new Exception("Account already exist");
             if (await _validateAccount.CheckEmailExist(accountDto.Email)) throw new Exception("Email already exist");
 
-            var result = await _userManager.CreateAsync(account, account.PasswordHash);
+            var randomPassword = GenerateToken.RandomString();
+            var result = await _userManager.CreateAsync(account, randomPassword);
             if (!result.Succeeded) throw new Exception("Something went wrong please try again later");
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(account);
-            var callbackUrl = $"http://localhost:60876/Account/Confirm?Token={code}&EmailTo={accountDto.Email}";
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = account.Id, code }, HttpContext.Request.Scheme);
 
             return new RegisterViewModel()
             {
                 User = account,
                 Code = code,
-                CallbackUrl = callbackUrl
+                CallbackUrl = callbackUrl,
+                RandomPassword = randomPassword
             };
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return View("Error");
-            }
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
 
-            //string bodyContent = await _emailTemplateService.RenderTemplateAsync<string>("Manage/ResetPasswordEmailTemplate.cshtml", resetPasswordUrl);
-
-            //await _messageService.SendAsync(_messageSender, new MessageContent()
-            //{
-            //    Recipients = new[] { user.Email },
-            //    Subject = "Reset Password",
-            //    HtmlContent = bodyContent
-            //});
-        }
 
         #endregion Manage Account
     }
