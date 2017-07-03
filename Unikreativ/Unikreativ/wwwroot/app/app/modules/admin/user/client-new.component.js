@@ -39,7 +39,6 @@ let NewClientComponent = class NewClientComponent {
         this.Website = new forms_1.FormControl('', forms_1.Validators.required);
         this.Industry = new forms_1.FormControl('', forms_1.Validators.required);
         this.UserName = new forms_1.FormControl('', forms_1.Validators.required);
-        this.PasswordHash = new forms_1.FormControl('', forms_1.Validators.required);
         this.newClientForm = new forms_1.FormGroup({
             CompanyName: this.CompanyName,
             Country: this.Country,
@@ -48,8 +47,7 @@ let NewClientComponent = class NewClientComponent {
             PhoneNumber: this.PhoneNumber,
             Website: this.Website,
             Industry: this.Industry,
-            UserName: this.UserName,
-            PasswordHash: this.PasswordHash
+            UserName: this.UserName
         });
     }
     newClient(value) {
@@ -62,8 +60,7 @@ let NewClientComponent = class NewClientComponent {
                 PhoneNumber: value.PhoneNumber,
                 Website: value.Website,
                 Industry: value.Industry,
-                UserName: value.UserName,
-                PasswordHash: value.PasswordHash
+                UserName: value.UserName
             };
             yield this.userService.newClient(newClient).then(res => {
                 if (res.result) {

@@ -22,13 +22,6 @@
                                 <label *ngIf="UserName.invalid && UserName.dirty">UserName is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':PasswordHash.invalid && PasswordHash.dirty}">
-                            <div class="md-form">
-                                <input formControlName="PasswordHash" type="password" id="PasswordHash" class="form-control">
-                                <label class="active" for="PasswordHash">PasswordHash</label>
-                                <label *ngIf="PasswordHash.invalid && PasswordHash.dirty">PasswordHash is required</label>
-                            </div>
-                        </div>
                         <div class="col-md-12" [ngClass]="{'error':CompanyName.invalid && CompanyName.dirty}">
                             <div class="md-form">
                                 <input formControlName="CompanyName" type="text" id="CompanyName" class="form-control">

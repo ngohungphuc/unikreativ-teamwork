@@ -24,35 +24,31 @@ namespace Unikreativ.Helper.Confirm
             Configuration = builder.Build();
         }
 
-        public Task SendEmail(EmailType emailType, string to, string callbackUrl)
+        public Task SendEmail(EmailType emailType, string to, string bodyContent)
         {
             var email = new Email
             {
                 SmtpServer = Configuration["Email:Server"],
                 SmtpPortNumber = int.Parse(Configuration["Email:Port"]),
                 FromEmail = Configuration["Email:From"],
-                ToEmail = to
+                ToEmail = to,
+                BodyContent = bodyContent
             };
             try
             {
                 switch (emailType)
                 {
                     case EmailType.ClientAccount:
+                    case EmailType.MemberAccount:
                         email.FromEmailTitle = "Account Register Confirmation";
                         email.ToEmailTitle = "Account Register Confirmation";
                         email.Subject = $"{to} - Account Register Confirmation";
-                        email.BodyContent =
-                            $"Welcome to Unikreative teamwork please follow this link <a href=\'{{callbackUrl}}\' target=\'_blank\' />{{callbackUrl}} </a> to activate your account";
-
                         break;
 
                     case EmailType.ResetPassword:
                         email.FromEmailTitle = "Password Reset";
                         email.ToEmailTitle = "Password Reset";
                         email.Subject = $"{to} - Password Reset";
-                        email.BodyContent =
-                             $"We receive your request to reset password. Follow this link <a href=\'{{callbackUrl}}\' target=\'_blank\' />{{callbackUrl}} </a> to update new password";
-
                         break;
                 }
 

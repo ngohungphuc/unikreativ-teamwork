@@ -8,5 +8,6 @@ namespace Unikreativ.Entities.Models.AccountViewModels
         public User User { get; set; }
         public string Code { get; set; }
         public string CallbackUrl { get; set; }
+        public string RandomPassword { get; set; }
     }
 }

@@ -46,7 +46,6 @@ export class NewClientComponent implements OnInit {
         this.Website = new FormControl('', Validators.required)
         this.Industry = new FormControl('', Validators.required)
         this.UserName = new FormControl('', Validators.required)
-        this.PasswordHash = new FormControl('', Validators.required)
 
 
         this.newClientForm = new FormGroup({
@@ -57,8 +56,7 @@ export class NewClientComponent implements OnInit {
             PhoneNumber: this.PhoneNumber,
             Website: this.Website,
             Industry: this.Industry,
-            UserName: this.UserName,
-            PasswordHash: this.PasswordHash
+            UserName: this.UserName
         })
 
     }
@@ -72,8 +70,7 @@ export class NewClientComponent implements OnInit {
             PhoneNumber: value.PhoneNumber,
             Website: value.Website,
             Industry: value.Industry,
-            UserName: value.UserName,
-            PasswordHash: value.PasswordHash
+            UserName: value.UserName
         }
 
         await this.userService.newClient(newClient).then(

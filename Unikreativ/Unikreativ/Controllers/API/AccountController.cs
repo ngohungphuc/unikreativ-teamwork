@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Unikreativ.Entities.Entities;
@@ -38,14 +39,23 @@ namespace Unikreativ.Controllers.API
             _accountServices = accountServices;
         }
 
-        [HttpGet]
-        [ValidModel]
-        public async Task<IActionResult> Confirm(ActivateAccountQueryParams queryParams)
-        {
-            if (queryParams == null) throw new ArgumentNullException("queryParams");
 
-            await _accountServices.ActivateAccount(queryParams);
-            return Redirect("http://localhost:60876");
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
+
     }
 }

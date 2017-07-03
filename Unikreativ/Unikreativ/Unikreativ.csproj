@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\app\modules\errors\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings.Development.json">
