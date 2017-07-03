@@ -28,19 +28,22 @@ namespace Unikreativ.Controllers.API
         private readonly IAccountServices _accountServices;
         private readonly ValidateAccount _validateAccount;
         private readonly IEmailSender _emailSender;
+        private readonly IEmailTemplateService _emailTemplateService;
 
         public AdminController(
             UserManager<User> userManager,
             IUserServices userServices,
             IAccountServices accountServices,
             ValidateAccount validateAccount,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+             IEmailTemplateService emailTemplateService)
         {
             _userManager = userManager;
             _userServices = userServices;
             _validateAccount = validateAccount;
             _emailSender = emailSender;
             _accountServices = accountServices;
+            _emailTemplateService = emailTemplateService;
         }
 
         #region Manage Account
@@ -130,6 +133,32 @@ namespace Unikreativ.Controllers.API
                 Code = code,
                 CallbackUrl = callbackUrl
             };
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+
+            //string bodyContent = await _emailTemplateService.RenderTemplateAsync<string>("Manage/ResetPasswordEmailTemplate.cshtml", resetPasswordUrl);
+
+            //await _messageService.SendAsync(_messageSender, new MessageContent()
+            //{
+            //    Recipients = new[] { user.Email },
+            //    Subject = "Reset Password",
+            //    HtmlContent = bodyContent
+            //});
         }
 
         #endregion Manage Account
