@@ -54,5 +54,16 @@ namespace Unikreativ.Repositories.Repositories
                 .ToListAsync();
             return client;
         }
+
+        public async Task<User> UpdateAccountInfo(User user, string key)
+        {
+            var account = _context.Users.Where(x => x.Id == key).AsNoTracking().FirstOrDefault();
+            if (account == null) return null;
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
     }
 }

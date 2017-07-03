@@ -33,21 +33,6 @@ namespace Unikreativ.Repositories.Repositories
             return newAccountRequest;
         }
 
-        public async Task<bool> ActivateAccount(ActivateAccountQueryParams queryParams)
-        {
-            var currentTime = DateTime.Today.Day;
-            var requestExist = _context.AccountRequests
-                .Where(
-                    request => request.Token == queryParams.Token
-                               && request.RequestTime.Day - currentTime > 0);
 
-            if (requestExist == null) return false;
-
-            var users = await _context.Users.FirstOrDefaultAsync(x => x.Email == queryParams.EmailTo);
-            users.EmailConfirmed = true;
-            await _context.SaveChangesAsync();
-
-            return true;
-        }
     }
 }

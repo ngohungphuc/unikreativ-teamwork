@@ -13,5 +13,7 @@ namespace Unikreativ.Services.Interface
         Task<List<Member>> GetTeamMembers();
 
         Task<List<Client>> GetClients();
+
+        Task<User> UpdateAccountInfo(User user, string key);
     }
 }

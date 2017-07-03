@@ -24,9 +24,5 @@ namespace Unikreativ.Services.Services
             return await _accountRepository.AddNewRequestAccount(email, token);
         }
 
-        public async Task<bool> ActivateAccount(ActivateAccountQueryParams queryParams)
-        {
-            return await _accountRepository.ActivateAccount(queryParams);
-        }
     }
 }

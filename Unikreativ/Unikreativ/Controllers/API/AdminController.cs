@@ -90,7 +90,8 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<IActionResult> UpdateClientInfo([FromBody] Client clientDto)
         {
-            await UpdateUserInfoAsync(clientDto);
+            var client = Mapper.Map<User>(clientDto);
+            await UpdateUserInfoAsync(client);
             return Json(new { result = true, msg = "Update Client success" });
         }
 
@@ -98,7 +99,8 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<IActionResult> UpdateMemberInfo([FromBody] Member memberDto)
         {
-            await UpdateUserInfoAsync(memberDto);
+            var member = Mapper.Map<User>(memberDto);
+            await UpdateUserInfoAsync(member);
             return Json(new { result = true, msg = "Update Member success" });
         }
 
@@ -114,14 +116,10 @@ namespace Unikreativ.Controllers.API
             return Json(new { result = true, msg = "Delete account success" });
         }
 
-        public async Task UpdateUserInfoAsync(dynamic accountDto)
-        {
-            var account = await _unitOfWork.UserRepository.GetByIdAsync(accountDto.Id);
-            if (account == null) throw new Exception("Account not exist");
 
-            var accountToUpdate = Mapper.Map<User>(accountDto);
-            await _unitOfWork.UserRepository.UpdateAsync(accountToUpdate, accountToUpdate.Id);
-        }
+        #endregion Manage Account
+
+        #region Private 
 
         private async Task<RegisterViewModel> CreateNewAccount(dynamic accountDto)
         {
@@ -149,8 +147,11 @@ namespace Unikreativ.Controllers.API
             };
         }
 
-
-
-        #endregion Manage Account
+        private async Task UpdateUserInfoAsync(dynamic accountDto)
+        {
+            if (accountDto == null) throw new Exception("Account not exist");
+            await _userServices.UpdateAccountInfo(accountDto, accountDto.Id);
+        }
+        #endregion
     }
 }

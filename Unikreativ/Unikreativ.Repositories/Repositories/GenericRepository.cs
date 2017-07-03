@@ -77,14 +77,10 @@ namespace Unikreativ.Repositories.Repositories
             if (updated == null)
                 return null;
 
-            T existing = _context.Set<T>().Find(key);
+            _context.Entry(updated).State = EntityState.Modified;
+            _context.SaveChanges();
 
-            if (existing != null)
-            {
-                _context.Entry(updated).State = EntityState.Modified;
-                _context.SaveChanges();
-            }
-            return existing;
+            return updated;
         }
 
         public async Task<T> UpdateAsync(T updated, string key)
@@ -92,14 +88,18 @@ namespace Unikreativ.Repositories.Repositories
             if (updated == null)
                 return null;
 
-            T existing = await _context.Set<T>().FindAsync(key);
-            if (existing != null)
+            try
             {
                 _context.Entry(updated).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
-            return existing;
+            return updated;
         }
 
         public void Delete(T t)
