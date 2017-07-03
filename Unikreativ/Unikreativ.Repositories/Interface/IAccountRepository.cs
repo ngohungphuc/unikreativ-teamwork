@@ -12,6 +12,5 @@ namespace Unikreativ.Repositories.Interface
     {
         Task<AccountRequest> AddNewRequestAccount(string email, string token);
 
-        Task<bool> ActivateAccount(ActivateAccountQueryParams queryParams);
     }
 }
