@@ -14,6 +14,6 @@ namespace Unikreativ.Repositories.Interface
 
         Task<List<Client>> GetClients();
 
-        Task<User> UpdateAccountInfo(User user, string key);
+
     }
 }

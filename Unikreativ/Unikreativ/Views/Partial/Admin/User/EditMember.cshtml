@@ -17,6 +17,13 @@
                 <div class="modal-body">
                     <div class="row">
                         <input type="hidden" #memberId name="Id" [value]="member.Id">
+                        <div class="col-md-12" [ngClass]="{'error':NormalizedUserName.invalid && NormalizedUserName.dirty}">
+                            <div class="md-form">
+                                <input [(ngModel)]="member.NormalizedUserName" formControlName="NormalizedUserName" value="{{member.NormalizedUserName}}" type="text" id="NormalizedUserName" class="form-control">
+                                <label class="active" for="NormalizedUserName">Alternate Name</label>
+                                <label *ngIf="NormalizedUserName.invalid && NormalizedUserName.dirty">Alternate Name is required</label>
+                            </div>
+                        </div>
                         <div class="col-md-12" [ngClass]="{'error':CompanyName.invalid && CompanyName.dirty}">
                             <div class="md-form">
                                 <input [(ngModel)]="member.CompanyName" formControlName="CompanyName" value="{{member.CompanyName}}" type="text" id="CompanyName" class="form-control">

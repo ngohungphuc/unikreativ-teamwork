@@ -41,7 +41,8 @@ export class EditMemberComponent implements OnInit {
             Email: this.Email,
             JobTitle: this.JobTitle,
             Role: this.Role,
-            ChargeRate: this.ChargeRate
+            ChargeRate: this.ChargeRate,
+            NormalizedUserName:this.NormalizedUserName
         })
     }
 
@@ -53,7 +54,8 @@ export class EditMemberComponent implements OnInit {
             PhoneNumber: value.PhoneNumber,
             JobTitle: value.JobTitle,
             Role: value.Role,
-            ChargeRate: value.ChargeRate
+            ChargeRate: value.ChargeRate,
+            NormalizedUserName:value.NormalizedUserName
         }
 
         await this

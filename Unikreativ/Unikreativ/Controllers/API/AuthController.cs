@@ -47,23 +47,28 @@ namespace Unikreativ.Controllers.API
             var result = await _signInManager.PasswordSignInAsync(userDto.Username, userDto.Password, false, true);
             if (result.IsLockedOut) AccountValidate.ValidationMessage("User account locked out.");
 
-            var requesAt = DateTime.Now;
-            var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
-
-            //need to pass user id for generate token
-            var token = TokenHelper.GenerateToken(user, expiresIn);
-
-            return JsonConvert.SerializeObject(new RequestResult
+            if (result.Succeeded)
             {
-                State = RequestState.Success,
-                Data = new
+                var requesAt = DateTime.Now;
+                var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
+
+                //need to pass user id for generate token
+                var token = TokenHelper.GenerateToken(user, expiresIn);
+
+                return JsonConvert.SerializeObject(new RequestResult
                 {
-                    requesAt,
-                    expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
-                    tokenType = TokenAuthOption.TokenType,
-                    accessToken = token
-                }
-            });
+                    State = RequestState.Success,
+                    Data = new
+                    {
+                        requesAt,
+                        expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
+                        tokenType = TokenAuthOption.TokenType,
+                        accessToken = token
+                    }
+                });
+            }
+            return AccountValidate.ValidationMessage("Account credentails is not valid"); ;
+
         }
 
         [HttpGet]

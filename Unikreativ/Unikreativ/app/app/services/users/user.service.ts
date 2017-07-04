@@ -8,7 +8,7 @@ export class UserService {
 
     constructor(private http : Http, private httpClientService : HttpClientService, private dataHandlerService : DataHandlerService, private authHttpService : AuthHttpServices) {
         // set token if save in local storage
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'))
     }
 
     getTeamMembers() {

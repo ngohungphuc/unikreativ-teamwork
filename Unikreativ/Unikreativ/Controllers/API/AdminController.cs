@@ -91,7 +91,7 @@ namespace Unikreativ.Controllers.API
         public async Task<IActionResult> UpdateClientInfo([FromBody] Client clientDto)
         {
             var client = await _unitOfWork.UserRepository.GetByIdAsync(clientDto.Id);
-            client = Mapper.Map<Client, User>(clientDto, client);
+            client = Mapper.Map(clientDto, client);
 
             await UpdateUserInfoAsync(client);
 
@@ -103,7 +103,7 @@ namespace Unikreativ.Controllers.API
         public async Task<IActionResult> UpdateMemberInfo([FromBody] Member memberDto)
         {
             var member = await _unitOfWork.UserRepository.GetByIdAsync(memberDto.Id);
-            member = Mapper.Map<Member, User>(memberDto, member);
+            member = Mapper.Map(memberDto, member);
 
             await UpdateUserInfoAsync(member);
 
@@ -152,10 +152,10 @@ namespace Unikreativ.Controllers.API
             };
         }
 
-        private async Task UpdateUserInfoAsync(User accountDto)
+        private async Task UpdateUserInfoAsync(User account)
         {
-            if (accountDto == null) throw new Exception("Account not exist");
-            await _userServices.UpdateAccountInfo(accountDto, accountDto.Id);
+            if (account == null) throw new Exception("Account null");
+            await _unitOfWork.UserRepository.UpdateAsync(account);
         }
 
         #endregion Private
