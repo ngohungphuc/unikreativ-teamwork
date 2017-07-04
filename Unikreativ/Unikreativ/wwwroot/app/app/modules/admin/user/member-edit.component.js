@@ -31,8 +31,8 @@ let EditMemberComponent = class EditMemberComponent {
         this.toastr = toastr;
     }
     ngOnInit() {
-        this.CompanyName = new forms_1.FormControl('', forms_1.Validators.required);
-        this.PhoneNumber = new forms_1.FormControl('', forms_1.Validators.required);
+        this.CompanyName = new forms_1.FormControl('');
+        this.PhoneNumber = new forms_1.FormControl('');
         this.Email = new forms_1.FormControl('', forms_1.Validators.required);
         this.JobTitle = new forms_1.FormControl('', forms_1.Validators.required);
         this.Role = new forms_1.FormControl('', forms_1.Validators.required);

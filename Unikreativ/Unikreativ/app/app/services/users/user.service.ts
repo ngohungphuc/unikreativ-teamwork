@@ -40,6 +40,13 @@ export class UserService {
             .authPost(url, client)
     }
 
+    newMember(member : any) {
+        let url = 'Admin/NewMember'
+        return this
+            .authHttpService
+            .authPost(url, member)
+    }
+
     updateClient(client : any) {
         let url = 'Admin/UpdateClientInfo'
         return this

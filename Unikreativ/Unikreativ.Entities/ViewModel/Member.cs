@@ -5,6 +5,7 @@ namespace Unikreativ.Entities.ViewModel
     public class Member
     {
         public string Id { get; set; }
+        public string UserName { get; set; }
         public string NormalizedUserName { get; set; }
         public string CompanyName { get; set; }
         public string Email { get; set; }

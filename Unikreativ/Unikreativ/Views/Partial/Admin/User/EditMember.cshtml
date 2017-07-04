@@ -24,11 +24,10 @@
                                 <label *ngIf="NormalizedUserName.invalid && NormalizedUserName.dirty">Alternate Name is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':CompanyName.invalid && CompanyName.dirty}">
+                        <div class="col-md-12" >
                             <div class="md-form">
                                 <input [(ngModel)]="member.CompanyName" formControlName="CompanyName" value="{{member.CompanyName}}" type="text" id="CompanyName" class="form-control">
                                 <label class="active" for="CompanyName">CompanyName</label>
-                                <label *ngIf="CompanyName.invalid && CompanyName.dirty">CompanyName is required</label>
                             </div>
                         </div>
                         <div class="col-md-12" [ngClass]="{'error':JobTitle.invalid && JobTitle.dirty}">
@@ -45,11 +44,10 @@
                                 <label *ngIf="Email.invalid && Email.dirty">Email is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':PhoneNumber.invalid && PhoneNumber.dirty}">
+                        <div class="col-md-12">
                             <div class="md-form">
                                 <input [(ngModel)]="member.PhoneNumber" formControlName="PhoneNumber" value="{{member.PhoneNumber}}" type="text" id="PhoneNumber" class="form-control">
                                 <label class="active" for="PhoneNumber">PhoneNumber</label>
-                                <label *ngIf="PhoneNumber.invalid && PhoneNumber.dirty">PhoneNumber is required</label>
                             </div>
                         </div>
                         <div class="col-md-12" [ngClass]="{'error':ChargeRate.invalid && ChargeRate.dirty}">
