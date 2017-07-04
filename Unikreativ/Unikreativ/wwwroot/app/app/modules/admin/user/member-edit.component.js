@@ -44,7 +44,8 @@ let EditMemberComponent = class EditMemberComponent {
             Email: this.Email,
             JobTitle: this.JobTitle,
             Role: this.Role,
-            ChargeRate: this.ChargeRate
+            ChargeRate: this.ChargeRate,
+            NormalizedUserName: this.NormalizedUserName
         });
     }
     editMemberInfo(value) {
@@ -56,7 +57,8 @@ let EditMemberComponent = class EditMemberComponent {
                 PhoneNumber: value.PhoneNumber,
                 JobTitle: value.JobTitle,
                 Role: value.Role,
-                ChargeRate: value.ChargeRate
+                ChargeRate: value.ChargeRate,
+                NormalizedUserName: value.NormalizedUserName
             };
             yield this
                 .userService

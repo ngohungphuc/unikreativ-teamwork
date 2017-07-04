@@ -72,32 +72,27 @@ namespace Unikreativ.Repositories.Repositories
             return entity;
         }
 
-        public T Update(T updated, string key)
+        public T Update(T updated)
         {
             if (updated == null)
                 return null;
 
+            _context.Set<T>().Attach(updated);
             _context.Entry(updated).State = EntityState.Modified;
             _context.SaveChanges();
 
             return updated;
         }
 
-        public async Task<T> UpdateAsync(T updated, string key)
+        public async Task<T> UpdateAsync(T updated)
         {
             if (updated == null)
                 return null;
 
-            try
-            {
-                _context.Entry(updated).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            _context.Set<T>().Attach(updated);
+            _context.Entry(updated).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
             return updated;
         }

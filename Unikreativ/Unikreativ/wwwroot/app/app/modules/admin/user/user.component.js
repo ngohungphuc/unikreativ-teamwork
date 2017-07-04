@@ -44,16 +44,16 @@ let UserComponent = class UserComponent {
     selectMember(member) {
         this.member = member;
     }
-    deleteClient(clientId) {
+    deleteClient(accountId) {
         return __awaiter(this, void 0, void 0, function* () {
             if (confirm('Are you sure to delete')) {
                 for (let i = 0; i < this.clients.length; i++) {
                     let clientToRemove = this.clients[i];
-                    if (clientToRemove.Id === clientId) {
-                        this.clients.splice(i, 1);
-                        yield this.userService.deleteAccount(clientId).then(res => {
+                    if (clientToRemove.Id === accountId) {
+                        yield this.userService.deleteAccount(accountId).then(res => {
                             if (res.result) {
                                 this.toastr.success(res.msg, 'Success');
+                                this.clients.splice(i, 1);
                             }
                             else
                                 this.toastr.error(res.msg, 'Error');

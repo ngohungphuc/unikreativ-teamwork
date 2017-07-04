@@ -30,9 +30,5 @@ namespace Unikreativ.Services.Services
             return await _userRepository.GetClients();
         }
 
-        public async Task<User> UpdateAccountInfo(User user, string key)
-        {
-            return await _userRepository.UpdateAccountInfo(user, key);
-        }
     }
 }

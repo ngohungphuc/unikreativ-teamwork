@@ -39,16 +39,16 @@ export class UserComponent implements OnInit {
         this.member = member
     }
 
-    async deleteClient(clientId: any) {
+    async deleteClient(accountId: any) {
         if (confirm('Are you sure to delete')) {
             for (let i = 0; i < this.clients.length; i++) {
                 let clientToRemove = this.clients[i]
-                if (clientToRemove.Id === clientId) {
-                    this.clients.splice(i, 1)
-                    await this.userService.deleteAccount(clientId).then(
+                if (clientToRemove.Id === accountId) {
+                    await this.userService.deleteAccount(accountId).then(
                         res => {
                             if (res.result) {
                                 this.toastr.success(res.msg, 'Success')
+                                this.clients.splice(i, 1)
                             }
                             else this.toastr.error(res.msg, 'Error')
                         }
