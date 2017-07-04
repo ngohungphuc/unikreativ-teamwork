@@ -45,6 +45,12 @@ let UserService = class UserService {
             .authHttpService
             .authPost(url, client);
     }
+    newMember(member) {
+        let url = 'Admin/NewMember';
+        return this
+            .authHttpService
+            .authPost(url, member);
+    }
     updateClient(client) {
         let url = 'Admin/UpdateClientInfo';
         return this

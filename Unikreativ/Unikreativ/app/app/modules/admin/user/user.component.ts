@@ -65,4 +65,8 @@ export class UserComponent implements OnInit {
     newClientCreated(newClient) {
         this.clients.push(newClient)
     }
+
+    newMemberCreated(newMember) {
+        this.teamMembers.push(newMember)
+    }
 }

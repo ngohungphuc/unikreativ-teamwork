@@ -28,8 +28,8 @@ export class EditMemberComponent implements OnInit {
     constructor(private userService : UserService, @Inject(Toastr_Token)private toastr : Toastr) {}
 
     ngOnInit() {
-        this.CompanyName = new FormControl('', Validators.required)
-        this.PhoneNumber = new FormControl('', Validators.required)
+        this.CompanyName = new FormControl('')
+        this.PhoneNumber = new FormControl('')
         this.Email = new FormControl('', Validators.required)
         this.JobTitle = new FormControl('', Validators.required)
         this.Role = new FormControl('', Validators.required)

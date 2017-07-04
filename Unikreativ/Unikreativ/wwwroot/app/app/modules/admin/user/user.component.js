@@ -67,6 +67,9 @@ let UserComponent = class UserComponent {
     newClientCreated(newClient) {
         this.clients.push(newClient);
     }
+    newMemberCreated(newMember) {
+        this.teamMembers.push(newMember);
+    }
 };
 UserComponent = __decorate([
     core_1.Component({
