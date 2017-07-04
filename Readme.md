@@ -42,3 +42,7 @@ This project will use the following technology
   http://www.dominikgorecki.com/2014/01/implementing-password-reset-in-mvc-4-ef-code-first-using-simple-membership-part-2/
 
   http://www.dominikgorecki.com/2013/10/mvc4-password-rese/		
+
+  http://adaodeveloper.blogspot.com/2014/02/update-model-with-entity-framework-and.html
+
+  https://visualstudiomagazine.com/blogs/tool-tracker/2013/11/updating--entities-with-automapper.aspx

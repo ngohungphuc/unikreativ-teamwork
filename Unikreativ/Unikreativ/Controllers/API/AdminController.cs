@@ -90,8 +90,11 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<IActionResult> UpdateClientInfo([FromBody] Client clientDto)
         {
-            var client = Mapper.Map<User>(clientDto);
+            var client = await _unitOfWork.UserRepository.GetByIdAsync(clientDto.Id);
+            client = Mapper.Map<Client, User>(clientDto, client);
+
             await UpdateUserInfoAsync(client);
+
             return Json(new { result = true, msg = "Update Client success" });
         }
 
@@ -99,8 +102,11 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<IActionResult> UpdateMemberInfo([FromBody] Member memberDto)
         {
-            var member = Mapper.Map<User>(memberDto);
+            var member = await _unitOfWork.UserRepository.GetByIdAsync(memberDto.Id);
+            member = Mapper.Map<Member, User>(memberDto, member);
+
             await UpdateUserInfoAsync(member);
+
             return Json(new { result = true, msg = "Update Member success" });
         }
 
@@ -116,10 +122,9 @@ namespace Unikreativ.Controllers.API
             return Json(new { result = true, msg = "Delete account success" });
         }
 
-
         #endregion Manage Account
 
-        #region Private 
+        #region Private
 
         private async Task<RegisterViewModel> CreateNewAccount(dynamic accountDto)
         {
@@ -128,8 +133,8 @@ namespace Unikreativ.Controllers.API
 
             var account = Mapper.Map<User>(accountDto);
 
-            if (await _validateAccount.CheckAccountExist(accountDto.UserName)) throw new Exception("Account already exist");
-            if (await _validateAccount.CheckEmailExist(accountDto.Email)) throw new Exception("Email already exist");
+            if (await _validateAccount.CheckAccountExist(accountDto.UserName) == true) throw new Exception("Account already exist");
+            if (await _validateAccount.CheckEmailExist(accountDto.Email) == true) throw new Exception("Email already exist");
 
             var randomPassword = GenerateToken.RandomString();
             var result = await _userManager.CreateAsync(account, randomPassword);
@@ -147,11 +152,12 @@ namespace Unikreativ.Controllers.API
             };
         }
 
-        private async Task UpdateUserInfoAsync(dynamic accountDto)
+        private async Task UpdateUserInfoAsync(User accountDto)
         {
             if (accountDto == null) throw new Exception("Account not exist");
             await _userServices.UpdateAccountInfo(accountDto, accountDto.Id);
         }
-        #endregion
+
+        #endregion Private
     }
 }
