@@ -19,13 +19,13 @@ namespace Unikreativ.Helper.Auth
         public async Task<bool> CheckAccountExist(string username)
         {
             var accountExist = await _userManager.FindByNameAsync(username);
-            return accountExist != null;
+            return accountExist != null ? true : false;
         }
 
         public async Task<bool> CheckEmailExist(string email)
         {
             var emailExist = await _userManager.FindByEmailAsync(email);
-            return emailExist != null;
+            return emailExist != null ? true : false;
         }
     }
 }
