@@ -5,27 +5,29 @@ import {
     Input,
     OnInit,
     ViewChild
-} from '@angular/core'
-import {FormControl, FormGroup, Validators} from '@angular/forms'
-import {Toastr, Toastr_Token} from '../../../extensions/toastr'
-import {UserService} from '../../../services/index'
+    } from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Toastr, Toastr_Token } from '../../../extensions/toastr'
+import { UserService } from '../../../services/index'
 
-@Component({selector: 'edit-client', templateUrl: 'partial/clientedit', providers: [UserService]})
+@Component({ selector: 'edit-client', templateUrl: 'partial/clientedit', providers: [UserService] })
 
 export class ClientEditComponent implements OnInit {
-    @Input()client : any[]
+    @Input() client: any[]
 
-    @ViewChild('clientId')clientId : ElementRef
+    @ViewChild('clientId') clientId: ElementRef
 
-    editClientInfoForm : FormGroup
-    CompanyName : FormControl
-    Country : FormControl
-    Address : FormControl
-    Email : FormControl
-    PhoneNumber : FormControl
-    Website : FormControl
-    Industry : FormControl
-    constructor(private userService : UserService, @Inject(Toastr_Token)private toastr : Toastr) {}
+    editClientInfoForm: FormGroup
+    CompanyName: FormControl
+    Country: FormControl
+    Address: FormControl
+    Email: FormControl
+    PhoneNumber: FormControl
+    Website: FormControl
+    Industry: FormControl
+    constructor(
+        private userService: UserService, 
+        @Inject(Toastr_Token) private toastr: Toastr) { }
 
     ngOnInit() {
         this.CompanyName = new FormControl('', Validators.required)
@@ -48,7 +50,7 @@ export class ClientEditComponent implements OnInit {
 
     }
 
-    async editClientInfo(value : any) {
+    async editClientInfo(value: any) {
         let client = {
             Id: this.clientId.nativeElement.value,
             CompanyName: value.CompanyName,

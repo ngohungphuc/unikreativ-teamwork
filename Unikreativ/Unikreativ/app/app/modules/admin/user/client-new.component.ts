@@ -20,7 +20,7 @@ import { UserService } from '../../../services/index'
 export class NewClientComponent implements OnInit {
     // emit event to user component when create new client
     @Output() newClientCreated = new EventEmitter()
-    
+
     newClientForm: FormGroup
     CompanyName: FormControl
     Country: FormControl

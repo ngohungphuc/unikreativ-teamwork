@@ -6,11 +6,15 @@ import {
     OnInit,
     Output
 } from '@angular/core'
-import {FormControl, FormGroup, Validators} from '@angular/forms'
-import {Toastr, Toastr_Token} from '../../../extensions/index'
-import {UserService} from '../../../services/index'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Toastr, Toastr_Token } from '../../../extensions/index'
+import { UserService } from '../../../services/index'
 
-@Component({selector: 'new-member', templateUrl: 'partial/newmember', providers: [UserService]})
+@Component({
+    selector: 'new-member',
+    templateUrl: 'partial/newmember',
+    providers: [UserService]
+})
 
 export class NewMemberComponent implements OnInit {
     @Output() newMemberCreated = new EventEmitter()
@@ -23,7 +27,9 @@ export class NewMemberComponent implements OnInit {
     Role: FormControl
     NormalizedUserName: FormControl
     ChargeRate: FormControl
-    constructor(private userService: UserService, @Inject(Toastr_Token)private toastr: Toastr) {}
+    constructor(
+        private userService: UserService,
+        @Inject(Toastr_Token) private toastr: Toastr) { }
 
     ngOnInit() {
         this.CompanyName = new FormControl('')
@@ -34,7 +40,7 @@ export class NewMemberComponent implements OnInit {
         this.ChargeRate = new FormControl('', Validators.required)
         this.NormalizedUserName = new FormControl('', Validators.required)
         this.Role = new FormControl('', Validators.required)
-    
+
         this.newMemberForm = new FormGroup({
             CompanyName: this.CompanyName,
             JobTitle: this.JobTitle,
@@ -54,9 +60,9 @@ export class NewMemberComponent implements OnInit {
             PhoneNumber: value.PhoneNumber,
             UserName: value.UserName,
             JobTitle: value.JobTitle,
-            ChargeRate:value.ChargeRate,
-            NormalizedUserName:value.NormalizedUserName,
-            Role:value.Role
+            ChargeRate: value.ChargeRate,
+            NormalizedUserName: value.NormalizedUserName,
+            Role: value.Role
         }
 
         await this
@@ -66,8 +72,8 @@ export class NewMemberComponent implements OnInit {
                 if (res.result) {
                     this.toastr.success(res.msg, 'Success')
                     this.newMemberCreated.emit(newMember)
-                } else 
+                } else
                     this.toastr.error(res.msg, 'Error')
-                })
+            })
     }
 }
