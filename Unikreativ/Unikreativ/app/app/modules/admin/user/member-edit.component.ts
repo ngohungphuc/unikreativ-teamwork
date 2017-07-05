@@ -6,26 +6,26 @@ import {
     OnInit,
     Output
 } from '@angular/core'
-import {FormControl, FormGroup, Validators} from '@angular/forms'
-import {Toastr, Toastr_Token} from '../../../extensions/index'
-import {UserService} from '../../../services/index'
-import {ViewChild, ElementRef} from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Toastr, Toastr_Token } from '../../../extensions/index'
+import { UserService } from '../../../services/index'
+import { ViewChild, ElementRef } from '@angular/core'
 
-@Component({selector: 'edit-member', templateUrl: 'partial/editmember', providers: [UserService]})
+@Component({ selector: 'edit-member', templateUrl: 'partial/editmember', providers: [UserService] })
 
 export class EditMemberComponent implements OnInit {
-    @Input()member : any[]
-    @ViewChild('memberId')memberId : ElementRef
+    @Input() member: any[]
+    @ViewChild('memberId') memberId: ElementRef
 
-    editMemberInfoForm : FormGroup
-    CompanyName : FormControl
-    Email : FormControl
-    PhoneNumber : FormControl
-    JobTitle : FormControl
-    Role : FormControl
-    ChargeRate : FormControl
+    editMemberInfoForm: FormGroup
+    CompanyName: FormControl
+    Email: FormControl
+    PhoneNumber: FormControl
+    JobTitle: FormControl
+    Role: FormControl
+    ChargeRate: FormControl
     NormalizedUserName: FormControl
-    constructor(private userService : UserService, @Inject(Toastr_Token)private toastr : Toastr) {}
+    constructor(private userService: UserService, @Inject(Toastr_Token) private toastr: Toastr) { }
 
     ngOnInit() {
         this.CompanyName = new FormControl('')
@@ -42,11 +42,11 @@ export class EditMemberComponent implements OnInit {
             JobTitle: this.JobTitle,
             Role: this.Role,
             ChargeRate: this.ChargeRate,
-            NormalizedUserName:this.NormalizedUserName
+            NormalizedUserName: this.NormalizedUserName
         })
     }
 
-    async editMemberInfo(value : any) {
+    async editMemberInfo(value: any) {
         let member = {
             Id: this.memberId.nativeElement.value,
             CompanyName: value.CompanyName,
@@ -55,7 +55,7 @@ export class EditMemberComponent implements OnInit {
             JobTitle: value.JobTitle,
             Role: value.Role,
             ChargeRate: value.ChargeRate,
-            NormalizedUserName:value.NormalizedUserName
+            NormalizedUserName: value.NormalizedUserName
         }
 
         await this

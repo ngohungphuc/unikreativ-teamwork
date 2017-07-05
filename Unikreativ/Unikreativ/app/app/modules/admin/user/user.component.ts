@@ -15,7 +15,8 @@ export class UserComponent implements OnInit {
     // dual binding data
     client: any[]
     member: any[]
-    constructor(private userService: UserService,
+    constructor(
+        private userService: UserService,
         @Inject(Toastr_Token) private toastr: Toastr) {
     }
 

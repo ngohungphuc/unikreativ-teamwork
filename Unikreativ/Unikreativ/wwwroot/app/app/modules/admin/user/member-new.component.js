@@ -81,7 +81,11 @@ __decorate([
     __metadata("design:type", Object)
 ], NewMemberComponent.prototype, "newMemberCreated", void 0);
 NewMemberComponent = __decorate([
-    core_1.Component({ selector: 'new-member', templateUrl: 'partial/newmember', providers: [index_2.UserService] }),
+    core_1.Component({
+        selector: 'new-member',
+        templateUrl: 'partial/newmember',
+        providers: [index_2.UserService]
+    }),
     __param(1, core_1.Inject(index_1.Toastr_Token)),
     __metadata("design:paramtypes", [index_2.UserService, Object])
 ], NewMemberComponent);
