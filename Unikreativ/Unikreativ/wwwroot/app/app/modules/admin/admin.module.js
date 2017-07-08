@@ -14,6 +14,7 @@ const platform_browser_1 = require("@angular/platform-browser");
 const forms_1 = require("@angular/forms");
 const nav_module_1 = require("./../template/nav.module");
 const core_1 = require("@angular/core");
+const project_service_1 = require("../../services/project/project.service");
 let AdminModule = class AdminModule {
 };
 AdminModule = __decorate([
@@ -27,9 +28,11 @@ AdminModule = __decorate([
             index_1.NewClientComponent,
             index_1.ClientEditComponent,
             index_1.NewMemberComponent,
-            index_1.EditMemberComponent
+            index_1.EditMemberComponent,
+            index_1.ProjectComponent,
+            index_1.NewProjectComponent
         ],
-        providers: [auth_guard_1.AuthGuard, index_2.UserService, index_2.AuthHttpServices]
+        providers: [auth_guard_1.AuthGuard, index_2.UserService, project_service_1.ProjectService, index_2.AuthHttpServices]
     })
 ], AdminModule);
 exports.AdminModule = AdminModule;

@@ -38,38 +38,6 @@ namespace Unikreativ.Entities.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AccountRequests",
-                columns: table => new
-                {
-                    RequestId = table.Column<Guid>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    RequestTime = table.Column<DateTime>(nullable: false),
-                    Token = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AccountRequests", x => x.RequestId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    AgreementDate = table.Column<DateTime>(nullable: false),
-                    BillingId = table.Column<string>(nullable: true),
-                    ClientId = table.Column<string>(nullable: true),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    EventId = table.Column<string>(nullable: true),
-                    ProjectDescription = table.Column<string>(nullable: true),
-                    ProjectName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -122,26 +90,6 @@ namespace Unikreativ.Entities.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SubTasks",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    ProjectId = table.Column<Guid>(nullable: true),
-                    SubTaskName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SubTasks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SubTasks_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -207,6 +155,48 @@ namespace Unikreativ.Entities.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    AgreementDate = table.Column<DateTime>(nullable: false),
+                    ClientId = table.Column<string>(nullable: true),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    ProjectDescription = table.Column<string>(nullable: true),
+                    ProjectName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Projects_AspNetUsers_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SubTasks",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    ProjectId = table.Column<Guid>(nullable: true),
+                    SubTaskName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubTasks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SubTasks_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -391,6 +381,11 @@ namespace Unikreativ.Entities.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Projects_ClientId",
+                table: "Projects",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SubTasks_ProjectId",
                 table: "SubTasks",
                 column: "ProjectId");
@@ -435,9 +430,6 @@ namespace Unikreativ.Entities.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AccountRequests");
-
-            migrationBuilder.DropTable(
                 name: "Billings");
 
             migrationBuilder.DropTable(
@@ -453,13 +445,13 @@ namespace Unikreativ.Entities.Migrations
                 name: "TasksRequests");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "SubTasks");
 
             migrationBuilder.DropTable(
                 name: "Projects");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

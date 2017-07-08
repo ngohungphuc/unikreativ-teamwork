@@ -18,21 +18,5 @@ namespace Unikreativ.Repositories.Repositories
             _context = context;
         }
 
-        public async Task<AccountRequest> AddNewRequestAccount(string email, string token)
-        {
-            var newAccountRequest = new AccountRequest
-            {
-                Email = email,
-                Token = token,
-                RequestTime = DateTime.Today
-            };
-
-            await _context.AccountRequests.AddAsync(newAccountRequest);
-            await _context.SaveChangesAsync();
-
-            return newAccountRequest;
-        }
-
-
     }
 }

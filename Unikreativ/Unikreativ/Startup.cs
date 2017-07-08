@@ -99,7 +99,8 @@ namespace Unikreativ
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IAccountServices, AccountServices>();
-
+            services.AddTransient<IEventService, EventSerivce>();
+            services.AddTransient<IEventRepository, EventRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -192,6 +193,7 @@ namespace Unikreativ
             {
                 cfg.CreateMap<Client, User>();
                 cfg.CreateMap<Member, User>();
+                cfg.CreateMap<ProjectViewModel, Project>();
             });
 
             #endregion Mapper

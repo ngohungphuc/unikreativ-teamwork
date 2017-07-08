@@ -19,10 +19,7 @@ namespace Unikreativ.Services.Services
             _accountRepository = accountRepository;
         }
 
-        public async Task<AccountRequest> AddNewRequestAccount(string email, string token)
-        {
-            return await _accountRepository.AddNewRequestAccount(email, token);
-        }
+
 
     }
 }

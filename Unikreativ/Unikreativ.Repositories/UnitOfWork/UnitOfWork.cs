@@ -9,7 +9,8 @@ namespace Unikreativ.Repositories.UnitOfWork
     {
         private ApplicationDbContext _dbContext;
         private GenericRepository<User> _userRepository;
-
+        private GenericRepository<Project> _projectRepository;
+        private GenericRepository<Event> _eventRepository;
         public UnitOfWork() : this(new ApplicationDbContext())
         {
         }
@@ -19,18 +20,11 @@ namespace Unikreativ.Repositories.UnitOfWork
             _dbContext = dbContext;
         }
 
-        public GenericRepository<User> UserRepository
-        {
-            get
-            {
-                if (this._userRepository == null)
-                {
-                    this._userRepository = new GenericRepository<User>(_dbContext);
-                }
-                return _userRepository;
-            }
-        }
+        public GenericRepository<User> UserRepository => _userRepository ?? (_userRepository = new GenericRepository<User>(_dbContext));
 
+        public GenericRepository<Project> ProjectRepository => _projectRepository ?? (_projectRepository = new GenericRepository<Project>(_dbContext));
+
+        public GenericRepository<Event> EventRepository => _eventRepository ?? (_eventRepository = new GenericRepository<Event>(_dbContext));
         /// <summary>
         /// Saves all pending changes
         /// </summary>

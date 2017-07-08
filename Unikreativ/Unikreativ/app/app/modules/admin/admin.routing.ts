@@ -1,6 +1,7 @@
 import { AdminComponent } from './admin.component'
 import { AuthGuard } from './../../extensions/guard/auth.guard'
 import { NgModule } from '@angular/core'
+import { ProjectComponent } from './project/project.component'
 import { RouterModule, Routes } from '@angular/router'
 import { UserComponent } from './user/user.component'
 
@@ -14,6 +15,10 @@ export const adminRoutes: Routes = [
             {
                 path: 'people',
                 component: UserComponent
+            },
+            {
+                path:'project',
+                component:ProjectComponent
             }
         ]
     },

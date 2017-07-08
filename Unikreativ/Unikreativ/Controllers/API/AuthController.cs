@@ -41,33 +41,30 @@ namespace Unikreativ.Controllers.API
         {
             var user = await _userManager.FindByNameAsync(userDto.Username);
 
-            if (user == null) AccountValidate.ValidationMessage("User account not exists");
-            if (!await _userManager.IsEmailConfirmedAsync(user)) AccountValidate.ValidationMessage("You must have a confirmed email to log in.");
+            if (user == null) return AccountValidate.ValidationMessage("User account not exists");
+            if (!await _userManager.IsEmailConfirmedAsync(user)) return AccountValidate.ValidationMessage("You must have a confirmed email to log in.");
 
             var result = await _signInManager.PasswordSignInAsync(userDto.Username, userDto.Password, false, true);
-            if (result.IsLockedOut) AccountValidate.ValidationMessage("User account locked out.");
+            if (result.IsLockedOut) return AccountValidate.ValidationMessage("User account locked out.");
 
-            if (result.Succeeded)
+            if (!result.Succeeded) return AccountValidate.ValidationMessage("Account credentails is not valid");
+            var requesAt = DateTime.Now;
+            var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
+
+            //need to pass user id for generate token
+            var token = TokenHelper.GenerateToken(user, expiresIn);
+
+            return JsonConvert.SerializeObject(new RequestResult
             {
-                var requesAt = DateTime.Now;
-                var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
-
-                //need to pass user id for generate token
-                var token = TokenHelper.GenerateToken(user, expiresIn);
-
-                return JsonConvert.SerializeObject(new RequestResult
+                State = RequestState.Success,
+                Data = new
                 {
-                    State = RequestState.Success,
-                    Data = new
-                    {
-                        requesAt,
-                        expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
-                        tokenType = TokenAuthOption.TokenType,
-                        accessToken = token
-                    }
-                });
-            }
-            return AccountValidate.ValidationMessage("Account credentails is not valid"); ;
+                    requesAt,
+                    expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
+                    tokenType = TokenAuthOption.TokenType,
+                    accessToken = token
+                }
+            });
 
         }
 
