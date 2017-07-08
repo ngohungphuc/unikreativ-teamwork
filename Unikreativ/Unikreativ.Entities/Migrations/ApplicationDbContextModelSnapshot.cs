@@ -123,22 +123,6 @@ namespace Unikreativ.Entities.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Unikreativ.Entities.Entities.AccountRequest", b =>
-                {
-                    b.Property<Guid>("RequestId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.Property<DateTime>("RequestTime");
-
-                    b.Property<string>("Token");
-
-                    b.HasKey("RequestId");
-
-                    b.ToTable("AccountRequests");
-                });
-
             modelBuilder.Entity("Unikreativ.Entities.Entities.Billing", b =>
                 {
                     b.Property<Guid>("Id")
@@ -229,19 +213,17 @@ namespace Unikreativ.Entities.Migrations
 
                     b.Property<DateTime>("AgreementDate");
 
-                    b.Property<string>("BillingId");
-
                     b.Property<string>("ClientId");
 
                     b.Property<DateTime>("DateModified");
-
-                    b.Property<string>("EventId");
 
                     b.Property<string>("ProjectDescription");
 
                     b.Property<string>("ProjectName");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.ToTable("Projects");
                 });
@@ -439,6 +421,13 @@ namespace Unikreativ.Entities.Migrations
                     b.HasOne("Unikreativ.Entities.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Unikreativ.Entities.Entities.Project", b =>
+                {
+                    b.HasOne("Unikreativ.Entities.Entities.User", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("Unikreativ.Entities.Entities.SubTask", b =>

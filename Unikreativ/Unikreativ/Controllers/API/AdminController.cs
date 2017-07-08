@@ -61,7 +61,7 @@ namespace Unikreativ.Controllers.API
                 SignupUrl = account.CallbackUrl,
                 RandomPassword = account.RandomPassword
             };
-            var bodyContent = await _emailTemplateService.RenderTemplateAsync("Account/AccountConfirm.cshtml", signUpInfo);
+            string bodyContent = await _emailTemplateService.RenderTemplateAsync("Account/AccountConfirm.cshtml", signUpInfo);
             await _emailSender.SendEmail(EmailType.ClientAccount, clientDto.Email, bodyContent);
 
             return Json(new { result = true, msg = "Create new client success" });
@@ -80,7 +80,7 @@ namespace Unikreativ.Controllers.API
                 SignupUrl = account.CallbackUrl,
                 RandomPassword = account.RandomPassword
             };
-            var bodyContent = await _emailTemplateService.RenderTemplateAsync("Account/AccountConfirm.cshtml", signUpInfo);
+            string bodyContent = await _emailTemplateService.RenderTemplateAsync("Account/AccountConfirm.cshtml", signUpInfo);
             await _emailSender.SendEmail(EmailType.MemberAccount, memberDto.Email, bodyContent);
 
             return Json(new { result = true, msg = "Create new member success", accountId = account.User.Id });
@@ -123,6 +123,7 @@ namespace Unikreativ.Controllers.API
         }
 
         #endregion Manage Account
+
 
         #region Private
 

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Unikreativ.Entities.Entities;
-using Unikreativ.Entities.Params;
 
 namespace Unikreativ.Services.Interface
 {
-    public interface IAccountServices
+    public interface IEventService
     {
-
-
+        Task<Event> AddEventAsync(ClaimsIdentity user, Project projectInfo);
     }
 }

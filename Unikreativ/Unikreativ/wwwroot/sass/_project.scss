@@ -1,0 +1,14 @@
+#project-page {
+    #activity-panel {
+        .list-group {
+            box-shadow: none;
+            .list-group-item {
+                border-left: none;
+                border-right: none;
+            }
+        }
+    }
+    #addProjectBtn {
+        float: right;
+    }
+}

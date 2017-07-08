@@ -25,6 +25,10 @@ namespace Unikreativ.Controllers.SPA
         public IActionResult NewMember() => PartialView("~/Views/Partial/Admin/User/NewMember.cshtml");
         
         public IActionResult EditMember() => PartialView("~/Views/Partial/Admin/User/EditMember.cshtml");
+
+        public IActionResult Project() => PartialView("~/Views/Partial/Admin/Project/Project.cshtml");
+        
+                public IActionResult NewProject() => PartialView("~/Views/Partial/Admin/Project/NewProject.cshtml");
         #endregion Admin
 
         #region Errors
