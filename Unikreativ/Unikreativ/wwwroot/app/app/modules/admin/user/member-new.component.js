@@ -24,6 +24,7 @@ const core_1 = require("@angular/core");
 const forms_1 = require("@angular/forms");
 const index_1 = require("../../../extensions/index");
 const index_2 = require("../../../services/index");
+const RequestState_1 = require("../../../model/RequestState");
 let NewMemberComponent = class NewMemberComponent {
     constructor(userService, toastr) {
         this.userService = userService;
@@ -66,12 +67,13 @@ let NewMemberComponent = class NewMemberComponent {
                 .userService
                 .newMember(newMember)
                 .then(res => {
-                if (res.result) {
-                    this.toastr.success(res.msg, 'Success');
+                console.log(res);
+                if (res.State === RequestState_1.RequestState.Success) {
+                    this.toastr.success(res.Msg, 'Success');
                     this.newMemberCreated.emit(newMember);
                 }
                 else
-                    this.toastr.error(res.msg, 'Error');
+                    this.toastr.error(res.Msg, 'Error');
             });
         });
     }

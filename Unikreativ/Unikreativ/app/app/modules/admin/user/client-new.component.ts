@@ -9,6 +9,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Toastr, Toastr_Token } from '../../../extensions/index'
 import { UserService } from '../../../services/index'
+import { RequestState } from '../../../model/RequestState'
 @Component({
     selector: 'new-client',
     templateUrl: 'partial/clientnew',
@@ -75,8 +76,8 @@ export class NewClientComponent implements OnInit {
 
         await this.userService.newClient(newClient).then(
             res => {
-                if (res.result) {
-                    this.toastr.success(res.msg, 'Success')
+                if (res.State === RequestState.Success) {
+                    this.toastr.success(res.Msg, 'Success')
                     this.newClientCreated.emit(newClient)
                 }
                 else this.toastr.error(res.msg, 'Error')

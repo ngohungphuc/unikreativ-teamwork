@@ -24,6 +24,7 @@ const core_1 = require("@angular/core");
 const forms_1 = require("@angular/forms");
 const index_1 = require("../../../extensions/index");
 const index_2 = require("../../../services/index");
+const RequestState_1 = require("../../../model/RequestState");
 let NewClientComponent = class NewClientComponent {
     constructor(userService, toastr) {
         this.userService = userService;
@@ -63,8 +64,8 @@ let NewClientComponent = class NewClientComponent {
                 UserName: value.UserName
             };
             yield this.userService.newClient(newClient).then(res => {
-                if (res.result) {
-                    this.toastr.success(res.msg, 'Success');
+                if (res.State === RequestState_1.RequestState.Success) {
+                    this.toastr.success(res.Msg, 'Success');
                     this.newClientCreated.emit(newClient);
                 }
                 else
