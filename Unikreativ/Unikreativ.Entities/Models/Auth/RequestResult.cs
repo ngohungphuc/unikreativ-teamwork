@@ -6,7 +6,7 @@ namespace Unikreativ.Entities.Models.Auth
     {
         public RequestState State { get; set; }
         public string Msg { get; set; }
-        public Object Data { get; set; }
+        public object Data { get; set; }
     }
 
     public enum RequestState

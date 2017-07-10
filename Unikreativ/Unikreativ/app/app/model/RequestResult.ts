@@ -3,3 +3,4 @@ export class RequestResult {
     Msg: string
     Data: Object
 }
+

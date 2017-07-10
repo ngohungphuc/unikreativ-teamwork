@@ -9,6 +9,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Toastr, Toastr_Token } from '../../../extensions/index'
 import { UserService } from '../../../services/index'
+import { RequestState } from '../../../model/RequestState'
 
 @Component({
     selector: 'new-member',
@@ -69,11 +70,12 @@ export class NewMemberComponent implements OnInit {
             .userService
             .newMember(newMember)
             .then(res => {
-                if (res.result) {
-                    this.toastr.success(res.msg, 'Success')
+                console.log(res)
+                if (res.State === RequestState.Success) {
+                    this.toastr.success(res.Msg, 'Success')
                     this.newMemberCreated.emit(newMember)
                 } else
-                    this.toastr.error(res.msg, 'Error')
+                    this.toastr.error(res.Msg, 'Error')
             })
     }
 }

@@ -41,13 +41,13 @@ namespace Unikreativ.Controllers.API
         {
             var user = await _userManager.FindByNameAsync(userDto.Username);
 
-            if (user == null) return AccountValidate.ValidationMessage("User account not exists");
-            if (!await _userManager.IsEmailConfirmedAsync(user)) return AccountValidate.ValidationMessage("You must have a confirmed email to log in.");
+            if (user == null) return AccountValidate.ValidationMessage(RequestState.Failed, "User account not exists");
+            if (!await _userManager.IsEmailConfirmedAsync(user)) return AccountValidate.ValidationMessage(RequestState.Failed, "You must have a confirmed email to log in.");
 
             var result = await _signInManager.PasswordSignInAsync(userDto.Username, userDto.Password, false, true);
-            if (result.IsLockedOut) return AccountValidate.ValidationMessage("User account locked out.");
+            if (result.IsLockedOut) return AccountValidate.ValidationMessage(RequestState.Failed, "User account locked out.");
 
-            if (!result.Succeeded) return AccountValidate.ValidationMessage("Account credentails is not valid");
+            if (!result.Succeeded) return AccountValidate.ValidationMessage(RequestState.Failed, "Account credentails is not valid");
             var requesAt = DateTime.Now;
             var expiresIn = requesAt + TokenAuthOption.ExpiresSpan;
 

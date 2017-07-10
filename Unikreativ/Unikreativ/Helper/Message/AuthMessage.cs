@@ -9,11 +9,11 @@ namespace Unikreativ.Helper.Message
 {
     public static class AccountValidate
     {
-        public static string ValidationMessage(string message)
+        public static string ValidationMessage(RequestState state, string message)
         {
             return JsonConvert.SerializeObject(new RequestResult
             {
-                State = RequestState.Failed,
+                State = state,
                 Msg = message
             });
         }

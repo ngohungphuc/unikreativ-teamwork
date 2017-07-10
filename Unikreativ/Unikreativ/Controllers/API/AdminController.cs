@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.Models;
 using Unikreativ.Entities.Models.AccountViewModels;
+using Unikreativ.Entities.Models.Auth;
 using Unikreativ.Entities.Params;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Filter;
@@ -14,6 +15,7 @@ using Unikreativ.Repositories.UnitOfWork;
 using Unikreativ.Services.Interface;
 using Unikreativ.Helper.Auth;
 using Unikreativ.Helper.Confirm;
+using Unikreativ.Helper.Message;
 using Unikreativ.Helper.Security;
 
 namespace Unikreativ.Controllers.API
@@ -50,7 +52,7 @@ namespace Unikreativ.Controllers.API
 
         [HttpPost]
         [ValidModel]
-        public async Task<IActionResult> NewClient([FromBody] Client clientDto)
+        public async Task<string> NewClient([FromBody] Client clientDto)
         {
             var account = await CreateNewAccount(clientDto);
 
@@ -61,15 +63,17 @@ namespace Unikreativ.Controllers.API
                 SignupUrl = account.CallbackUrl,
                 RandomPassword = account.RandomPassword
             };
+
             string bodyContent = await _emailTemplateService.RenderTemplateAsync("Account/AccountConfirm.cshtml", signUpInfo);
             await _emailSender.SendEmail(EmailType.ClientAccount, clientDto.Email, bodyContent);
 
-            return Json(new { result = true, msg = "Create new client success" });
+            return AccountValidate.ValidationMessage(RequestState.Success, "Create new client success");
+
         }
 
         [HttpPost]
         [ValidModel]
-        public async Task<IActionResult> NewMember([FromBody] Member memberDto)
+        public async Task<string> NewMember([FromBody] Member memberDto)
         {
             var account = await CreateNewAccount(memberDto);
 
@@ -83,43 +87,43 @@ namespace Unikreativ.Controllers.API
             string bodyContent = await _emailTemplateService.RenderTemplateAsync("Account/AccountConfirm.cshtml", signUpInfo);
             await _emailSender.SendEmail(EmailType.MemberAccount, memberDto.Email, bodyContent);
 
-            return Json(new { result = true, msg = "Create new member success", accountId = account.User.Id });
+            return AccountValidate.ValidationMessage(RequestState.Success, "Create new member success");
         }
 
         [HttpPut]
         [ValidModel]
-        public async Task<IActionResult> UpdateClientInfo([FromBody] Client clientDto)
+        public async Task<string> UpdateClientInfo([FromBody] Client clientDto)
         {
             var client = await _unitOfWork.UserRepository.GetByIdAsync(clientDto.Id);
             client = Mapper.Map(clientDto, client);
 
             await UpdateUserInfoAsync(client);
 
-            return Json(new { result = true, msg = "Update Client success" });
+            return AccountValidate.ValidationMessage(RequestState.Success, "Update Client success");
         }
 
         [HttpPut]
         [ValidModel]
-        public async Task<IActionResult> UpdateMemberInfo([FromBody] Member memberDto)
+        public async Task<string> UpdateMemberInfo([FromBody] Member memberDto)
         {
             var member = await _unitOfWork.UserRepository.GetByIdAsync(memberDto.Id);
             member = Mapper.Map(memberDto, member);
 
             await UpdateUserInfoAsync(member);
 
-            return Json(new { result = true, msg = "Update Member success" });
+            return AccountValidate.ValidationMessage(RequestState.Success, "Update Member success");
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> DeleteAccount(string id)
+        public async Task<string> DeleteAccount(string id)
         {
             if (id == null) throw new ArgumentNullException(nameof(id));
 
             var clientToDelete = await _unitOfWork.UserRepository.GetByIdAsync(id);
             await _unitOfWork.UserRepository.DeleteAsync(clientToDelete);
 
-            return Json(new { result = true, msg = "Delete account success" });
+            return AccountValidate.ValidationMessage(RequestState.Success, "Delete account success");
         }
 
         #endregion Manage Account
