@@ -15,26 +15,29 @@
                 <!--Body-->
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-12" [ngClass]="{'error':ProjectName.invalid && ProjectName.dirty}">
+                        <div class="col-md-12">
                             <div class="md-form">
-                                <input formControlName="ProjectName" type="text" id="ProjectName" class="form-control">
-                                <label class="active" for="ProjectName">Project Name</label>
-                                <label *ngIf="ProjectName.invalid && ProjectName.dirty">Project Name is required</label>
+                                <input formControlName="projectName" type="text" id="projectName" class="form-control">
+                                <label class="active" for="projectName">Project Name</label>
+                                <label *ngIf="newProjectForm.get('projectName').touched && newProjectForm.get('projectName').hasError('required')">Project Name is required</label>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':ClientName.invalid && ClientName.dirty}">
+                        <div class="col-md-12">
                             <div class="md-form">
-                                <input formControlName="ClientName" type="text" id="ClientName" class="form-control">
-                                <label class="active" for="ClientName">Client Name</label>
-                                <label *ngIf="ClientName.invalid && ClientName.dirty">Client Name is required</label>
+                                <input formControlName="user" type="text" id="user" #clientName class="form-control" (keyup)="searchClients(clientName.value)">
+                                <label class="active" for="user">Client Name</label>
+                                <label *ngIf="newProjectForm.get('user').touched && newProjectForm.get('user').hasError('required')">Client Name is required</label>
+                                <ul class="list-group" *ngIf="showResult">
+                                    <li *ngFor="let client of clientList" class="list-group-item">{{client.UserName}} - Company {{client.CompanyName}}</li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-md-12" [ngClass]="{'error':ProjectDescription.invalid && ProjectDescription.dirty}">
+                        <div class="col-md-12">
                             <div class="md-form">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea formControlName="ProjectDescription" type="text" id="ProjectDescription" class="md-textarea"></textarea>
-                                <label class="active" for="ProjectDescription">Project Description </label>
-                                <label *ngIf="ProjectDescription.invalid && ProjectDescription.dirty">Project Description is required</label>
+                                <textarea formControlName="projectDescription" type="text" id="projectDescription" class="md-textarea"></textarea>
+                                <label class="active" for="projectDescription">Project Description </label>
+                                <label *ngIf="newProjectForm.get('projectDescription').touched && newProjectForm.get('projectDescription').hasError('required')">Project Description is required</label>
                             </div>
                         </div>
                     </div>

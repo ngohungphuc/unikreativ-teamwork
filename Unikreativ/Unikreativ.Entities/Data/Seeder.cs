@@ -51,7 +51,7 @@ namespace Unikreativ.Entities.Data
                 Industry = "Technology"
             };
 
-            var client = new User
+            var kms = new User
             {
                 Email = "kmstechnology@com.vn",
                 UserName = "kms",
@@ -63,6 +63,22 @@ namespace Unikreativ.Entities.Data
                 PhoneNumberConfirmed = true,
                 LockoutEnabled = false,
                 PhoneNumber = "(+84) 8 3811 9977",
+                SecurityStamp = Guid.NewGuid().ToString(),
+                Industry = "Technology"
+            };
+
+            var nash = new User
+            {
+                Email = "nashtech@com.vn",
+                UserName = "nashtech",
+                Address = "ETown 1 Cộng Hòa Quận Tân Bình",
+                Country = "UK",
+                CompanyName = "NashTech",
+                Website = "http://www.nashtech.com/",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                LockoutEnabled = false,
+                PhoneNumber = "1234567",
                 SecurityStamp = Guid.NewGuid().ToString(),
                 Industry = "Technology"
             };
@@ -85,8 +101,8 @@ namespace Unikreativ.Entities.Data
                 var password = new PasswordHasher<User>();
                 helen.PasswordHash = password.HashPassword(helen, "tranmaiphuong2609");
                 tony.PasswordHash = password.HashPassword(tony, "tony95");
-                client.PasswordHash = password.HashPassword(client, "kms123");
-
+                kms.PasswordHash = password.HashPassword(kms, "kms123");
+                nash.PasswordHash = password.HashPassword(nash, "nash123");
                 var userStore = new UserStore<User>(_context);
 
                 await userStore.CreateAsync(helen);
@@ -95,8 +111,12 @@ namespace Unikreativ.Entities.Data
                 await userStore.CreateAsync(tony);
                 await userStore.AddToRoleAsync(tony, "Developer");
 
-                await userStore.CreateAsync(client);
-                await userStore.AddToRoleAsync(client, "Client");
+                await userStore.CreateAsync(kms);
+                await userStore.AddToRoleAsync(kms, "Client");
+
+
+                await userStore.CreateAsync(nash);
+                await userStore.AddToRoleAsync(nash, "Client");
             }
 
             await _context.SaveChangesAsync();

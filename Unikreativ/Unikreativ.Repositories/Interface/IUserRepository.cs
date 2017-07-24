@@ -12,7 +12,7 @@ namespace Unikreativ.Repositories.Interface
     {
         Task<List<Member>> GetTeamMembers();
 
-        Task<List<Client>> GetClients();
+        Task<List<Client>> GetClients(string clientName = null);
 
 
     }

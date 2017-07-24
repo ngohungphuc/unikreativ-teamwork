@@ -22,9 +22,10 @@ let UserService = class UserService {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     getTeamMembers() {
-        let url = 'Data/GetTeamMembers';
+        let url = 'Data/GetClientList';
         let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.httpClientService
+        return this
+            .httpClientService
             .get(url, { headers: headers })
             .map(res => res.json())
             .catch(this.dataHandlerService.handleError);
@@ -32,38 +33,41 @@ let UserService = class UserService {
     getClients() {
         let url = 'Data/GetClients';
         let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.httpClientService
-            .get(url, { headers: headers })
-            .map(res => res.json())
-            .catch(this.dataHandlerService.handleError);
-    }
-    searchClients(clientName) {
-        let url = `Data/SearchClientByName?clientName=${clientName}`;
-        let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.httpClientService
+        return this
+            .httpClientService
             .get(url, { headers: headers })
             .map(res => res.json())
             .catch(this.dataHandlerService.handleError);
     }
     newClient(client) {
         let url = 'Admin/NewClient';
-        return this.authHttpService.authPost(url, client);
+        return this
+            .authHttpService
+            .authPost(url, client);
     }
     newMember(member) {
         let url = 'Admin/NewMember';
-        return this.authHttpService.authPost(url, member);
+        return this
+            .authHttpService
+            .authPost(url, member);
     }
     updateClient(client) {
         let url = 'Admin/UpdateClientInfo';
-        return this.authHttpService.authPut(url, client);
+        return this
+            .authHttpService
+            .authPut(url, client);
     }
     updateMember(member) {
         let url = 'Admin/UpdateMemberInfo';
-        return this.authHttpService.authPut(url, member);
+        return this
+            .authHttpService
+            .authPut(url, member);
     }
     deleteAccount(id) {
         let url = `Admin/DeleteAccount/${id}`;
-        return this.authHttpService.authDelete(url);
+        return this
+            .authHttpService
+            .authDelete(url);
     }
 };
 UserService = __decorate([
@@ -74,4 +78,4 @@ UserService = __decorate([
         index_1.AuthHttpServices])
 ], UserService);
 exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+//# sourceMappingURL=account.service.js.map
