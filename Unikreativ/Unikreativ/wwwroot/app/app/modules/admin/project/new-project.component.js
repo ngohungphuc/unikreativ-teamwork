@@ -20,38 +20,51 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const user_service_1 = require("../../../services/users/user.service");
 const project_service_1 = require("./../../../services/project/project.service");
 const core_1 = require("@angular/core");
 const forms_1 = require("@angular/forms");
 const toastr_1 = require("../../../extensions/toastr");
+const RequestState_1 = require("../../../model/RequestState");
 let NewProjectComponent = class NewProjectComponent {
-    constructor(projectService, toastr) {
+    constructor(projectService, userService, fb, toastr) {
         this.projectService = projectService;
+        this.userService = userService;
+        this.fb = fb;
         this.toastr = toastr;
+        this.showResult = false;
     }
     ngOnInit() {
-        this.ProjectName = new forms_1.FormControl('', forms_1.Validators.required);
-        this.ClientName = new forms_1.FormControl('', forms_1.Validators.required);
-        this.ProjectDescription = new forms_1.FormControl('', forms_1.Validators.required);
-        this.newProjectForm = new forms_1.FormGroup({
-            ProjectName: this.ProjectName,
-            ClientName: this.ClientName,
-            ProjectDescription: this.ProjectDescription
+        this.newProjectForm = this.fb.group({
+            projectName: ['', forms_1.Validators.required],
+            user: ['', forms_1.Validators.required],
+            projectDescription: ['', forms_1.Validators.required]
         });
     }
     newProject(value) {
         return __awaiter(this, void 0, void 0, function* () {
             let newProject = {
-                ProjectName: value.ProjectName,
-                ClientName: value.ClientName,
-                ProjectDescription: value.ProjectDescription
+                ProjectName: value.projectName,
+                User: value.user,
+                ProjectDescription: value.projectDescription
             };
             yield this.projectService.newProject(newProject).then(res => {
-                if (res.result)
-                    this.toastr.success(res.msg, 'Success');
+                if (res.State === RequestState_1.RequestState.Success)
+                    this.toastr.success(res.Msg, 'Success');
                 else
-                    this.toastr.error(res.msg, 'Error');
+                    this.toastr.error(res.Msg, 'Error');
             });
+        });
+    }
+    searchClients(clientName) {
+        this.userService.searchClients(clientName).subscribe(res => {
+            if (res) {
+                console.log(res);
+                this.showResult = true;
+                this.clientList = res;
+            }
+        }, err => {
+            this.toastr.error('Error');
         });
     }
 };
@@ -60,8 +73,10 @@ NewProjectComponent = __decorate([
         selector: 'new-project',
         templateUrl: 'partial/newproject'
     }),
-    __param(1, core_1.Inject(toastr_1.Toastr_Token)),
-    __metadata("design:paramtypes", [project_service_1.ProjectService, Object])
+    __param(3, core_1.Inject(toastr_1.Toastr_Token)),
+    __metadata("design:paramtypes", [project_service_1.ProjectService,
+        user_service_1.UserService,
+        forms_1.FormBuilder, Object])
 ], NewProjectComponent);
 exports.NewProjectComponent = NewProjectComponent;
 //# sourceMappingURL=new-project.component.js.map

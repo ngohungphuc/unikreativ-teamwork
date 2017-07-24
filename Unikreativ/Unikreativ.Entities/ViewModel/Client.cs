@@ -30,8 +30,6 @@ namespace Unikreativ.Entities.ViewModel
 
         public string UserName { get; set; }
 
-        public string PasswordHash { get; set; }
-
         private readonly double ChargeRate = 0;
         private readonly bool EmailConfirmed = false;
         private readonly bool LockoutEnabled = false;

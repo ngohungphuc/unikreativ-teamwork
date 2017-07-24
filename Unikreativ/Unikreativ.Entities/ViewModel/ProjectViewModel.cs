@@ -11,8 +11,8 @@ namespace Unikreativ.Entities.ViewModel
 
         public string ProjectDescription { get; set; }
 
-        public DateTime AgreementDate { get; set; }
+        public DateTime AgreementDate = DateTime.Now;
 
-        public User User { get; set; }
+        public string UserName { get; set; }
     }
 }

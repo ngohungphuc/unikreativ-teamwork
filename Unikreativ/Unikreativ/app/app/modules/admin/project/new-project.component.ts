@@ -1,50 +1,65 @@
+import { UserService } from '../../../services/users/user.service'
 import { ProjectService } from './../../../services/project/project.service'
-import {Component, OnInit, Inject} from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
-import {Toastr_Token,Toastr} from '../../../extensions/toastr'
+import { Component, OnInit, Inject } from '@angular/core'
+import {
+  FormControl,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms'
+import { Toastr_Token, Toastr } from '../../../extensions/toastr'
+import { RequestState } from '../../../model/RequestState'
 
 @Component({
-    selector: 'new-project', 
-    templateUrl: 'partial/newproject'
+  selector: 'new-project',
+  templateUrl: 'partial/newproject'
 })
-
 export class NewProjectComponent implements OnInit {
+  showResult = false
+  clientList: any
+  newProjectForm: FormGroup
 
-    newProjectForm: FormGroup
-    ProjectName: FormControl
-    ClientName: FormControl
-    ProjectDescription: FormControl
+  constructor(
+    private projectService: ProjectService,
+    private userService: UserService,
+    private fb: FormBuilder,
+    @Inject(Toastr_Token) private toastr: Toastr
+  ) {}
 
-    constructor(
-        private projectService:ProjectService,
-        @Inject(Toastr_Token)private toastr: Toastr) {}
+  ngOnInit() {
+    this.newProjectForm = this.fb.group({
+      projectName: ['', Validators.required],
+      user: ['', Validators.required],
+      projectDescription: ['', Validators.required]
+    })
+  }
 
-    ngOnInit() {
-        this.ProjectName = new FormControl('', Validators.required)
-        this.ClientName = new FormControl('', Validators.required)
-        this.ProjectDescription = new FormControl('', Validators.required)
-
-
-        this.newProjectForm = new FormGroup({
-            ProjectName: this.ProjectName,
-            ClientName: this.ClientName,
-            ProjectDescription: this.ProjectDescription
-        })
-
+  async newProject(value: any) {
+    let newProject = {
+      ProjectName: value.projectName,
+      User: value.user,
+      ProjectDescription: value.projectDescription
     }
 
-    async newProject(value: any) {
-        let newProject = {
-            ProjectName: value.ProjectName,
-            ClientName: value.ClientName,
-            ProjectDescription: value.ProjectDescription
+    await this.projectService.newProject(newProject).then(res => {
+      if (res.State === RequestState.Success)
+        this.toastr.success(res.Msg, 'Success')
+      else this.toastr.error(res.Msg, 'Error')
+    })
+  }
+
+  searchClients(clientName: string) {
+    this.userService.searchClients(clientName).subscribe(
+      res => {
+        if (res) {
+          console.log(res)
+          this.showResult = true
+          this.clientList = res
         }
-
-        await this.projectService.newProject(newProject).then(
-            res => {
-                if (res.result) 
-                    this.toastr.success(res.msg, 'Success')
-                else this.toastr.error(res.msg, 'Error')
-            })
-    }
+      },
+      err => {
+        this.toastr.error('Error')
+      }
+    )
+  }
 }

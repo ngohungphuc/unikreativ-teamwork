@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Unikreativ.Services.Interface;
 using Unikreativ.Entities.Entities;
+using Unikreativ.Repositories.UnitOfWork;
 
 namespace Unikreativ.Controllers.API
 {
@@ -11,7 +12,7 @@ namespace Unikreativ.Controllers.API
     {
         private readonly UserManager<User> _userManager;
         private readonly IUserServices _userServices;
-
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         public DataController(IUserServices userServices, UserManager<User> userManager)
         {
             _userManager = userManager;
@@ -32,6 +33,11 @@ namespace Unikreativ.Controllers.API
             return Ok(clients);
         }
 
+        public async Task<IActionResult> SearchClientByName(string clientName)
+        {
+            var clients = await _userServices.GetClients(clientName);
+            return Ok(clients);
+        }
         #endregion Get Info
     }
 }

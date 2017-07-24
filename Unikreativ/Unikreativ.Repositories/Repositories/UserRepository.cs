@@ -43,7 +43,7 @@ namespace Unikreativ.Repositories.Repositories
                           }).AsNoTracking().ToListAsync();
         }
 
-        public async Task<List<Client>> GetClients()
+        public async Task<List<Client>> GetClients(string clientName = null)
         {
             var role = _context.Roles.SingleOrDefault(r => r.Name == "Client");
 
@@ -52,7 +52,8 @@ namespace Unikreativ.Repositories.Repositories
                 .Select(Mapping.ClientMapping)
                 .AsNoTracking()
                 .ToListAsync();
-            return client;
+
+            return !string.IsNullOrEmpty(clientName) ? client.Where(x => x.UserName.Contains(clientName)).ToList() : client;
         }
     }
 }

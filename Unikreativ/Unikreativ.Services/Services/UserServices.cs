@@ -25,9 +25,9 @@ namespace Unikreativ.Services.Services
             return await _userRepository.GetTeamMembers();
         }
 
-        public async Task<List<Client>> GetClients()
+        public async Task<List<Client>> GetClients(string clientName = null)
         {
-            return await _userRepository.GetClients();
+            return await _userRepository.GetClients(clientName);
         }
 
     }
