@@ -45,7 +45,7 @@ let NewProjectComponent = class NewProjectComponent {
         return __awaiter(this, void 0, void 0, function* () {
             let newProject = {
                 ProjectName: value.projectName,
-                User: value.user,
+                UserName: this.client,
                 ProjectDescription: value.projectDescription
             };
             yield this.projectService.newProject(newProject).then(res => {

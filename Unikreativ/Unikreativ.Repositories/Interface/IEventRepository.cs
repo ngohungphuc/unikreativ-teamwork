@@ -9,6 +9,6 @@ namespace Unikreativ.Repositories.Interface
 {
     public interface IEventRepository
     {
-        Task<Event> AddEventAsync(ClaimsIdentity user, Project projectInfo);
+        Task<Event> AddEventAsync(Project projectInfo);
     }
 }

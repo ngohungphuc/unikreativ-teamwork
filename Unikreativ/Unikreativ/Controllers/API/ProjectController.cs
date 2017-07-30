@@ -53,14 +53,14 @@ namespace Unikreativ.Controllers.API
         public async Task<IActionResult> NewProject([FromBody] ProjectViewModel projectDto)
         {
             var project = Mapper.Map<Project>(projectDto);
-            var client = await _userManager.FindByNameAsync(projectDto.UserName);
+
+            var client = await _unitOfWork.UserRepository.FindAsync(u => u.UserName == projectDto.UserName);
             project.Client = client;
+
             await _unitOfWork.ProjectRepository.AddAsync(project);
+            var eventData = await _eventService.AddEventAsync(project);
 
-            var claimsIdentity = User.Identity as ClaimsIdentity;
-            await _eventService.AddEventAsync(claimsIdentity, project);
-
-            return Json(new { result = true, msg = "New project success" });
+            return Json(new { result = true, msg = "New project success", eventData });
         }
     }
 }

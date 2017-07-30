@@ -12,9 +12,9 @@ namespace Unikreativ.Services.Services
     public class EventSerivce : IEventService
     {
         private readonly IEventRepository _eventRepository;
-        public Task<Event> AddEventAsync(ClaimsIdentity user, Project projectInfo)
+        public async Task<Event> AddEventAsync(Project projectInfo)
         {
-            return _eventRepository.AddEventAsync(user, projectInfo);
+            return await _eventRepository.AddEventAsync(projectInfo);
         }
     }
 }
