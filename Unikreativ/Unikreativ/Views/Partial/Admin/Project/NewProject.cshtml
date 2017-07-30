@@ -24,12 +24,14 @@
                         </div>
                         <div class="col-md-12">
                             <div class="md-form">
-                                <input formControlName="user" type="text" id="user" #clientName class="form-control" (keyup)="searchClients(clientName.value)">
+                                <input formControlName="user" type="text" id="user" #clientName  value="{{client}}" class="form-control" (keyup)="searchClients(clientName.value)">
                                 <label class="active" for="user">Client Name</label>
                                 <label *ngIf="newProjectForm.get('user').touched && newProjectForm.get('user').hasError('required')">Client Name is required</label>
-                                <ul class="list-group" *ngIf="showResult">
-                                    <li *ngFor="let client of clientList" class="list-group-item">{{client.UserName}} - Company {{client.CompanyName}}</li>
-                                </ul>
+                                <div id="searchClientResult" *ngIf="showResult">
+                                    <ul class="list-group">
+                                        <li *ngFor="let client of clientList" class="list-group-item"><span (click)="selectClient($event.target.innerText)">{{client.UserName}}</span> - Company {{client.CompanyName}}</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">

@@ -57,15 +57,22 @@ let NewProjectComponent = class NewProjectComponent {
         });
     }
     searchClients(clientName) {
-        this.userService.searchClients(clientName).subscribe(res => {
-            if (res) {
-                console.log(res);
-                this.showResult = true;
-                this.clientList = res;
-            }
-        }, err => {
-            this.toastr.error('Error');
-        });
+        if (clientName) {
+            this.userService.searchClients(clientName).subscribe(res => {
+                if (res) {
+                    this.showResult = true;
+                    this.clientList = res;
+                }
+            }, err => {
+                this.toastr.error('Error');
+            });
+        }
+        else
+            this.showResult = false;
+    }
+    selectClient(clientName) {
+        this.client = clientName;
+        this.showResult = false;
     }
 };
 NewProjectComponent = __decorate([
