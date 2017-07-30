@@ -19,7 +19,6 @@ namespace Unikreativ.Services.Services
             _userRepository = userRepository;
         }
 
-
         public async Task<List<Member>> GetTeamMembers()
         {
             return await _userRepository.GetTeamMembers();

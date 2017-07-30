@@ -38,7 +38,7 @@ export class NewProjectComponent implements OnInit {
   async newProject(value: any) {
     let newProject = {
       ProjectName: value.projectName,
-      User: value.user,
+      UserName: this.client,
       ProjectDescription: value.projectDescription
     }
 

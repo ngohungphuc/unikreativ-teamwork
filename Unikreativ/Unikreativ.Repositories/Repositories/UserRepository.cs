@@ -53,7 +53,7 @@ namespace Unikreativ.Repositories.Repositories
                 .AsNoTracking()
                 .ToListAsync();
 
-            return !string.IsNullOrEmpty(clientName) ? client.Where(x => x.UserName.Contains(clientName)).ToList() : client;
+            return !string.IsNullOrEmpty(clientName) ? client.Where(x => x.UserName.Contains(clientName.ToLower())).ToList() : client;
         }
     }
 }
