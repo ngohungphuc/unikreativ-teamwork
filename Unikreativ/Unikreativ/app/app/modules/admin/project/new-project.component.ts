@@ -17,6 +17,7 @@ import { RequestState } from '../../../model/RequestState'
 export class NewProjectComponent implements OnInit {
   showResult = false
   clientList: any
+  client:string
   newProjectForm: FormGroup
 
   constructor(
@@ -48,18 +49,25 @@ export class NewProjectComponent implements OnInit {
     })
   }
 
-  searchClients(clientName: string) {
-    this.userService.searchClients(clientName).subscribe(
-      res => {
-        if (res) {
-          console.log(res)
-          this.showResult = true
-          this.clientList = res
-        }
-      },
-      err => {
-        this.toastr.error('Error')
-      }
-    )
+  searchClients(clientName) {
+    if(clientName) {
+      this.userService.searchClients(clientName).subscribe(
+          res => {
+            if (res) {
+              this.showResult = true
+              this.clientList = res
+            }
+          },
+          err => {
+            this.toastr.error('Error')
+          }
+        )
+    }
+    else this.showResult = false
+  }
+
+  selectClient(clientName) {
+    this.client = clientName
+    this.showResult = false
   }
 }
