@@ -8,7 +8,7 @@ using Unikreativ.Entities.Data;
 namespace Unikreativ.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170708150730_Init")]
+    [Migration("20170802135958_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

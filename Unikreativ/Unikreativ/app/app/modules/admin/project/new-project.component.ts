@@ -43,9 +43,9 @@ export class NewProjectComponent implements OnInit {
     }
 
     await this.projectService.newProject(newProject).then(res => {
-      if (res.State === RequestState.Success)
-        this.toastr.success(res.Msg, 'Success')
-      else this.toastr.error(res.Msg, 'Error')
+      if (res.result)
+        this.toastr.success(res.msg, 'Success')
+      else this.toastr.error(res.msg, 'Error')
     })
   }
 

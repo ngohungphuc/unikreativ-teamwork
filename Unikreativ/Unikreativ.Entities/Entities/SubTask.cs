@@ -6,6 +6,6 @@ namespace Unikreativ.Entities.Entities
     {
         public string SubTaskName { get; set; }
         public Project Project { get; set; }
-        public ICollection<TasksRequest> TasksRequests { get; set; }
+        public IList<TasksRequest> TasksRequests { get; set; }
     }
 }

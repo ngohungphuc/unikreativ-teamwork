@@ -27,7 +27,7 @@ namespace Unikreativ.Entities.Entities
 
         public string AssignBy { get; set; }
 
-        public ICollection<MediaFile> MediaFiles { get; set; }
+        public IList<MediaFile> MediaFiles { get; set; }
         public SubTask SubTask { get; set; }
     }
 }
