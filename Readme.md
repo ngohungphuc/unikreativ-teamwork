@@ -46,3 +46,5 @@ This project will use the following technology
   http://adaodeveloper.blogspot.com/2014/02/update-model-with-entity-framework-and.html
 
   https://visualstudiomagazine.com/blogs/tool-tracker/2013/11/updating--entities-with-automapper.aspx
+
+  http://rion.io/2016/01/04/accessing-identity-info-using-dependency-injection-in-net-5/

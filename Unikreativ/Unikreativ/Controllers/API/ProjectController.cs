@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Auth;
@@ -60,7 +56,9 @@ namespace Unikreativ.Controllers.API
             await _unitOfWork.ProjectRepository.AddAsync(project);
             var eventData = await _eventService.AddEventAsync(project);
 
-            return Json(new { result = true, msg = "New project success", eventData });
+            return Json(new { result = true, msg = "New project success" });
+
         }
+
     }
 }

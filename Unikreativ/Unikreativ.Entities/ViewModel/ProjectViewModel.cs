@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Unikreativ.Entities.Entities;
-
 namespace Unikreativ.Entities.ViewModel
 {
     public class ProjectViewModel
     {
+        public Guid Id { get; set; }
         public string ProjectName { get; set; }
 
         public string ProjectDescription { get; set; }
@@ -15,8 +13,6 @@ namespace Unikreativ.Entities.ViewModel
 
         public string UserName { get; set; }
 
-        public ICollection<Billing> Billings = new List<Billing>();
-        public ICollection<Event> Events = new List<Event>();
-        public ICollection<SubTask> SubTasks = new List<SubTask>();
+        public User Client { get; set; }
     }
 }

@@ -25,7 +25,6 @@ const project_service_1 = require("./../../../services/project/project.service")
 const core_1 = require("@angular/core");
 const forms_1 = require("@angular/forms");
 const toastr_1 = require("../../../extensions/toastr");
-const RequestState_1 = require("../../../model/RequestState");
 let NewProjectComponent = class NewProjectComponent {
     constructor(projectService, userService, fb, toastr) {
         this.projectService = projectService;
@@ -49,10 +48,10 @@ let NewProjectComponent = class NewProjectComponent {
                 ProjectDescription: value.projectDescription
             };
             yield this.projectService.newProject(newProject).then(res => {
-                if (res.State === RequestState_1.RequestState.Success)
-                    this.toastr.success(res.Msg, 'Success');
+                if (res.result)
+                    this.toastr.success(res.msg, 'Success');
                 else
-                    this.toastr.error(res.Msg, 'Error');
+                    this.toastr.error(res.msg, 'Error');
             });
         });
     }
