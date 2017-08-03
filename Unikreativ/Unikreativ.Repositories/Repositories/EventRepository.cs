@@ -18,8 +18,7 @@ namespace Unikreativ.Repositories.Repositories
                 IsCompleted = false,
                 Description =
                     $"{projectInfo.Client.UserName} create project {projectInfo.ProjectName} at {DateTime.Now}",
-                Project = projectInfo,
-                TasksRequest = null
+                Project = projectInfo
             };
 
             await _unitOfWork.EventRepository.AddAsync(projectEvent);

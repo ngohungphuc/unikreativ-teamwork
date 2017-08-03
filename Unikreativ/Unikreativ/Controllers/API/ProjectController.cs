@@ -25,6 +25,7 @@ namespace Unikreativ.Controllers.API
         private readonly IEmailSender _emailSender;
         private readonly IEmailTemplateService _emailTemplateService;
         private readonly IEventService _eventService;
+        private readonly IUserResolverService _userResolverService;
         public ProjectController(
             UserManager<User> userManager,
             IUserServices userServices,
@@ -32,7 +33,8 @@ namespace Unikreativ.Controllers.API
             ValidateAccount validateAccount,
             IEmailSender emailSender,
             IEmailTemplateService emailTemplateService,
-            IEventService eventService)
+            IEventService eventService,
+            IUserResolverService userResolverService)
         {
             _userManager = userManager;
             _userServices = userServices;
@@ -41,6 +43,7 @@ namespace Unikreativ.Controllers.API
             _accountServices = accountServices;
             _emailTemplateService = emailTemplateService;
             _eventService = eventService;
+            _userResolverService = userResolverService;
         }
 
 
@@ -49,9 +52,7 @@ namespace Unikreativ.Controllers.API
         public async Task<IActionResult> NewProject([FromBody] ProjectViewModel projectDto)
         {
             var project = Mapper.Map<Project>(projectDto);
-
-            var client = await _unitOfWork.UserRepository.FindAsync(u => u.UserName == projectDto.UserName);
-            project.Client = client;
+            project.Client = await _userResolverService.GetUser();
 
             await _unitOfWork.ProjectRepository.AddAsync(project);
             var eventData = await _eventService.AddEventAsync(project);
