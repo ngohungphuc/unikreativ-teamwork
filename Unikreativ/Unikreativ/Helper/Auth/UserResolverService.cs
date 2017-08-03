@@ -6,7 +6,14 @@ using Unikreativ.Entities.Entities;
 
 namespace Unikreativ.Helper.Auth
 {
-    public class UserResolverService
+    public interface IUserResolverService
+    {
+        Task<User> GetUser();
+        string GetUserName();
+        Task<string> GetUserId();
+    }
+
+    public class UserResolverService: IUserResolverService
     {
         private readonly IHttpContextAccessor _context;
         private readonly UserManager<User> _userManager;

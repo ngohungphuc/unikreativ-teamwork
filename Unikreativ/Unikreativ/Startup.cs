@@ -91,6 +91,7 @@ namespace Unikreativ
             // Add application services.
             services.AddTransient<Seeder>();
             services.AddScoped<ValidateAccount>();
+            services.AddTransient<IUserResolverService, UserResolverService>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IEmailTemplateService, EmailTemplateService>();
             services.AddTransient<IEmailSender, MessageServices>();
