@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq.Expressions;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -55,9 +57,17 @@ namespace Unikreativ.Controllers.API
             project.Client = await _userResolverService.GetUser();
 
             await _unitOfWork.ProjectRepository.AddAsync(project);
-            var eventData = await _eventService.AddEventAsync(project);
+            try
+            {
 
-            return Json(new { result = true, msg = "New project success" });
+                var eventData = await _eventService.AddEventAsync(project);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Json(new { result = true, msg = "Create new project success" });
 
         }
 

@@ -7,7 +7,13 @@ using Unikreativ.Entities.Entities;
 
 namespace Unikreativ.Helper.Auth
 {
-    public class ValidateAccount
+    public interface IValidateAccount
+    {
+        Task<bool> CheckAccountExist(string username);
+        Task<bool> CheckEmailExist(string email);
+    }
+
+    public class ValidateAccount : IValidateAccount
     {
         private readonly UserManager<User> _userManager;
 
