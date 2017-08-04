@@ -128,7 +128,6 @@ namespace Unikreativ.Controllers.API
 
         #endregion Manage Account
 
-
         #region Private
 
         private async Task<RegisterViewModel> CreateNewAccount(dynamic accountDto)

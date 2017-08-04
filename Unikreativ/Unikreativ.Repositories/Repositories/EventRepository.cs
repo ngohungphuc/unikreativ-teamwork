@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Repositories.Interface;
 namespace Unikreativ.Repositories.Repositories
@@ -7,7 +8,13 @@ namespace Unikreativ.Repositories.Repositories
 
     public class EventRepository : IEventRepository
     {
-        private readonly UnitOfWork.UnitOfWork _unitOfWork = new UnitOfWork.UnitOfWork();
+        private readonly ApplicationDbContext _context;
+
+        public EventRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public async Task<Event> AddEventAsync(Project projectInfo)
         {
             var projectEvent = new Event
@@ -21,7 +28,8 @@ namespace Unikreativ.Repositories.Repositories
                 Project = projectInfo
             };
 
-            await _unitOfWork.EventRepository.AddAsync(projectEvent);
+            await _context.Events.AddAsync(projectEvent);
+            await _context.SaveChangesAsync();
 
             return projectEvent;
         }
