@@ -28,6 +28,7 @@ namespace Unikreativ.Controllers.API
         private readonly IEmailTemplateService _emailTemplateService;
         private readonly IEventService _eventService;
         private readonly IUserResolverService _userResolverService;
+        private readonly IProjectServices _projectService;
         public ProjectController(
             UserManager<User> userManager,
             IUserServices userServices,
@@ -36,7 +37,8 @@ namespace Unikreativ.Controllers.API
             IEmailSender emailSender,
             IEmailTemplateService emailTemplateService,
             IEventService eventService,
-            IUserResolverService userResolverService)
+            IUserResolverService userResolverService,
+            IProjectServices projectService)
         {
             _userManager = userManager;
             _userServices = userServices;
@@ -46,6 +48,7 @@ namespace Unikreativ.Controllers.API
             _emailTemplateService = emailTemplateService;
             _eventService = eventService;
             _userResolverService = userResolverService;
+            _projectService = projectService;
         }
 
 
@@ -56,18 +59,10 @@ namespace Unikreativ.Controllers.API
             var project = Mapper.Map<Project>(projectDto);
             project.Client = await _userResolverService.GetUser();
 
-            await _unitOfWork.ProjectRepository.AddAsync(project);
-            try
-            {
+            await _projectService.AddProjectAsync(project);
+            var eventData = await _eventService.AddEventAsync(project);
 
-                var eventData = await _eventService.AddEventAsync(project);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return Json(new { result = true, msg = "Create new project success" });
+            return Json(new { result = true, msg = "Create new project success", eventData });
 
         }
 
