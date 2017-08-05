@@ -23,7 +23,7 @@ namespace Unikreativ.Controllers.API
         private readonly UserManager<User> _userManager;
         private readonly IUserServices _userServices;
         private readonly IAccountServices _accountServices;
-        private readonly ValidateAccount _validateAccount;
+        private readonly IValidateAccount _validateAccount;
         private readonly IEmailSender _emailSender;
         private readonly IEmailTemplateService _emailTemplateService;
         private readonly IEventService _eventService;
@@ -33,7 +33,7 @@ namespace Unikreativ.Controllers.API
             UserManager<User> userManager,
             IUserServices userServices,
             IAccountServices accountServices,
-            ValidateAccount validateAccount,
+            IValidateAccount validateAccount,
             IEmailSender emailSender,
             IEmailTemplateService emailTemplateService,
             IEventService eventService,
