@@ -38,7 +38,7 @@ namespace Unikreativ.Controllers.API
             IAccountServices accountServices,
             IValidateAccount validateAccount,
             IEmailSender emailSender,
-             IEmailTemplateService emailTemplateService)
+            IEmailTemplateService emailTemplateService)
         {
             _userManager = userManager;
             _userServices = userServices;

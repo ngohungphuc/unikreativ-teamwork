@@ -12,6 +12,10 @@ namespace Unikreativ.Services.Services
     {
         private readonly IProjectRepository _projectRepository;
 
+        public ProjectServices(IProjectRepository projectRepository)
+        {
+            _projectRepository = projectRepository;
+        }
         public async Task AddProjectAsync(Project project)
         {
             await _projectRepository.AddProjectAsync(project);

@@ -22,14 +22,14 @@ namespace Unikreativ.Controllers.API
         private readonly UserManager<User> _userManager;
         private readonly IUserServices _userServices;
         private readonly IAccountServices _accountServices;
-        private readonly ValidateAccount _validateAccount;
+        private readonly IValidateAccount _validateAccount;
         private readonly IEmailSender _emailSender;
 
         public AccountController(
             UserManager<User> userManager,
             IUserServices userServices,
             IAccountServices accountServices,
-            ValidateAccount validateAccount,
+            IValidateAccount validateAccount,
             IEmailSender emailSender)
         {
             _userManager = userManager;
