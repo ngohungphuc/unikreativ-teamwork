@@ -24,8 +24,8 @@ namespace Unikreativ.Controllers.API
     [Route("api/[controller]/[action]")]
     public class AdminController : Controller
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         private readonly UserManager<User> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserServices _userServices;
         private readonly IAccountServices _accountServices;
         private readonly IValidateAccount _validateAccount;
@@ -34,6 +34,7 @@ namespace Unikreativ.Controllers.API
 
         public AdminController(
             UserManager<User> userManager,
+             IUnitOfWork unitOfWork,
             IUserServices userServices,
             IAccountServices accountServices,
             IValidateAccount validateAccount,
@@ -41,6 +42,7 @@ namespace Unikreativ.Controllers.API
             IEmailTemplateService emailTemplateService)
         {
             _userManager = userManager;
+            _unitOfWork = unitOfWork;
             _userServices = userServices;
             _validateAccount = validateAccount;
             _emailSender = emailSender;
@@ -94,7 +96,7 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<string> UpdateClientInfo([FromBody] Client clientDto)
         {
-            var client = await _unitOfWork.UserRepository.GetByIdAsync(clientDto.Id);
+            var client = await _unitOfWork.Repository<User>().GetByIdAsync(clientDto.Id);
             client = Mapper.Map(clientDto, client);
 
             await UpdateUserInfoAsync(client);
@@ -106,7 +108,7 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<string> UpdateMemberInfo([FromBody] Member memberDto)
         {
-            var member = await _unitOfWork.UserRepository.GetByIdAsync(memberDto.Id);
+            var member = await _unitOfWork.Repository<User>().GetByIdAsync(memberDto.Id);
             member = Mapper.Map(memberDto, member);
 
             await UpdateUserInfoAsync(member);
@@ -120,8 +122,8 @@ namespace Unikreativ.Controllers.API
         {
             if (id == null) throw new ArgumentNullException(nameof(id));
 
-            var clientToDelete = await _unitOfWork.UserRepository.GetByIdAsync(id);
-            await _unitOfWork.UserRepository.DeleteAsync(clientToDelete);
+            var clientToDelete = await _unitOfWork.Repository<User>().GetByIdAsync(id);
+            await _unitOfWork.Repository<User>().DeleteAsync(clientToDelete);
 
             return AccountValidate.ValidationMessage(RequestState.Success, "Delete account success");
         }
@@ -159,7 +161,7 @@ namespace Unikreativ.Controllers.API
         private async Task UpdateUserInfoAsync(User account)
         {
             if (account == null) throw new Exception("Account null");
-            await _unitOfWork.UserRepository.UpdateAsync(account);
+            await _unitOfWork.Repository<User>().UpdateAsync(account);
         }
 
         #endregion Private

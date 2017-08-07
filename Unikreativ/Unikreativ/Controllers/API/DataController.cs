@@ -12,7 +12,6 @@ namespace Unikreativ.Controllers.API
     {
         private readonly UserManager<User> _userManager;
         private readonly IUserServices _userServices;
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         public DataController(IUserServices userServices, UserManager<User> userManager)
         {
             _userManager = userManager;
