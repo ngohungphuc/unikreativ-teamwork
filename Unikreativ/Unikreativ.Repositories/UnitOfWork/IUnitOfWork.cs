@@ -1,13 +1,14 @@
 ﻿using System;
+using Unikreativ.Repositories.Interface;
 
 namespace Unikreativ.Repositories.UnitOfWork
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork /*: IDisposable*/
     {
-        /// <summary>
-        /// Saves all pending changes
-        /// </summary>
-        /// <returns>The number of objects in an Added, Modified, or Deleted state</returns>
-        int Commit();
+        IGenericRepository<T> Repository<T>() where T : class;
+
+        void Commit();
+
+        void Rollback();
     }
 }

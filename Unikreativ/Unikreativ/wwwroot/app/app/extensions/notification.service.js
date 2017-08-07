@@ -6,20 +6,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("./index");
 const core_1 = require("@angular/core");
-require("./rxjs-extensions");
-let ServicesModule = class ServicesModule {
+const Subject_1 = require("rxjs/Subject");
+let PushService = class PushService {
+    constructor() {
+        this.subject = new Subject_1.Subject();
+    }
+    sendMessage(message) {
+        this.subject.next({ text: message });
+    }
+    clearMessage() {
+        this.subject.next();
+    }
+    getMessage() {
+        return this.subject.asObservable();
+    }
 };
-ServicesModule = __decorate([
-    core_1.NgModule({
-        providers: [
-            index_1.HttpClientService,
-            index_1.DataHandlerService,
-            index_1.PushService,
-            { provide: index_1.Toastr_Token, useValue: toastr }
-        ]
-    })
-], ServicesModule);
-exports.ServicesModule = ServicesModule;
-//# sourceMappingURL=shared.module.js.map
+PushService = __decorate([
+    core_1.Injectable()
+], PushService);
+exports.PushService = PushService;
+//# sourceMappingURL=notification.service.js.map

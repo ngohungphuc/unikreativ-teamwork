@@ -20,6 +20,7 @@ using Unikreativ.Helper.Auth;
 using Unikreativ.Helper.Confirm;
 using Unikreativ.Repositories.Interface;
 using Unikreativ.Repositories.Repositories;
+using Unikreativ.Repositories.UnitOfWork;
 using Unikreativ.Services.Interface;
 using Unikreativ.Services.Services;
 
@@ -90,6 +91,7 @@ namespace Unikreativ
 
             // Add application services.
             services.AddTransient<Seeder>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IValidateAccount, ValidateAccount>();
             services.AddTransient<IUserResolverService, UserResolverService>();
             services.AddTransient<IEmailTemplateService, EmailTemplateService>();

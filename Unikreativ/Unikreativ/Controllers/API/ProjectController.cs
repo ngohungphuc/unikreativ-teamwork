@@ -19,7 +19,6 @@ namespace Unikreativ.Controllers.API
     [Route("api/[controller]/[action]")]
     public class ProjectController : Controller
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         private readonly UserManager<User> _userManager;
         private readonly IUserServices _userServices;
         private readonly IAccountServices _accountServices;

@@ -6,4 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./http-extensions"));
 __export(require("./services-handler"));
 __export(require("./toastr"));
+__export(require("./notification.service"));
 //# sourceMappingURL=index.js.map

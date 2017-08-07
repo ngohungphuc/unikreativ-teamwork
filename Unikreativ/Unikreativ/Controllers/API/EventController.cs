@@ -17,8 +17,8 @@ namespace Unikreativ.Controllers.API
     [Route("api/[controller]/[action]")]
     public class EventController : Controller
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         private readonly UserManager<User> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserServices _userServices;
         private readonly IAccountServices _accountServices;
         private readonly IValidateAccount _validateAccount;
@@ -27,6 +27,7 @@ namespace Unikreativ.Controllers.API
         private readonly IEventService _eventService;
         public EventController(
             UserManager<User> userManager,
+            IUnitOfWork unitOfWork,
             IUserServices userServices,
             IAccountServices accountServices,
             IValidateAccount validateAccount,
@@ -35,6 +36,7 @@ namespace Unikreativ.Controllers.API
             IEventService eventService)
         {
             _userManager = userManager;
+            _unitOfWork = unitOfWork;
             _userServices = userServices;
             _validateAccount = validateAccount;
             _emailSender = emailSender;
@@ -45,7 +47,7 @@ namespace Unikreativ.Controllers.API
 
         public async Task<IActionResult> GetAllEvents()
         {
-            var events = await _unitOfWork.EventRepository.GetAllAsync();
+            var events = await _unitOfWork.Repository<Event>().GetAllAsync();
             return Ok(events);
         }
     }
