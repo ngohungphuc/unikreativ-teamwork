@@ -1,10 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
-using Microsoft.Extensions.Configuration;
 using MimeKit;
 using Unikreativ.Entities.Models;
+using Unikreativ.Helper.Config;
 
 namespace Unikreativ.Helper.Confirm
 {
@@ -13,24 +12,13 @@ namespace Unikreativ.Helper.Confirm
     // For more details see this link https://go.microsoft.com/fwlink/?LinkID=532713
     public class MessageServices : IEmailSender, ISmsSender
     {
-        public IConfigurationRoot Configuration { get; }
-
-        public MessageServices()
-        {
-            var builder = new ConfigurationBuilder()
-              .SetBasePath(Directory.GetCurrentDirectory())
-             .AddJsonFile("appsettings.json");
-
-            Configuration = builder.Build();
-        }
-
         public Task SendEmail(EmailType emailType, string to, string bodyContent)
         {
             var email = new Email
             {
-                SmtpServer = Configuration["Email:Server"],
-                SmtpPortNumber = int.Parse(Configuration["Email:Port"]),
-                FromEmail = Configuration["Email:From"],
+                SmtpServer = ConfigReader.GetConfigFile["Email:Server"],
+                SmtpPortNumber = int.Parse(ConfigReader.GetConfigFile["Email:Port"]),
+                FromEmail = ConfigReader.GetConfigFile["Email:From"],
                 ToEmail = to,
                 BodyContent = bodyContent
             };
@@ -83,8 +71,8 @@ namespace Unikreativ.Helper.Confirm
             {
                 client.Connect(email.SmtpServer, email.SmtpPortNumber, false);
                 client.Authenticate(
-                    Configuration["Email:Usermail"],
-                    Configuration["Email:Password"]);
+                    ConfigReader.GetConfigFile["Email:Usermail"],
+                    ConfigReader.GetConfigFile["Email:Password"]);
                 client.Send(mimeMessage);
                 client.Disconnect(true);
             }
