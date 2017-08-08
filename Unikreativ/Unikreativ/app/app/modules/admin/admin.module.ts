@@ -1,3 +1,4 @@
+import { EventModule } from './../event/event.module'
 import {
     AdminComponent,
     NewClientComponent,
@@ -20,7 +21,12 @@ import { ProjectService } from '../../services/project/project.service'
 
 @NgModule({
     imports: [
-        BrowserModule, FormsModule, ReactiveFormsModule, NavModule, AdminRoutingModule
+        BrowserModule, 
+        FormsModule,
+        ReactiveFormsModule,
+        NavModule, 
+        AdminRoutingModule,
+        EventModule
     ],
     declarations: [
         AdminComponent,

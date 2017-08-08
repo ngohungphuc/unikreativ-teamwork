@@ -1,4 +1,4 @@
-﻿import { AdminModule, ErrorsModule } from './app/modules/index'
+﻿import { AdminModule, ErrorsModule, EventModule } from './app/modules/index'
 import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app.routing'
 import { BrowserModule } from '@angular/platform-browser'
@@ -20,6 +20,7 @@ import { ServicesModule } from './app/extensions/shared.module'
         ServicesModule,
         NavModule,
         AdminModule,
+        EventModule,
         ErrorsModule,
         AppRoutingModule
     ],

@@ -29,6 +29,7 @@ AppModule = __decorate([
             shared_module_1.ServicesModule,
             nav_module_1.NavModule,
             index_1.AdminModule,
+            index_1.EventModule,
             index_1.ErrorsModule,
             app_routing_1.AppRoutingModule
         ],

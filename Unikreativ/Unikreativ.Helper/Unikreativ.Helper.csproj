@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
@@ -7,6 +7,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Auth\" />
+    <ProjectReference Include="..\Unikreativ.Entities\Unikreativ.Entities.csproj" />
   </ItemGroup>
 </Project>
