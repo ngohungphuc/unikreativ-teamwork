@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikreativ.Services", "Unikreativ.Services\Unikreativ.Services.csproj", "{17D06631-C304-4207-80F6-2400885BED76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unikreativ.Services", "Unikreativ.Services\Unikreativ.Services.csproj", "{17D06631-C304-4207-80F6-2400885BED76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikreativ.Entities", "Unikreativ.Entities\Unikreativ.Entities.csproj", "{1BDE7550-BBCB-484A-A847-320021924F6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unikreativ.Entities", "Unikreativ.Entities\Unikreativ.Entities.csproj", "{1BDE7550-BBCB-484A-A847-320021924F6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikreativ.Repositories", "Unikreativ.Repositories\Unikreativ.Repositories.csproj", "{F0831116-68D4-4262-9850-0C160C3853E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unikreativ.Repositories", "Unikreativ.Repositories\Unikreativ.Repositories.csproj", "{F0831116-68D4-4262-9850-0C160C3853E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unikreativ", "Unikreativ\Unikreativ.csproj", "{980B1AD4-D866-4D9D-B788-BEF9A4331FAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unikreativ", "Unikreativ\Unikreativ.csproj", "{980B1AD4-D866-4D9D-B788-BEF9A4331FAC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unikreativ.Helper", "Unikreativ.Helper\Unikreativ.Helper.csproj", "{E9F89367-A6FA-43ED-B6F8-A931F6B6869A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{980B1AD4-D866-4D9D-B788-BEF9A4331FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{980B1AD4-D866-4D9D-B788-BEF9A4331FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{980B1AD4-D866-4D9D-B788-BEF9A4331FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9F89367-A6FA-43ED-B6F8-A931F6B6869A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9F89367-A6FA-43ED-B6F8-A931F6B6869A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9F89367-A6FA-43ED-B6F8-A931F6B6869A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9F89367-A6FA-43ED-B6F8-A931F6B6869A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

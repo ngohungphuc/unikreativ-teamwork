@@ -16,36 +16,30 @@ namespace Unikreativ.Helper.Confirm
         {
             var email = new Email
             {
-                SmtpServer = ConfigReader.GetConfigFile["Email:Server"],
-                SmtpPortNumber = int.Parse(ConfigReader.GetConfigFile["Email:Port"]),
-                FromEmail = ConfigReader.GetConfigFile["Email:From"],
+                SmtpServer = ConfigReader.GetConfigFile()["Email:Server"],
+                SmtpPortNumber = int.Parse(ConfigReader.GetConfigFile()["Email:Port"]),
+                FromEmail = ConfigReader.GetConfigFile()["Email:From"],
                 ToEmail = to,
                 BodyContent = bodyContent
             };
-            try
-            {
-                switch (emailType)
-                {
-                    case EmailType.ClientAccount:
-                    case EmailType.MemberAccount:
-                        email.FromEmailTitle = "Account Register Confirmation";
-                        email.ToEmailTitle = "Account Register Confirmation";
-                        email.Subject = $"{to} - Account Register Confirmation";
-                        break;
 
-                    case EmailType.ResetPassword:
-                        email.FromEmailTitle = "Password Reset";
-                        email.ToEmailTitle = "Password Reset";
-                        email.Subject = $"{to} - Password Reset";
-                        break;
-                }
-
-                SendMailService(email);
-            }
-            catch (Exception ex)
+            switch (emailType)
             {
-                throw ex;
+                case EmailType.ClientAccount:
+                case EmailType.MemberAccount:
+                    email.FromEmailTitle = "Account Register Confirmation";
+                    email.ToEmailTitle = "Account Register Confirmation";
+                    email.Subject = $"{to} - Account Register Confirmation";
+                    break;
+
+                case EmailType.ResetPassword:
+                    email.FromEmailTitle = "Password Reset";
+                    email.ToEmailTitle = "Password Reset";
+                    email.Subject = $"{to} - Password Reset";
+                    break;
             }
+
+            SendMailService(email);
             return Task.FromResult(0);
         }
 
@@ -71,8 +65,8 @@ namespace Unikreativ.Helper.Confirm
             {
                 client.Connect(email.SmtpServer, email.SmtpPortNumber, false);
                 client.Authenticate(
-                    ConfigReader.GetConfigFile["Email:Usermail"],
-                    ConfigReader.GetConfigFile["Email:Password"]);
+                    ConfigReader.GetConfigFile()["Email:Usermail"],
+                    ConfigReader.GetConfigFile()["Email:Password"]);
                 client.Send(mimeMessage);
                 client.Disconnect(true);
             }

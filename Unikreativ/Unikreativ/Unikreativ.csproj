@@ -48,10 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Unikreativ.Entities\Unikreativ.Entities.csproj" />
+    <ProjectReference Include="..\Unikreativ.Helper\Unikreativ.Helper.csproj" />
     <ProjectReference Include="..\Unikreativ.Services\Unikreativ.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\app\modules\errors\" />
+    <Folder Include="Views\Partial\Event\" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings.Development.json">

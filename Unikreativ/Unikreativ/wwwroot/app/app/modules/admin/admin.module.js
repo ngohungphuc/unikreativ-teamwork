@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const event_module_1 = require("./../event/event.module");
 const index_1 = require("../index");
 const admin_routing_1 = require("./admin.routing");
 const auth_guard_1 = require("./../../extensions/guard/auth.guard");
@@ -20,7 +21,12 @@ let AdminModule = class AdminModule {
 AdminModule = __decorate([
     core_1.NgModule({
         imports: [
-            platform_browser_1.BrowserModule, forms_1.FormsModule, forms_1.ReactiveFormsModule, nav_module_1.NavModule, admin_routing_1.AdminRoutingModule
+            platform_browser_1.BrowserModule,
+            forms_1.FormsModule,
+            forms_1.ReactiveFormsModule,
+            nav_module_1.NavModule,
+            admin_routing_1.AdminRoutingModule,
+            event_module_1.EventModule
         ],
         declarations: [
             index_1.AdminComponent,
