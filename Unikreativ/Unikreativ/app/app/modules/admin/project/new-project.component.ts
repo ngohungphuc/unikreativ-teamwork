@@ -1,3 +1,4 @@
+import { PushService } from './../../../extensions/notification.service'
 import { UserService } from '../../../services/users/user.service'
 import { ProjectService } from './../../../services/project/project.service'
 import { Component, OnInit, Inject } from '@angular/core'
@@ -9,6 +10,7 @@ import {
 } from '@angular/forms'
 import { Toastr_Token, Toastr } from '../../../extensions/toastr'
 import { RequestState } from '../../../model/RequestState'
+import { Project } from '../../../model/ProjectModel';
 
 @Component({
   selector: 'new-project',
@@ -24,7 +26,8 @@ export class NewProjectComponent implements OnInit {
     private projectService: ProjectService,
     private userService: UserService,
     private fb: FormBuilder,
-    @Inject(Toastr_Token) private toastr: Toastr
+    @Inject(Toastr_Token) private toastr: Toastr,
+    private pushService:PushService
   ) {}
 
   ngOnInit() {
@@ -43,8 +46,16 @@ export class NewProjectComponent implements OnInit {
     }
 
     await this.projectService.newProject(newProject).then(res => {
-      if (res.result)
+      if (res.result){
         this.toastr.success(res.msg, 'Success')
+        this.pushService.notify(new Project(
+          res.eventData.TaskName,
+          res.eventData.AssignBy,
+          res.eventData.DateAssigned,
+          res.eventData.Description
+        ));
+      }
+        
       else this.toastr.error(res.msg, 'Error')
     })
   }
