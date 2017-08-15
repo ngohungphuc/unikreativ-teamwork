@@ -4,5 +4,5 @@ export class Project {
     public AssignBy: string,
     public DateAssigned: Date,
     public Description: string
-  ){};
+  ) {}
 }

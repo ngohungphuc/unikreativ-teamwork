@@ -1,22 +1,31 @@
+import { Component, OnInit } from '@angular/core'
+import { EventService } from '../../services/index'
 import { Project } from './../../model/ProjectModel'
 import { PushService } from './../../extensions/notification.service'
-import { Component, OnInit } from '@angular/core'
+
 @Component({
-    selector: 'event-list',
-    templateUrl: 'partial/eventlist'
+  selector: 'event-list',
+  templateUrl: 'partial/eventlist'
 })
 
 export class EventListComponent implements OnInit {
+  eventList: any
 
-    constructor(private pushService:PushService) { }
+  constructor(
+        private pushService: PushService,
+        private eventServices: EventService) {}
 
-    ngOnInit() { 
-        this.pushService
-            .observe(event=>event instanceof Project)
-            .subscribe((val=> this.getEvent()))
-    }
+  ngOnInit() {
+    this.getEvent()
 
-    getEvent(){
+    this.pushService
+      .observe(event => event instanceof Project)
+      .subscribe(val => this.getEvent())
+  }
 
-    }
+  getEvent() {
+      this.eventServices.getAllEvents().then( res=> {
+        this.eventList = res
+      })
+  }
 }

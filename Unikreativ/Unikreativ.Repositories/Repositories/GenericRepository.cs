@@ -89,7 +89,6 @@ namespace Unikreativ.Repositories.Repositories
             if (updated == null)
                 return null;
 
-
             _context.Set<T>().Attach(updated);
             _context.Entry(updated).State = EntityState.Modified;
             await _context.SaveChangesAsync();

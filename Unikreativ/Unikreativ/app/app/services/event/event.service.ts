@@ -4,7 +4,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http'
 import { Injectable } from '@angular/core'
 
 @Injectable()
-export class ProjectService {
+export class EventService {
 
     constructor(
         private http: Http,
@@ -12,11 +12,9 @@ export class ProjectService {
         private dataHandlerService: DataHandlerService,
         private authHttpService: AuthHttpServices) {
     }
-
-    newProject(client: any) {
-        let url = 'Project/NewProject'
-        return this
-            .authHttpService
-            .authPost(url, client)
+    
+    getAllEvents() {
+        let url = 'Event/GetAllEvents'
+        return this.authHttpService.authGet(url)
     }
 }

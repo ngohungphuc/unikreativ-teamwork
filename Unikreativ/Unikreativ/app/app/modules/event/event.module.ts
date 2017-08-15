@@ -1,3 +1,4 @@
+import { EventService } from './../../services/index'
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { EventListComponent } from '../index'
@@ -12,6 +13,6 @@ import { EventListComponent } from '../index'
     declarations: [ 
         EventListComponent 
     ],
-    providers:[]
+    providers:[EventService]
 })
 export class EventModule { }

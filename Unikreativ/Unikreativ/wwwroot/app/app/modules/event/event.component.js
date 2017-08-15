@@ -10,9 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
+const index_1 = require("../../services/index");
+const ProjectModel_1 = require("./../../model/ProjectModel");
+const notification_service_1 = require("./../../extensions/notification.service");
 let EventListComponent = class EventListComponent {
-    constructor() { }
+    constructor(pushService, eventServices) {
+        this.pushService = pushService;
+        this.eventServices = eventServices;
+    }
     ngOnInit() {
+        this.getEvent();
+        this.pushService
+            .observe(event => event instanceof ProjectModel_1.Project)
+            .subscribe(val => this.getEvent());
+    }
+    getEvent() {
+        this.eventServices.getAllEvents().then(res => {
+            this.eventList = res;
+        });
     }
 };
 EventListComponent = __decorate([
@@ -20,7 +35,8 @@ EventListComponent = __decorate([
         selector: 'event-list',
         templateUrl: 'partial/eventlist'
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [notification_service_1.PushService,
+        index_1.EventService])
 ], EventListComponent);
 exports.EventListComponent = EventListComponent;
 //# sourceMappingURL=event.component.js.map
