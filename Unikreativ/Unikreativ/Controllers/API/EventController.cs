@@ -45,10 +45,25 @@ namespace Unikreativ.Controllers.API
             _eventService = eventService;
         }
 
-        public async Task<IActionResult> GetAllEvents()
+        //public async Task<IActionResult> GetAllEvents()
+        //{
+
+        //        var events = await _unitOfWork.Repository<Event>().GetAllAsync();
+        //        return Ok(events);
+        //}
+
+        public IActionResult GetAllEvents()
         {
-            var events = await _unitOfWork.Repository<Event>().GetAllAsync();
-            return Ok(events);
+            try
+            {
+                var events = _unitOfWork.Repository<Event>()
+                .Filter(includeProperties: "Project");
+                return Ok(events);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -136,7 +136,7 @@ namespace Unikreativ.Repositories.Repositories
             if (page != null && pageSize != null)
                 query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
 
-            return query;
+            return query.ToList();
         }
 
         public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
