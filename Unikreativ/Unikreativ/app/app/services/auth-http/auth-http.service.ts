@@ -21,12 +21,12 @@ export class AuthHttpServices {
         this.token = currentUser && currentUser.token
     }
 
-    authGet(url): Promise<RequestResult> {
+    authGet(url): Promise<any> {
         let headers = this.initAuthHeaders()
 
         return this.httpClientService.get(url, { headers: headers })
             .toPromise()
-            .then(res => res.json() as RequestResult)
+            .then(res => res.json() as any)
             .catch(this.dataHandlerService.handleError)
     }
 

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs/Observable'
+import { Subject } from 'rxjs/Subject'
 
 @Injectable()
 export class PushService {
@@ -18,7 +18,7 @@ export class PushService {
     return this.subject.asObservable()
   }
 
-  observe(filter: (any) => boolean) {
+  observe(filter: (data) => boolean) {
     return this.subject.filter(filter)
   }
 

@@ -10,7 +10,7 @@ import {
 } from '@angular/forms'
 import { Toastr_Token, Toastr } from '../../../extensions/toastr'
 import { RequestState } from '../../../model/RequestState'
-import { Project } from '../../../model/ProjectModel';
+import { Project } from '../../../model/ProjectModel'
 
 @Component({
   selector: 'new-project',
@@ -19,7 +19,7 @@ import { Project } from '../../../model/ProjectModel';
 export class NewProjectComponent implements OnInit {
   showResult = false
   clientList: any
-  client:string
+  client: string
   newProjectForm: FormGroup
 
   constructor(
@@ -27,7 +27,7 @@ export class NewProjectComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     @Inject(Toastr_Token) private toastr: Toastr,
-    private pushService:PushService
+    private pushService: PushService
   ) {}
 
   ngOnInit() {
@@ -46,35 +46,34 @@ export class NewProjectComponent implements OnInit {
     }
 
     await this.projectService.newProject(newProject).then(res => {
-      if (res.result){
+      if (res.result) {
         this.toastr.success(res.msg, 'Success')
-        this.pushService.notify(new Project(
-          res.eventData.TaskName,
-          res.eventData.AssignBy,
-          res.eventData.DateAssigned,
-          res.eventData.Description
-        ));
-      }
-        
-      else this.toastr.error(res.msg, 'Error')
+        this.pushService.notify(
+          new Project(
+            res.eventData.TaskName,
+            res.eventData.AssignBy,
+            res.eventData.DateAssigned,
+            res.eventData.Description
+          )
+        )
+      } else this.toastr.error(res.msg, 'Error')
     })
   }
 
   searchClients(clientName) {
-    if(clientName) {
+    if (clientName) {
       this.userService.searchClients(clientName).subscribe(
-          res => {
-            if (res) {
-              this.showResult = true
-              this.clientList = res
-            }
-          },
-          err => {
-            this.toastr.error('Error')
+        res => {
+          if (res) {
+            this.showResult = true
+            this.clientList = res
           }
-        )
-    }
-    else this.showResult = false
+        },
+        err => {
+          this.toastr.error('Error')
+        }
+      )
+    } else this.showResult = false
   }
 
   selectClient(clientName) {

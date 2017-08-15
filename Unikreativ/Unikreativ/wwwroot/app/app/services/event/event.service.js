@@ -13,26 +13,24 @@ const index_1 = require("../index");
 const index_2 = require("../../extensions/index");
 const http_1 = require("@angular/http");
 const core_1 = require("@angular/core");
-let ProjectService = class ProjectService {
+let EventService = class EventService {
     constructor(http, httpClientService, dataHandlerService, authHttpService) {
         this.http = http;
         this.httpClientService = httpClientService;
         this.dataHandlerService = dataHandlerService;
         this.authHttpService = authHttpService;
     }
-    newProject(client) {
-        let url = 'Project/NewProject';
-        return this
-            .authHttpService
-            .authPost(url, client);
+    getAllEvents() {
+        let url = 'Event/GetAllEvents';
+        return this.authHttpService.authGet(url);
     }
 };
-ProjectService = __decorate([
+EventService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http,
         index_2.HttpClientService,
         index_2.DataHandlerService,
         index_1.AuthHttpServices])
-], ProjectService);
-exports.ProjectService = ProjectService;
-//# sourceMappingURL=project.service.js.map
+], EventService);
+exports.EventService = EventService;
+//# sourceMappingURL=event.service.js.map

@@ -21,6 +21,12 @@ let PushService = class PushService {
     getMessage() {
         return this.subject.asObservable();
     }
+    observe(filter) {
+        return this.subject.filter(filter);
+    }
+    notify(data) {
+        this.subject.next(data);
+    }
 };
 PushService = __decorate([
     core_1.Injectable()

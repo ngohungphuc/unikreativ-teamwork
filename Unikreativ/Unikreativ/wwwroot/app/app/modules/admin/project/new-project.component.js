@@ -20,17 +20,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const notification_service_1 = require("./../../../extensions/notification.service");
 const user_service_1 = require("../../../services/users/user.service");
 const project_service_1 = require("./../../../services/project/project.service");
 const core_1 = require("@angular/core");
 const forms_1 = require("@angular/forms");
 const toastr_1 = require("../../../extensions/toastr");
+const ProjectModel_1 = require("../../../model/ProjectModel");
 let NewProjectComponent = class NewProjectComponent {
-    constructor(projectService, userService, fb, toastr) {
+    constructor(projectService, userService, fb, toastr, pushService) {
         this.projectService = projectService;
         this.userService = userService;
         this.fb = fb;
         this.toastr = toastr;
+        this.pushService = pushService;
         this.showResult = false;
     }
     ngOnInit() {
@@ -48,8 +51,10 @@ let NewProjectComponent = class NewProjectComponent {
                 ProjectDescription: value.projectDescription
             };
             yield this.projectService.newProject(newProject).then(res => {
-                if (res.result)
+                if (res.result) {
                     this.toastr.success(res.msg, 'Success');
+                    this.pushService.notify(new ProjectModel_1.Project(res.eventData.TaskName, res.eventData.AssignBy, res.eventData.DateAssigned, res.eventData.Description));
+                }
                 else
                     this.toastr.error(res.msg, 'Error');
             });
@@ -82,7 +87,7 @@ NewProjectComponent = __decorate([
     __param(3, core_1.Inject(toastr_1.Toastr_Token)),
     __metadata("design:paramtypes", [project_service_1.ProjectService,
         user_service_1.UserService,
-        forms_1.FormBuilder, Object])
+        forms_1.FormBuilder, Object, notification_service_1.PushService])
 ], NewProjectComponent);
 exports.NewProjectComponent = NewProjectComponent;
 //# sourceMappingURL=new-project.component.js.map

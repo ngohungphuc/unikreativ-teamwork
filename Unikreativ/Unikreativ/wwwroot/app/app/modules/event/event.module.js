@@ -6,9 +6,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const index_1 = require("./../../services/index");
 const core_1 = require("@angular/core");
 const platform_browser_1 = require("@angular/platform-browser");
-const index_1 = require("../index");
+const index_2 = require("../index");
 let EventModule = class EventModule {
 };
 EventModule = __decorate([
@@ -17,12 +18,12 @@ EventModule = __decorate([
             platform_browser_1.BrowserModule
         ],
         exports: [
-            index_1.EventListComponent
+            index_2.EventListComponent
         ],
         declarations: [
-            index_1.EventListComponent
+            index_2.EventListComponent
         ],
-        providers: []
+        providers: [index_1.EventService]
     })
 ], EventModule);
 exports.EventModule = EventModule;
