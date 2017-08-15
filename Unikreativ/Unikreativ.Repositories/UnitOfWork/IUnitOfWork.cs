@@ -3,7 +3,7 @@ using Unikreativ.Repositories.Interface;
 
 namespace Unikreativ.Repositories.UnitOfWork
 {
-    public interface IUnitOfWork /*: IDisposable*/
+    public interface IUnitOfWork : IDisposable
     {
         IGenericRepository<T> Repository<T>() where T : class;
 
