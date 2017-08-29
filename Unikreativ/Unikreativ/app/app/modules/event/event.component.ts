@@ -20,7 +20,7 @@ export class EventListComponent implements OnInit {
 
     this.pushService
       .observe(event => event instanceof Project)
-      .subscribe(val => this.getEvent())
+      .subscribe(val => this.populateEvent(val))
   }
 
   getEvent() {
@@ -28,4 +28,9 @@ export class EventListComponent implements OnInit {
         this.eventList = res
       })
   }
+
+  populateEvent(eventData) {
+    this.eventList = [...this.eventList, eventData]
+  }
+
 }
