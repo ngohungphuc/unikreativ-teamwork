@@ -22,12 +22,15 @@ let EventListComponent = class EventListComponent {
         this.getEvent();
         this.pushService
             .observe(event => event instanceof ProjectModel_1.Project)
-            .subscribe(val => this.getEvent());
+            .subscribe(val => this.populateEvent(val));
     }
     getEvent() {
         this.eventServices.getAllEvents().then(res => {
             this.eventList = res;
         });
+    }
+    populateEvent(eventData) {
+        this.eventList = [...this.eventList, eventData];
     }
 };
 EventListComponent = __decorate([
