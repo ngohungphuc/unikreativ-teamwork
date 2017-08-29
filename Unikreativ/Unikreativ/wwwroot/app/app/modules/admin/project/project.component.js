@@ -18,7 +18,7 @@ let ProjectComponent = class ProjectComponent {
 };
 ProjectComponent = __decorate([
     core_1.Component({
-        selector: 'project',
+        selector: 'uni-project',
         templateUrl: 'partial/project'
     }),
     __metadata("design:paramtypes", [])

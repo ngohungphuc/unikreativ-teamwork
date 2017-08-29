@@ -10,18 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
-let AdminComponent = class AdminComponent {
-    constructor() {
+const project_service_1 = require("../../../services/project/project.service");
+let ProjectListComponent = class ProjectListComponent {
+    constructor(projectService) {
+        this.projectService = projectService;
     }
     ngOnInit() {
+        this.projectService.getProjectList().then(res => {
+            console.log(res);
+            this.projectList = res;
+        });
     }
 };
-AdminComponent = __decorate([
+ProjectListComponent = __decorate([
     core_1.Component({
-        selector: 'uni-dashboard',
-        templateUrl: 'partial/admin'
+        selector: 'uni-project-list',
+        templateUrl: 'partial/ProjectList'
     }),
-    __metadata("design:paramtypes", [])
-], AdminComponent);
-exports.AdminComponent = AdminComponent;
-//# sourceMappingURL=admin.component.js.map
+    __metadata("design:paramtypes", [project_service_1.ProjectService])
+], ProjectListComponent);
+exports.ProjectListComponent = ProjectListComponent;
+//# sourceMappingURL=project-list.component.js.map

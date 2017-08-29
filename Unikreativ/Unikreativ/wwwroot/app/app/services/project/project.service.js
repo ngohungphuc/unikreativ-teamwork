@@ -20,11 +20,13 @@ let ProjectService = class ProjectService {
         this.dataHandlerService = dataHandlerService;
         this.authHttpService = authHttpService;
     }
+    getProjectList() {
+        let url = 'Project/GetProjectList';
+        return this.authHttpService.authGet(url);
+    }
     newProject(client) {
         let url = 'Project/NewProject';
-        return this
-            .authHttpService
-            .authPost(url, client);
+        return this.authHttpService.authPost(url, client);
     }
 };
 ProjectService = __decorate([

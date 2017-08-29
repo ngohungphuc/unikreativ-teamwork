@@ -48,7 +48,7 @@ namespace Unikreativ.Controllers.API
         public IActionResult GetAllEvents()
         {
             var events = _unitOfWork.Repository<Event>()
-                .Filter(includeProperties: "Project",orderBy:en=>en.OrderByDescending(ev=>ev.DateAssigned));
+                .Filter(includeProperties: "Project", orderBy: en => en.OrderByDescending(ev => ev.DateAssigned));
             return Ok(events);
         }
     }

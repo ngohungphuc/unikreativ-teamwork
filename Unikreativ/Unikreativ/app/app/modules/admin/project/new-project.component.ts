@@ -13,7 +13,7 @@ import { RequestState } from '../../../model/RequestState'
 import { Project } from '../../../model/ProjectModel'
 
 @Component({
-  selector: 'new-project',
+  selector: 'uni-new-project',
   templateUrl: 'partial/newproject'
 })
 export class NewProjectComponent implements OnInit {

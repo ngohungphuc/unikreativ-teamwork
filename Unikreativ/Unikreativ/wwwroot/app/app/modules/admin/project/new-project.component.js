@@ -81,7 +81,7 @@ let NewProjectComponent = class NewProjectComponent {
 };
 NewProjectComponent = __decorate([
     core_1.Component({
-        selector: 'new-project',
+        selector: 'uni-new-project',
         templateUrl: 'partial/newproject'
     }),
     __param(3, core_1.Inject(toastr_1.Toastr_Token)),

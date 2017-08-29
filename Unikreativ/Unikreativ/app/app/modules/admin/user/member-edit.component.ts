@@ -11,7 +11,7 @@ import { Toastr, Toastr_Token } from '../../../extensions/index'
 import { UserService } from '../../../services/index'
 import { ViewChild, ElementRef } from '@angular/core'
 
-@Component({ selector: 'edit-member', templateUrl: 'partial/editmember', providers: [UserService] })
+@Component({ selector: 'uni-edit-member', templateUrl: 'partial/editmember', providers: [UserService] })
 
 export class EditMemberComponent implements OnInit {
     @Input() member: any[]

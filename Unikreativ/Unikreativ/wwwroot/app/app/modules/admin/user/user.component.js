@@ -72,7 +72,7 @@ let UserComponent = class UserComponent {
 };
 UserComponent = __decorate([
     core_1.Component({
-        selector: 'user',
+        selector: 'uni-user',
         templateUrl: 'partial/usermanage',
         providers: [index_2.UserService]
     }),

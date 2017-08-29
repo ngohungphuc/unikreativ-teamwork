@@ -12,7 +12,7 @@ import { UserService } from '../../../services/index'
 import { RequestState } from '../../../model/RequestState'
 
 @Component({
-    selector: 'new-member',
+    selector: 'uni-new-member',
     templateUrl: 'partial/newmember',
     providers: [UserService]
 })

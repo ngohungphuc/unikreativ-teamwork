@@ -76,7 +76,7 @@ __decorate([
     __metadata("design:type", core_1.ElementRef)
 ], ClientEditComponent.prototype, "clientId", void 0);
 ClientEditComponent = __decorate([
-    core_1.Component({ selector: 'edit-client', templateUrl: 'partial/clientedit', providers: [index_1.UserService] }),
+    core_1.Component({ selector: 'uni-edit-client', templateUrl: 'partial/clientedit', providers: [index_1.UserService] }),
     __param(1, core_1.Inject(toastr_1.Toastr_Token)),
     __metadata("design:paramtypes", [index_1.UserService, Object])
 ], ClientEditComponent);

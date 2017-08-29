@@ -92,8 +92,8 @@
     </div>
 </div>
 <!--Raise event when new client is create -->
-<new-client (newClientCreated)="newClientCreated($event)"></new-client>
-<edit-client [client]="client"></edit-client>
+<uni-new-client (newClientCreated)="newClientCreated($event)"></uni-new-client>
+<uni-edit-client [client]="client"></uni-edit-client>
 
-<new-member (newMemberCreated)="newMemberCreated($event)"></new-member>
-<edit-member [member]="member"></edit-member>
+<uni-new-member (newMemberCreated)="newMemberCreated($event)"></uni-new-member>
+<uni-edit-member [member]="member"></uni-edit-member>

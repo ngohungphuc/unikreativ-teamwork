@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 
 @Component({
-    selector: 'project',
+    selector: 'uni-project',
     templateUrl: 'partial/project'
 })
 

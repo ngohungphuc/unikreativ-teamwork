@@ -84,7 +84,7 @@ __decorate([
 ], NewMemberComponent.prototype, "newMemberCreated", void 0);
 NewMemberComponent = __decorate([
     core_1.Component({
-        selector: 'new-member',
+        selector: 'uni-new-member',
         templateUrl: 'partial/newmember',
         providers: [index_2.UserService]
     }),
