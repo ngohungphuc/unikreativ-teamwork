@@ -35,7 +35,7 @@ let EventListComponent = class EventListComponent {
 };
 EventListComponent = __decorate([
     core_1.Component({
-        selector: 'event-list',
+        selector: 'uni-event-list',
         templateUrl: 'partial/eventlist'
     }),
     __metadata("design:paramtypes", [notification_service_1.PushService,

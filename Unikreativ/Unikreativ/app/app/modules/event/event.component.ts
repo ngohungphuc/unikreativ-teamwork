@@ -4,7 +4,7 @@ import { Project } from './../../model/ProjectModel'
 import { PushService } from './../../extensions/notification.service'
 
 @Component({
-  selector: 'event-list',
+  selector: 'uni-event-list',
   templateUrl: 'partial/eventlist'
 })
 

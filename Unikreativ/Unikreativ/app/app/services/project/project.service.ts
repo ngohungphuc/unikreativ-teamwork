@@ -13,10 +13,14 @@ export class ProjectService {
         private authHttpService: AuthHttpServices) {
     }
 
+    getProjectList() {
+        let url = 'Project/GetProjectList'
+        return this.authHttpService.authGet(url)
+    }
+
     newProject(client: any) {
         let url = 'Project/NewProject'
-        return this
-            .authHttpService
-            .authPost(url, client)
+        return this.authHttpService.authPost(url, client)
     }
+
 }

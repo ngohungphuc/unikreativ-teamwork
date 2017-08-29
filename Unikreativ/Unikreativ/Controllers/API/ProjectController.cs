@@ -20,6 +20,7 @@ namespace Unikreativ.Controllers.API
     public class ProjectController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserServices _userServices;
         private readonly IAccountServices _accountServices;
         private readonly IValidateAccount _validateAccount;
@@ -30,6 +31,7 @@ namespace Unikreativ.Controllers.API
         private readonly IProjectServices _projectService;
         public ProjectController(
             UserManager<User> userManager,
+            IUnitOfWork unitOfWork,
             IUserServices userServices,
             IAccountServices accountServices,
             IValidateAccount validateAccount,
@@ -40,6 +42,7 @@ namespace Unikreativ.Controllers.API
             IProjectServices projectService)
         {
             _userManager = userManager;
+            _unitOfWork = unitOfWork;
             _userServices = userServices;
             _validateAccount = validateAccount;
             _emailSender = emailSender;
@@ -50,6 +53,12 @@ namespace Unikreativ.Controllers.API
             _projectService = projectService;
         }
 
+        [HttpGet]
+        public IActionResult GetProjectList()
+        {
+            var projectList = _unitOfWork.Repository<Project>().Filter();
+            return Ok(projectList);
+        }
 
         [HttpPost]
         [ValidModel]
@@ -64,6 +73,5 @@ namespace Unikreativ.Controllers.API
             return Json(new { result = true, msg = "Create new project success", eventData });
 
         }
-
     }
 }

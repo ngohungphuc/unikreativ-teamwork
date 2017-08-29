@@ -10,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Toastr, Toastr_Token } from '../../../extensions/toastr'
 import { UserService } from '../../../services/index'
 
-@Component({ selector: 'edit-client', templateUrl: 'partial/clientedit', providers: [UserService] })
+@Component({ selector: 'uni-edit-client', templateUrl: 'partial/clientedit', providers: [UserService] })
 
 export class ClientEditComponent implements OnInit {
     @Input() client: any[]

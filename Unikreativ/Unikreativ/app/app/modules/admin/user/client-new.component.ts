@@ -11,7 +11,7 @@ import { Toastr, Toastr_Token } from '../../../extensions/index'
 import { UserService } from '../../../services/index'
 import { RequestState } from '../../../model/RequestState'
 @Component({
-    selector: 'new-client',
+    selector: 'uni-new-client',
     templateUrl: 'partial/clientnew',
     providers: [
         UserService

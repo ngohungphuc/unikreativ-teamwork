@@ -77,7 +77,7 @@ __decorate([
     __metadata("design:type", core_2.ElementRef)
 ], EditMemberComponent.prototype, "memberId", void 0);
 EditMemberComponent = __decorate([
-    core_1.Component({ selector: 'edit-member', templateUrl: 'partial/editmember', providers: [index_2.UserService] }),
+    core_1.Component({ selector: 'uni-edit-member', templateUrl: 'partial/editmember', providers: [index_2.UserService] }),
     __param(1, core_1.Inject(index_1.Toastr_Token)),
     __metadata("design:paramtypes", [index_2.UserService, Object])
 ], EditMemberComponent);

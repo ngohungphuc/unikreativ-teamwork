@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable'
 import { Toastr, Toastr_Token } from '../../../extensions/index'
 import { UserService } from '../../../services/index'
 @Component({
-    selector: 'user',
+    selector: 'uni-user',
     templateUrl: 'partial/usermanage',
     providers: [UserService]
 })
