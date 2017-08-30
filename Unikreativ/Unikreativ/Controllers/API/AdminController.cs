@@ -139,8 +139,8 @@ namespace Unikreativ.Controllers.API
 
             var account = Mapper.Map<User>(accountDto);
 
-            if (await _validateAccount.CheckAccountExist(accountDto.UserName) == true) throw new Exception("Account already exist");
-            if (await _validateAccount.CheckEmailExist(accountDto.Email) == true) throw new Exception("Email already exist");
+            if (await _validateAccount.CheckAccountExist(accountDto.UserName)) throw new Exception("Account already exist");
+            if (await _validateAccount.CheckEmailExist(accountDto.Email)) throw new Exception("Email already exist");
 
             var randomPassword = GenerateToken.RandomString();
             var result = await _userManager.CreateAsync(account, randomPassword);

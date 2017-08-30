@@ -18,6 +18,7 @@ using Unikreativ.Entities.Models.Auth;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Auth;
 using Unikreativ.Helper.Confirm;
+using Unikreativ.Helper.Extensions;
 using Unikreativ.Repositories.Interface;
 using Unikreativ.Repositories.Repositories;
 using Unikreativ.Repositories.UnitOfWork;
@@ -51,60 +52,12 @@ namespace Unikreativ
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            // Enable the use of an [Authorize("Bearer")] attribute on methods and classes to protect.
-            services.AddAuthorization(auth =>
-            {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser().Build());
-            });
-
-            services.AddMvc().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-            });
-
-            //services.AddMvcCore().AddJsonFormatters();
-
-            services.AddIdentity<User, IdentityRole>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 4;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-
-                //lock out attempt
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-                options.Lockout.MaxFailedAccessAttempts = 2;
-            })
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
-
-            // Add application services.
-            services.AddTransient<Seeder>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IValidateAccount, ValidateAccount>();
-            services.AddTransient<IUserResolverService, UserResolverService>();
-            services.AddTransient<IEmailTemplateService, EmailTemplateService>();
-            services.AddTransient<IEmailSender, MessageServices>();
-            services.AddTransient<ISmsSender, MessageServices>();
-            services.AddTransient<IUserServices, UserServices>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IAccountRepository, AccountRepository>();
-            services.AddTransient<IAccountServices, AccountServices>();
-            services.AddTransient<IEventService, EventSerivce>();
-            services.AddTransient<IEventRepository, EventRepository>();
-            services.AddTransient<IProjectServices, ProjectServices>();
-            services.AddTransient<IProjectRepository, ProjectRepository>();
+            services.AddCustomizedDataAccess(Configuration);
+            services.AddUnikreativAuthorization();
+            services.AddUnikreativJsonOption();
+            services.AddSignalR();
+            services.AddCustomizedIdentity();
+            services.AddUnikreativServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -126,7 +79,6 @@ namespace Unikreativ
             }
 
             app.UseStaticFiles();
-
             #region Handle Exception
 
             app.UseExceptionHandler(appBuilder =>
@@ -165,55 +117,13 @@ namespace Unikreativ
             });
 
             #endregion Handle Exception
-
-            #region UseJwtBearerAuthentication
-
-            app.UseJwtBearerAuthentication(new JwtBearerOptions()
-            {
-                TokenValidationParameters = new TokenValidationParameters()
-                {
-                    IssuerSigningKey = TokenAuthOption.Key,
-                    ValidAudience = TokenAuthOption.Audience,
-                    ValidIssuer = TokenAuthOption.Issuer,
-                    // When receiving a token, check that we've signed it.
-                    ValidateIssuerSigningKey = true,
-                    // When receiving a token, check that it is still valid.
-                    ValidateLifetime = true,
-                    // This defines the maximum allowable clock skew - i.e. provides a tolerance on the token expiry time
-                    // when validating the lifetime. As we're creating the tokens locally and validating them on the same
-                    // machines which should have synchronised time, this can be set to zero. Where external tokens are
-                    // used, some leeway here could be useful.
-                    ClockSkew = TimeSpan.FromMinutes(0)
-                }
-            });
-
-            #endregion UseJwtBearerAuthentication
-
+            app.UseUnikreativJWT();
             app.UseIdentity();
-
-            #region Mapper
-
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Client, User>();
-                cfg.CreateMap<Member, User>();
-                cfg.CreateMap<ProjectViewModel, Project>();
-            });
-
-            #endregion Mapper
-
-            // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute("spa",
-                    "{*anything}",
-                    new { controller = "Home", action = "Index" });
-            });
+            ApplicationBuilderExtension.GetAutoMapper();
+            app.UseSignalR();
+            app.UseUnikreativCustomizedMvc();
         }
+
+        
     }
 }

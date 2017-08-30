@@ -41,27 +41,5 @@ namespace Unikreativ.Repositories.UnitOfWork
         {
             _dbContext.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
         }
-
-        /// <summary>
-        /// Disposes the current object
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Disposes all external resources.
-        /// </summary>
-        /// <param name="disposing">The dispose indicator.</param>
-        private void Dispose(bool disposing)
-        {
-            if (!disposing) return;
-            if (_dbContext == null) return;
-            _dbContext.Dispose();
-            _dbContext = null;
-        }
-
     }
 }
