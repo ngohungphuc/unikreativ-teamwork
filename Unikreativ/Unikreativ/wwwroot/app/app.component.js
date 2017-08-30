@@ -11,6 +11,8 @@ let AppComponent = class AppComponent {
     constructor() {
         this.welcomeMsg = 'Welcome to Angular4 & ASP.Net Core';
     }
+    ngOnInit() {
+    }
 };
 AppComponent = __decorate([
     core_1.Component({
