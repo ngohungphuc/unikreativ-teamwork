@@ -55,7 +55,6 @@ namespace Unikreativ
             services.AddCustomizedDataAccess(Configuration);
             services.AddUnikreativAuthorization();
             services.AddUnikreativJsonOption();
-            services.AddSignalR();
             services.AddCustomizedIdentity();
             services.AddUnikreativServices();
         }
@@ -120,7 +119,6 @@ namespace Unikreativ
             app.UseUnikreativJWT();
             app.UseIdentity();
             ApplicationBuilderExtension.GetAutoMapper();
-            app.UseSignalR();
             app.UseUnikreativCustomizedMvc();
         }
 

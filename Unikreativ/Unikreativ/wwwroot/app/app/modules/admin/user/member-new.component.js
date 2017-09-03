@@ -67,7 +67,6 @@ let NewMemberComponent = class NewMemberComponent {
                 .userService
                 .newMember(newMember)
                 .then(res => {
-                console.log(res);
                 if (res.State === RequestState_1.RequestState.Success) {
                     this.toastr.success(res.Msg, 'Success');
                     this.newMemberCreated.emit(newMember);
