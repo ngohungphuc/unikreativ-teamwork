@@ -70,7 +70,6 @@ export class NewMemberComponent implements OnInit {
             .userService
             .newMember(newMember)
             .then(res => {
-                console.log(res)
                 if (res.State === RequestState.Success) {
                     this.toastr.success(res.Msg, 'Success')
                     this.newMemberCreated.emit(newMember)
