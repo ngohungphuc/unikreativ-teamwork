@@ -17,6 +17,7 @@ using Unikreativ.Helper.Auth;
 using Unikreativ.Helper.Confirm;
 using Unikreativ.Helper.Message;
 using Unikreativ.Helper.Security;
+using Unikreativ.Helper.Account;
 
 namespace Unikreativ.Controllers.API
 {
@@ -31,15 +32,16 @@ namespace Unikreativ.Controllers.API
         private readonly IValidateAccount _validateAccount;
         private readonly IEmailSender _emailSender;
         private readonly IEmailTemplateService _emailTemplateService;
-
+        private readonly IAccountHelper _accountHelper;
         public AdminController(
             UserManager<User> userManager,
-             IUnitOfWork unitOfWork,
+            IUnitOfWork unitOfWork,
             IUserServices userServices,
             IAccountServices accountServices,
             IValidateAccount validateAccount,
             IEmailSender emailSender,
-            IEmailTemplateService emailTemplateService)
+            IEmailTemplateService emailTemplateService,
+            IAccountHelper accountHelper)
         {
             _userManager = userManager;
             _unitOfWork = unitOfWork;
@@ -48,6 +50,7 @@ namespace Unikreativ.Controllers.API
             _emailSender = emailSender;
             _accountServices = accountServices;
             _emailTemplateService = emailTemplateService;
+            _accountHelper = accountHelper;
         }
 
         #region Manage Account
@@ -56,7 +59,7 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<string> NewClient([FromBody] Client clientDto)
         {
-            var account = await CreateNewAccount(clientDto);
+            var account = await _accountHelper.CreateNewAccount(clientDto);
 
             await _userManager.AddToRoleAsync(account.User, "Client");
             var signUpInfo = new SignUpInfo
@@ -77,8 +80,7 @@ namespace Unikreativ.Controllers.API
         [ValidModel]
         public async Task<string> NewMember([FromBody] Member memberDto)
         {
-            var account = await CreateNewAccount(memberDto);
-
+            var account = await _accountHelper.CreateNewAccount(memberDto);
             await _userManager.AddToRoleAsync(account.User, memberDto.Role);
             var signUpInfo = new SignUpInfo
             {
@@ -99,7 +101,7 @@ namespace Unikreativ.Controllers.API
             var client = await _unitOfWork.Repository<User>().GetByIdAsync(clientDto.Id);
             client = Mapper.Map(clientDto, client);
 
-            await UpdateUserInfoAsync(client);
+            await _accountHelper.UpdateUserInfoAsync(client);
 
             return AccountValidate.ValidationMessage(RequestState.Success, "Update Client success");
         }
@@ -111,7 +113,7 @@ namespace Unikreativ.Controllers.API
             var member = await _unitOfWork.Repository<User>().GetByIdAsync(memberDto.Id);
             member = Mapper.Map(memberDto, member);
 
-            await UpdateUserInfoAsync(member);
+            await _accountHelper.UpdateUserInfoAsync(member);
 
             return AccountValidate.ValidationMessage(RequestState.Success, "Update Member success");
         }
@@ -129,41 +131,5 @@ namespace Unikreativ.Controllers.API
         }
 
         #endregion Manage Account
-
-        #region Private
-
-        private async Task<RegisterViewModel> CreateNewAccount(dynamic accountDto)
-        {
-            if (accountDto == null)
-                throw new ArgumentNullException(nameof(accountDto));
-
-            var account = Mapper.Map<User>(accountDto);
-
-            if (await _validateAccount.CheckAccountExist(accountDto.UserName)) throw new Exception("Account already exist");
-            if (await _validateAccount.CheckEmailExist(accountDto.Email)) throw new Exception("Email already exist");
-
-            var randomPassword = GenerateToken.RandomString();
-            var result = await _userManager.CreateAsync(account, randomPassword);
-            if (!result.Succeeded) throw new Exception("Something went wrong please try again later");
-
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(account);
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = account.Id, code }, HttpContext.Request.Scheme);
-
-            return new RegisterViewModel()
-            {
-                User = account,
-                Code = code,
-                CallbackUrl = callbackUrl,
-                RandomPassword = randomPassword
-            };
-        }
-
-        private async Task UpdateUserInfoAsync(User account)
-        {
-            if (account == null) throw new Exception("Account null");
-            await _unitOfWork.Repository<User>().UpdateAsync(account);
-        }
-
-        #endregion Private
     }
 }

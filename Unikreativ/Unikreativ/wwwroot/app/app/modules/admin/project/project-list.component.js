@@ -11,23 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const project_service_1 = require("../../../services/project/project.service");
-const $ = require("jquery");
 let ProjectListComponent = class ProjectListComponent {
     constructor(projectService) {
         this.projectService = projectService;
     }
     ngOnInit() {
         this.projectService.getProjectList().then(res => {
-            console.log(res);
             this.projectList = res;
-        });
-        let myHubProxy = $.connection.hub.createHubProxy('UnikreativHub');
-        console.log(myHubProxy);
-        myHubProxy.on('clientListener', function (msg) {
-            console.log(msg);
-        });
-        $.connection.hub.start().done(function () {
-            myHubProxy.invoke('TestHub');
         });
     }
 };

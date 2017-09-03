@@ -1,20 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
-using Unikreativ.Entities.Models.Auth;
+using Unikreativ.Helper.Account;
 using Unikreativ.Helper.Auth;
 using Unikreativ.Helper.Confirm;
 using Unikreativ.Repositories.Interface;
@@ -22,6 +17,9 @@ using Unikreativ.Repositories.Repositories;
 using Unikreativ.Repositories.UnitOfWork;
 using Unikreativ.Services.Interface;
 using Unikreativ.Services.Services;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Unikreativ.Helper.Extensions
 {
@@ -61,9 +59,12 @@ namespace Unikreativ.Helper.Extensions
 
         public static IServiceCollection AddUnikreativServices(this IServiceCollection services)
         {
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<Seeder>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IValidateAccount, ValidateAccount>();
+            services.AddTransient<IAccountHelper, AccountHelper>();
             services.AddTransient<IUserResolverService, UserResolverService>();
             services.AddTransient<IEmailTemplateService, EmailTemplateService>();
             services.AddTransient<IEmailSender, MessageServices>();
