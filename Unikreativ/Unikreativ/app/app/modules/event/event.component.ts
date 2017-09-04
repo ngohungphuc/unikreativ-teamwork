@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { EventService } from '../../services/index'
-import { Project } from './../../model/ProjectModel'
+import { Event } from './../../model/EventModel'
 import { PushService } from './../../extensions/notification.service'
 
 @Component({
@@ -19,7 +19,7 @@ export class EventListComponent implements OnInit {
     this.getEvent()
 
     this.pushService
-      .observe(event => event instanceof Project)
+      .observe(event => event instanceof Event)
       .subscribe(val => this.populateEvent(val))
   }
 

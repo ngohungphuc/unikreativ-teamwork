@@ -11,14 +11,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const project_service_1 = require("../../../services/project/project.service");
+const notification_service_1 = require("../../../extensions/notification.service");
+const ProjectModel_1 = require("../../../model/ProjectModel");
 let ProjectListComponent = class ProjectListComponent {
-    constructor(projectService) {
+    constructor(pushService, projectService) {
+        this.pushService = pushService;
         this.projectService = projectService;
+        this.subscriptions = [];
     }
     ngOnInit() {
         this.projectService.getProjectList().then(res => {
             this.projectList = res;
         });
+        this.subscriptions.push(this.pushService
+            .observe(event => event instanceof ProjectModel_1.Project)
+            .subscribe(val => {
+            this.populateProject(val);
+        }));
+    }
+    populateProject(projectData) {
+        console.log(projectData);
+        this.projectList = [...this.projectList, projectData];
     }
 };
 ProjectListComponent = __decorate([
@@ -26,7 +39,8 @@ ProjectListComponent = __decorate([
         selector: 'uni-project-list',
         templateUrl: 'partial/ProjectList'
     }),
-    __metadata("design:paramtypes", [project_service_1.ProjectService])
+    __metadata("design:paramtypes", [notification_service_1.PushService,
+        project_service_1.ProjectService])
 ], ProjectListComponent);
 exports.ProjectListComponent = ProjectListComponent;
 //# sourceMappingURL=project-list.component.js.map

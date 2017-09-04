@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
+using Unikreativ.Helper.Auth;
 using Unikreativ.Repositories.Interface;
 namespace Unikreativ.Repositories.Repositories
 {
@@ -9,22 +10,27 @@ namespace Unikreativ.Repositories.Repositories
     public class EventRepository : IEventRepository
     {
         private readonly ApplicationDbContext _context;
-
-        public EventRepository(ApplicationDbContext context)
+        private readonly IUserResolverService _userResolverService;
+        public EventRepository(
+             ApplicationDbContext context,
+             IUserResolverService userResolverService
+             )
         {
             _context = context;
+            _userResolverService = userResolverService;
         }
 
         public async Task<Event> AddEventAsync(Project projectInfo)
         {
+            var currentUser = await _userResolverService.GetUser();
             var projectEvent = new Event
             {
                 TaskName = projectInfo.ProjectName,
-                AssignBy = projectInfo.Client.UserName,
+                AssignBy = currentUser.FullName,
                 DateAssigned = DateTime.Now,
                 IsCompleted = false,
                 Description =
-                    $"{projectInfo.Client.UserName} create project {projectInfo.ProjectName} at {DateTime.Now}",
+                    $"{currentUser.FullName} create project {projectInfo.ProjectName} at {DateTime.Now}",
                 Project = projectInfo
             };
 

@@ -26,6 +26,7 @@ const project_service_1 = require("./../../../services/project/project.service")
 const core_1 = require("@angular/core");
 const forms_1 = require("@angular/forms");
 const toastr_1 = require("../../../extensions/toastr");
+const EventModel_1 = require("../../../model/EventModel");
 const ProjectModel_1 = require("../../../model/ProjectModel");
 let NewProjectComponent = class NewProjectComponent {
     constructor(projectService, userService, fb, toastr, pushService) {
@@ -43,17 +44,19 @@ let NewProjectComponent = class NewProjectComponent {
             projectDescription: ['', forms_1.Validators.required]
         });
     }
-    newProject(value) {
+    newProject(value, clientName) {
         return __awaiter(this, void 0, void 0, function* () {
+            const client = this.client ? clientName.value : this.client;
             let newProject = {
                 ProjectName: value.projectName,
-                UserName: this.client,
+                UserName: client,
                 ProjectDescription: value.projectDescription
             };
             yield this.projectService.newProject(newProject).then(res => {
                 if (res.result) {
+                    this.pushService.notify(new ProjectModel_1.Project(value.projectName, client, value.projectDescription, new Date()));
+                    this.pushService.notify(new EventModel_1.Event(res.eventData.TaskName, res.eventData.AssignBy, res.eventData.DateAssigned, res.eventData.Description));
                     this.toastr.success(res.msg, 'Success');
-                    this.pushService.notify(new ProjectModel_1.Project(res.eventData.TaskName, res.eventData.AssignBy, res.eventData.DateAssigned, res.eventData.Description));
                 }
                 else
                     this.toastr.error(res.msg, 'Error');

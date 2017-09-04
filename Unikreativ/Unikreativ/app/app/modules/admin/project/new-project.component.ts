@@ -10,6 +10,7 @@ import {
 } from '@angular/forms'
 import { Toastr_Token, Toastr } from '../../../extensions/toastr'
 import { RequestState } from '../../../model/RequestState'
+import { Event } from '../../../model/EventModel'
 import { Project } from '../../../model/ProjectModel'
 
 @Component({
@@ -38,24 +39,33 @@ export class NewProjectComponent implements OnInit {
     })
   }
 
-  async newProject(value: any) {
+  async newProject(value: any,clientName) {
+    const client = this.client ? clientName.value : this.client
     let newProject = {
       ProjectName: value.projectName,
-      UserName: this.client,
+      UserName: client,
       ProjectDescription: value.projectDescription
     }
 
     await this.projectService.newProject(newProject).then(res => {
       if (res.result) {
-        this.toastr.success(res.msg, 'Success')
         this.pushService.notify(
           new Project(
+            value.projectName,
+            client,
+            value.projectDescription,
+            new Date()
+          )
+        )
+        this.pushService.notify(
+          new Event(
             res.eventData.TaskName,
             res.eventData.AssignBy,
             res.eventData.DateAssigned,
             res.eventData.Description
           )
         )
+        this.toastr.success(res.msg, 'Success')
       } else this.toastr.error(res.msg, 'Error')
     })
   }

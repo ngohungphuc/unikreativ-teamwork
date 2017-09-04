@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Unikreativ.Entities\Unikreativ.Entities.csproj" />
+    <ProjectReference Include="..\Unikreativ.Helper\Unikreativ.Helper.csproj" />
   </ItemGroup>
 
 </Project>

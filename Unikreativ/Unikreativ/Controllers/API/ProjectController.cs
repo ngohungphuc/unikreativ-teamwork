@@ -56,7 +56,8 @@ namespace Unikreativ.Controllers.API
         [HttpGet]
         public IActionResult GetProjectList()
         {
-            var projectList = _unitOfWork.Repository<Project>().Filter();
+            var projectList = _unitOfWork.Repository<Project>()
+                .Filter(includeProperties: "Client,Billings,TasksRequests,SubTasks");
             return Ok(projectList);
         }
 
@@ -65,7 +66,7 @@ namespace Unikreativ.Controllers.API
         public async Task<IActionResult> NewProject([FromBody] ProjectViewModel projectDto)
         {
             var project = Mapper.Map<Project>(projectDto);
-            project.Client = await _userResolverService.GetUser();
+            project.Client =  await _unitOfWork.Repository<User>().FindAsync(u => u.UserName == projectDto.UserName);
 
             await _projectService.AddProjectAsync(project);
             var eventData = await _eventService.AddEventAsync(project);

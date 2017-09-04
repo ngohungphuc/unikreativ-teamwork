@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const index_1 = require("../../services/index");
-const ProjectModel_1 = require("./../../model/ProjectModel");
+const EventModel_1 = require("./../../model/EventModel");
 const notification_service_1 = require("./../../extensions/notification.service");
 let EventListComponent = class EventListComponent {
     constructor(pushService, eventServices) {
@@ -21,7 +21,7 @@ let EventListComponent = class EventListComponent {
     ngOnInit() {
         this.getEvent();
         this.pushService
-            .observe(event => event instanceof ProjectModel_1.Project)
+            .observe(event => event instanceof EventModel_1.Event)
             .subscribe(val => this.populateEvent(val));
     }
     getEvent() {

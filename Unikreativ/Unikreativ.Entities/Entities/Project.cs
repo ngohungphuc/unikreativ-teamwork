@@ -14,6 +14,7 @@ namespace Unikreativ.Entities.Entities
         public User Client { get; set; }
         public IList<Billing> Billings { get; set; }
         public IList<Event> Events { get; set; }
+        public IList<TasksRequest> TasksRequests { get; set; }
         public IList<SubTask> SubTasks { get; set; }
     }
 }

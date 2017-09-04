@@ -440,7 +440,7 @@ namespace Unikreativ.Entities.Migrations
             modelBuilder.Entity("Unikreativ.Entities.Entities.TasksRequest", b =>
                 {
                     b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
-                        .WithMany()
+                        .WithMany("TasksRequests")
                         .HasForeignKey("ProjectId");
 
                     b.HasOne("Unikreativ.Entities.Entities.SubTask", "SubTask")

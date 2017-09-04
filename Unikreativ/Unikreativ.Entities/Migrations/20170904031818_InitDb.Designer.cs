@@ -8,8 +8,8 @@ using Unikreativ.Entities.Data;
 namespace Unikreativ.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170802135958_Init")]
-    partial class Init
+    [Migration("20170904031818_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -441,7 +441,7 @@ namespace Unikreativ.Entities.Migrations
             modelBuilder.Entity("Unikreativ.Entities.Entities.TasksRequest", b =>
                 {
                     b.HasOne("Unikreativ.Entities.Entities.Project", "Project")
-                        .WithMany()
+                        .WithMany("TasksRequests")
                         .HasForeignKey("ProjectId");
 
                     b.HasOne("Unikreativ.Entities.Entities.SubTask", "SubTask")
