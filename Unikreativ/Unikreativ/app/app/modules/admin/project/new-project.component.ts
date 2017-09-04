@@ -39,7 +39,7 @@ export class NewProjectComponent implements OnInit {
     })
   }
 
-  async newProject(value: any,clientName) {
+  async newProject(value: any, clientName) {
     const client = this.client ? clientName.value : this.client
     let newProject = {
       ProjectName: value.projectName,

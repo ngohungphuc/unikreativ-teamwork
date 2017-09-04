@@ -30,7 +30,7 @@ export class ProjectListComponent implements OnInit {
         )
     }
 
-    populateProject(projectData){
+    populateProject(projectData) {
         console.log(projectData)
         this.projectList = [...this.projectList, projectData]
     }

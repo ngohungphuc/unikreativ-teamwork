@@ -1,7 +1,7 @@
 export class Project {
   constructor(
     ProjectName: string,
-    UserName: string,
+    CompanyName: string,
     ProjectDescription: string,
     AgreementDate: Date
   ) {}
