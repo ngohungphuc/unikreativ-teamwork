@@ -1,5 +1,7 @@
 # Unikreativ Teamwork Project
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f8e51464e4e4af588d61e48d0b523f2)](https://www.codacy.com/app/ngohungphuc95/unikreativ-teamwork?utm_source=github.com&utm_medium=referral&utm_content=ngohungphuc/unikreativ-teamwork&utm_campaign=badger)
+
 ![Unikreativ](http://unikreativ.com/wp-content/uploads/2016/12/photo-logo.png)
 
 This project will use the following technology
