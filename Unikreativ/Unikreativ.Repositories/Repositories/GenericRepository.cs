@@ -75,7 +75,9 @@ namespace Unikreativ.Repositories.Repositories
         public T Update(T updated)
         {
             if (updated == null)
+            {
                 return null;
+            }
 
             _context.Set<T>().Attach(updated);
             _context.Entry(updated).State = EntityState.Modified;
@@ -87,7 +89,9 @@ namespace Unikreativ.Repositories.Repositories
         public async Task<T> UpdateAsync(T updated)
         {
             if (updated == null)
+            {
                 return null;
+            }
 
             _context.Set<T>().Attach(updated);
             _context.Entry(updated).State = EntityState.Modified;
@@ -123,18 +127,28 @@ namespace Unikreativ.Repositories.Repositories
         {
             IQueryable<T> query = _context.Set<T>();
             if (filter != null)
+            {
                 query = query.Where(filter);
+            }
 
             if (orderBy != null)
+            {
                 query = orderBy(query);
+            }
 
             if (includeProperties != null)
+            {
                 foreach (
                     var includeProperty in includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
                     query = query.Include(includeProperty);
+                }
+            }
 
             if (page != null && pageSize != null)
+            {
                 query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
+            }
 
             return query.ToList();
         }

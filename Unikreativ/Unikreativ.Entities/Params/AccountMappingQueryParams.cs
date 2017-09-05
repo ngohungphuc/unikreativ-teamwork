@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Unikreativ.Entities.ViewModel;
+﻿using Unikreativ.Entities.ViewModel;
 
 namespace Unikreativ.Entities.Params
 {

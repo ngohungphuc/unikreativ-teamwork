@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Unikreativ.Helper.Confirm
+﻿namespace Unikreativ.Helper.Confirm
 {
     public class MessageContent
     {

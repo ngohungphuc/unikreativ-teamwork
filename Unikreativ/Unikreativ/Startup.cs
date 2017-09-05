@@ -1,29 +1,15 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using System;
 using Unikreativ.Entities.Data;
-using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.Models.Auth;
-using Unikreativ.Entities.ViewModel;
-using Unikreativ.Helper.Auth;
-using Unikreativ.Helper.Confirm;
 using Unikreativ.Helper.Extensions;
-using Unikreativ.Repositories.Interface;
-using Unikreativ.Repositories.Repositories;
-using Unikreativ.Repositories.UnitOfWork;
-using Unikreativ.Services.Interface;
-using Unikreativ.Services.Services;
 
 namespace Unikreativ
 {
@@ -116,7 +102,7 @@ namespace Unikreativ
             });
 
             #endregion Handle Exception
-            app.UseUnikreativJWT();
+            app.UseUnikreativJwt();
             app.UseIdentity();
             ApplicationBuilderExtension.GetAutoMapper();
             app.UseUnikreativCustomizedMvc();

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unikreativ.Entities.Data;
-using Unikreativ.Entities.Entities;
 using Unikreativ.Repositories.Interface;
 using Unikreativ.Repositories.Repositories;
 
@@ -10,8 +9,8 @@ namespace Unikreativ.Repositories.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private ApplicationDbContext _dbContext;
-        private Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
+        private readonly ApplicationDbContext _dbContext;
+        private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
 
         public Dictionary<Type, object> Repositories
         {
@@ -23,7 +22,6 @@ namespace Unikreativ.Repositories.UnitOfWork
         {
             _dbContext = dbContext;
         }
-
 
         public IGenericRepository<T> Repository<T>() where T : class
         {

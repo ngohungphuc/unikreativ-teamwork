@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Unikreativ.Entities.Data;
-using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.Mapping;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Repositories.Interface;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Unikreativ.Repositories.Repositories
 {
@@ -42,7 +37,7 @@ namespace Unikreativ.Repositories.Repositories
                           }).AsNoTracking().ToListAsync();
         }
 
-        public async Task<List<Client>> GetClients(string clientName = null)
+        public async Task<List<Client>> GetClients(string clientName)
         {
             var role = _context.Roles.SingleOrDefault(r => r.Name == "Client");
 

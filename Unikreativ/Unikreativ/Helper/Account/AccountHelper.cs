@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.Models.AccountViewModels;
@@ -60,12 +58,23 @@ namespace Unikreativ.Helper.Account
 
             var account = Mapper.Map<User>(accountDto);
 
-            if (await _validateAccount.CheckAccountExist(accountDto.UserName)) return AccountRegisterResult.AccountExist;
-            if (await _validateAccount.CheckEmailExist(accountDto.Email)) return AccountRegisterResult.EmailExist;
+            if (await _validateAccount.CheckAccountExist(accountDto.UserName))
+            {
+                return AccountRegisterResult.AccountExist;
+            }
+
+            if (await _validateAccount.CheckEmailExist(accountDto.Email))
+            {
+                return AccountRegisterResult.EmailExist;
+            }
 
             var randomPassword = GenerateToken.RandomString();
             var result = await _userManager.CreateAsync(account, randomPassword);
-            if (!result.Succeeded) return AccountRegisterResult.Failed;
+
+            if (!result.Succeeded)
+            {
+                return AccountRegisterResult.Failed;
+            }
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(account);
             var callbackUrl = _urlHelperFactory.GetUrlHelper(_actionAccessor.ActionContext)

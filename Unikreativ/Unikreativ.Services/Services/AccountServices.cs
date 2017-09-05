@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unikreativ.Entities.Entities;
-using Unikreativ.Entities.Params;
-using Unikreativ.Repositories.Interface;
+﻿using Unikreativ.Repositories.Interface;
 using Unikreativ.Services.Interface;
 
 namespace Unikreativ.Services.Services

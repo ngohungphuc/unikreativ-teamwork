@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Unikreativ.Entities.Models.Auth
+﻿namespace Unikreativ.Entities.Models.Auth
 {
     public class RequestResult
     {

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Unikreativ.Entities.Entities;
+﻿using Unikreativ.Entities.Entities;
 
 namespace Unikreativ.Entities.Models.AccountViewModels
 {

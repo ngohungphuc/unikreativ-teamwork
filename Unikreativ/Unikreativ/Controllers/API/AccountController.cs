@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Unikreativ.Entities.Entities;
-using Unikreativ.Helper.Filter;
-using Unikreativ.Entities.Params;
 using Unikreativ.Helper.Auth;
 using Unikreativ.Helper.Confirm;
-using Unikreativ.Repositories.UnitOfWork;
 using Unikreativ.Services.Interface;
 
 namespace Unikreativ.Controllers.API

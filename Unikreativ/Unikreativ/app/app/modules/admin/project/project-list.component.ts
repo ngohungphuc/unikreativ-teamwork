@@ -17,21 +17,21 @@ export class ProjectListComponent implements OnInit {
         private projectService: ProjectService) { }
 
     ngOnInit() { 
-        this.projectService.getProjectList().then(res => {
-            this.projectList = res
-        })
+        this.populateProject()
 
         this.subscriptions.push(
             this.pushService
             .observe(event => event instanceof Project)
             .subscribe(val => {
-                this.populateProject(val)
+                this.populateProject()
             })
         )
     }
 
-    populateProject(projectData) {
-        console.log(projectData)
-        this.projectList = [...this.projectList, projectData]
+    populateProject() {
+        this.projectService.getProjectList().then(res => {
+            console.log(res)
+            this.projectList = res
+        })
     }
 }

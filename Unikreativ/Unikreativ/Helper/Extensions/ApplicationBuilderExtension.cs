@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Auth;
@@ -12,11 +9,11 @@ namespace Unikreativ.Helper.Extensions
 {
     public static class ApplicationBuilderExtension
     {
-        public static IApplicationBuilder UseUnikreativJWT(this IApplicationBuilder app)
+        public static IApplicationBuilder UseUnikreativJwt(this IApplicationBuilder app)
         {
             app.UseJwtBearerAuthentication(new JwtBearerOptions()
             {
-                TokenValidationParameters = new TokenValidationParameters()
+                TokenValidationParameters =
                 {
                     IssuerSigningKey = TokenAuthOption.Key,
                     ValidAudience = TokenAuthOption.Audience,

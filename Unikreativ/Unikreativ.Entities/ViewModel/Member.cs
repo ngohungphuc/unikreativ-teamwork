@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Unikreativ.Entities.ViewModel
 {
     public class Member

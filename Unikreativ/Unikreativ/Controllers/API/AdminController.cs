@@ -6,9 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Entities.Models;
-using Unikreativ.Entities.Models.AccountViewModels;
 using Unikreativ.Entities.Models.Auth;
-using Unikreativ.Entities.Params;
 using Unikreativ.Entities.ViewModel;
 using Unikreativ.Helper.Filter;
 using Unikreativ.Repositories.UnitOfWork;
@@ -16,7 +14,6 @@ using Unikreativ.Services.Interface;
 using Unikreativ.Helper.Auth;
 using Unikreativ.Helper.Confirm;
 using Unikreativ.Helper.Message;
-using Unikreativ.Helper.Security;
 using Unikreativ.Helper.Account;
 
 namespace Unikreativ.Controllers.API
@@ -122,7 +119,10 @@ namespace Unikreativ.Controllers.API
         [Route("{id}")]
         public async Task<string> DeleteAccount(string id)
         {
-            if (id == null) throw new ArgumentNullException(nameof(id));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
 
             var clientToDelete = await _unitOfWork.Repository<User>().GetByIdAsync(id);
             await _unitOfWork.Repository<User>().DeleteAsync(clientToDelete);

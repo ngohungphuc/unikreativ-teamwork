@@ -18,7 +18,27 @@
   overflow-y: scroll;
 }
 
-.project-list{
-  border-bottom:1px solid #f7f7f7;
-}
+.project-list {
+  border-bottom: 1px solid #4a4747;
 
+  #project-img {
+    width: 100px;
+  }
+
+  #project-left-content {
+    text-align: center;
+  }
+
+  #project-name-img {
+    position: absolute;
+    padding-right: -33px;
+    margin-top: 35px;
+    padding-top: -10px;
+    margin-left: -92px;
+    color: white;
+  }
+
+  #project-content {
+    width: 500px;
+  }
+}

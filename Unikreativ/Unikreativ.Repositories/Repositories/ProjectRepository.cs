@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Unikreativ.Entities.Data;
 using Unikreativ.Entities.Entities;
 using Unikreativ.Repositories.Interface;

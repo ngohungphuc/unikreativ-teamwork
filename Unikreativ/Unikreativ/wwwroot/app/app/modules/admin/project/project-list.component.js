@@ -20,18 +20,18 @@ let ProjectListComponent = class ProjectListComponent {
         this.subscriptions = [];
     }
     ngOnInit() {
-        this.projectService.getProjectList().then(res => {
-            this.projectList = res;
-        });
+        this.populateProject();
         this.subscriptions.push(this.pushService
             .observe(event => event instanceof ProjectModel_1.Project)
             .subscribe(val => {
-            this.populateProject(val);
+            this.populateProject();
         }));
     }
-    populateProject(projectData) {
-        console.log(projectData);
-        this.projectList = [...this.projectList, projectData];
+    populateProject() {
+        this.projectService.getProjectList().then(res => {
+            console.log(res);
+            this.projectList = res;
+        });
     }
 };
 ProjectListComponent = __decorate([

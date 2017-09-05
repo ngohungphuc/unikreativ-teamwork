@@ -1,7 +1,7 @@
 # Unikreativ Teamwork Project
 [![codebeat badge](https://codebeat.co/badges/3cc55caf-1f0b-434a-9ddd-6c68156ed87a)](https://codebeat.co/projects/github-com-ngohungphuc-unikreativ-teamwork-master)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f8e51464e4e4af588d61e48d0b523f2)](https://www.codacy.com/app/ngohungphuc95/unikreativ-teamwork?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ngohungphuc/unikreativ-teamwork&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a49e078a7cc423b94f6cfe9cc5e472a)](https://www.codacy.com/app/ngohungphuc95/unikreativ-teamwork?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ngohungphuc/unikreativ-teamwork&amp;utm_campaign=Badge_Grade)
 
 ![Unikreativ](http://unikreativ.com/wp-content/uploads/2016/12/photo-logo.png)
 

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Unikreativ.Services.Interface;
 using Unikreativ.Entities.Entities;
-using Unikreativ.Repositories.UnitOfWork;
 
 namespace Unikreativ.Controllers.API
 {
@@ -28,7 +27,7 @@ namespace Unikreativ.Controllers.API
 
         public async Task<IActionResult> GetClients()
         {
-            var clients = await _userServices.GetClients();
+            var clients = await _userServices.GetClients(null);
             return Ok(clients);
         }
 
