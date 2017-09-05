@@ -1,0 +1,23 @@
+﻿.loading-component {
+    margin: 20% 45% 0 45%;
+}
+
+@media (max-width: 1440px) {
+    .fixed-sn .double-nav, .fixed-sn footer, .fixed-sn main {
+        padding-left: 18%;
+    }
+
+    .side-nav.fixed {
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+.navbar .breadcrumb {
+    margin-left:65px;
+}
+
+.fixed-sn .double-nav, .fixed-sn footer, .fixed-sn main {
+    padding-left: 15%;
+}

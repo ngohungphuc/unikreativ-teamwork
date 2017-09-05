@@ -30,8 +30,25 @@ namespace Unikreativ.Entities.ViewModel
 
         public string UserName { get; set; }
 
-        private readonly double ChargeRate = 0;
-        private readonly bool EmailConfirmed = false;
-        private readonly bool LockoutEnabled = false;
+        private double _ChargeRate = 0;
+        public double ChargeRate
+        {
+            get { return _ChargeRate; }
+            set { _ChargeRate = value; }
+        }
+
+        private bool _EmailConfirmed = false;
+        public bool EmailConfirmed
+        {
+            get { return _EmailConfirmed; }
+            set { _EmailConfirmed = value; }
+        }
+
+        private bool _LockoutEnabled = false;
+        public bool LockoutEnabled
+        {
+            get { return _LockoutEnabled; }
+            set { _LockoutEnabled = value; }
+        }
     }
 }

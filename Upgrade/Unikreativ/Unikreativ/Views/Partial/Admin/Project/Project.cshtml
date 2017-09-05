@@ -1,0 +1,38 @@
+<ul class="nav nav-tabs nav-justified blue-grey darken-4" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#project-activity" role="tab"><i class="fa fa-tasks" aria-hidden="true"></i> Project Activity</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#project-list" role="tab"><i class="fa fa-laptop" aria-hidden="true"></i> Project List</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#project-event" role="tab"><i class="fa fa-feed" aria-hidden="true"></i> Upcoming Event</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane fade in show active" id="project-activity" role="tabpanel">
+        <br>
+            <div class="card card-body">
+                    <div class="card">
+                        <h3 class="card-header blue-grey darken-4 white-text">Activity</h3>
+                        <div class="card-body">
+                            <p class="card-text"><uni-event-list></uni-event-list></p>
+                        </div>
+                    </div>
+            </div>
+    </div>
+    <div class="tab-pane fade" id="project-list" role="tabpanel">
+        <br>
+        <div class="col-md-6"><button type="button" class="btn blue-grey darken-4" id="addProjectBtn" data-toggle="modal" data-target="#newProject">Add Project</button></div>
+        <br>
+        <p><uni-project-list></uni-project-list></p>
+    </div>
+    <div class="tab-pane fade" id="project-event" role="tabpanel">
+        <br>
+        <p>Project event</p>
+    </div>
+</div>
+
+
+<uni-new-project></uni-new-project>
+                           

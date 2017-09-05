@@ -37,6 +37,9 @@ namespace Unikreativ.Helper.Confirm
                     email.ToEmailTitle = "Password Reset";
                     email.Subject = $"{to} - Password Reset";
                     break;
+
+                default:
+                    break;
             }
 
             SendMailService(email);

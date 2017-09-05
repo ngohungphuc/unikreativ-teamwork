@@ -3,8 +3,6 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f8e51464e4e4af588d61e48d0b523f2)](https://www.codacy.com/app/ngohungphuc95/unikreativ-teamwork?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ngohungphuc/unikreativ-teamwork&amp;utm_campaign=Badge_Grade)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f8e51464e4e4af588d61e48d0b523f2)](https://www.codacy.com/app/ngohungphuc95/unikreativ-teamwork?utm_source=github.com&utm_medium=referral&utm_content=ngohungphuc/unikreativ-teamwork&utm_campaign=badger)
-
 ![Unikreativ](http://unikreativ.com/wp-content/uploads/2016/12/photo-logo.png)
 
 This project will use the following technology
@@ -17,7 +15,7 @@ This project will use the following technology
 
   - [Bootstrap materialize design](https://mdbootstrap.com)
 
-  - AngularJS2
+  - Angular4
 
   - SQL Server
 
@@ -28,6 +26,10 @@ This project will use the following technology
   - Design use case and write SRS
   
   - Implement basic function
+
+  - Implement JWT
+
+  - Implement SignalR or Socket
 
   Continue to update.....
 

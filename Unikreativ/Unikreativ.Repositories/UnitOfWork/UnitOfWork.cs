@@ -11,7 +11,13 @@ namespace Unikreativ.Repositories.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _dbContext;
-        public Dictionary<Type, object> repositories = new Dictionary<Type, object>();
+        private Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
+
+        public Dictionary<Type, object> Repositories
+        {
+            get { return _repositories; }
+            set { Repositories = value; }
+        }
 
         public UnitOfWork(ApplicationDbContext dbContext)
         {
@@ -21,13 +27,13 @@ namespace Unikreativ.Repositories.UnitOfWork
 
         public IGenericRepository<T> Repository<T>() where T : class
         {
-            if (repositories.Keys.Contains(typeof(T)))
+            if (Repositories.Keys.Contains(typeof(T)))
             {
-                return repositories[typeof(T)] as IGenericRepository<T>;
+                return Repositories[typeof(T)] as IGenericRepository<T>;
             }
 
             IGenericRepository<T> repo = new GenericRepository<T>(_dbContext);
-            repositories.Add(typeof(T), repo);
+            Repositories.Add(typeof(T), repo);
             return repo;
         }
 

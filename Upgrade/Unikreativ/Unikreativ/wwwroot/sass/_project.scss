@@ -1,0 +1,24 @@
+#project-page {
+  #activity-panel {
+    .list-group {
+      box-shadow: none;
+      .list-group-item {
+        border-left: none;
+        border-right: none;
+      }
+    }
+  }
+  #addProjectBtn {
+    float: right;
+  }
+}
+
+#searchClientResult {
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.project-list{
+  border-bottom:1px solid #f7f7f7;
+}
+

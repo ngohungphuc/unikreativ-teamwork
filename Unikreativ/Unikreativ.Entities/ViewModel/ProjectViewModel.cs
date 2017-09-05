@@ -11,12 +11,19 @@ namespace Unikreativ.Entities.ViewModel
             Events = new List<Event>();
             SubTasks = new List<SubTask>();
         }
+        private DateTime _AgreementDate = DateTime.Now;
+
         public Guid Id { get; set; }
+
         public string ProjectName { get; set; }
 
         public string ProjectDescription { get; set; }
 
-        public DateTime AgreementDate = DateTime.Now;
+        public DateTime AgreementDate
+        {
+            get { return _AgreementDate; } 
+            set { _AgreementDate = value; }
+        }
 
         public string UserName { get; set; }
 

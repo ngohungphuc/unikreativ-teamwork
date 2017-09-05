@@ -1,0 +1,99 @@
+<div class="tabs-wrapper">
+    <ul class="nav classic-tabs tabs-primary" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link waves-light active" data-toggle="tab" href="#panelMembers" role="tab"><i class="fa fa-user fa-2x" aria-hidden="true"></i><br> Members</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-light" data-toggle="tab" href="#panelClients" role="tab"><i class="fa fa-user-md fa-2x" aria-hidden="true"></i><br> Clients</a>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content card">
+    <div class="tab-pane fade in show active" id="panelMembers" role="tabpanel">
+        <a class="btn btn-primary btn-rounded" data-toggle="modal" data-target="#newMember" id="newMemberbtn">New Member</a>
+        <div class="row mb-0">
+            <div class="col-md-12">
+                <div class="card-block pt-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="primary-color">
+                                    <th>Name</th>
+                                    <th>CompanyName</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>JobTitle</th>
+                                    <th>Charge Rate</th>
+                                    <th>Primary Role</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border">
+                                <tr *ngFor="let teamMember of teamMembers">
+                                    <td>{{teamMember.NormalizedUserName}}</td>
+                                    <td>{{teamMember.CompanyName}}</td>
+                                    <td>{{teamMember.Email}}</td>
+                                    <td>{{teamMember.PhoneNumber}}</td>
+                                    <td>{{teamMember.JobTitle}}</td>
+                                    <th>{{teamMember.ChargeRate}}</th>
+                                    <td>{{teamMember.Role}}</td>
+                                    <td class="action-btn">
+                                        <a class="btn-floating btn-md blue" data-toggle="modal" data-target="#editMemberInfo"><i class="fa fa-pencil" aria-hidden="true" (click)="selectMember(teamMember)"></i></a>
+                                        <a class="btn-floating btn-md red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="panelClients" role="tabpanel">
+        <a class="btn btn-primary btn-rounded" data-toggle="modal" data-target="#newClient" id="newClientbtn">New Client</a>
+        <div class="row mb-0">
+            <div class="col-md-12">
+                <div class="card-block pt-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="primary-color">
+                                    <th>CompanyName</th>
+                                    <th>Address</th>
+                                    <th>Country</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Industry</th>
+                                    <th>Website</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border">
+                                <tr *ngFor="let client of clients">
+                                    <td>{{client.CompanyName}}</td>
+                                    <td>{{client.Address}}</td>
+                                    <td>{{client.Country}}</td>
+                                    <td>{{client.Email}}</td>
+                                    <td>{{client.PhoneNumber}}</td>
+                                    <td>{{client.Industry}}</td>
+                                    <td>{{client.Website}}</td>
+                                    <td class="action-btn">
+                                        <a class="btn-floating btn-md blue" data-toggle="modal" data-target="#editClientInfo"><i class="fa fa-pencil" aria-hidden="true" (click)="selectClient(client)"></i></a>
+                                        <a class="btn-floating btn-md red" (click)="deleteClient(client.Id,$event)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Raise event when new client is create -->
+<uni-new-client (newClientCreated)="newClientCreated($event)"></uni-new-client>
+<uni-edit-client [client]="client"></uni-edit-client>
+
+<uni-new-member (newMemberCreated)="newMemberCreated($event)"></uni-new-member>
+<uni-edit-member [member]="member"></uni-edit-member>

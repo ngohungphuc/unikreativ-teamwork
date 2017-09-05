@@ -17,7 +17,6 @@ namespace Unikreativ.Repositories.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly RoleManager<IdentityRole> _roleManager;
 
         public UserRepository(ApplicationDbContext context)
         {

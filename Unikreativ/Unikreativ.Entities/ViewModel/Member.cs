@@ -13,6 +13,11 @@ namespace Unikreativ.Entities.ViewModel
         public string Role { get; set; }
         public string JobTitle { get; set; }
         public double ChargeRate { get; set; }
-        private readonly bool EmailConfirmed = false;
+        private bool _EmailConfirmed = false;
+        public bool EmailConfirmed
+        {
+            get { return _EmailConfirmed; }
+            set { _EmailConfirmed = value; }
+        }
     }
 }
