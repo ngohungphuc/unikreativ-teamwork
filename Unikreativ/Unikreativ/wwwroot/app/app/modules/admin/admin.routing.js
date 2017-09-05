@@ -6,25 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const admin_component_1 = require("./admin.component");
+const index_1 = require("../index");
 const auth_guard_1 = require("./../../extensions/guard/auth.guard");
 const core_1 = require("@angular/core");
-const project_component_1 = require("./project/project.component");
 const router_1 = require("@angular/router");
-const user_component_1 = require("./user/user.component");
 exports.adminRoutes = [
     {
         path: 'admin',
-        component: admin_component_1.AdminComponent,
+        component: index_1.AdminComponent,
         canActivate: [auth_guard_1.AuthGuard],
         children: [
             {
-                path: 'people',
-                component: user_component_1.UserComponent
+                path: 'project',
+                component: index_1.ProjectComponent
             },
             {
-                path: 'project',
-                component: project_component_1.ProjectComponent
+                path: 'project/:name',
+                component: index_1.ProjectDetailComponent
+            },
+            {
+                path: 'people',
+                component: index_1.UserComponent
             }
         ]
     },

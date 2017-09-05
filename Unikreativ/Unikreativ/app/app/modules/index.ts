@@ -14,5 +14,6 @@ export * from './admin/user/member-edit.component'
 export * from './admin/project/project.component'
 export * from './admin/project/new-project.component'
 export * from './admin/project/project-list.component'
+export * from './admin/project/project-details.component'
 export * from './admin/admin.module'
 

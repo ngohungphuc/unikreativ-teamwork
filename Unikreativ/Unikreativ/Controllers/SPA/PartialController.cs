@@ -38,6 +38,8 @@ namespace Unikreativ.Controllers.SPA
         public IActionResult NewProject() => PartialView("~/Views/Partial/Admin/Project/NewProject.cshtml");
 
         public IActionResult ProjectList() => PartialView("~/Views/Partial/Admin/Project/ProjectList.cshtml");
+
+        public IActionResult ProjectDetail() => PartialView("~/Views/Partial/Admin/Project/ProjectDetail.cshtml");
         #endregion
         #region Errors
 

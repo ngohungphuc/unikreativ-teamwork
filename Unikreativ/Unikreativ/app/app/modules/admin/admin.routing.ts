@@ -1,10 +1,12 @@
-import { AdminComponent } from './admin.component'
+import {
+    AdminComponent,
+    ProjectComponent,
+    ProjectDetailComponent,
+    UserComponent
+    } from '../index'
 import { AuthGuard } from './../../extensions/guard/auth.guard'
 import { NgModule } from '@angular/core'
-import { ProjectComponent } from './project/project.component'
 import { RouterModule, Routes } from '@angular/router'
-import { UserComponent } from './user/user.component'
-
 
 export const adminRoutes: Routes = [
     {
@@ -13,12 +15,16 @@ export const adminRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {
-                path: 'people',
-                component: UserComponent
+                path:'project',
+                component: ProjectComponent
             },
             {
-                path:'project',
-                component:ProjectComponent
+                path:'project/:name',
+                component: ProjectDetailComponent
+            },
+            {
+                path: 'people',
+                component: UserComponent
             }
         ]
     },

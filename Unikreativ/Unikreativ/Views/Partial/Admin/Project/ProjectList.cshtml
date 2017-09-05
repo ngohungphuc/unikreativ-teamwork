@@ -3,7 +3,7 @@
     <div class="media mb-1 project-list border">
         <div class="row">
             <div class="col-md-4" id="project-left-content">
-                <a class="media-left waves-light">
+                <a class="media-left waves-light" routerLink="/admin/project/{{project.ProjectName}}">
                     <img class="rounded-circle" id="project-img" src="/images/blank_img.jpg" alt="">
                 </a>
                 <span id="project-name-img">{{project.ProjectName}}</span>
@@ -15,8 +15,8 @@
                         <li><i class="fa fa-star amber-text"></i></li>
                         <li><i class="fa fa-star amber-text"></i></li>
                         <li><i class="fa fa-star amber-text"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star amber-text"></i></li>
+                        <li><i class="fa fa-star amber-text"></i></li>
                     </ul>
                     <p>Client : {{project.Client.CompanyName}}</p>
                     <p>Info : {{project.ProjectDescription}}</p>

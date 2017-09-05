@@ -37,7 +37,8 @@ AdminModule = __decorate([
             index_1.EditMemberComponent,
             index_1.ProjectComponent,
             index_1.NewProjectComponent,
-            index_1.ProjectListComponent
+            index_1.ProjectListComponent,
+            index_1.ProjectDetailComponent
         ],
         providers: [auth_guard_1.AuthGuard, index_2.UserService, project_service_1.ProjectService, index_2.AuthHttpServices]
     })

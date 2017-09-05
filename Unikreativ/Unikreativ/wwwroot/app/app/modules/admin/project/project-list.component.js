@@ -29,7 +29,6 @@ let ProjectListComponent = class ProjectListComponent {
     }
     populateProject() {
         this.projectService.getProjectList().then(res => {
-            console.log(res);
             this.projectList = res;
         });
     }

@@ -8,7 +8,8 @@ import {
     UserComponent,
     ProjectComponent,
     NewProjectComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    ProjectDetailComponent
 } from '../index'
 import {AdminRoutingModule} from './admin.routing'
 import {AuthGuard} from './../../extensions/guard/auth.guard'
@@ -38,7 +39,8 @@ import { ProjectService } from '../../services/project/project.service'
         EditMemberComponent,
         ProjectComponent,
         NewProjectComponent,
-        ProjectListComponent
+        ProjectListComponent,
+        ProjectDetailComponent
     ],
     providers: [AuthGuard, UserService,ProjectService, AuthHttpServices]
 })
