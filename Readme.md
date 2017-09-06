@@ -1,4 +1,4 @@
-# Unikreativ Teamwork Project
+# Project management web application using ASP.Core & ANGULAR 4
 [![codebeat badge](https://codebeat.co/badges/3cc55caf-1f0b-434a-9ddd-6c68156ed87a)](https://codebeat.co/projects/github-com-ngohungphuc-unikreativ-teamwork-master)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a49e078a7cc423b94f6cfe9cc5e472a)](https://www.codacy.com/app/ngohungphuc95/unikreativ-teamwork?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ngohungphuc/unikreativ-teamwork&amp;utm_campaign=Badge_Grade)
