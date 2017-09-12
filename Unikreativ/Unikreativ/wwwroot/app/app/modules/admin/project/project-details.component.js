@@ -11,13 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
+const project_service_1 = require("../../../services/project/project.service");
 let ProjectDetailComponent = class ProjectDetailComponent {
-    constructor(route) {
+    constructor(route, projectService) {
         this.route = route;
+        this.projectService = projectService;
     }
     ngOnInit() {
-        this.projectName = this.route.params.subscribe(params => {
-            console.log(params['name']);
+        this.route.params.subscribe(params => {
+            this.projectService.getProjectByName(params['name']).then(res => {
+                this.projectDetail = res;
+                console.log(this.projectDetail);
+            });
         });
     }
 };
@@ -26,7 +31,8 @@ ProjectDetailComponent = __decorate([
         selector: 'uni-project-detail',
         templateUrl: 'partial/ProjectDetail'
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
+        project_service_1.ProjectService])
 ], ProjectDetailComponent);
 exports.ProjectDetailComponent = ProjectDetailComponent;
 //# sourceMappingURL=project-details.component.js.map

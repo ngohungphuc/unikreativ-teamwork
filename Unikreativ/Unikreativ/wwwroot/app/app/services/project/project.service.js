@@ -24,6 +24,10 @@ let ProjectService = class ProjectService {
         let url = 'Project/GetProjectList';
         return this.authHttpService.authGet(url);
     }
+    getProjectByName(name) {
+        let url = `Project/GetProjectByName?ProjectName=${name}`;
+        return this.authHttpService.authGet(url);
+    }
     newProject(client) {
         let url = 'Project/NewProject';
         return this.authHttpService.authPost(url, client);

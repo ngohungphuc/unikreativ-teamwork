@@ -59,6 +59,13 @@ namespace Unikreativ.Controllers.API
             return Ok(projectList);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetProjectByName(string projectName)
+        {
+            var projectInfo = await _projectService.GetProjectByName(projectName); 
+            return Ok(projectInfo);
+        }
+
         [HttpPost]
         [ValidModel]
         public async Task<IActionResult> NewProject([FromBody] ProjectViewModel projectDto)

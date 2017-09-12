@@ -18,9 +18,15 @@ export class ProjectService {
         return this.authHttpService.authGet(url)
     }
 
+    getProjectByName(name){
+        let url = `Project/GetProjectByName?ProjectName=${name}`;
+        return this.authHttpService.authGet(url)
+    }
+
     newProject(client: any) {
         let url = 'Project/NewProject'
         return this.authHttpService.authPost(url, client)
     }
+
 
 }
